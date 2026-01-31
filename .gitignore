@@ -1,0 +1,18 @@
+# Hugo build outputs
+public/
+resources/_gen/
+
+# Hugo cache
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+nul
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
