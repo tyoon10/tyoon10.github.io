@@ -1,0 +1,32 @@
+title: Taewan Yoon
+baseurl: "https://twyoon.com/"
+languageCode: en-us
+defaultContentLanguage: en
+theme: ["github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5"]
+
+# Google Analytics (leave empty to disable)
+googleAnalytics: ""
+
+module:
+  imports:
+    - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
+
+# --- SECURITY CONFIGURATION (THE FIX) ---
+security:
+  funcs:
+    getenv:
+      - '^WC_'     # Allows HugoBlox variables
+      - '^HUGO_'   # Allows standard Hugo variables
+      - '^CI$'     # Allows CI/CD variables
+
+# --- PERSONAL INFO ---
+params:
+  author:
+    name: Taewan Yoon
+    bio: MBAxMS Candidate at Columbia | AI Strategist
+    email: contact@twyoon.com
+  footer:
+    copyright:
+      notice: '© 2026 Taewan Yoon. All rights reserved.'
+      license:
+        enable: false
