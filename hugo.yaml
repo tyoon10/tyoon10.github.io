@@ -4,29 +4,73 @@ languageCode: en-us
 defaultContentLanguage: en
 theme: ["github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5"]
 
-# Google Analytics (leave empty to disable)
 googleAnalytics: ""
 
 module:
   imports:
     - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
 
-# --- SECURITY CONFIGURATION (THE FIX) ---
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 security:
   funcs:
     getenv:
-      - '^WC_'     # Allows HugoBlox variables
-      - '^HUGO_'   # Allows standard Hugo variables
-      - '^CI$'     # Allows CI/CD variables
+      - '^WC_'
+      - '^HUGO_'
+      - '^CI$'
 
-# --- PERSONAL INFO ---
+# --- APPEARANCE ---
 params:
+  appearance:
+    theme_day: minimal
+    theme_night: dark
+    font: minimal
+    font_size: m
+
+  features:
+    math:
+      enable: true
+    syntax_highlighter:
+      theme_light: github-light
+      theme_dark: dracula
+    avatar:
+      shape: circle
+
+  header:
+    navbar:
+      enable: true
+      show_logo: true
+      highlight_active_link: true
+      show_search: false
+      show_day_night: true
+      align: r
+
   author:
     name: Taewan Yoon
-    bio: MBAxMS Candidate at Columbia | AI Strategist
+    bio: Enterprise AI Strategy | MBA/MS at Columbia
     email: contact@twyoon.com
+
   footer:
     copyright:
       notice: '© 2026 Taewan Yoon. All rights reserved.'
       license:
         enable: false
+
+# --- NAVIGATION ---
+menus:
+  main:
+    - name: Home
+      url: '#about'
+      weight: 10
+    - name: Projects
+      url: '#projects'
+      weight: 20
+    - name: Posts
+      url: '#posts'
+      weight: 30
+    - name: Contact
+      url: '#contact'
+      weight: 40

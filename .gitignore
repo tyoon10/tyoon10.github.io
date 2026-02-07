@@ -16,3 +16,6 @@ nul
 
 # Claude Code
 .claude/
+
+# Private notes
+meeting notes/
