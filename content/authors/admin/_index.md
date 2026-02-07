@@ -24,6 +24,9 @@ education:
     - course: MBA / MS (dual degree)
       institution: Columbia University
       year: 2026
+    - course: BBA, Finance & Operations Research
+      institution: Yonsei University
+      year: 2016
 
 social:
   - icon: envelope
@@ -38,4 +41,4 @@ social:
     link: https://github.com/tyoon10
 ---
 
-MBA/MS candidate at Columbia. Currently at Anthropic, leading Claude's campus go-to-market for Columbia and NYC — grew the builder community from 300 to 600+ through enterprise-focused workshops and hackathons. Previously built AI pipelines for quantitative finance research and presented to 200+ industry professionals at MathWorks. Background in investment banking with a CFA charter. Manus AI Fellow focused on enterprise agentic systems.
+MBA/MS candidate at Columbia. Currently at Anthropic, executing Claude's enterprise go-to-market for Columbia and NYC — built the builder community from 0 to 600+ through enterprise-focused workshops and hackathons. Previously built AI pipelines for quantitative finance research and presented to 200+ industry professionals at MathWorks. Background in investment banking with a CFA charter. Manus AI Fellow leading enterprise agentic AI community programs.
