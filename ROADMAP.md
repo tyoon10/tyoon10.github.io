@@ -42,9 +42,9 @@ Hugh Thomas: *"If you're inside a company that's going to hire you, why would th
 |-------|--------|------------------------|
 | **Anthropic** (current) | 90% of inbound interest on LinkedIn. Enterprise AI credibility. | Lead with it in org affiliations. Frame all Claude workshop/hackathon work as enterprise go-to-market execution. |
 | **Manus AI Fellow** | Agentic AI is the narrative of 2025-26. Enterprise focus. Meta acquisition adds validation. | Highlight in bio. Frame as enterprise agentic AI leadership, not just "fellowship." |
+| **AI Club Co-President** | Community builder. 300→600+ growth. Enterprise event programming. | Frame as go-to-market execution at scale, not "student club leadership." |
 | **AI pipeline builder** (MathWorks) | Shows you build, not just strategize. Presented to 200+ industry professionals. | Project case study. Lead with "built a novel AI pipeline" not "presented at conference." |
 | **Finance background** (IB, CFA) | Domain expertise that AI companies need but can't easily hire for. | Weave into every project/post. You don't just build AI — you build AI for finance. |
-| **AI Club Co-President** | Community builder. 300→600+ growth. Enterprise event programming. | Frame as go-to-market execution at scale, not "student club leadership." |
 
 ### Key Messaging Rules
 
