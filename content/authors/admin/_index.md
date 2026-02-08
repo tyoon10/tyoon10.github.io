@@ -1,5 +1,5 @@
 ---
-role: Enterprise AI Strategy | MBA/MS at Columbia
+role: Agentic Systems, AI Strategy | MBA/MS at Columbia
 superuser: true
 
 organizations:
