@@ -42,8 +42,7 @@ social:
     link: https://github.com/tyoon10
 ---
 
-MBA/MS (AI & ML) candidate at Columbia. 
-Currently at Anthropic, executing Claude's go-to-market for Columbia and NYC — built the builder community from 0 to 600+ through enterprise-focused workshops and hackathons. 
+MBA/MS candidate at Columbia. 
+Currently at Anthropic, executing Claude's go-to-market for Columbia and NYC — built the builder community from 0 to 800+ through enterprise-focused workshops and hackathons. 
 Manus AI Fellow leading enterprise agentic AI community programs.
-Previously built RAG pipelines and graph vector databases for quantitative finance research, presenting to 100+ industry professionals at MathWorks. 
-Co-founded an AI-native fintech (acquired), building ML-powered analytics that achieved 2x conversion rates. CFA charterholder, and mentor at CFA Society New York with investment banking background. 
+Co-founded an AI-native fintech (acquired by a major insurance firm). CFA charterholder, mentor at CFA Society New York. 
