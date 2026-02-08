@@ -66,6 +66,37 @@
   letter-spacing: 0.01em;
 }
 
+/* Organization logos */
+.org-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 12px 0 4px;
+  flex-wrap: wrap;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .org-logo {
+    height: 32px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+  }
+}
+
+.dark .org-logos .org-logo {
+  filter: brightness(0) invert(1);
+}
+
 /* About bio readability */
 #profile .bio-text {
   max-width: 640px;

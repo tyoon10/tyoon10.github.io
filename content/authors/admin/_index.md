@@ -5,10 +5,16 @@ superuser: true
 organizations:
   - name: Anthropic
     url: https://www.anthropic.com/
+    logo: /media/logos/anthropic.svg
   - name: Columbia Business School
     url: https://business.columbia.edu/
+    logo: /media/logos/cbs.png
   - name: Columbia Engineering
     url: https://www.engineering.columbia.edu/
+    logo: /media/logos/columbia-engineering.png
+  - name: CFA Society New York
+    url: https://www.cfany.org/
+    logo: /media/logos/cfany.png
 
 bio: Building go-to-market strategies and AI products at the intersection of LLM platforms and enterprise finance.
 
