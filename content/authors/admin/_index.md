@@ -18,8 +18,7 @@ interests:
   - LLM Applications in Finance
   - Agentic AI Systems
   - AI Product Strategy
-  - RAG & Evaluation Systems
-  - Responsible AI
+  - AI-Enhanced Collective Intelligence
 
 education:
   courses:
@@ -43,4 +42,8 @@ social:
     link: https://github.com/tyoon10
 ---
 
-MBA/MS candidate at Columbia. Currently at Anthropic, executing Claude's enterprise go-to-market for Columbia and NYC — built the builder community from 0 to 600+ through enterprise-focused workshops and hackathons. Previously built RAG pipelines and graph vector databases for quantitative finance research, presenting to 200+ industry professionals at MathWorks. Co-founded an AI-native fintech (acquired), building ML-powered analytics that achieved 2x conversion rates. CFA charterholder with investment banking background. Manus AI Fellow leading enterprise agentic AI community programs.
+MBA/MS (AI & ML) candidate at Columbia. 
+Currently at Anthropic, executing Claude's go-to-market for Columbia and NYC — built the builder community from 0 to 600+ through enterprise-focused workshops and hackathons. 
+Manus AI Fellow leading enterprise agentic AI community programs.
+Previously built RAG pipelines and graph vector databases for quantitative finance research, presenting to 100+ industry professionals at MathWorks. 
+Co-founded an AI-native fintech (acquired), building ML-powered analytics that achieved 2x conversion rates. CFA charterholder, and mentor at CFA Society New York with investment banking background. 
