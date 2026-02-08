@@ -95,6 +95,13 @@
 
 .dark .org-logos .org-logo {
   filter: brightness(0) invert(1);
+
+  &.no-invert {
+    filter: none;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
 }
 
 /* About bio readability */

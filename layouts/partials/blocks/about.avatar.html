@@ -51,7 +51,7 @@
       {{ range $person.organizations }}
         {{ if .logo }}
           <a href="{{ .url }}" target="_blank" rel="noopener" title="{{ .name }}">
-            <img src="{{ .logo }}" alt="{{ .name }}" class="org-logo" loading="lazy">
+            <img src="{{ .logo }}" alt="{{ .name }}" class="org-logo{{ if eq (default true .dark_invert) false }} no-invert{{ end }}" loading="lazy">
           </a>
         {{ else }}
           <h3>
