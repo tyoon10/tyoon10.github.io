@@ -24,6 +24,9 @@ security:
 
 # --- APPEARANCE ---
 params:
+  locale:
+    date_format: "January 2006"
+
   appearance:
     theme_day: minimal
     theme_night: dark
