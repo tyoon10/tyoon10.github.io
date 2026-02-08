@@ -15,6 +15,7 @@ organizations:
   - name: CFA Society New York
     url: https://www.cfany.org/
     logo: /media/logos/cfany.png
+    dark_invert: false
 
 bio: Building go-to-market strategies and AI products at the intersection of LLM platforms and enterprise finance.
 
