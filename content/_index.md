@@ -75,42 +75,24 @@ sections:
       spacing:
         padding: ["40px", "0", "40px", "0"]
 
-  # ---- UPCOMING EVENTS ----
+  # ---- EVENTS ----
   - block: collection
     id: events
     content:
-      title: Upcoming Events
+      title: Events
       subtitle: ""
       text: ""
       count: 5
       filters:
         folders:
           - event
-        exclude_past: true
-      sort_by: Date
-      sort_ascending: true
-    design:
-      view: compact
-      columns: "1"
-      spacing:
-        padding: ["40px", "0", "40px", "0"]
-
-  # ---- PREVIOUS EVENTS ----
-  - block: collection
-    id: past-events
-    content:
-      title: Previous Events
-      subtitle: ""
-      text: ""
-      count: 5
-      filters:
-        folders:
-          - event
-        exclude_future: true
       sort_by: Date
       sort_ascending: false
+      archive:
+        enable: true
+        text: "See all events"
     design:
-      view: compact
+      view: list
       columns: "1"
       spacing:
         padding: ["40px", "0", "40px", "0"]
