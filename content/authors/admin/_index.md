@@ -1,5 +1,4 @@
 ---
-title: Taewan Yoon
 role: Enterprise AI Strategy | MBA/MS at Columbia
 superuser: true
 
@@ -40,9 +39,13 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/tyoon10
+  - icon: file-alt
+    icon_pack: fas
+    link: /resume.pdf
+    label: Resume
 ---
 
 MBA/MS candidate at Columbia. 
 Currently at Anthropic, executing Claude's go-to-market for Columbia and NYC — built the builder community from 0 to 800+ through enterprise-focused workshops and hackathons. 
 Manus AI Fellow leading enterprise agentic AI community programs.
-Co-founded an AI-native fintech (acquired by a major insurance firm). CFA charterholder, mentor at CFA Society New York. 
+Co-founded an AI-native FinTech (acquired by a major insurance firm). CFA charterholder, mentor at CFA Society New York. 
