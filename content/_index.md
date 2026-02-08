@@ -11,7 +11,7 @@ sections:
       text: |-
         **Columbia MBA/MS** | Enterprise AI | Financial Services
 
-        Bridging AI platforms and financial institutions. Building go-to-market strategies and AI products where LLMs meet enterprise finance.
+        Building AI systems and go-to-market strategies where LLMs meet enterprise finance. From RAG pipelines to enterprise adoption — the bridge between AI platforms and financial institutions.
       cta:
         label: View Projects
         url: '#projects'
@@ -39,7 +39,7 @@ sections:
     id: projects
     content:
       title: Projects
-      subtitle: End-to-end builds, not slide decks
+      subtitle: Enterprise AI systems, from prototype to production
       text: ""
       count: 4
       filters:
@@ -81,7 +81,7 @@ sections:
     content:
       title: Contact
       text: |-
-        Open to enterprise AI strategy roles, particularly at the intersection of LLM platforms and financial services.
+        Open to enterprise AI roles — solutions architecture, product management, and go-to-market — at the intersection of LLM platforms and financial services.
       email: contact@twyoon.com
       contact_links:
         - icon: linkedin
