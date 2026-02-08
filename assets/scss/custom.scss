@@ -111,6 +111,11 @@
   line-height: 1.7;
 }
 
+/* Events list — minimal homepage display */
+#events .view-list-item .btn-links {
+  display: none;
+}
+
 /* Contact list */
 .wg-contact .fa-ul {
   margin-left: 2rem;
