@@ -7,7 +7,7 @@ sections:
   - block: hero
     id: hero
     content:
-      title: "Taewan Yoon"
+      title: "Taewan Yoon, CFA"
       text: |-
         **Columbia MBA/MS** | Enterprise AI | Financial Services
 

@@ -74,6 +74,9 @@ menus:
     - name: Posts
       url: '#posts'
       weight: 30
+    - name: Resume
+      url: /resume.pdf
+      weight: 35
     - name: Contact
       url: '#contact'
       weight: 40
