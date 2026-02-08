@@ -18,6 +18,12 @@ image:
   focal_point: Smart
   preview_only: false
 
+links:
+  - icon: video
+    icon_pack: fas
+    name: Conference Recording
+    url: https://www.mathworks.com/videos/investment-strategies-ideation-using-large-language-models-and-structured-multi-modal-data-1760424545621.html
+
 draft: false
 ---
 
