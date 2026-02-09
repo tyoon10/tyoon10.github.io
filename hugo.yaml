@@ -4,7 +4,7 @@ languageCode: en-us
 defaultContentLanguage: en
 theme: ["github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5"]
 
-googleAnalytics: ""
+googleAnalytics: "G-H62WJ8E3J9"
 
 module:
   imports:
