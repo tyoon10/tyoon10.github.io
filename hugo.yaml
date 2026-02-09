@@ -15,6 +15,10 @@ markup:
     renderer:
       unsafe: true
 
+privacy:
+  googleAnalytics:
+    respectDoNotTrack: true
+
 security:
   funcs:
     getenv:
@@ -41,6 +45,8 @@ params:
       theme_dark: dracula
     avatar:
       shape: circle
+    privacy_pack:
+      enable: true
 
   header:
     navbar:
@@ -58,7 +64,7 @@ params:
 
   footer:
     copyright:
-      notice: '© 2026 Taewan Yoon. All rights reserved.'
+      notice: '© 2026 Taewan Yoon. All rights reserved. This site uses [Google Analytics](/privacy/).'
       license:
         enable: false
 
