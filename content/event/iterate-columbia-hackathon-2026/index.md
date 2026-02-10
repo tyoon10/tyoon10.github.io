@@ -2,7 +2,7 @@
 title: "AI Club x Iterate NYC Hackathon"
 event: AI Club x Iterate NYC Hackathon
 event_url: https://luma.com/dyzbn70z
-location: "Geffen Hall, Columbia Business School"
+location: "Columbia Business School"
 
 summary: "150 hackers. 10 hours. $10,000+ in prizes. Co-organized with Anthropic, ElevenLabs, and YC-backed startups."
 
@@ -39,17 +39,7 @@ The CBS AI Club and Iterate are bringing together the best builders in New York 
 
 ## Sponsors & Partners
 
-**Anthropic** | **ElevenLabs** | **Lovable** | **Blaxel** (YC X25) | **Finny** (YC S24) | **Perle**
-
-## Schedule
-
-| Time | Activity |
-|------|----------|
-| 8:30 AM | Doors open, breakfast, check-in |
-| 9:30 AM | Kickoff and hacking begins |
-| 12:30 PM | Lunch |
-| 7:00 PM | Hacking ends, demos begin |
-| 8:30 PM | Awards and wrap-up |
+**Anthropic** | **ElevenLabs** | **Lovable** | **Blaxel** (YC X25) | **Finny** (YC S24) | **Perle** | **BizCrush**
 
 ## Who Should Apply
 
