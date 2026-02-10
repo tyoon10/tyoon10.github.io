@@ -8,7 +8,7 @@ summary: "Panelist alongside representatives from Meta, Uber, Apple, and Anthrop
 
 date: 2026-01-23T13:00:00-05:00
 date_end: 2026-01-23T17:00:00-05:00
-all_day: false
+all_day: true
 
 authors:
   - admin

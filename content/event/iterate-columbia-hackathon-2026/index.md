@@ -8,7 +8,7 @@ summary: "150 hackers. 10 hours. $10,000+ in prizes. Co-organized with Anthropic
 
 date: 2026-02-14T08:30:00-05:00
 date_end: 2026-02-14T20:30:00-05:00
-all_day: false
+all_day: true
 
 authors:
   - admin
