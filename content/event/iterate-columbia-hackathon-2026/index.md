@@ -1,10 +1,10 @@
 ---
-title: "Iterate x Columbia AI Club Hackathon"
-event: Iterate x Columbia AI Club Hackathon
+title: "AI Club x Iterate NYC Hackathon"
+event: AI Club x Iterate NYC Hackathon
 event_url: https://luma.com/dyzbn70z
-location: "Columbia Business School, NYC"
+location: "Geffen Hall, Columbia Business School"
 
-summary: "Co-organized a high-intensity 11-hour hackathon with $10,000+ in prizes, sponsored by Anthropic, ElevenLabs, and YC-backed startups."
+summary: "150 hackers. 10 hours. $10,000+ in prizes. Co-organized with Anthropic, ElevenLabs, and YC-backed startups."
 
 date: 2026-02-14T08:30:00-05:00
 date_end: 2026-02-14T20:30:00-05:00
@@ -21,17 +21,36 @@ tags:
 links:
   - icon: link
     icon_pack: fas
-    name: Event Page
+    name: Apply Now
     url: https://luma.com/dyzbn70z
 ---
 
-Co-organized a high-intensity 11-hour in-person hackathon at Columbia Business School. 150 selected participants, 10 hours from idea to working demo, $10,000+ in prizes.
+150 hackers. 10 hours. $10,000+ in prizes. One room.
+
+The CBS AI Club and Iterate are bringing together the best builders in New York City for a day-long hackathon at Columbia Business School. 10 hours to go from idea to working demo. No pre-built projects. No slide decks. Just you, your team, and whatever you can ship before time runs out.
+
+## What to Expect
+
+- 10-hour build sprint in Geffen Hall at Columbia Business School
+- $10,000+ in total prizes — cash awards, AI service credits, and partner merchandise
+- Complimentary breakfast and lunch
+- Access to cutting-edge tools and APIs from our partners
+- Judging by a panel of investors, founders, and technologists
 
 ## Sponsors & Partners
 
-- **Anthropic** — Language models
-- **ElevenLabs** — AI audio platform
-- **Lovable** — Full-stack app development
-- **Blaxel** (YC X25) — Persistent agent sandboxes
-- **Finny** (YC S24) — AI-powered financial prospecting
-- **Perle** — Human-in-the-loop data labeling
+**Anthropic** | **ElevenLabs** | **Lovable** | **Blaxel** (YC X25) | **Finny** (YC S24) | **Perle**
+
+## Schedule
+
+| Time | Activity |
+|------|----------|
+| 8:30 AM | Doors open, breakfast, check-in |
+| 9:30 AM | Kickoff and hacking begins |
+| 12:30 PM | Lunch |
+| 7:00 PM | Hacking ends, demos begin |
+| 8:30 PM | Awards and wrap-up |
+
+## Who Should Apply
+
+Developers, designers, data scientists, MBAs with product chops, grad students, working professionals — all are welcome. Application-based; top applicants selected to participate.
