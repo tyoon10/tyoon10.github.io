@@ -2,7 +2,7 @@
 title: "Claude Builder Club Spring 2026 Kick Off"
 event: Claude Builder Club Spring 2026 Kick Off
 event_url: https://cglink.me/2ca/r131627
-location: "Columbia University, New York, NY"
+location: "Columbia University"
 
 summary: "Hosted the Claude Builder Club spring launch at Columbia Business School — 200+ registered, hands-on Claude Opus 4.6 workshop, complimentary Claude Pro subscriptions."
 
@@ -30,8 +30,12 @@ Claude Builder Club Spring 2026 Kick Off
 
 https://www.jotform.com/253566966596075
 
+## Prompt Submission Folder
+
+https://drive.google.com/drive/folders/1EMJu93N9coSKb0bwuQqphjWAHjBSdKWd?usp=sharing
+
 ## Full Agenda
 
 - **CBC Introduction**
 - **What's New About Opus 4.6**
-- **Hands-on Workshop - Build PRD**
+- **Claude Code Prompt Challenge**
