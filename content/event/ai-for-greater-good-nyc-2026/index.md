@@ -2,7 +2,7 @@
 title: "Panel: AI & 2026 — AI for Greater Good NYC Kick Off"
 event: 2026 AI for Greater Good - New York Kick Off
 event_url: https://luma.com/cjylbi37
-location: "New York, NY"
+location: "307 W 38th St, New York, NY"
 
 summary: "Panelist alongside representatives from Meta, Uber, Apple, and Anthropic discussing the AI landscape in 2026."
 

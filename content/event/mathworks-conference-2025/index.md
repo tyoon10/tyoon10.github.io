@@ -1,8 +1,8 @@
 ---
 title: "Investment Strategies Ideation Using LLMs and Structured Multi-Modal Data"
-event: MathWorks Global Conference 2025
+event: MathWorks Finance Conference 2025
 event_url: https://www.mathworks.com/videos/investment-strategies-ideation-using-large-language-models-and-structured-multi-modal-data-1760424545621.html
-location: "New York, NY"
+location: "Virtual"
 
 summary: "Presented a LightRAG pipeline that transforms 4,000+ academic papers into a queryable graph vector database for quantitative finance research."
 
