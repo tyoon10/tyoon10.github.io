@@ -63,6 +63,10 @@ params:
     bio: Enterprise AI Strategy | MBA/MS at Columbia
     email: contact@twyoon.com
 
+  marketing:
+    analytics:
+      google_analytics: "G-H62WJ8E3J9"
+
   footer:
     copyright:
       notice: '© 2026 Taewan Yoon. All rights reserved. This site uses [Google Analytics](/privacy/).'
