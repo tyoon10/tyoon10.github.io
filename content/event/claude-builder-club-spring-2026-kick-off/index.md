@@ -78,3 +78,15 @@ Try these troubleshooting steps:
 3. **Resubmit the [check-in form](https://www.jotform.com/253566966596075)** with the corrected Org ID from platform.claude.com
 4. **Wait one more week** for the next Friday batch processing
 5. If you're still not receiving anything after resubmitting, **please join the next CBC event** so we can help troubleshoot in person
+
+### I got a Claude Pro access code link but it's not working
+
+Make sure your account is **not on an active Pro or Max plan**. In order to use the free access code, you need to:
+
+1. **Cancel** your existing Pro or Max subscription
+2. **Wait** for the current billing period to expire
+3. Once you're back on the **free plan**, apply the access code to redeem your free Claude Pro subscription
+
+### How long do we get Claude Pro for?
+
+You get **6 months** of free Claude Pro (expires on **August 2026**).
