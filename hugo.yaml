@@ -30,7 +30,7 @@ security:
 # --- APPEARANCE ---
 params:
   locale:
-    date_format: "January 2006"
+    date_format: "Jan 2, 2006"
 
   appearance:
     theme_day: minimal
