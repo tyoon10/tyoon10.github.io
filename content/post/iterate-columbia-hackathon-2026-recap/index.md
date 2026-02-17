@@ -102,9 +102,9 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 
 ### Lunch
 
-{{< gallery album="hackathon-2026-lunch" >}}
-
 **12:00 PM** — **250 Shake Shack burgers** hit the tables. The line formed before the announcement finished.
+
+{{< gallery album="hackathon-2026-lunch" >}}
 
 **12:30 – 5:00 PM** — The long build. This is where projects took shape. Teams that started with ambitious scopes narrowed to shippable demos. Teams that started simple discovered unexpected depth. Mentor rotations continued. All the breakout rooms were on fire.
 
@@ -115,9 +115,9 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 
 ### Pitch and Judging
 
-{{< gallery album="hackathon-2026-pitching" >}}
-
 **6:30 – 7:30 PM** — Demo time. Selected finalists pitched their projects to a judging panel of investors, founders, and technologists. The range was striking — healthcare AI, financial tools, creative applications, developer productivity, education platforms — reflecting the breadth of professions represented in the room.
+
+{{< gallery album="hackathon-2026-pitching" >}}
 
 **8:00 PM** — Prize announcements and closing. Twelve hours after doors opened, the room cleared out with the particular energy of people who shipped something real alongside strangers who became collaborators. Even after closing, many have stayed for another hour sharing their passion and building connections.
 
