@@ -20,11 +20,11 @@ organizations:
 bio: Building go-to-market strategies and AI products at the intersection of LLM platforms and enterprise finance.
 
 interests:
-  - Enterprise AI Go-to-Market
-  - LLM Applications in Finance
-  - Agentic AI Systems
-  - AI Product Strategy
-  - AI-Enhanced Collective Intelligence
+  - How frontier AI gets adopted at enterprise scale
+  - Where LLMs create durable edge in financial services
+  - The emerging design space of agentic systems
+  - AI product strategy at the platform–enterprise interface
+  - AI as infrastructure for collective human intelligence
 
 education:
   courses:

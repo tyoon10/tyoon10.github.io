@@ -24,15 +24,15 @@ links:
     url: https://cglink.me/2ca/r131627
 ---
 
-Claude Builder Club Spring 2026 Kick Off
+## Get Involved
 
-## Check-in Form
+[Step 1. Interest Form](https://www.jotform.com/253555944387168)
 
-https://www.jotform.com/253566966596075
+[Step 2. Check-in Form](https://www.jotform.com/253566966596075)
 
 ## Prompt Submission Folder
 
-https://drive.google.com/drive/folders/1EMJu93N9coSKb0bwuQqphjWAHjBSdKWd?usp=sharing
+[Prompt Submission Folder](https://drive.google.com/drive/folders/1EMJu93N9coSKb0bwuQqphjWAHjBSdKWd?usp=sharing)
 
 ## Full Agenda
 

@@ -11,7 +11,7 @@ sections:
       text: |-
         **Columbia MBA/MS** | Enterprise AI | Financial Services
 
-        I sit where frontier AI meets enterprise finance — translating what the best models can do into strategies that financial institutions can actually deploy. From hands-on system architecture to go-to-market execution, I bridge the gap between AI platforms and the organizations that need to adopt them.
+        The intersection of frontier AI and enterprise finance is still being defined — I'm drawn to that. I translate what the best models can do into strategies that financial institutions can actually deploy, and I'm always working to understand both sides more deeply. From hands-on system architecture to go-to-market execution, I bridge the gap between AI platforms and the organizations that need to adopt them.
       cta:
         label: View Projects
         url: '#projects'
@@ -39,9 +39,9 @@ sections:
     id: projects
     content:
       title: Projects
-      subtitle: AI systems built for enterprise deployment, not just demonstration
+      subtitle: ""
       text: ""
-      count: 4
+      count: 1
       filters:
         folders:
           - project
@@ -58,7 +58,7 @@ sections:
     id: posts
     content:
       title: "Writing"
-      subtitle: Enterprise AI strategy for technical leaders and business decision-makers
+      subtitle: "Thinking through AI — systems, products, and the questions worth asking"
       text: ""
       count: 3
       filters:
