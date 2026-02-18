@@ -11,7 +11,7 @@ sections:
       text: |-
         **Columbia MBA/MS** | Enterprise AI | Financial Services
 
-        Building AI systems and go-to-market strategies where LLMs meet enterprise finance. From RAG pipelines to enterprise adoption — the bridge between AI platforms and financial institutions.
+        I sit where frontier AI meets enterprise finance — translating what the best models can do into strategies that financial institutions can actually deploy. From hands-on system architecture to go-to-market execution, I bridge the gap between AI platforms and the organizations that need to adopt them.
       cta:
         label: View Projects
         url: '#projects'
@@ -39,7 +39,7 @@ sections:
     id: projects
     content:
       title: Projects
-      subtitle: Enterprise AI systems, from prototype to production
+      subtitle: AI systems built for enterprise deployment, not just demonstration
       text: ""
       count: 4
       filters:
@@ -58,7 +58,7 @@ sections:
     id: posts
     content:
       title: "Writing"
-      subtitle: Enterprise AI strategy and technical decision-making
+      subtitle: Enterprise AI strategy for technical leaders and business decision-makers
       text: ""
       count: 3
       filters:
@@ -103,7 +103,7 @@ sections:
     content:
       title: Contact
       text: |-
-        Open to enterprise AI roles — solutions architecture, product management, and go-to-market — at the intersection of LLM platforms and financial services.
+        Selectively pursuing enterprise AI roles — solutions architecture, product strategy, and go-to-market — where deep financial services expertise and hands-on AI deployment experience create measurable business value.
       email: contact@twyoon.com
       contact_links:
         - icon: linkedin

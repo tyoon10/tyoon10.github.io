@@ -108,7 +108,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 
 **12:30 – 5:00 PM** — The long build. This is where projects took shape. Teams that started with ambitious scopes narrowed to shippable demos. Teams that started simple discovered unexpected depth. Mentor rotations continued. All the breakout rooms were on fire.
 
-**5:00 PM** — **200 ChaHalo milk teas** arrived for the reception while judging was in-process. Also gone instantly.
+**5:00 PM** — **200 ChaHalo milk teas** arrived for the reception while judging was in progress. Also gone instantly.
 
 {{< gallery album="hackathon-2026-tea" >}}
 
