@@ -32,7 +32,7 @@ links:
 
 ## Prompt Submission Folder
 
-[Prompt Submission Folder](https://drive.google.com/drive/folders/1EMJu93N9coSKb0bwuQqphjWAHjBSdKWd?usp=sharing)
+[Prompt Submission Folder](https://drive.google.com/drive/folders/1v0UbbA4MHmO-2xdV6hDFzQ4ZfLLSjm74?usp=sharing)
 
 ## Full Agenda
 
