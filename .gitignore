@@ -17,6 +17,9 @@ nul
 # Claude Code
 .claude/
 
+# Internal presentations (not for website)
+presentations/
+
 # Private notes and strategy
 meeting notes*/
 job-descriptions/

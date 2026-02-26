@@ -15,57 +15,45 @@ tags:
   - Claude
   - Agentic AI
   - Product Management
+
 ---
 
-## Step 1. Join Claude Builder Club
+## Before the Workshop
 
-Fill out both forms to get set up with free Claude Pro access (6 months, courtesy of Anthropic):
+Install these two things so you're ready to follow along:
+
+### 1. VS Code
+
+Download from [code.visualstudio.com](https://code.visualstudio.com/) — free, works on Windows and macOS.
+
+### 2. Node.js
+
+Download the **LTS version** from [nodejs.org](https://nodejs.org/) — required for Claude Code to run, even inside VS Code.
+
+---
+
+## Join Claude Builder Club
+
+Get free Claude Pro access for 6 months (courtesy of Anthropic):
 
 1. [CBC Interest Form](https://www.jotform.com/253555944387168) — join the mailing list
 2. [CBC Check-in Form](https://www.jotform.com/253566966596075) — submit your Org ID to receive Claude Pro
 
-> You'll need your **Org ID from [platform.claude.com](https://platform.claude.com)** (not claude.ai). Create an account with your `.edu` email, set up an Individual Org, then find the Org ID under Settings.
-
----
-
-## Step 2. Install Claude Code
-
-Claude Code is Anthropic's AI-powered coding agent that runs in your terminal. It can scaffold projects, write and edit code, run commands, and iterate on your ideas in real time.
-
-**Install:**
-
-1. Install [Node.js](https://nodejs.org/) (LTS version)
-2. Open your terminal and run:
-   ```
-   npm install -g @anthropic-ai/claude-code
-   ```
-3. Launch it in any project folder:
-   ```
-   claude
-   ```
-4. It will prompt you to authenticate with your Anthropic account on first run
-
----
-
-## Step 3. Workshop — Build with Claude Code
-
-### Why Claude Code for PMs
-
-- Go from idea to working prototype without writing code yourself
-- Validate product hypotheses with functional demos, not slide decks
-- Speak the language of your engineering team with firsthand build experience
-
-### Best Practices
-
-- **Start with a clear prompt.** Describe what you want to build, who it's for, and what it should do. The more specific, the better.
-- **Iterate in conversation.** Treat Claude Code like a pairing session — review what it builds, then ask for changes.
-- **Use `/init` to scaffold.** Starting a new project? Let Claude Code set up the structure for you.
-- **Keep scope tight.** Ship one feature at a time. A working login screen beats a half-finished app.
+> **Org ID:** Go to [platform.claude.com](https://platform.claude.com) (not claude.ai) → sign up with your `.edu` email → create Individual Org → copy Org ID from Settings.
 
 ---
 
 ## Resources
 
-- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code/overview)
 - [Claude Builder Club WhatsApp Group](https://chat.whatsapp.com/FUkH54ePpto9OJ1Iiq0KSi)
 - [Anthropic API Console](https://platform.claude.com)
+
+## Claude Code Resources
+
+- [Overview](https://code.claude.com/docs/en/overview)
+- [How Claude Code Works](https://code.claude.com/docs/en/how-claude-code-works)
+- [Features Overview](https://code.claude.com/docs/en/features-overview)
+- [Common Workflows](https://code.claude.com/docs/en/common-workflows)
+- [Best Practices](https://code.claude.com/docs/en/best-practices)
+- [Agent Skills](https://code.claude.com/docs/en/skills)
+- [Best practices from Claude Code's creator (X thread)](https://x.com/bcherny/status/2017742741636321619)
