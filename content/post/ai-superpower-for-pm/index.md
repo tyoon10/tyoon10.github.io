@@ -13,7 +13,7 @@ categories:
 date: 2026-02-26
 lastmod: 2026-02-26
 featured: true
-draft: true
+draft: false
 
 image:
   caption: "Claude Code Workshop at Columbia Business School"
