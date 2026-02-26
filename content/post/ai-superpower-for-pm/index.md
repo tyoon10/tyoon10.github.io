@@ -21,6 +21,12 @@ image:
   preview_only: false
 
 projects: []
+
+links:
+  - icon: linkedin
+    icon_pack: fab
+    name: LinkedIn Post
+    url: https://www.linkedin.com/posts/taewan-yoon_claudepartner-productmanagement-contextengineering-activity-7432843926362931201-MvCA
 ---
 
 ## 300 Students, Two Weeks, One Recurring Conversation
