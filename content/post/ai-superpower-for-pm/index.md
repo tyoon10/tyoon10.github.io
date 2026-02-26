@@ -38,7 +38,7 @@ The highlight was yesterday's session at Chris LaSala's Digital Product Manageme
 2. Guide PMs past the fear of facing command-line tools and IDEs
 3. Land a genuine superpower in their hands
 
-The world has been shifting at a pace that is hard to overstate. In the span of three weeks:
+The world has been shifting at a pace that is hard to overstate. In three weeks:
 - Claude Opus 4.6 released *on February 5th*
 - OpenAI acquired OpenClaw *on the 15th*
 - Claude Sonnet 4.6 dropped *on the 17th*
@@ -56,7 +56,7 @@ When I opened VS Code for a live demo, a visible portion of the room checked out
 
 I understand this. **I was one of them.**
 
-But Mihail's observation about engineers applies here with uncomfortable precision. AI-native engineers, he writes, don't "just download Cursor and prompt it a few times." They build spec-driven systems, understand agent limitations like SDK hallucination, and know how to set up agent-friendly environments — an AGENTS.md, consistent patterns, robust test coverage — so that the agent can actually do its job. The tool is a **multiplier** for their existing fundamentals, NOT a crutch that replaces them.
+But Mihail's observation about engineers applies here with uncomfortable precision. AI-native engineers don't "just download Cursor and prompt it a few times." They build spec-driven systems and agent-friendly environments so the agent can actually do its job. The tool is a **multiplier** for their existing fundamentals, NOT a crutch that replaces them.
 
 The same is true for PMs. Opening a browser and typing questions into a chat box is the PM equivalent of downloading Cursor and prompting it a few times. It feels like progress.
 
@@ -79,11 +79,9 @@ This is not a bug that will be patched. It is the **fundamental mathematical str
 
 The consequences are measurable. Research on the "lost-in-middle" phenomenon shows that information buried in the center of a long context receives **10–40% lower recall accuracy** compared to information placed at the beginning or end. The model is not ignoring your content on purpose — its attention budget simply runs thin in the middle.
 
-**Anthropic was intentional about this.** They restricted context windows until the latest 4.6 models (now up to 1 million tokens) because they understood that a bigger window does not automatically mean better performance. The window and the effective range are not the same thing.
+**Anthropic was intentional about this.** They restricted context windows until the latest 4.6 models (now up to 1 million tokens) because they understood that a bigger window does not automatically mean better performance.
 
-As Andrej Karpathy put it, the real challenge is *"the delicate art and science of filling the context window with just the right information for the next step."* (I think it summarizes the key beautifully)
-
-The RULER benchmark drives this home with a sobering finding: only 50% of models claiming 32K+ context actually maintain satisfactory performance at 32K tokens. Near-perfect scores on simple needle-in-a-haystack tests do not translate to real long-context understanding.
+As Andrej Karpathy put it, the real challenge is *"the delicate art and science of filling the context window with just the right information for the next step."*
 
 So if bigger and smarter is not the answer, what is?
 
@@ -114,7 +112,7 @@ A single well-written document is easy to duplicate. But a **structured, living 
 
 **This is exactly what you want to build for your Claude Code workflow.** Mihail describes how AI-native engineers set up "agent-friendly" codebases — an AGENTS.md file, consistent style patterns, a robust build system — so the agent has the right context to operate effectively. For PMs, the equivalent is a CLAUDE.md file, structured project briefs, clear module hierarchies. These are not AI tricks. They are **documentation practices** applied to a new kind of collaborator.
 
-The contrast is sharp. Files dumped into a chat return *generic responses*, heavily influenced by the model's general training data. Files curated with intention — structured, scoped, progressively disclosed — return responses that understand your specific product, your specific stakeholders, your specific constraints. Rather than wasting most of your token budget and context window on irrelevant noise, you direct the attention to what matters the most to you.
+The contrast is sharp. Files dumped into a chat return *generic responses*, shaped by the model's general training data. Files curated with intention return responses that understand your specific product, your specific stakeholders, your specific constraints.
 
 ## Three Moves That Change How You Work
 
@@ -126,17 +124,21 @@ Instead of re-explaining your product, team, and constraints at the start of eve
 
 **2. Separate tasks instead of stacking them.**
 
-When you ask the model to research, draft, and review in a single session, you are asking it to hold multiple competing contexts simultaneously. This is the classic context confusion pattern — the model starts mixing requirements from different tasks, applying constraints from the wrong context. Instead, isolate tasks. Run research in one focused session, drafting in another. Each focused session gets a clean, narrow context window. This is the PM version of what Mihail describes AI-native engineers doing: splitting complex projects into milestones and delegating tasks to 2–5 coding agents concurrently. The principle is the same — **focused context, parallel execution**.
+When you ask the model to research, draft, and review in a single session, you are asking it to hold multiple competing contexts simultaneously. This is the classic context confusion pattern — the model starts mixing requirements from different tasks, applying constraints from the wrong context. Instead, isolate tasks. Run research in one focused session, drafting in another. Each focused session gets a clean, narrow context window — **focused context, parallel execution**.
 
 **3. Treat the context window as a budget, not a storage unit.**
 
-Before adding any file or document to context, ask: *does this actually need to be here for this specific task?* Irrelevant content does not sit passively in the background. It actively *competes* for the model's attention. Research shows that even a single irrelevant document is enough to measurably degrade performance on the relevant ones. Less, but more targeted, is almost always better.
+Before adding any file or document to context, ask: *does this actually need to be here for this specific task?* Irrelevant content does not sit passively in the background. It actively *competes* for the model's attention. Even a single irrelevant document is enough to measurably degrade performance on the relevant ones. Less, but more targeted, is almost always better.
 
 ## The AI Superpower Is a PM Superpower
 
 Back in that room at Columbia Business School, the title of the session was not just a provocation — it was a genuine belief.
 
-Product managers are already expert context engineers in their daily work. They manage competing stakeholder information. They translate ambiguous user signals into clear requirements. They hold product decisions in relation to business constraints, technical feasibility, and user needs — all at once. PMs have always been in the business of curating what the next conversation needs to know.
+Product managers are already expert context engineers in their daily work. They:
+- manage competing stakeholder information
+- translate ambiguous signals into clear requirements
+- hold product decisions in relation to business constraints, technical feasibility, and user needs
+PMs have always been in the business of curating what the next conversation needs to know.
 
 Context engineering for AI is that same discipline applied to a new kind of system — one that is extraordinarily capable when you give it the right context, and embarrassingly generic when you do not.
 
