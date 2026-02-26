@@ -5,7 +5,6 @@ summary: "Context engineering — not prompt engineering — is the PM superpowe
 authors:
   - admin
 tags:
-  - AI
   - Product Management
   - Context Engineering
   - Claude Code
@@ -17,8 +16,8 @@ featured: true
 draft: true
 
 image:
-  caption: ""
-  focal_point: ""
+  caption: "Claude Code Workshop at Columbia Business School"
+  focal_point: Center
   preview_only: false
 
 projects: []
