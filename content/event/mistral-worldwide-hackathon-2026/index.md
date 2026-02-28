@@ -39,7 +39,7 @@ Invited to judge project submissions at the New York venue, evaluating teams on 
 
 Over **1,000 AI engineers** were selected from a competitive applicant pool to build across all seven cities simultaneously. The New York edition alone drew hundreds of builders for a 36-hour sprint at Verci Flatiron, with overnight accommodations and full catering across both days.
 
-**Global prizes** include \\$10,000 cash, \\$15,000 in Mistral credits, and a final interview for the **Supercell AI Innovation Lab** (\\$100K value). City-level prizes add an additional \\$3,000+ in cash and credits per location.
+**Global prizes** include \$10,000 cash, \$15,000 in Mistral credits, and a final interview for the **Supercell AI Innovation Lab** (\$100K value). City-level prizes add an additional \$3,000+ in cash and credits per location.
 
 ## Partners & Sponsors
 

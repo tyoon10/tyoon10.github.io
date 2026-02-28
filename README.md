@@ -1,6 +1,6 @@
 # twyoon.com — Maintenance Guide
 
-Private reference for maintaining and updating the personal portfolio site.
+Private reference for maintaining and updating the personal portfolio site. For Claude Code agent context, see `CLAUDE.md`.
 
 ---
 

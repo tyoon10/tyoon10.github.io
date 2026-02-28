@@ -33,14 +33,14 @@ links:
     url: https://luma.com/dyzbn70z
 ---
 
-300 builders. 12 hours. \\$10,000+ in prizes. One room.
+300 builders. 12 hours. \$10,000+ in prizes. One room.
 
 The CBS AI Club and Iterate brought together builders from across New York City for a day-long hackathon at Columbia Business School's Geffen Hall Board Room. 60+ teams submitted final projects spanning healthcare AI, financial tools, creative applications, developer productivity, and education platforms.
 
 ## What Happened
 
 - 12-hour build sprint in Geffen Hall at Columbia Business School
-- \\$10,000+ in total prizes — cash awards, AI service credits, and partner merchandise
+- \$10,000+ in total prizes — cash awards, AI service credits, and partner merchandise
 - 250 Shake Shack burgers and 200 ChaHalo milk teas
 - Access to cutting-edge tools and APIs from our partners
 - Judging by a panel of investors, founders, and technologists
