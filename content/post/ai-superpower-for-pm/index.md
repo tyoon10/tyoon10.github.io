@@ -27,6 +27,10 @@ links:
     icon_pack: fab
     name: LinkedIn Post
     url: https://www.linkedin.com/posts/taewan-yoon_claudepartner-productmanagement-contextengineering-activity-7432843926362931201-MvCA
+  - icon: calendar-alt
+    icon_pack: fas
+    name: Workshop Event
+    url: /event/claude-for-product-management-workshop/
 ---
 
 ## 300 Students, Two Weeks, One Recurring Conversation
