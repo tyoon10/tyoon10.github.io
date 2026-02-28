@@ -47,4 +47,4 @@ Over **1,000 AI engineers** were selected from a competitive applicant pool to b
 
 ## Context
 
-This continues a trajectory from organizing hackathons to evaluating them — from co-leading the [AI Club x Iterate NYC Hackathon](/event/iterate-columbia-hackathon-2026/) (300 builders, \\$10K+ prizes) at Columbia three weeks earlier, to now judging a global-scale competition backed by one of Europe's leading AI companies. The shift from organizer to judge at this scale reflects growing recognition in New York's AI builder community.
+This continues a trajectory from organizing hackathons to evaluating them — from co-leading the [AI Club x Iterate NYC Hackathon](/event/iterate-columbia-hackathon-2026/) (300 builders, \$10K+ prizes) at Columbia three weeks earlier, to now judging a global-scale competition backed by one of Europe's leading AI companies. The shift from organizer to judge at this scale reflects growing recognition in New York's AI builder community.
