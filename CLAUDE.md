@@ -31,14 +31,13 @@ Author profile: `content/authors/admin/_index.md` (note the underscore).
 
 Math mode is enabled (`hugo.yaml` → `params.features.math.enable: true`). HugoBlox uses KaTeX, which treats `$...$` as inline math delimiters. Any literal `$` in content **will be interpreted as LaTeX**.
 
-**IMPORTANT:** Use `\\$` (double backslash + dollar) in markdown source. Single `\$` does NOT work with KaTeX.
+**IMPORTANT:** Use the HTML entity `&#36;` for all literal dollar signs — in both markdown body and YAML frontmatter. Backslash escaping (`\$`, `\\$`) does NOT work reliably with KaTeX.
 ```
 WRONG:  $10,000 in prizes       ← renders as LaTeX math
 WRONG:  \$10,000 in prizes      ← still renders as LaTeX math
-RIGHT:  \\$10,000 in prizes     ← renders as literal $10,000
+WRONG:  \\$10,000 in prizes     ← renders with visible backslash
+RIGHT:  &#36;10,000 in prizes   ← renders as $10,000
 ```
-
-Note: In YAML frontmatter (summary, title), the escaping is the same (`\\$`) because YAML also consumes one backslash layer.
 
 ## Build Commands
 
