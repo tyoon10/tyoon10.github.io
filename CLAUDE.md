@@ -27,17 +27,11 @@ Author profile: `content/authors/admin/_index.md` (note the underscore).
 - **Posts:** title, summary, date, authors, tags, projects (cross-links to project slugs)
 - **Projects:** title, summary, tags, date, external_link, links
 
-## Critical: Dollar Sign Escaping
+## Math Mode & Dollar Signs
 
-Math mode is enabled (`hugo.yaml` → `params.features.math.enable: true`). HugoBlox uses KaTeX, which treats `$...$` as inline math delimiters. Any literal `$` in content **will be interpreted as LaTeX**.
+Global math is **disabled** (`hugo.yaml` → `params.features.math.enable: false`). Dollar signs work as plain text with no escaping needed.
 
-**IMPORTANT:** Use the HTML entity `&#36;` for all literal dollar signs — in both markdown body and YAML frontmatter. Backslash escaping (`\$`, `\\$`) does NOT work reliably with KaTeX.
-```
-WRONG:  $10,000 in prizes       ← renders as LaTeX math
-WRONG:  \$10,000 in prizes      ← still renders as LaTeX math
-WRONG:  \\$10,000 in prizes     ← renders with visible backslash
-RIGHT:  &#36;10,000 in prizes   ← renders as $10,000
-```
+If a page needs LaTeX, enable per-page via frontmatter `math: true` — but note that `$...$` will then trigger KaTeX on that page. Use `\(...\)` for inline math on math-enabled pages to avoid conflicts with currency.
 
 ## Build Commands
 

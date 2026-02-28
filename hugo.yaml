@@ -40,7 +40,7 @@ params:
 
   features:
     math:
-      enable: true
+      enable: false
     syntax_highlighter:
       theme_light: github-light
       theme_dark: dracula
