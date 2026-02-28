@@ -36,7 +36,7 @@ links:
 
 On Valentine's Day morning at 8:30 AM, the Geffen Hall Board Room at Columbia Business School was packed. Nearly 300 people — strangers from across New York City — had shown up to build.
 
-This was the AI Club x Iterate NYC Hackathon: 12 hours, $10,000+ in prizes, 8 corporate sponsors, and the largest AI hackathon Columbia Business School has ever hosted. It was the product of months of planning between the CBS AI Club and Iterate, and a deliberate bet that the best things happen when you open the doors to everyone.
+This was the AI Club x Iterate NYC Hackathon: 12 hours, \\$10,000+ in prizes, 8 corporate sponsors, and the largest AI hackathon Columbia Business School has ever hosted. It was the product of months of planning between the CBS AI Club and Iterate, and a deliberate bet that the best things happen when you open the doors to everyone.
 
 
 ## The Idea
@@ -50,7 +50,7 @@ The venue mattered. Geffen Hall's Board Room at Columbia Business School is wher
 
 - **300** builders in the room
 - **60+** teams crossed the 'finish line' by submitting final projects
-- **$10,000+** in total prizes
+- **\\$10,000+** in total prizes
 - **8** corporate sponsors
 - **20+** co-organizing team members
 - **12** hours from kickoff to final pitch

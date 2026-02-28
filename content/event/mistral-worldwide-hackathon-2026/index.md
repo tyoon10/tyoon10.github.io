@@ -1,5 +1,5 @@
 ---
-title: "Judge: Mistral AI Worldwide Hackathon — New York"
+title: "Mistral AI Worldwide Hackathon — New York"
 event: Mistral AI Worldwide Hackathon 2026
 event_url: https://luma.com/mistralhack-newyork?tk=W3R0u7
 location: "Verci Flatiron, New York"
@@ -39,7 +39,7 @@ Invited to judge project submissions at the New York venue, evaluating teams on 
 
 Over **1,000 AI engineers** were selected from a competitive applicant pool to build across all seven cities simultaneously. The New York edition alone drew hundreds of builders for a 36-hour sprint at Verci Flatiron, with overnight accommodations and full catering across both days.
 
-**Global prizes** include $10,000 cash, $15,000 in Mistral credits, and a final interview for the **Supercell AI Innovation Lab** ($100K value). City-level prizes add an additional $3,000+ in cash and credits per location.
+**Global prizes** include \\$10,000 cash, \\$15,000 in Mistral credits, and a final interview for the **Supercell AI Innovation Lab** (\\$100K value). City-level prizes add an additional \\$3,000+ in cash and credits per location.
 
 ## Partners & Sponsors
 
@@ -47,4 +47,4 @@ Over **1,000 AI engineers** were selected from a competitive applicant pool to b
 
 ## Context
 
-This continues a trajectory from organizing hackathons to evaluating them — from co-leading the [AI Club x Iterate NYC Hackathon](/event/iterate-columbia-hackathon-2026/) (300 builders, $10K+ prizes) at Columbia three weeks earlier, to now judging a global-scale competition backed by one of Europe's leading AI companies. The shift from organizer to judge at this scale reflects growing recognition in New York's AI builder community.
+This continues a trajectory from organizing hackathons to evaluating them — from co-leading the [AI Club x Iterate NYC Hackathon](/event/iterate-columbia-hackathon-2026/) (300 builders, \\$10K+ prizes) at Columbia three weeks earlier, to now judging a global-scale competition backed by one of Europe's leading AI companies. The shift from organizer to judge at this scale reflects growing recognition in New York's AI builder community.
