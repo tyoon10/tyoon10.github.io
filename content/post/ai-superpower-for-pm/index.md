@@ -44,7 +44,7 @@ The highlight was yesterday's session at Chris LaSala's Digital Product Manageme
 
 The world has been shifting at a pace that is hard to overstate. In three weeks:
 - Claude Opus 4.6 released *on February 5th*
-- OpenAI acquired OpenClaw *on the 15th*
+- OpenAI hired a creator of OpenClaw *on the 15th*
 - Claude Sonnet 4.6 dropped *on the 17th*
 - Gemini 3.1 Pro arrived *on the 19th*
 
