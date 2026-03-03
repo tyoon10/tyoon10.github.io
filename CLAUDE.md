@@ -27,6 +27,12 @@ Author profile: `content/authors/admin/_index.md` (note the underscore).
 - **Posts:** title, summary, date, authors, tags, projects (cross-links to project slugs)
 - **Projects:** title, summary, tags, date, external_link, links
 
+## Cross-Linking Convention
+
+Events and posts that cover the same occasion should link bidirectionally:
+- **Event → Post**: Add a `links` entry with `icon: book-open` and `name: Read the Article`
+- **Post → Event**: Add a `links` entry with `icon: calendar-alt` and `name: Workshop Event` (or similar)
+
 ## Math Mode & Dollar Signs
 
 Global math is **disabled** (`hugo.yaml` → `params.features.math.enable: false`). Dollar signs work as plain text with no escaping needed.
