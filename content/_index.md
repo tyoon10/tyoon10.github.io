@@ -103,7 +103,7 @@ sections:
     content:
       title: Contact
       text: |-
-        Selectively pursuing enterprise AI roles — solutions architecture, product strategy, and go-to-market — where deep financial services expertise and hands-on AI deployment experience create measurable business value.
+        Selectively pursuing enterprise AI roles — solutions architecture, product strategy, and go-to-market — where deep FinTech expertise and hands-on AI deployment experience create measurable business value.
       email: contact@twyoon.com
       contact_links:
         - icon: linkedin

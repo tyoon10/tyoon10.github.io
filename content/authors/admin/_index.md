@@ -53,6 +53,6 @@ social:
 ---
 
 MBA/MS candidate at Columbia. 
-Currently leading Claude's go-to-market for Columbia and NYC — built the builder community from 0 to 900+ through enterprise-focused workshops and hackathons. 
-Manus AI Fellow leading enterprise agentic AI community programs.
+Currently leading Claude's go-to-market for Columbia and NYC — built the builder community from 0 to 800+ through enterprise-focused workshops and hackathons. 
+Manus AI Fellow leading end-to-end agentic AI community programs.
 Co-founded an AI-native FinTech (acquired by a major insurance firm). CFA charterholder, mentor at CFA Society New York. 
