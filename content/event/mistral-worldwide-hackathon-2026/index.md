@@ -19,6 +19,10 @@ tags:
   - Hackathon
 
 links:
+  - icon: book-open
+    icon_pack: fas
+    name: Read the Recap
+    url: /post/mistral-worldwide-hackathon-2026-recap/
   - icon: linkedin
     icon_pack: fab
     name: LinkedIn Post
