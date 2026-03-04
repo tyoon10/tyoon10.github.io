@@ -1,6 +1,6 @@
 ---
 title: "Connecting Local to Global: Inside Mistral AI's Worldwide Hackathon"
-subtitle: "Recap of the Multi-City, High-Stake Operation from the Judge's Seat in New York"
+subtitle: "Recap of the Multi-City, High-Stake Operation from the Judge's Seat"
 summary: "7,000+ applications, 1,000+ builders, 7 cities, $200K+ in prizes — inside Mistral AI's first worldwide hackathon, from the judge's seat at the New York edition."
 authors:
   - admin
@@ -36,7 +36,11 @@ links:
 
 At 9 AM on February 28th, Verci Flatiron in Manhattan was already buzzing. Laptops open, monitors set up, breakfast croissants on the tables — a nod to the Parisian company behind it all. Across the room, hundreds of builders were settling in for what would become a 36-hour overnight sprint. Across the world, six other cities were doing the same thing.
 
+{{< figure src="albums/mistral-2026-arrival/1-banners-sponsors.jpeg" >}}
+
 This was **Mistral AI's first-ever Worldwide Hackathon** — their largest hackathon to date — running simultaneously across **Paris, London, New York, San Francisco, Tokyo, Singapore, and Sydney**. Over 7,000 people applied. 1,000 were selected. And I was there as a judge.
+
+{{< figure src="albums/mistral-2026-arrival/3-venue-packed-crowd.jpeg" caption="Hundreds of builders packed into the NYC venue for the opening kickoff." >}}
 
 ## The Event at Scale
 
@@ -52,13 +56,21 @@ What made this event structurally different from any hackathon was the **simulta
 
 *"The breakfast you just had was 'France'...and every meal will represent each hosting city."* **The cultural details!** For two days, we served French croissants for breakfast, Japanese sushi for dinner, and so on. The real-time awareness that builders in Tokyo were wrapping up while NYC was just hitting its stride at midnight created a sense of scale that I had never experienced at a hackathon before. There was something electric about knowing that at any given moment during the 36-hour sprint, someone on the other side of the planet was hacking on the same models, under the same rules, toward the same deadline.
 
+{{< figure src="albums/mistral-2026-arrival/meal/2-french-breakfast.jpeg" caption="Day 1 breakfast: French croissants, pastries, and fruit — 'France' was the first meal." >}}
+
+{{< figure src="albums/mistral-2026-global/meal/7-tokyo-sushi-dinner.jpeg" caption="Day 1 dinner: Japanese sushi platters at the Tokyo venue — every meal represented a host city." >}}
+
 NYC's venue was packed. Teams of one to four people, working through the night, building with Mistral's latest [Mistral 3 models](https://mistral.ai/news/mistral-3). The energy shifted across the 36 hours — from excited planning, to the quiet intensity of the overnight build, to the focused urgency of final demos.
+
+{{< gallery album="mistral-2026-global" >}}
 
 ## Why Mistral — The Technology Behind the Build
 
 Spending two days embedded with Mistral and NVIDIA teams from developer relations and solution architecture gave me a perspective that most coverage of this company misses.
 
-[Mistral's CEO Arthur Mensch has been explicit](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) about their strategic bet: "The fight for AI supremacy is between open and closed systems, not geography." That philosophy shaped every aspect of this hackathon. Builders owned their stack from the first line of code — fully permissive, unrestricted commercial use. No API lock-in. No usage caps. 
+{{< figure src="albums/mistral-2026-arrival/4-hackathon-tshirt-tour.jpg" caption="The official Mistral Worldwide Hackathon t-shirt — concert-tour style, listing all seven host cities." >}}
+
+[Mistral's CEO Arthur Mensch has been explicit](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) about their strategic bet: "The fight for AI supremacy is between open and closed systems, not geography." That philosophy shaped every aspect of this hackathon. Builders owned their stack from the first line of code — fully permissive, unrestricted commercial use. No API lock-in. No usage caps.
 
 The flagship, [Mistral Large 3](https://docs.mistral.ai/models/mistral-large-3-25-12), is a **Mixture-of-Experts** architecture:
 - with 675 billion total parameters but only 41 billion active at inference, enabling frontier-level capability at a fraction of the compute cost
@@ -69,9 +81,21 @@ But what made the hackathon technically interesting was the **small model** stor
 
 In conversations with the Mistral team, a consistent theme emerged. They were not positioning Mistral as a benchmark competitor to OpenAI or Google. They were positioning it as infrastructure for builders who want *sovereignty over their AI stack.* [Howard](https://www.linkedin.com/in/howard-cohen-879863133/) (Head of Communications) put it directly: "We are open source, because we want to empower the builders, giving you the technology IN YOUR HANDS." Mensch himself frames this as a safer bet for any country building AI infrastructure locally. It accommodates cultural nuances, deploys on local hardware, and avoids dependence on centralized systems.
 
+For the builders in the room, this was not theoretical. They were running models on their own machines, modifying architectures, and shipping demos that would have required API billing and vendor approval under a closed-model paradigm. That difference shaped the kinds of projects that got built:
+
+{{< figure src="albums/mistral-2026-building/projects/12-project-brickstral.jpeg" caption="Brickstral — an AI-powered LEGO builder that generates 3D models from text prompts using Mistral Large." >}}
+
+{{< figure src="albums/mistral-2026-building/projects/13-project-dispatch-ops.jpeg" caption="Dispatch Ops — an AI emergency dispatch system combining real-time map data with Mistral-powered triage." >}}
+
+{{< figure src="albums/mistral-2026-building/projects/14-project-lacuna.jpeg" caption="LACUNA — a cross-lingual divergence explorer visualizing semantic topology across languages in 3D." >}}
+
+{{< gallery album="mistral-2026-building" >}}
+
 ## Judging and Mentoring
 
 What I found most rewarding was the **dual role**. I was there to evaluate, but the extended format allowed me to engage teams across multiple build stages.
+
+{{< figure src="albums/mistral-2026-judging/1-judging-session-timer.jpeg" caption="Five minutes on the clock — a team presents their demo to the judging panel." >}}
 
 The mentoring conversations followed a pattern: teams come up and show me technically impressive demos, and I would push them on the problem space:
 
@@ -81,11 +105,21 @@ The mentoring conversations followed a pattern: teams come up and show me techni
 
 These were not rhetorical questions. The teams that actively reflected on them — that paused, rethought their approach, and came back with sharper framing — were the ones that outperformed. There were solutions that doubled down on technical sophistication alone (and I was blown away), but none of them make it to the top.
 
+{{< figure src="albums/mistral-2026-judging/5-mentoring-circle.jpg" caption="A mentoring session in progress — judges and builders huddled together reviewing a project." >}}
+
+{{< gallery album="mistral-2026-judging" >}}
+
 ## The People
 
-A hackathon of this scale becomes a crossroads. The judging panel alone spanned across all seven cities. In the NYC room, I enjoyed the extended conversations with Mistral's solution engineers, listening to NVIDIA's technical marketing teams as they navigated the participants' proposal using [NVFP4 on NVIDIA Blackwell platform](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/). We also had ML Researcher from [Tilde Research](https://tilderesearch.com/), a frontier research lab that allowed us to look under the hood of the Ministral models with the mechanistic interpretability that ensured they were safe and reliable. 
+A hackathon of this scale becomes a crossroads. The judging panel alone spanned across all seven cities. In the NYC room, I enjoyed the extended conversations with Mistral's solution engineers, listening to NVIDIA's technical marketing teams as they navigated the participants' proposal using [NVFP4 on NVIDIA Blackwell platform](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/). We also had ML Researcher from [Tilde Research](https://tilderesearch.com/), a frontier research lab that allowed us to look under the hood of the Ministral models with the mechanistic interpretability that ensured they were safe and reliable.
+
+{{< figure src="albums/mistral-2026-people/03-nvidia-team.jpg" caption="The NVIDIA team on-site at the NYC venue — supporting builders with accelerated computing expertise." >}}
 
 And then there was the scene across the event hall itself. People hovering their hands in the air wearing VR headsets to create games for the [Supercell](https://supercell.com/) track. Teams iteratively testing voice interactions using [ElevenLabs](https://elevenlabs.io/) technology. I occasionally lifted my eyes from the screen to the steady hum of spinning fans and the electric pulse of racing minds. In the entire space filled with cognitive energy, neurons sparked and ideas collided as collective effort met the raw power of accelerated silicon.
+
+{{< figure src="albums/mistral-2026-judging/7-paris-vr-demo-supercell.jpeg" caption="Paris venue: a builder demos a VR game on Meta Horizon for the Supercell track while the crowd watches." >}}
+
+{{< gallery album="mistral-2026-people" >}}
 
 ## Three Takeaways
 
@@ -108,6 +142,8 @@ Two things stayed with me after the event.
 First, the open-source AI community does not just live on GitHub, disconnected in silos. This hackathon brought it to life — real people, in the same room, building together across seven time zones. The simultaneous global format created something that neither a single-city event nor an online hackathon can replicate: the feeling of being part of a worldwide movement with local roots. The potential for sustained, cross-border collaboration in the AI ecosystem is real, and events like this prove it.
 
 Second, my own trajectory over the past month tells a story about what is possible when you show up and do the work. From organizing club-level events, to [city-scale hackathons](https://twyoon.com/post/iterate-columbia-hackathon-2026-recap/), to judging a global competition backed by some of the most significant companies in AI. The connective thread was not credentials or luck — it was [Iterate](https://hackiterate.com/), and the trust built through consistent execution.
+
+{{< figure src="albums/mistral-2026-people/12-winners-group-photo.jpg" caption="NYC local winners and judges on stage after 36 hours of building." >}}
 
 The global finals are on March 9th. NYC's local winners advance. I will be watching to see if the teams I mentored carry the momentum forward.
 
