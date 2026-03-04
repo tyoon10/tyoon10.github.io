@@ -67,19 +67,17 @@ The flagship, [Mistral Large 3](https://docs.mistral.ai/models/mistral-large-3-2
 
 But what made the hackathon technically interesting was the **small model** story. [Ministral 3](https://docs.mistral.ai/models/ministral-3-14b-25-12) — a family of nine dense models across 3B, 8B, and 14B parameterscan run on devices with as little as 4GB of VRAM using 4-bit quantization. Standard laptops. No cloud. **No internet required.** For a hackathon, this means teams could prototype locally, iterate fast, and deploy without infrastructure dependencies.
 
-In conversations with the Mistral team, a consistent theme emerged. They were not positioning Mistral as a benchmark competitor to OpenAI or Google. They were positioning it as infrastructure for builders who want *sovereignty over their AI stack.* [Howard](https://www.linkedin.com/in/howard-cohen-879863133/) (Head of Communications) put it directly: "Open source — because we want to empower the builders, giving them the technology in their hands." Mensch himself frames this as a safer bet for any country building AI infrastructure locally — it accommodates cultural nuances, deploys on local hardware, and avoids dependence on centralized proprietary systems.
-
-For the builders in the room, this was not theoretical. They were running models on their own machines, modifying architectures, and shipping demos that would have required API billing and vendor approval under a closed-model paradigm. That difference shaped the kinds of projects that got built.
+In conversations with the Mistral team, a consistent theme emerged. They were not positioning Mistral as a benchmark competitor to OpenAI or Google. They were positioning it as infrastructure for builders who want *sovereignty over their AI stack.* [Howard](https://www.linkedin.com/in/howard-cohen-879863133/) (Head of Communications) put it directly: "We are open source, because we want to empower the builders, giving you the technology IN YOUR HANDS." Mensch himself frames this as a safer bet for any country building AI infrastructure locally. It accommodates cultural nuances, deploys on local hardware, and avoids dependence on centralized systems.
 
 ## Judging and Mentoring
 
-What I found most rewarding was the **dual role**. I was there to evaluate, but the extended format — two full days versus the typical single-day sprint — meant there was real time to mentor throughout the event.
+What I found most rewarding was the **dual role**. I was there to evaluate, but the extended format allowed me to engage teams across multiple build stages.
 
-The mentoring conversations followed a pattern. Teams would show me technically impressive demos, and I would push them on the problem space:
+The mentoring conversations followed a pattern: teams come up and show me technically impressive demos, and I would push them on the problem space:
 
-*"What user problem does this solve? Does this really add value in its current state?"*
+*"What user problem does this solve? Does this add value to **how users currently get the job done?**"*
 
-*"Have you been considerate about safety? Are you responsible in deploying AI on values including privacy, safety, public good, inclusion?"*
+*"How do you ensure safety? Have you been considerate about values including privacy, public good, and/or inclusion?"*
 
 These were not rhetorical questions. The teams that actively reflected on them — that paused, rethought their approach, and came back with sharper framing — were the ones that outperformed in the final evaluations. The ones that brushed past them and doubled down on technical sophistication alone did not make it to the top.
 
