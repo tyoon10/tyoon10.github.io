@@ -79,13 +79,11 @@ The mentoring conversations followed a pattern: teams come up and show me techni
 
 *"How do you ensure safety? Have you been considerate about values including privacy, public good, and/or inclusion?"*
 
-These were not rhetorical questions. The teams that actively reflected on them — that paused, rethought their approach, and came back with sharper framing — were the ones that outperformed in the final evaluations. The ones that brushed past them and doubled down on technical sophistication alone did not make it to the top.
-
-What stood out across submissions was the creative usage of Mistral's open-weight models. The two-day format enabled contrarian approaches — projects that required real architectural thinking, team coordination, and iterative refinement. These were builds that would not have existed from solo work or a shorter sprint. The extended window rewarded depth over speed, and the strongest teams used every hour of it.
+These were not rhetorical questions. The teams that actively reflected on them — that paused, rethought their approach, and came back with sharper framing — were the ones that outperformed. There were solutions that doubled down on technical sophistication alone (and I was blown away), but none of them make it to the top.
 
 ## The People
 
-A hackathon of this scale becomes a crossroads. The judging panel alone spanned 45+ people across all seven cities. In the NYC room, I connected with the Mistral team — Howard, Param, Devon, David — who were hands-on throughout the event. NVIDIA engineers Anu, Dhruv, and Rachel were on the floor, and I watched teams pull them into real-time conversations about accelerated computing for their solutions. The Tilde Research team — Gitika and Alec — brought a research lens that sharpened technical evaluations. Fellow judges and mentors Andy and Khrystyna brought perspectives that challenged my own.
+A hackathon of this scale becomes a crossroads. The judging panel alone spanned across all seven cities. In the NYC room, I enjoyed the extended conversations with Mistral's solution engineers, listening to NVIDIA's technical marketing teams as they navigated the participants' proposal using [NVFP4 on NVIDIA Blackwell platform](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/). We also had ML Researcher from [Tilde Research](https://tilderesearch.com/), a frontier research lab that allowed us to look under the hood of the Ministral models with the mechanistic interpretability that ensured they were safe and reliable. 
 
 And then there was the scene across the event hall itself. People hovering their hands in the air wearing VR headsets to create games for the Supercell track. Teams iteratively testing voice interactions using ElevenLabs technology. Builders huddled around monitors, demoing to each other before they ever showed a judge. The energy was not performative — it was genuine.
 
