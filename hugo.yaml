@@ -67,8 +67,6 @@ params:
     analytics:
       google_analytics: "G-H62WJ8E3J9"
 
-  sharing: false
-
   footer:
     copyright:
       notice: '© 2026 Taewan Yoon. All rights reserved. This site uses [Google Analytics](/privacy/).'
