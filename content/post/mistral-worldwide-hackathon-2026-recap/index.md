@@ -36,25 +36,21 @@ links:
 
 At 9 AM on February 28th, Verci Flatiron in Manhattan was already buzzing. Laptops open, monitors set up, breakfast croissants on the tables — a nod to the Parisian company behind it all. Across the room, hundreds of builders were settling in for what would become a 36-hour overnight sprint. Across the world, six other cities were doing the same thing.
 
-This was Mistral AI's first-ever Worldwide Hackathon — their largest hackathon to date — running simultaneously across Paris, London, New York, San Francisco, Tokyo, Singapore, and Sydney. Over 7,000 people applied. Just over 1,000 were selected. And I was there as a judge.
-
-## From Organizer to Judge in 14 Days
-
-Two weeks earlier, on Valentine's Day, I had co-organized the [AI Club x Iterate NYC Hackathon](/post/iterate-columbia-hackathon-2026-recap/) at Columbia Business School — 300 builders, 60+ teams, $10K+ in prizes, 8 sponsors. It was the largest AI hackathon CBS had ever hosted.
-
-That event was operated by Iterate, and working closely with Simon and the Iterate team was one of the highlights. When Mistral tapped Iterate to operate their global hackathon, Simon reached out and invited me to join the judging panel. I specifically asked for the judge role — I wanted to evaluate, not just advise.
-
-The arc felt significant. Fourteen days from organizing a campus hackathon to judging a global competition backed by NVIDIA, AWS, Weights & Biases, Hugging Face, ElevenLabs, Jump Trading, and Supercell. Same operator. Different scale entirely.
+This was **Mistral AI's first-ever Worldwide Hackathon** — their largest hackathon to date — running simultaneously across Paris, London, New York, San Francisco, Tokyo, Singapore, and Sydney. Over 7,000 people applied. Just over 1,000 were selected. And I was there as a judge.
 
 ## The Event at Scale
 
-The numbers alone tell a story. Seven cities. 7,000+ applications from a highly competitive global pool. $200K+ in total prizes. A grand prize of $10,000 cash plus $15,000 in Mistral credits plus a hiring opportunity at Mistral AI — with local winners advancing to a global final on March 9th via YouTube livestream.
+The numbers alone tell a story. 
+- Seven cities
+- 7,000+ applications from a highly competitive global pool 
+- $200K+ in total prizes 
+- A grand prize of $10,000 cash plus $15,000 in Mistral credits plus a hiring opportunity at Mistral AI — with local winners advancing to a global final on March 9th via YouTube livestream
 
 But the numbers only capture part of it.
 
-The cultural details made this event feel genuinely global. Every meal represented a host city — French croissants for breakfast, Japanese sushi for dinner. The real-time awareness that builders in Tokyo were wrapping up while NYC was just hitting its stride at midnight created a sense of scale that I had never experienced at a hackathon before.
+The **cultural details** made this event feel genuinely global. **Every meal represented a host city** — French croissants for breakfast, Japanese sushi for dinner. The real-time awareness that builders in Tokyo were wrapping up while NYC was just hitting its stride at midnight created a sense of scale that I had never experienced at a hackathon before.
 
-NYC's venue was packed. Teams of one to four people, working through the night, building with Mistral's latest models. The energy shifted across the 36 hours — from excited planning, to the quiet intensity of the overnight build, to the focused urgency of final demos.
+NYC's venue was packed. Teams of one to four people, working through the night, building with Mistral's latest [Mistral 3 models](https://mistral.ai/news/mistral-3). The energy shifted across the 36 hours — from excited planning, to the quiet intensity of the overnight build, to the focused urgency of final demos.
 
 ## Judging and Mentoring
 
