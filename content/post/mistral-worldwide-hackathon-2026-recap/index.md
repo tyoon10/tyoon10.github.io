@@ -27,7 +27,7 @@ links:
   - icon: linkedin
     icon_pack: fab
     name: LinkedIn Post
-    url: https://www.linkedin.com/posts/taewan-yoon_mistralai-hackathon-nyc-share-7433280584619028480-aHHn
+    url: https://www.linkedin.com/posts/taewan-yoon_mistralai-global-hackathon-activity-7435021705292558338-n9fY?utm_source=share&utm_medium=member_desktop&rcm=ACoAABRMohgBTDAub89p8r8UUED-rE_w8mkBjbk
   - icon: link
     icon_pack: fas
     name: Event Page
