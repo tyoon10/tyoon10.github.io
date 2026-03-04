@@ -85,9 +85,7 @@ These were not rhetorical questions. The teams that actively reflected on them �
 
 A hackathon of this scale becomes a crossroads. The judging panel alone spanned across all seven cities. In the NYC room, I enjoyed the extended conversations with Mistral's solution engineers, listening to NVIDIA's technical marketing teams as they navigated the participants' proposal using [NVFP4 on NVIDIA Blackwell platform](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/). We also had ML Researcher from [Tilde Research](https://tilderesearch.com/), a frontier research lab that allowed us to look under the hood of the Ministral models with the mechanistic interpretability that ensured they were safe and reliable. 
 
-And then there was the scene across the event hall itself. People hovering their hands in the air wearing VR headsets to create games for the Supercell track. Teams iteratively testing voice interactions using ElevenLabs technology. Builders huddled around monitors, demoing to each other before they ever showed a judge. The energy was not performative — it was genuine.
-
-Iterate's volunteers — including Ishita and Cyprien, both Stanford students — kept the operations seamless. Having seen Iterate run the CBS hackathon two weeks earlier, I knew their operational rigor firsthand. At global scale, that reliability mattered even more.
+And then there was the scene across the event hall itself. People hovering their hands in the air wearing VR headsets to create games for the [Supercell](https://supercell.com/) track. Teams iteratively testing voice interactions using [ElevenLabs](https://elevenlabs.io/) technology. I occasionally lifted my eyes from the screen to the steady hum of spinning fans and the electric pulse of racing minds. In the entire space filled with cognitive energy, neurons sparked and ideas collided as collective effort met the raw power of accelerated silicon.
 
 ## Three Takeaways
 
