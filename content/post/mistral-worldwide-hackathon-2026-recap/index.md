@@ -95,7 +95,7 @@ For the builders in the room, this was not theoretical. They were running models
 
 What I found most rewarding was the **dual role**. I was there to evaluate, but the extended format allowed me to engage teams across multiple build stages.
 
-{{< figure src="albums/mistral-2026-judging/1-judging-session-timer.jpeg" caption="Five minutes on the clock — a team presents their demo to the judging panel." >}}
+{{< figure src="albums/mistral-2026-judging/judging/1-judging-session-timer.jpeg" caption="Five minutes on the clock — a team presents their demo to the judging panel." >}}
 
 The mentoring conversations followed a pattern: teams come up and show me technically impressive demos, and I would push them on the problem space:
 
