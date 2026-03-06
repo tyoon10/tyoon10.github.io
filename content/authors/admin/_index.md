@@ -52,7 +52,5 @@ social:
     label: Resume
 ---
 
-MBA/MS candidate at Columbia. 
-Currently leading Claude's go-to-market for Columbia and NYC — built the builder community from 0 to 800+ through enterprise-focused workshops and hackathons. 
-Manus AI Fellow leading end-to-end agentic AI community programs.
-Co-founded an AI-native FinTech (acquired by a major insurance firm). CFA charterholder, mentor at CFA Society New York. 
+MBA/MS at Columbia. Built and scaled Claude's NYC builder community from 0 to 1,000+ members. Leading the AI Club and AI Startup Challenge, and founded BRAIN NYC, a practitioner network tackling the hardest business challenges with frontier AI.
+Enterprise AI strategist and product manager. Shipped agentic workflows as a Manus AI Fellow and co-founded AI-native fintech startup (acquired by a major insurance firm). Mentor at CFA Society New York.
