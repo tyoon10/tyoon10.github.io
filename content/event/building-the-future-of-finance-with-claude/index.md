@@ -6,6 +6,7 @@ location: "Columbia Business School"
 summary: "Guest lecture for Prof. Moran Cerf's executive education program, demonstrating AI-native workflows for finance — live demos of Claude in Excel, PowerPoint, and Claude Code, plus a deep dive into context engineering and system-level thinking."
 
 date: 2026-03-17
+publishDate: 2026-03-10
 all_day: true
 
 authors:
