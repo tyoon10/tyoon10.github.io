@@ -16,11 +16,17 @@ tags:
   - Claude
   - Executive Education
   - Finance
+  
+links:
+  - icon: link
+    icon_pack: fas
+    name: Website
+    url: https://execed.business.columbia.edu/programs/business-ai
 ---
 
 ## Overview
 
-Invited guest lecture for **The Business of AI**, Columbia's top-ranked executive education program led by Prof. Moran Cerf. The audience is senior executives (VPs, CEOs, board members) attending a week-long intensive on AI strategy and implementation.
+Invited guest lecture for **The Business of AI**, Columbia's top-ranked executive education program led by [Prof. Moran Cerf](https://business.columbia.edu/staff/people/moran-cerf). The audience is senior executives (VPs, CEOs, board members) attending a week-long intensive on AI strategy and implementation.
 
 ## Topics Covered
 
