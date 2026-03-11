@@ -13,11 +13,11 @@ sections:
 
         The intersection of frontier AI and enterprise finance is still being defined — I'm drawn to that. I translate what the best models can do into strategies that institutions can actually deploy, and I'm always working to understand both sides more deeply.
       cta:
-        label: View Projects
-        url: '#projects'
-      cta_alt:
         label: Read My Writing
         url: '#posts'
+      cta_alt:
+        label: View Projects
+        url: '#projects'
     design:
       background:
         color: 'rgb(20, 22, 34)'
@@ -31,25 +31,6 @@ sections:
     content:
       username: admin
     design:
-      spacing:
-        padding: ["40px", "0", "40px", "0"]
-
-  # ---- PROJECTS ----
-  - block: collection
-    id: projects
-    content:
-      title: Projects
-      subtitle: ""
-      text: ""
-      count: 2
-      filters:
-        folders:
-          - project
-      sort_by: Date
-      sort_ascending: false
-    design:
-      view: card
-      columns: "1"
       spacing:
         padding: ["40px", "0", "40px", "0"]
 
@@ -72,6 +53,25 @@ sections:
     design:
       view: compact
       columns: "2"
+      spacing:
+        padding: ["40px", "0", "40px", "0"]
+
+  # ---- PROJECTS ----
+  - block: collection
+    id: projects
+    content:
+      title: Projects
+      subtitle: ""
+      text: ""
+      count: 2
+      filters:
+        folders:
+          - project
+      sort_by: Date
+      sort_ascending: false
+    design:
+      view: card
+      columns: "1"
       spacing:
         padding: ["40px", "0", "40px", "0"]
 
