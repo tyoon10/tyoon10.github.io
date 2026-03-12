@@ -14,7 +14,7 @@ categories:
 date: 2026-03-12
 lastmod: 2026-03-12
 featured: true
-draft: true
+draft: false
 
 math: true
 
