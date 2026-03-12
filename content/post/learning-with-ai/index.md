@@ -19,8 +19,8 @@ draft: true
 math: true
 
 image:
-  caption: ""
-  focal_point: ""
+  caption: "Double ML residualization — confounding removed"
+  focal_point: Center
   preview_only: false
 
 projects:
@@ -43,7 +43,7 @@ links:
 
 ## 100 Slides a Week, Six Weeks, Three Days
 
-The [Causal Inference](https://www8.gsb.columbia.edu/courses/mba/2025/spring/b8144-001) mid-term was in three days. The course material spanned six weeks — roughly 100 slides per lecture, plus 23 Jupyter notebooks of computational examples. I had barely touched the recordings.
+The Causal Inference mid-term was in three days. The course material spanned six weeks — roughly 100 slides per lecture, plus 23 Jupyter notebooks of computational examples. I had barely touched the recordings.
 
 This is not a course you can memorize. Causal Inference is the study of **what happens when you intervene** — a question that sounds simple until you realize it requires its own mathematical framework, its own graphical language, and a hierarchy of estimation methods that each break in different ways. The potential outcomes framework alone — $Y_i^{(D=d)}$, the counterfactual you never observe — demands a level of intuitive comfort that slides cannot give you.
 
@@ -85,6 +85,8 @@ Every module was the direct consequence of a specific exchange. The [propensity 
 
 None of these were single-prompt artifacts. Each was iterative — me going back to Claude to check whether my intuition made sense, asking for specific numerical examples, then formulating the visualization, discovering the rendering was wrong, debugging together, and refining until the picture matched the concept.
 
+![Chat module showing the IPW vs BDA exchange](chat-module.png "Synthesis attempt evaluated in real time — from the interactive chat transcript")
+
 One module I want to highlight: the **Three Building Blocks** interactive in the L2 tab. Toggle between chain, fork, and collider. Toggle conditioning on and off. Watch the path open or close. See the numerical example update in real time — the collider showing correlation of 0.012 in the full population flipping to -0.290 among admitted students. That single visualization captures something that took me three attempts to understand from slides alone.
 
 
@@ -97,6 +99,8 @@ After the study session, I asked Claude to analyze my interaction patterns. The 
 > *"Your wrong answers reveal a consistent pattern: defaulting to inaction. On the graph exercise, you correctly ruled out M, then concluded 'adjustment set: none' instead of continuing to search. When you correctly rule something out, you sometimes treat that as the full answer rather than continuing to look."*
 
 > *"Your synthesis attempts describe what but not always why. 'What does this do?' gets partial credit. 'Why does this work?' gets full credit."*
+
+![Claude's first-principles assessment of my learning style](claude-assessment.png "Claude's analysis of interaction patterns from the study session")
 
 That last observation landed. My intuitive answers were almost always right. But the gap between intuition and formal argument — the ability to write out the *why* symbol by symbol — was the real area to sharpen. And I would not have seen it without the feedback loop.
 
@@ -133,5 +137,3 @@ The [study module](https://tyoon10.github.io/causal-inference/) I built is the m
 ---
 
 *The full study session transcript is available as an [interactive chat module](https://tyoon10.github.io/causal-inference/chat.html). The [interactive study guide](https://tyoon10.github.io/causal-inference/) covers the complete Causal Inference curriculum — from potential outcomes through Double ML and sensitivity analysis.*
-
-*References: [Ultralearning](https://www.scotthyoung.com/blog/ultralearning/) by Scott H. Young*
