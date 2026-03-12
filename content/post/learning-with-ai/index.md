@@ -137,17 +137,19 @@ The [study module](https://tyoon10.github.io/causal-inference/) I built is the m
 
 ## A Note on Responsible Use
 
-I want to be direct about something. Using AI to study is not the same as using AI to cheat — but the line is thinner than most people admit, and it runs through intent.
+Here is the truth that nobody wants to say out loud: AI makes it trivially easy to stop learning. You can generate answers, produce essays, solve problem sets, and never engage a single neuron in the process. The tool does not care whether you understand. **You have to care.**
 
-Every school has its own policies. Every instructor draws their own boundaries. Some courses explicitly permit AI tools; others prohibit them entirely. Some fall in between — allowing AI for concept exploration but not for graded submissions. **You are responsible for knowing where your institution stands.** Not assuming. Not guessing. Knowing.
+Your education is yours. Not the institution's, not the instructor's, not the model's — yours. The degree is a credential. The understanding behind it is the actual asset. And the moment you let a tool do the cognitive work for you, you are hollowing out the one thing that makes the credential worth anything.
 
-My use of Claude in this study session fell clearly on the learning side: I was building understanding, not generating answers to submit. Every synthesis was my own — tested, challenged, and often corrected by the model. The study module and the chat transcript are transparent evidence of the process, not products designed to shortcut it. I publish them precisely because I believe the method is worth sharing openly.
+This is not an abstract concern. It is the central question facing every student right now: **are you learning, or are you performing the appearance of learning?**
 
-But the same tool that sharpened my understanding could just as easily have done the thinking for me. The difference is entirely in how you choose to use it. If you are copying outputs into problem sets, you are not learning — you are outsourcing the exact cognitive work that the course is designed to develop. And you are doing it in a way that may violate your institution's academic integrity standards.
+I think this question matters beyond any individual student — because it goes to the heart of what higher education is for. The lecture content, the readings, the problem sets — these are increasingly available anywhere, to anyone, often for free. If universities were just information delivery systems, AI would have already made them obsolete. But they are not. The value of a [Columbia Business School](https://business.columbia.edu/) classroom is not the information on the slides. It is the cohort you argue with. The professor who sees where your reasoning breaks and pushes you past it. The structure that forces you to engage with ideas you would never seek out on your own. The network effects of being surrounded by people who chose to be there.
 
-The responsibility is yours. Know your school's AI policy. Respect your instructor's expectations. And be honest with yourself about whether the tool is making you sharper or making you dependent. The answer should be obvious from a simple test: can you explain what you built, from first principles, without the tool open?
+AI cannot replicate any of that. But it *can* erode it — quietly, one shortcut at a time — if students stop doing the work that makes those interactions meaningful. A seminar where half the room outsourced the reading to GPT is a worse seminar for everyone. A study group where nobody struggled with the problem set first has nothing to discuss.
 
-If yes — you learned it. If not — you borrowed it.
+The responsibility is not just to follow your school's AI policy — though you should. It is to **own your learning**. To treat every assignment not as an output to produce but as a rep for your brain. To use AI the way I used it here: as a sparring partner that sharpens your thinking, not a ghostwriter that replaces it.
+
+Higher education will maintain its unique value exactly as long as the people inside it keep doing the hard cognitive work. That is on us — every student, in every classroom, every time we decide whether to think or to delegate.
 
 ---
 
