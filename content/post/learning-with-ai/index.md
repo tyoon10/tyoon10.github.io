@@ -134,6 +134,21 @@ The [study module](https://tyoon10.github.io/causal-inference/) I built is the m
 
 **Keep thinking.** The tool does not replace that. It accelerates it.
 
+
+## A Note on Responsible Use
+
+I want to be direct about something. Using AI to study is not the same as using AI to cheat — but the line is thinner than most people admit, and it runs through intent.
+
+Every school has its own policies. Every instructor draws their own boundaries. Some courses explicitly permit AI tools; others prohibit them entirely. Some fall in between — allowing AI for concept exploration but not for graded submissions. **You are responsible for knowing where your institution stands.** Not assuming. Not guessing. Knowing.
+
+My use of Claude in this study session fell clearly on the learning side: I was building understanding, not generating answers to submit. Every synthesis was my own — tested, challenged, and often corrected by the model. The study module and the chat transcript are transparent evidence of the process, not products designed to shortcut it. I publish them precisely because I believe the method is worth sharing openly.
+
+But the same tool that sharpened my understanding could just as easily have done the thinking for me. The difference is entirely in how you choose to use it. If you are copying outputs into problem sets, you are not learning — you are outsourcing the exact cognitive work that the course is designed to develop. And you are doing it in a way that may violate your institution's academic integrity standards.
+
+The responsibility is yours. Know your school's AI policy. Respect your instructor's expectations. And be honest with yourself about whether the tool is making you sharper or making you dependent. The answer should be obvious from a simple test: can you explain what you built, from first principles, without the tool open?
+
+If yes — you learned it. If not — you borrowed it.
+
 ---
 
 *The full study session transcript is available as an [interactive chat module](https://tyoon10.github.io/causal-inference/chat.html). The [interactive study guide](https://tyoon10.github.io/causal-inference/) covers the complete Causal Inference curriculum — from potential outcomes through Double ML and sensitivity analysis.*
