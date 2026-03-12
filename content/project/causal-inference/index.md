@@ -1,5 +1,5 @@
 ---
-title: "Interactive Causal Inference Study Guide"
+title: "Causal Inference — Interactive Study Guide"
 summary: "A single-page interactive web app covering causal inference from potential outcomes to Double ML, with canvas visualizations, KaTeX formulas, and a full method comparison framework."
 authors:
   - admin

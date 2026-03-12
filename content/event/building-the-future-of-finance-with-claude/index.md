@@ -20,7 +20,7 @@ tags:
 links:
   - icon: link
     icon_pack: fas
-    name: Website
+    name: Official Website
     url: https://execed.business.columbia.edu/programs/business-ai
 ---
 

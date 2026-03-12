@@ -39,11 +39,18 @@ Global math is **disabled** (`hugo.yaml` → `params.features.math.enable: false
 
 If a page needs LaTeX, enable per-page via frontmatter `math: true` — but note that `$...$` will then trigger KaTeX on that page. Use `\(...\)` for inline math on math-enabled pages to avoid conflicts with currency.
 
+## Future-Dated Content
+
+Hugo skips pages where `date` is in the future. CI now includes `--buildFuture` (added 2026-03-10), but as a belt-and-suspenders approach:
+- **Always set `publishDate: {today}` on future-dated events** so they render even without `--buildFuture`
+- The `date` field controls the event date displayed; `publishDate` controls when Hugo considers the page eligible for rendering
+
 ## Build Commands
 
 ```bash
 hugo server                  # Dev server at localhost:1313
 hugo --gc --minify           # Production build (outputs to public/)
+hugo --gc --minify --buildFuture  # Include future-dated content
 ```
 
 ## Git Workflow
