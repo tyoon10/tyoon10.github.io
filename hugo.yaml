@@ -1,5 +1,6 @@
 title: Taewan Yoon
 baseurl: "https://twyoon.com/"
+timeout: 300s
 languageCode: en-us
 defaultContentLanguage: en
 theme: ["github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5"]
