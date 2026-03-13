@@ -42,6 +42,8 @@ The highlight was yesterday's session at Chris LaSala's Digital Product Manageme
 2. Guide PMs past the fear of facing command-line tools and IDEs
 3. Land a genuine superpower in their hands
 
+By the end of the session, students who had never touched a terminal were initializing Claude Code projects on their own machines. That conversion, from anxiety to activation in ninety minutes, is the part I keep coming back to.
+
 The world has been shifting at a pace that is hard to overstate. In three weeks:
 - Claude Opus 4.6 released *on February 5th*
 - OpenAI hired a creator of OpenClaw *on the 15th*
@@ -56,7 +58,9 @@ That distinction matters just as much on the product side. And it is exactly whe
 
 ## The Safe Space That Isn't
 
-When I opened VS Code for a live demo, a visible portion of the room checked out. Node.js, the terminal, GitHub — these tools triggered anxiety, not curiosity. Many students quietly returned to what felt safe: a chat interface (i.e., your everyday *claude.ai* or *chatgpt.com*).
+When I opened VS Code for a live demo, a visible portion of the room checked out. Node.js, the terminal, GitHub: these tools triggered anxiety, not curiosity. Many students quietly returned to what felt safe: a chat interface (i.e., your everyday *claude.ai* or *chatgpt.com*).
+
+So I kept the terminal open and built something in front of them, narrating every step, every error, every moment where the agent did something I did not expect. By the end, the questions had shifted from "do I need to learn to code?" to "how do I set this up on my laptop?"
 
 I understand this. **I was one of them.**
 
@@ -64,7 +68,7 @@ But Mihail's observation about engineers applies here with uncomfortable precisi
 
 The same is true for PMs. Opening a browser and typing questions into a chat box is the PM equivalent of downloading Cursor and prompting it a few times. It feels like progress.
 
-But here is the truth that anyone who has spent serious time trying to automate workflows with LLMs already knows: the chat interface has a ceiling. **The more you iterate, the more you hit it.**
+But here is the truth that anyone who has spent serious time trying to automate workflows with LLMs already knows: the chat interface has a ceiling. **The more you iterate, the more you hit it.** I watched it happen in real time. Students who had been confidently using Claude for weeks ran into the same wall during the session.
 - You lose context after an extended conversation.
 - You start a new session and begin from scratch.
 - You dump all your context files at once, expecting that an ever-smarter model will magically figure out which file matters for which question. **(I was one of them)**
@@ -110,7 +114,7 @@ This is a mindset shift. You are no longer just a prompter of outputs. You are a
 
 Here is the reframe that unlocks everything for PMs: **context engineering is not an alien discipline**. It is something exceptional PM teams have practiced for decades — in a different medium.
 
-From my previous experience as a PM at multinational companies — from 100,000 to over 1 million employees globally — these exceptional hyperscalers had one thing in common. It was not raw intelligence or headcount. It was their **documentation systems**.
+From my previous experience as a PM at multinational companies, from 100,000 to over 1 million employees globally, these exceptional hyperscalers had one thing in common. It was not raw intelligence or headcount. It was their **documentation systems**. The teams that shipped fastest were the ones where any engineer could open a single document and understand why a decision was made, who it affected, and what constraints shaped it, without asking a single person.
 
 A single well-written document is easy to duplicate. But a **structured, living system of documentation** — one that connects decisions to context, context to stakeholders, and stakeholders to constraints — that becomes a genuine strategic moat. It is what allows PM teams to move at a super fast pace, consistently shipping high-impact products.
 

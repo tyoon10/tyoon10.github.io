@@ -79,7 +79,7 @@ When Claude asked me to explain the relationship between IPW and the Back-Door A
 
 Studying through conversation alone is powerful. Studying through *building* is permanent.
 
-Throughout the session, I was simultaneously constructing an [interactive study module](https://tyoon10.github.io/causal-inference/) — a single-file HTML application with interactive visualizations for every major concept. Not a summary sheet. A visual reasoning tool.
+Throughout the session, I was simultaneously constructing an [interactive study module](https://tyoon10.github.io/causal-inference/), a single-file HTML application with interactive visualizations for every major concept. I open-sourced the whole thing: the module, the [full chat transcript](https://tyoon10.github.io/causal-inference/chat.html), and the [source code](https://github.com/tyoon10/causal-inference). Not a summary sheet. A reasoning tool anyone can pick apart.
 
 Every module was the direct consequence of a specific exchange. The [propensity score overlap visualization](https://tyoon10.github.io/causal-inference/#panel-l4) was born from my question about what the support assumption actually looks like. The [BDA predict-and-average animation](https://tyoon10.github.io/causal-inference/#panel-l5) came from struggling to understand why averaging over observed $Z$ values implements the $\sum_z P(Z=z)$ weighting. The [IPW vs BDA comparison](https://tyoon10.github.io/causal-inference/#panel-l5) emerged from arguing about algebraic equivalence.
 
@@ -102,12 +102,12 @@ After the study session, I asked Claude to analyze my interaction patterns. The 
 
 ![Claude's first-principles assessment of my learning style](claude-assessment.png "Claude's analysis of interaction patterns from the study session")
 
-That last observation landed. My intuitive answers were almost always right. But the gap between intuition and formal argument — the ability to write out the *why* symbol by symbol — was the real area to sharpen. And I would not have seen it without the feedback loop.
+That last observation landed. My intuitive answers were almost always right. But the gap between intuition and formal argument, the ability to write out the *why* symbol by symbol, was the real area to sharpen. And I would not have seen it without the feedback loop. I have since used this same diagnostic move when prototyping, when debugging an approach that is going nowhere, when I suspect I am solving the wrong problem. Ask the model to audit your reasoning patterns, not your answers.
 
 
 ## The Method Behind the Method
 
-What I described is not unique to Causal Inference. It is a general learning system:
+What I described is not unique to Causal Inference. It is how I approach any unfamiliar technical domain, whether I am studying for an exam, onboarding into a new codebase, or building something I have never built before:
 
 1. **Start from first principles** — don't begin with the details. Build the conceptual skeleton first, then hang the methods on it.
 2. **Question relentlessly** — every concept earns its place only after you have tested its boundaries.
@@ -117,7 +117,7 @@ What I described is not unique to Causal Inference. It is a general learning sys
 
 [Scott Young](https://www.scotthyoung.com/) describes a version of this in [*Ultralearning*](https://www.scotthyoung.com/blog/ultralearning/) — the framework that enabled him to complete the MIT computer science curriculum in 11 months. His core principles: directness, retrieval, and feedback. What AI adds is **immediacy**. The feedback loop that used to require a study group, a tutor, or a professor's office hours now happens in real time, at any hour, on any topic.
 
-This is the same approach that carried me through the [CFA](https://www.cfainstitute.org/programs/cfa) Level II and III exams in under two weeks of preparation each. Progressive synthesis, constant self-testing, and relentless questioning. The difference now is that the sparring partner never runs out of patience.
+This is the same approach that carried me through the [CFA](https://www.cfainstitute.org/programs/cfa) Level II and III exams in under two weeks of preparation each, and the same approach I used to build [technical workshops from scratch](/post/ai-superpower-for-pm/) in domains where I started with zero classroom authority. Progressive synthesis, constant self-testing, and relentless questioning. The difference now is that the sparring partner never runs out of patience.
 
 
 ## The Temptation You Have to Resist
@@ -132,7 +132,7 @@ The tool is a **multiplier**, not a replacement. It is an aggregation of existin
 
 The [study module](https://tyoon10.github.io/causal-inference/) I built is the manifestation of this possibility. Not a product of delegation, but of iteration — questioning, validating, visualizing, correcting. The fact that we now have immediate access to answers as we learn is an extraordinary gift. But only if you keep your brain in the loop.
 
-**Keep thinking.** The tool does not replace that. It accelerates it.
+**Keep thinking.** The tool does not replace that. It accelerates it. And when you find a method that actually works, publish it. Ship the artifact. Open-source the transcript. The best study guide is the one someone else can argue with too.
 
 
 ## A Note on Responsible Use
