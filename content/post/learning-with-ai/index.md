@@ -1,7 +1,7 @@
 ---
 title: "How I Learn Anything with AI"
-subtitle: "Studying for the hardest exam of the semester — by arguing with Claude"
-summary: "Six weeks of Causal Inference, a few days to study, and an AI that talks back. Inside the study method that turned an impossible exam into a system for learning anything."
+subtitle: "Progressive synthesis, immediate feedback, and the study method that works for everything"
+summary: "The feedback loop that used to require study groups, office hours, and weeks of iteration now happens in real time. How arguing with Claude turned six weeks of Causal Inference into a repeatable system for learning anything technical."
 authors:
   - admin
 tags:
