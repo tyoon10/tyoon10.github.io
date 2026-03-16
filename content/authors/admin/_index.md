@@ -52,6 +52,6 @@ social:
     label: Resume
 ---
 
-Columbia MBA/MS. Built and scaled Claude's NYC builder ecosystem from 0 to 1,000+ members. Leading the AI Club and AI Startup Challenge, and founded BRAIN NYC—a practitioner network tackling the hardest business challenges with frontier AI.
+Columbia MBA/MS. Built and scaled Claude's NYC builder ecosystem from 0 to 1,000+ members. Leading the AI Club and AI Startup Challenge, and founded BRAIN NYC—a startup network tackling the hardest business challenges with frontier AI.
 
-Enterprise AI strategist, product manager, and community builder. Shipped agentic workflows as a Manus AI Fellow and co-founded AI-native fintech startup (acquired by a major insurance firm). Mentor at CFA Society New York.
+AI strategist, product manager, and startup community builder. Shipped agentic workflows as a Manus AI Fellow and co-founded AI-native fintech startup (acquired by a major insurance firm). Mentor at CFA Society New York.
