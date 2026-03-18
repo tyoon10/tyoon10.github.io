@@ -121,6 +121,26 @@
   grid-template-columns: repeat(2, 1fr) !important;
 }
 
+/* Article body — breathing room around headings */
+.article-container .article-style {
+  h2 {
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+  }
+  h3 {
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+  }
+  // First heading in article — no border above
+  > h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
 /* Contact list */
 .wg-contact .fa-ul {
   margin-left: 2rem;
