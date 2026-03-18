@@ -1,7 +1,7 @@
 ---
 title: "What Senior Business Leaders Actually Ask About AI"
-subtitle: "10 Questions from the Boardroom — Answered"
-summary: "I guest-lectured to Directors and C-suite leaders at Columbia's executive AI program. The questions they asked reveal exactly where senior leadership's mind is right now."
+subtitle: "10 Questions from Columbia's Executive AI Program"
+summary: "I guest-lectured to Directors and C-suite leaders at Columbia's executive AI program. Their questions — about liability, talent, and competitive advantage — reveal where leadership's mind actually is on AI right now."
 authors:
   - admin
 tags:
@@ -29,13 +29,13 @@ links:
     url: /event/building-the-future-of-finance-with-claude/
 ---
 
-Today I guest-lectured at Columbia Business School's executive education program, [The Business of AI](https://execed.business.columbia.edu), alongside Prof. Moran Cerf. The room was filled with Directors, VPs, and C-suite leaders from global firms — people who approve seven-figure technology budgets and sit in boardrooms where AI strategy is debated quarterly.
+Today I guest-lectured at Columbia Business School's executive education program, [The Business of AI](https://execed.business.columbia.edu), alongside Prof. Moran Cerf. The room was filled with Directors, VPs, and C-suite leaders from global firms — people with decades of experience running businesses, managing risk, and making high-stakes decisions long before AI entered the conversation.
 
 After a morning of AI fundamentals — how LLMs work, fine-tuning, RAG, and open-weight models — I ran a live demo: building a **full DCF valuation model and a board-ready pitch deck** using Claude's Excel and PowerPoint integration, from a blank spreadsheet to finished deliverables in **under 15 minutes**.
 
-What followed was the most revealing part. The questions these executives asked tell you exactly where the senior leadership mind is right now on AI. Not where LinkedIn thinks it is. Where it ACTUALLY IS.
+What followed was the most valuable part of the session for me. The Q&A surfaced questions that I don't typically hear in tech-native circles — questions shaped by real operational complexity, regulatory constraints, and fiduciary responsibility. These leaders weren't asking *whether* AI works. They were pressure-testing *how it fits* into the world they already navigate.
 
-Here are the questions they asked — reframed and answered.
+Here are the questions they raised — reframed with context and data I've gathered since.
 
 ---
 
@@ -43,9 +43,9 @@ Here are the questions they asked — reframed and answered.
 
 This was the first question out of the room — before any demo, before any use case. **Liability.**
 
-The honest answer: **you are.** AI providers explicitly disclaim liability for outputs. When Claude builds a DCF or drafts a loan approval, the institution's name is on it. The model provider's isn't.
+The short answer: **the institution is.** AI providers explicitly disclaim liability for outputs. When Claude builds a DCF or drafts a loan approval, the firm's name is on it. The model provider's isn't.
 
-This isn't a new problem. It's the same principle that applies when a first-year analyst builds a model: the MD who signs off on the pitch book owns the output. AI doesn't change the accountability chain — it changes the speed at which errors can propagate if no one's checking.
+As several people in the room pointed out, this isn't entirely new. It's the same principle that applies when a first-year analyst builds a model: the MD who signs off owns the output. AI doesn't change the accountability chain — it changes the speed at which errors can propagate if no one's checking.
 
 The data supports the urgency. [McKinsey's 2025 State of AI report](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai) found that **51% of firms have already experienced AI-related incidents**, yet accountability remains diffuse:
 
@@ -59,15 +59,15 @@ The data supports the urgency. [McKinsey's 2025 State of AI report](https://www.
 
 Meanwhile, **74% of organizations** expect significant agentic AI deployment within two years (Deloitte). The gap between adoption velocity and governance readiness is where risk lives.
 
-> **The real question isn't "can AI make mistakes?"** — it's whether your review process catches mistakes regardless of who — or what — made them. If your QA relies on the assumption that a human built the model slowly, you have a process problem, not an AI problem.
+> **The real question isn't "can AI make mistakes?"** — it's whether existing review processes catch mistakes regardless of who — or what — made them. If QA relies on the assumption that a human built the model slowly, that's a process gap, not an AI problem.
 
 ## 2. "We'd have to give them everything — all our documents, all our IP. How safe is that?"
 
-This question carried real weight in the room. You could feel the discomfort. These are people whose firms spend **millions on information barriers and data classification**.
+This question carried real weight in the room. You could feel the tension. These are leaders whose firms spend **millions on information barriers and data classification** — they live this risk daily.
 
-Prof. Cerf made a point that landed: your documents are already sitting on someone else's cloud — AWS, Azure, Google Cloud. The migration to cloud infrastructure five years ago was the decision point. Fine-tuning is a flag you turn on within infrastructure you've already entrusted.
+Prof. Cerf made a point that resonated: your documents are already sitting on someone else's cloud — AWS, Azure, Google Cloud. The migration to cloud infrastructure was the decision point. Fine-tuning is a flag you turn on within infrastructure you've already entrusted.
 
-That said, the concern isn't irrational. There's a meaningful difference between the two:
+That said, the concern isn't irrational — and the executives in the room were right to push on it. There's a meaningful difference between the two:
 
 | | Cloud Storage | Fine-Tuning |
 |---|---|---|
@@ -78,13 +78,13 @@ That said, the concern isn't irrational. There's a meaningful difference between
 
 [PwC's 2025 Responsible AI Survey](https://www.pwc.com/us/en/tech-effect/ai-analytics/responsible-ai-survey.html) found that **only one-third of CEOs globally** have high trust in embedding AI into key processes. [Deloitte](https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html) reports that **73% of executives** rank data privacy and security as their number one AI governance concern.
 
-> The executives who navigate this well don't ask "is it safe?" in the abstract. They ask: **"what data classification does this require, and what's the deployment model that matches our existing governance?"** That turns a philosophical debate into a procurement decision.
+> What I've observed from firms that move quickly on this: they reframe it from "is it safe?" to **"what data classification does this require, and what's the deployment model that matches our existing governance?"** That turns a philosophical debate into a procurement decision.
 
 ## 3. "What are the switching costs if we pick the wrong provider?"
 
-This is a **CFO question disguised as a technology question**. What they're really asking: if we bet on one AI provider and they raise prices, get acquired, or fall behind — are we locked in?
+This is a **CFO question disguised as a technology question** — and it's a sharp one. What they're really asking: if we bet on one AI provider and they raise prices, get acquired, or fall behind — are we locked in?
 
-The answer, right now, is surprisingly encouraging. AI companies have deliberately made switching easy. APIs are largely interoperable. A RAG implementation built for Claude can be ported to GPT or Gemini with minimal code changes. The providers are competing for enterprise deals by lowering switching costs, not raising them.
+The current landscape is surprisingly encouraging on this front. AI companies have deliberately made switching easy. APIs are largely interoperable. A RAG implementation built for Claude can be ported to GPT or Gemini with minimal code changes. The providers are competing for enterprise deals by lowering switching costs, not raising them.
 
 The major banks are already designing for exactly this scenario:
 
@@ -96,11 +96,11 @@ The major banks are already designing for exactly this scenario:
 
 They've all designed around the same assumption: **no single provider stays on top forever.**
 
-But there's a subtlety. The switching cost isn't in the API. It's in the **institutional knowledge** you encode into the system — your prompt libraries, your fine-tuned models, your team's learned workflows. The deeper you integrate, the more the switching cost becomes a people problem, not a technology problem. That's worth factoring into your adoption strategy from day one.
+But there's a subtlety that one executive in the room flagged: the switching cost isn't in the API. It's in the **institutional knowledge** encoded in the system — prompt libraries, fine-tuned models, learned workflows. The deeper the integration, the more the switching cost becomes a people problem, not a technology problem.
 
 ## 4. "How do you actually verify the output?"
 
-This was the question the room kept circling back to. Not "can AI do the work?" — they'd just watched it build a complete valuation model. The question was: **"should I trust it?"**
+This was the question the room kept returning to — and rightly so. Not "can AI do the work?" — they'd just watched it build a complete valuation model. The question was: **"should I trust it?"**
 
 [PwC](https://www.pwc.com/us/en/tech-effect/ai-analytics/responsible-ai-survey.html) quantified the trust gap:
 
@@ -110,15 +110,15 @@ This was the question the room kept circling back to. Not "can AI do the work?" 
 | Performance improvement | **35%** |
 | Financial transactions | **20%** |
 
-The gap between capability and confidence is where most enterprises stall. Three practical approaches close it — most sophisticated teams use all of them:
+The gap between capability and confidence is where most enterprises stall. Three approaches came up in the discussion — and the most sophisticated teams seem to use all of them:
 
 ### 1. Use your existing templates
 
-Don't start from a blank canvas. Give the AI your firm's model template — the same one your analysts use. The AI populates it; you review it against a structure you already understand. **The verification surface area shrinks dramatically.**
+Rather than starting from a blank canvas, feed the AI your firm's existing model template — the same one analysts use. The AI populates it; the reviewer checks it against a structure they already understand. **The verification surface area shrinks dramatically.**
 
 ### 2. Check the work in stages, not at the end
 
-The same way you'd review an analyst's work: **assumptions → build → output**. Don't let any tool — human or AI — run unsupervised from prompt to final deliverable.
+The same way you'd review an analyst's work: **assumptions → build → output**. No tool — human or AI — should run unsupervised from prompt to final deliverable.
 
 ### 3. Use a second model to audit the first
 
@@ -128,7 +128,7 @@ One executive in the room shared this practice: have a different LLM write the t
 
 ## 5. "If we sell the business and we've fine-tuned a model with all our data, does that hit the multiple?"
 
-This one surprised me. It's a question only a financially sophisticated audience would ask, and it reveals how deeply these executives are thinking about **AI as a balance sheet issue**, not just an operations issue.
+This one surprised me — and it's a question I wouldn't have thought to ask. It reveals how deeply these leaders think about **AI as a balance sheet issue**, not just an operations issue. That's the kind of lens that comes from decades of deal experience.
 
 The concern has two dimensions:
 
@@ -136,7 +136,7 @@ The concern has two dimensions:
 
 **Durability risk:** If your competitive advantage is encoded in a system you rent, how does an acquirer evaluate how long that advantage lasts?
 
-There isn't a settled answer yet. But the direction is clear. [NVIDIA's 2026 State of AI in Financial Services survey](https://blogs.nvidia.com/blog/ai-in-financial-services-survey-2026/) found that **83% of financial services firms** say open-source models are important to their AI strategy. The firms moving toward **open-weight models and on-premise deployments** are partly doing so because ownership of the model is cleaner from a corporate finance perspective.
+There isn't a settled answer yet — this is genuinely uncharted territory. But the direction is suggestive. [NVIDIA's 2026 State of AI in Financial Services survey](https://blogs.nvidia.com/blog/ai-in-financial-services-survey-2026/) found that **83% of financial services firms** say open-source models are important to their AI strategy. The firms moving toward **open-weight models and on-premise deployments** are partly doing so because ownership of the model is cleaner from a corporate finance perspective.
 
 > If you're building toward an exit or a strategic transaction, **how you deploy AI today has implications for how your business gets valued tomorrow.**
 
@@ -144,7 +144,7 @@ There isn't a settled answer yet. But the direction is clear. [NVIDIA's 2026 Sta
 
 A senior executive posed this not as a fear, but as a hypothesis — and then answered it himself: *"Seems to me the analyst jobs aren't going anywhere. They'll be doing more sophisticated work."*
 
-He's partly right. The volume of pure production work — building models from scratch, formatting pitch books, pulling comps — will compress. That's the work that kept analysts in the office until 4 AM, and it's the work AI handles well today.
+I think he's largely right — and the data supports his instinct. The volume of pure production work — building models from scratch, formatting pitch books, pulling comps — will compress. That's the work that kept analysts in the office until 4 AM, and it's the work AI handles well today.
 
 But the signals are contradictory:
 
@@ -155,11 +155,11 @@ But the signals are contradictory:
 
 The real shift isn't fewer analysts. It's **analysts who arrive at judgment faster**. A first-year who can build and review an AI-generated model in **2 hours** instead of building one from scratch in **12** has ten extra hours to spend on second-year work: client interaction, sector expertise, deal strategy.
 
-> **The firms that treat AI as a headcount reduction tool will lose.** The firms that treat it as a leverage multiplier — more output per person, higher-quality thinking earlier in careers — will win the talent war.
+> From where I sit — watching how the fastest-moving teams actually use these tools — **the firms that treat AI as a headcount reduction tool will struggle to retain talent.** The firms that treat it as a leverage multiplier — more output per person, higher-quality thinking earlier in careers — seem better positioned for the long game.
 
 ## 7. "What kind of person should we be hiring for this world?"
 
-This was the question with **the most energy in the room**. Not the technology — the people.
+This was the question with **the most energy in the room** — and it's one where their experience matters far more than mine. I can speak to what the tools can do. They know what it takes to change how **thousands of people** work.
 
 The scale of the challenge is significant. [BCG's "AI at Work 2025" survey](https://www.bcg.com/publications/2025/ai-at-work-momentum-builds-but-gaps-remain) found:
 
@@ -169,7 +169,7 @@ The scale of the challenge is significant. [BCG's "AI at Work 2025" survey](http
 
 [McKinsey's "Superagency in the Workplace" report](https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work) found that employees are **3x more likely** than leaders expect to already be using gen AI for 30%+ of their daily work — yet **47% of C-suite leaders** believe their companies are moving too slowly due to leadership misalignment and lack of talent.
 
-The talent problem is largely a leadership problem. Three qualities matter more now than they did two years ago:
+From the AI side, three qualities seem to matter more now than they did two years ago — though I suspect anyone who's led a major technology transition would recognize the pattern:
 
 ### Learning velocity over domain depth
 
@@ -185,9 +185,9 @@ Not just using AI, but interrogating it — reading the thinking trace, challeng
 
 ## 8. "How does Claude compare to Microsoft Copilot?"
 
-Every executive audience asks this. It's the vendor selection question, and it matters because most firms will standardize on one or two platforms.
+Every executive audience asks this — it's the vendor selection question, and it matters because most firms will standardize on one or two platforms.
 
-The honest answer: the landscape shifts quarterly, and any specific comparison I give today will be partially outdated by the time you read this. **What's more durable is the framework for evaluating:**
+I work extensively with Claude, so I'll be transparent about my bias. Rather than a specific comparison that will be outdated in months, here's the **evaluation framework** I think holds up:
 
 | Evaluation dimension | What to ask | Why it matters |
 |---|---|---|
@@ -197,7 +197,7 @@ The honest answer: the landscape shifts quarterly, and any specific comparison I
 
 The major banks aren't picking one. [JPMorgan](https://www.cnbc.com/2025/09/30/jpmorgan-chase-fully-ai-connected-megabank.html), [Goldman Sachs](https://www.ai-street.co/p/goldman-joins-jpm-morgan-stanley-releasing-ai-tool), and [Citigroup](https://fortune.com/2025/04/09/how-citis-cto-is-rolling-out-new-gen-ai-productivity-tools-to-more-employees-across-the-globe/) all run **multi-model architectures**.
 
-> **My recommendation:** Don't pick one. Design your workflows to be model-agnostic where possible, and go deep on one platform where the integration creates real leverage.
+> The pattern I see among the firms moving fastest: **don't pick one.** Design workflows to be model-agnostic where possible, and go deep on one platform only where the integration creates real leverage.
 
 ## 9. "Can it process real-time market data?"
 
@@ -217,7 +217,7 @@ When Claude builds a financial model, it doesn't just work from the documents yo
 
 ## 10. "What should we be preparing for — strategically?"
 
-This was the question underneath many of the tactical ones. Prof. Cerf laid out the three enterprise AI adoption models. The trend line is clear: **enterprises are moving toward more control.**
+This was the question underneath many of the tactical ones. Prof. Cerf laid out the three enterprise AI adoption models earlier in the day, and the trend line is clear: **enterprises are moving toward more control.**
 
 | Model | How it works | Data ownership | Best for |
 |---|---|---|---|
@@ -229,18 +229,36 @@ The data confirms the trajectory. [NVIDIA](https://blogs.nvidia.com/blog/ai-in-f
 
 [Accenture's AI revenue tripled to **$2.7 billion** in FY2025](https://www.ciodive.com/news/accenture-generative-ai-revenue-skills-training-data-modernization/761161/), with bookings reaching **$5.9 billion** — but the company noted that isolating AI revenue is becoming meaningless because **AI is now embedded across most client engagements**. That's the signal: AI is moving from a line item to an operating assumption.
 
-> **Don't over-invest in a single deployment model.** Build your data architecture, your prompt libraries, and your team's AI fluency in ways that are portable. The biggest risk isn't choosing the wrong model. It's building organizational muscle memory around a single approach and being unable to adapt when the landscape shifts — which it will.
+> The biggest risk probably isn't choosing the wrong model — it's building organizational muscle memory around a single approach and being unable to adapt when the landscape shifts. **Portability in data architecture, prompt libraries, and team AI fluency** seems like the best hedge available right now.
 
 ---
 
-## The Pattern Underneath
+## What I Took Away
 
-These questions came from a room of people who control significant budgets, manage large teams, and are accountable to boards. They weren't asking about AI because it's interesting. They were asking because they have to make decisions — **this quarter** — about how their organizations will operate.
+I walked into this session thinking I'd be teaching. I walked out realizing how much I was learning.
 
-The pattern I see across every executive audience: **the technology questions get answered quickly. The questions that linger — liability, talent, competitive advantage, organizational design — don't have clean answers yet.** And those are exactly the questions that require senior leadership to engage directly, not delegate to IT.
+The technology questions — *can it do X, how does it compare to Y* — got answered relatively quickly. The questions that lingered were about **liability, talent, competitive advantage, and organizational design**. Those don't have clean answers yet, and they're the ones that require exactly the kind of judgment and experience that was sitting in that room.
 
-If you're a leader navigating this transition, the most valuable thing you can do this week isn't evaluating an AI tool. It's sitting with your team and asking:
+I know the latest developments in AI. These leaders know what it actually takes to change how a **10,000-person organization** operates, how to navigate regulatory constraints across jurisdictions, how to make investment decisions when the technology landscape shifts every quarter. That's a different — and harder — kind of expertise.
 
-> **Where are our people doing translation work — converting information from one format to another — instead of thinking?**
+---
 
-That's your starting point.
+## Three Questions I'd Ask Back
+
+The best conversations aren't one-directional. If I could sit back down with that room, here's what I'd want to ask them:
+
+### 1. How do you verify what's true when there's too much information to process?
+
+AI hallucination gets all the attention, but senior leaders have been dealing with information overload long before LLMs. When you're getting **conflicting signals** from consultants, internal reports, market data, and board members — each with their own incentives — how do you actually decide what to trust? I suspect the verification frameworks that work for AI outputs are the same ones that already work for everything else. I'd love to know what yours look like.
+
+### 2. What was the last major technology shift your organization resisted — and what did the resistance teach you?
+
+Every firm has a story about a technology they adopted too late or too early. Cloud migration, electronic trading, mobile banking — each had its skeptics and its champions. **The pattern of how your organization responded to past shifts is probably the best predictor of how it will handle AI.** I'd want to understand: what was the internal turning point? Was it a competitive threat, a client demand, a new hire who changed the culture? That history is more useful than any AI roadmap.
+
+### 3. If your best people had 30% more capacity tomorrow, what would you point them at?
+
+This is the question underneath all the efficiency talk. AI can compress production work — but **freed-up capacity is only valuable if leadership knows where to direct it.** The firms that struggle with AI adoption often don't have a technology problem; they have an ambiguity problem. They haven't decided what "higher-value work" actually means for their teams. The leaders who've already answered this question clearly are the ones whose AI deployments seem to stick.
+
+---
+
+*These questions reflect my genuine curiosity — and my belief that the most interesting phase of AI adoption isn't the technology. It's the organizational learning that happens when experienced leaders bring their judgment to bear on genuinely new capabilities. I'm grateful to Prof. Cerf and the Columbia Executive Education program for creating a room where that kind of exchange could happen.*
