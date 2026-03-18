@@ -21,7 +21,7 @@ links:
   - icon: book-open
     icon_pack: fas
     name: Read the Article
-    url: /post/what-senior-executives-ask-about-ai/
+    url: /post/what-senior-business-leaders-ask-about-ai/
   - icon: link
     icon_pack: fas
     name: Official Website

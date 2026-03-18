@@ -1,5 +1,5 @@
 ---
-title: "What Senior Executives Actually Ask About AI"
+title: "What Senior Business Leaders Actually Ask About AI"
 subtitle: "10 Questions from the Boardroom — Answered"
 summary: "I guest-lectured to Directors and C-suite leaders at Columbia's executive AI program. The questions they asked reveal exactly where senior leadership's mind is right now."
 authors:
