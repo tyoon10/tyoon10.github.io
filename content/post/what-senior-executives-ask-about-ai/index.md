@@ -10,8 +10,8 @@ tags:
   - Executive Education
 categories:
   - AI Strategy
-date: 2026-03-18
-lastmod: 2026-03-18
+date: 2026-03-17
+lastmod: 2026-03-17
 featured: true
 draft: false
 
@@ -29,11 +29,11 @@ links:
     url: /event/building-the-future-of-finance-with-claude/
 ---
 
-I recently guest-lectured at Columbia Business School's executive education program, [The Business of AI](https://execed.business.columbia.edu), alongside Prof. Moran Cerf. The room was filled with Directors, VPs, and C-suite leaders from global financial services firms — people who approve seven-figure technology budgets and sit in boardrooms where AI strategy is debated quarterly.
+Today I guest-lectured at Columbia Business School's executive education program, [The Business of AI](https://execed.business.columbia.edu), alongside Prof. Moran Cerf. The room was filled with Directors, VPs, and C-suite leaders from global firms — people who approve seven-figure technology budgets and sit in boardrooms where AI strategy is debated quarterly.
 
-After a morning of AI fundamentals — how LLMs work, fine-tuning, RAG, and open-weight models — I ran a live demo: building a full DCF valuation model and a board-ready pitch deck using Claude's Excel and PowerPoint integration, from a blank spreadsheet to finished deliverables in under 20 minutes.
+After a morning of AI fundamentals — how LLMs work, fine-tuning, RAG, and open-weight models — I ran a live demo: building a full DCF valuation model and a board-ready pitch deck using Claude's Excel and PowerPoint integration, from a blank spreadsheet to finished deliverables in under 15 minutes.
 
-What followed was the most revealing part. The questions these executives asked tell you exactly where the senior leadership mind is right now on AI. Not where LinkedIn thinks it is. Where it actually is.
+What followed was the most revealing part. The questions these executives asked tell you exactly where the senior leadership mind is right now on AI. Not where LinkedIn thinks it is. Where it ACTUALLY IS.
 
 Here are the questions they asked — reframed and answered.
 
