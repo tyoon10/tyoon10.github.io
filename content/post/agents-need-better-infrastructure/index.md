@@ -18,7 +18,7 @@ featured: true
 draft: false
 
 image:
-  caption: "From the Mistral AI Worldwide Hackathon to GTC 2026"
+  caption: "NVIDIA Dynamo — Vera Rubin NVL72 and Groq 3 LPX uniting extreme FLOPS and bandwidth (GTC 2026 keynote)"
   focal_point: Center
   preview_only: false
 
