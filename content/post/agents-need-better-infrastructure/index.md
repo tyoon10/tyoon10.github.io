@@ -129,4 +129,4 @@ I'm starting there. Rebuilding the same agent workflows I run on Claude's API �
 
 ---
 
-*Figures generated with [agentic_stack_viz.py](https://github.com/tyoon10/tyoon10.github.io) — a Python module visualizing the concepts in this article. Perspective informed by judging [Mistral AI's Worldwide Hackathon](https://hackiterate.com/mistral-worldwide-hackathons) (New York Edition, February 28 – March 1, 2026) and following [GTC 2026](https://www.nvidia.com/en-us/gtc/) announcements (March 16–19, 2026). Organized by Mistral AI, operated by [Iterate](https://hackiterate.com/).*
+*Figures generated with [agentic-inference](https://github.com/tyoon10/agentic-inference) — a Python module visualizing the concepts in this article. Perspective informed by judging [Mistral AI's Worldwide Hackathon](https://hackiterate.com/mistral-worldwide-hackathons) (New York Edition, February 28 – March 1, 2026) and following [GTC 2026](https://www.nvidia.com/en-us/gtc/) announcements (March 16–19, 2026). Organized by Mistral AI, operated by [Iterate](https://hackiterate.com/).*
