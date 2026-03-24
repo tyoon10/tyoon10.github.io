@@ -67,6 +67,8 @@ Consider three workflows I run regularly. Each one stresses infrastructure in a 
 
 The pattern is clear. Agents don't just make *more* calls than chatbots. They make *different kinds* of calls — bursty, sequential, iterative, unpredictable — often within the same task. A single agent workflow might fan out in parallel, chain results in sequence, then loop over them iteratively. Infrastructure designed for steady-state chatbot traffic — one request in, one response out — can't handle this.
 
+{{< figure src="agent-loop-trace.png" caption="A single agent task — 'read the repo and summarize it' — generates 4 model turns and 3 tool calls. Each blue card is an LLM inference call. Each orange-green pair is a tool round-trip. A chatbot would be one blue card." >}}
+
 This is exactly what NVIDIA's [Dynamo 1.0](https://github.com/ai-dynamo/dynamo) targets. An orchestration layer that routes requests to GPUs with cached context, scales prompt processing and token generation independently, and autoscales based on latency SLAs instead of fixed capacity. Not a new inference engine — a coordination layer above the engines that already exist.
 
 ## The Bill Is the Bottleneck
@@ -80,6 +82,8 @@ For a single developer, APIs win on simplicity. For a team running dozens of age
 But here's the thing. This isn't either/or.
 
 I saw it at the hackathon too. Teams that tried to run *everything* locally hit quality limits on complex reasoning. The harder tasks — multi-step analysis, ambiguous problem-solving — are where [Claude](https://www.anthropic.com/claude) and [GPT-4](https://openai.com/index/gpt-4/) are measurably better. Classification, extraction, routing? Those run locally on a 24-billion-parameter model without breaking a sweat. **The architecture that wins is hybrid: route easy calls to self-hosted open models, hard calls to frontier APIs.**
+
+{{< figure src="hybrid-routing-decisions.png" caption="Hybrid routing in practice: a local model classifies each task's complexity (x-axis), then routes below the threshold to self-hosted Mistral and above to Claude. Simple tasks cluster left — fast and cheap. Complex tasks go right — slower but higher quality." >}}
 
 This is exactly what [Mistral's CEO Arthur Mensch means](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) when he says "the fight for AI supremacy is between open and closed systems." Open models don't need to beat frontier on every benchmark. They need to own the high-volume layer — the 80% of inference calls that are fast, predictable, and sensitive — and let frontier handle the rest.
 
