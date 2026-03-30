@@ -13,7 +13,7 @@ tags:
 categories:
   - AI Strategy
 date: 2026-03-24
-lastmod: 2026-03-24
+lastmod: 2026-03-30
 featured: true
 draft: false
 
@@ -43,7 +43,7 @@ Some teams were running [Ministral 3](https://docs.mistral.ai/models/ministral-3
 
 In the same room, [NVIDIA](https://www.nvidia.com/)'s technical marketing team was helping builders navigate [NVFP4 quantization on Blackwell](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/), optimizing inference for the projects being built in real time. I didn't fully appreciate what they were doing until later. They weren't selling GPUs. They were solving the inference problem that every agent builder in that room was about to hit.
 
-Three weeks later, [GTC 2026](https://www.nvidia.com/en-us/gtc/). NVIDIA and Mistral shared a stage. Half the keynote was about infrastructure for agents — not chatbots. [Dynamo 1.0](https://github.com/ai-dynamo/dynamo). [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/). [CMX on BlueField-4](https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-cmx-context-memory-storage-platform/). And days before the conference, Mistral released [Small 4](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) — 119 billion parameters, explicitly designed for agentic tool-calling.
+Three weeks later, [GTC 2026](https://www.nvidia.com/en-us/gtc/). NVIDIA and Mistral shared a stage. Half the keynote was about infrastructure for agents — not chatbots. [Dynamo 1.0](https://github.com/ai-dynamo/dynamo). [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/). [NIXL](https://developer.nvidia.com/blog/enhancing-distributed-inference-performance-with-the-nvidia-inference-transfer-library/) for zero-copy KV cache transfer across disaggregated workers. And days before the conference, Mistral released [Small 4](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) — 119 billion parameters, explicitly designed for agentic tool-calling.
 
 The through-line clicked. **The hackathon showed me the problem. GTC showed me the answer.**
 
@@ -81,21 +81,25 @@ For a single developer, APIs win on simplicity. For a team running dozens of age
 
 But here's the thing. This isn't either/or.
 
-I saw it at the hackathon too. Teams that tried to run *everything* locally hit quality limits on complex reasoning. The harder tasks — multi-step analysis, ambiguous problem-solving — are where [Claude](https://www.anthropic.com/claude) and [GPT-4](https://openai.com/index/gpt-4/) are measurably better. Classification, extraction, routing? Those run locally on a 24-billion-parameter model without breaking a sweat. **The architecture that wins is hybrid: route easy calls to self-hosted open models, hard calls to frontier APIs.**
+I saw it at the hackathon too. Teams that tried to run *everything* locally hit quality limits on complex reasoning. Classification, extraction, routing? Those run on a 12-billion-parameter model without breaking a sweat. Multi-step analysis, ambiguous problem-solving? That's where larger models justify their cost. **The architecture that wins is hybrid: route easy calls to small, fast models — hard calls to frontier-class models.**
 
-{{< figure src="hybrid-routing-decisions.png" caption="Hybrid routing in practice: a local model classifies each task's complexity (x-axis), then routes below the threshold to self-hosted Mistral and above to Claude. Simple tasks cluster left — fast and cheap. Complex tasks go right — slower but higher quality." >}}
+The entire routing stack can live under one API. [Mistral Nemotron](https://build.nvidia.com/mistralai/mistral-nemotron) — a 12B model built jointly by Mistral and NVIDIA for agentic tool-calling — handles classification and the fast tier. [Mistral Large 3](https://build.nvidia.com/mistralai/mistral-large-3-instruct-2512) (675B MoE) handles complex reasoning. Both served through NVIDIA's API catalog at `integrate.api.nvidia.com`. One key, one endpoint pattern, two tiers of intelligence.
 
-This is exactly what [Mistral's CEO Arthur Mensch means](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) when he says "the fight for AI supremacy is between open and closed systems." Open models don't need to beat frontier on every benchmark. They need to own the high-volume layer — the 80% of inference calls that are fast, predictable, and sensitive — and let frontier handle the rest.
+{{< figure src="hybrid-routing-decisions.png" caption="Hybrid routing in practice: a classifier model scores each task's complexity (x-axis), then routes below the threshold to Mistral Nemotron and above to Mistral Large 3. Simple tasks cluster left — fast and cheap. Complex tasks go right — slower but higher quality. Both tiers run through the same NVIDIA API." >}}
 
-NVIDIA agrees. Their [AI-Q](https://developer.nvidia.com/blog/how-to-build-deep-agents-for-enterprise-search-with-nvidia-ai-q-and-langchain/) enterprise research blueprint runs [Nemotron](https://developer.nvidia.com/nemotron) locally and GPT-5.2 via API in the same pipeline. [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/)'s Privacy Router automates this routing — based on data sensitivity policy, not developer preference. **The hybrid model isn't a compromise. It's the reference architecture from the company building the GPUs.**
+This is exactly what [Mistral's CEO Arthur Mensch means](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) when he says "the fight for AI supremacy is between open and closed systems." Open models don't need to beat closed frontier on every benchmark. They need to own the high-volume layer — the 80% of inference calls that are fast, predictable, and sensitive — and let larger models handle the rest.
+
+NVIDIA agrees. Their [AI-Q](https://developer.nvidia.com/blog/how-to-build-deep-agents-for-enterprise-search-with-nvidia-ai-q-and-langchain/) enterprise research blueprint runs [Nemotron](https://developer.nvidia.com/nemotron) locally and GPT-5.2 via API in the same pipeline. [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/)'s Privacy Router automates this routing — based on data sensitivity policy, not developer preference. **The hybrid model isn't a compromise. It's the reference architecture from the company building the GPUs.** And when you're ready to self-host, the same models run on NIM containers with the same API — swap the URL, keep the code.
 
 ## The Infrastructure Layer Just Arrived
 
-I am not going to recap the GTC keynote. Three announcements matter for anyone building agents today.
+I am not going to recap the GTC keynote. Two announcements matter for anyone building agents today.
 
 ### Dynamo 1.0 — the orchestration gap
 
 Before Dynamo, scaling inference meant manually configuring [Triton](https://developer.nvidia.com/triton-inference-server) across nodes. Dynamo coordinates inference engines — [TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), [vLLM](https://github.com/vllm-project/vllm), [NIM](https://build.nvidia.com/) — into a unified multi-node system. It routes requests to GPUs that already cached relevant context, cutting time-to-first-token in half. It separates prompt processing from token generation so each can scale independently. And it autoscales on latency SLAs — not fixed capacity, but actual performance targets.
+
+Under the hood, Dynamo's disaggregated serving relies on [NIXL](https://developer.nvidia.com/blog/enhancing-distributed-inference-performance-with-the-nvidia-inference-transfer-library/) — the NVIDIA Inference Transfer Library. When prefill and decode run on separate GPU workers, the KV cache generated during prefill has to move to the decode worker fast enough that the split doesn't add latency. NIXL does this via zero-copy RDMA transfers across a unified memory hierarchy that spans GPU memory, CPU memory, NVMe, and cloud storage. It's already integrated into TensorRT-LLM, vLLM, and Dynamo itself — the plumbing that makes disaggregated serving work at production speed.
 
 The headline number: **7x throughput per GPU** on [DeepSeek R1](https://huggingface.co/deepseek-ai/DeepSeek-R1). Built in Rust with Python extensibility — open source from day one. You don't need this for a single GPU. You need it when agent traffic becomes unpredictable at scale — when the fan-outs, chains, and loops from dozens of concurrent workflows collide on the same cluster.
 
@@ -105,13 +109,7 @@ The enterprise blockers for autonomous agents aren't technical — they're trust
 
 The Privacy Router is the part that makes the hybrid architecture real. It decides — based on organizational policy — which inference calls touch frontier APIs and which stay on local infrastructure. The routing diagram from the previous section isn't speculative. It's a shipping product.
 
-### CMX on BlueField-4 — the context gap
-
-Agents accumulate context across tool calls. Results, conversation history, retrieved documents — it grows with every step. Eventually it exceeds GPU memory. Today's answer is truncation or summarization, which means *discarding information* the agent might need later. [CMX](https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-cmx-context-memory-storage-platform/) offloads context memory to [BlueField](https://www.nvidia.com/en-us/networking/products/data-processing-unit/) DPUs, scaling the context window without discarding anything.
-
-This is the earliest signal that **context management is becoming a hardware problem** — not just a prompting problem. And for agent developers who have watched their context windows fill up mid-task, it is a signal worth paying attention to.
-
-**The pattern across all three:** NVIDIA is not retrofitting chatbot infrastructure for agents. They are building infrastructure that understands how agents actually work — bursty traffic, shared context across calls, policy constraints on data flow, and memory that grows unpredictably. Purpose-built, not patched.
+**The pattern across both:** NVIDIA is not retrofitting chatbot infrastructure for agents. They are building infrastructure that understands how agents actually work — bursty traffic, shared context across calls, policy constraints on data flow, and KV caches that need to move between workers without adding latency. Purpose-built, not patched.
 
 ## Three Layers, Not One
 
@@ -119,18 +117,18 @@ Three years ago, the question was *which model.* Then *which framework.* Now: **
 
 The stack for agentic AI has three layers:
 
-- **The model layer** — what reasons. Claude, GPT, Mistral, Llama.
-- **The serving layer** — how it runs. NIM, TensorRT-LLM, vLLM, Dynamo.
+- **The model layer** — what reasons. Mistral Nemotron for speed, Mistral Large 3 for depth, Llama, DeepSeek — open weights across the capability spectrum.
+- **The serving layer** — how it runs. NIM containers, TensorRT-LLM optimization, NIXL for KV cache transfer, Dynamo for multi-node orchestration.
 - **The governance layer** — who controls what. OpenShell, privacy routing, policy engines.
 
 Most agent developers — myself included, until recently — only think about the first. We pick a model, write the prompts, chain the calls, and treat everything below the API as someone else's problem. That works when you're prototyping. It stops working when you're deploying — when the bill scales with every agent loop, when compliance requires data to stay local, when a burst of concurrent workflows overwhelms a rate limiter designed for chatbots.
 
 The developers who understand all three layers will build systems that are faster, cheaper, and actually deployable in enterprises that care about compliance and cost. That is the gap between a demo and a product.
 
-Three weeks ago, I watched builders at the Mistral hackathon hit inference limits with no clear answer. Today, the answer has a name — several names. Dynamo. OpenShell. NIM. Mistral Small 4.
+Three weeks ago, I watched builders at the Mistral hackathon hit inference limits with no clear answer. Today, the answer has a name — several names. Dynamo. NIXL. OpenShell. NIM. Mistral Nemotron.
 
-I'm starting there. Rebuilding the same agent workflows I run on Claude's API — on the [Mistral](https://mistral.ai/) + [NVIDIA](https://www.nvidia.com/) open stack this time. Same skills, different infrastructure. I'll write about what I find.
+I'm starting there. Rebuilding the same agent workflows — on the [NVIDIA](https://www.nvidia.com/) + [Mistral](https://mistral.ai/) open stack. One API key, two model tiers, zero vendor lock-in. Same skills, different infrastructure. I'll write about what I find.
 
 ---
 
-*Figures generated with [agentic-inference](https://github.com/tyoon10/agentic-inference) — a Python module visualizing the concepts in this article. Perspective informed by judging [Mistral AI's Worldwide Hackathon](https://hackiterate.com/mistral-worldwide-hackathons) (New York Edition, February 28 – March 1, 2026) and following [GTC 2026](https://www.nvidia.com/en-us/gtc/) announcements (March 16–19, 2026). Organized by Mistral AI, operated by [Iterate](https://hackiterate.com/).*
+*Figures generated with [agentic-inference](https://github.com/tyoon10/agentic-inference) — a companion repo demonstrating agent loops and hybrid routing on the NVIDIA API catalog. Perspective informed by judging [Mistral AI's Worldwide Hackathon](https://hackiterate.com/mistral-worldwide-hackathons) (New York Edition, February 28 – March 1, 2026) and following [GTC 2026](https://www.nvidia.com/en-us/gtc/) announcements (March 16–19, 2026). Organized by Mistral AI, operated by [Iterate](https://hackiterate.com/).*
