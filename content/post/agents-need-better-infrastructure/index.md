@@ -127,8 +127,38 @@ The developers who understand all three layers will build systems that are faste
 
 Three weeks ago, I watched builders at the Mistral hackathon hit inference limits with no clear answer. Today, the answer has a name — several names. Dynamo. NIXL. OpenShell. NIM. Mistral Small 4.
 
-I'm starting there. Rebuilding the same agent workflows — on the [NVIDIA](https://www.nvidia.com/) + [Mistral](https://mistral.ai/) open stack. One API key, two model tiers, zero vendor lock-in. Same skills, different infrastructure. I'll write about what I find.
+I started there. Rebuilt the same agent workflows — on the [NVIDIA](https://www.nvidia.com/) + [Mistral](https://mistral.ai/) open stack. One API key, two model tiers, zero vendor lock-in. Same skills, different infrastructure. Here's what I found.
+
+## Update: Running Real Agents on NVIDIA's API
+
+*Added April 1, 2026*
+
+I put the theory to the test. Three working projects, all running on [Mistral Small 4](https://build.nvidia.com/mistralai/mistral-small-4-119b-2603) via NVIDIA's hosted API at `integrate.api.nvidia.com`:
+
+**Project 1 — Tool-calling agent loop.** The core `while(tool_use)` pattern. The model autonomously decides which tools to call, what arguments to pass, and when to stop. No hardcoded step sequence. This is the pattern underneath every agent framework — stripped to its essentials.
+
+**Project 2 — Hybrid router.** A complexity classifier routes easy calls to Mistral Small 4 and hard calls to [Mistral Large 3](https://build.nvidia.com/mistralai/mistral-large-3-instruct-2512). One API key, two intelligence tiers. The same architecture NVIDIA's OpenShell Privacy Router implements at the infrastructure level.
+
+**Project 3 — AI news aggregator.** The most revealing demo. An autonomous agent that crawls 9 RSS feeds (OpenAI, Google, NVIDIA, DeepMind, Hugging Face, MIT Tech Review, arXiv, Anthropic, Mistral), identifies the most significant stories, fetches full article text, and compiles a structured markdown digest — all without human intervention.
+
+Here's what a single run looks like:
+
+| Metric | Value |
+|--------|-------|
+| Model | Mistral Small 4 (119B) via NVIDIA API |
+| Turns | 5 autonomous turns |
+| Tool calls | 24 total (date range, source listing, 9 feed fetches, 12 article extractions, digest save) |
+| Input tokens | 79,449 |
+| Output tokens | 4,664 |
+| Total latency | 62 seconds |
+| Bottleneck | Turn 4: 47 seconds — the model synthesizes 79K tokens of article data into a ranked digest |
+
+The bottleneck is exactly what you'd expect from the inference patterns described above. Turns 1-3 are fast tool-calling bursts — short prompts, quick responses, parallel fan-out across feeds. Turn 4 is a massive sequential generation: the model processes the entire accumulated context and produces a 6,000-character digest in one pass. **This is the turn where Dynamo's disaggregated serving matters** — separating the prompt processing (79K tokens of prefill) from the token generation (4.6K tokens of decode) so each can scale independently.
+
+The real learning wasn't the latency numbers. It was the integration friction. NVIDIA's endpoint rejects message fields that OpenAI's SDK includes by default (`audio`, `refusal`, `annotations`). The default `mistral-nemotron` model returns `finish_reason: "tool_calls"` with an empty tool call list — silently breaking the agent loop. Fixing these required reading error messages, testing model variants, and stripping unsupported fields from the message history. **This is exactly the kind of developer friction a TME blog post should document** — the gap between "it works on OpenAI" and "it works on NIM."
+
+The [companion repo](https://github.com/tyoon10/agentic-inference) includes all three projects with verbose agent logging, trace capture, and the fixes described above.
 
 ---
 
-*Figures generated with [agentic-inference](https://github.com/tyoon10/agentic-inference) — a companion repo demonstrating agent loops and hybrid routing on the NVIDIA API catalog. Perspective informed by judging [Mistral AI's Worldwide Hackathon](https://hackiterate.com/mistral-worldwide-hackathons) (New York Edition, February 28 – March 1, 2026) and following [GTC 2026](https://www.nvidia.com/en-us/gtc/) announcements (March 16–19, 2026). Organized by Mistral AI, operated by [Iterate](https://hackiterate.com/).*
+*Figures generated with [agentic-inference](https://github.com/tyoon10/agentic-inference) — a companion repo demonstrating agent loops, hybrid routing, and autonomous news aggregation on the NVIDIA API catalog. Perspective informed by judging [Mistral AI's Worldwide Hackathon](https://hackiterate.com/mistral-worldwide-hackathons) (New York Edition, February 28 – March 1, 2026) and following [GTC 2026](https://www.nvidia.com/en-us/gtc/) announcements (March 16–19, 2026). Organized by Mistral AI, operated by [Iterate](https://hackiterate.com/).*
