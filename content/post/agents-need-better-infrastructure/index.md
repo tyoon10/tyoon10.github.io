@@ -13,7 +13,7 @@ tags:
 categories:
   - AI Strategy
 date: 2026-03-24
-lastmod: 2026-03-30
+lastmod: 2026-04-01
 featured: true
 draft: false
 
@@ -83,13 +83,13 @@ But here's the thing. This isn't either/or.
 
 I saw it at the hackathon too. Teams that tried to run *everything* locally hit quality limits on complex reasoning. Classification, extraction, routing? Those run on a 12-billion-parameter model without breaking a sweat. Multi-step analysis, ambiguous problem-solving? That's where larger models justify their cost. **The architecture that wins is hybrid: route easy calls to small, fast models — hard calls to frontier-class models.**
 
-The entire routing stack can live under one API. [Mistral Nemotron](https://build.nvidia.com/mistralai/mistral-nemotron) — a 12B model built jointly by Mistral and NVIDIA for agentic tool-calling — handles classification and the fast tier. [Mistral Large 3](https://build.nvidia.com/mistralai/mistral-large-3-instruct-2512) (675B MoE) handles complex reasoning. Both served through NVIDIA's API catalog at `integrate.api.nvidia.com`. One key, one endpoint pattern, two tiers of intelligence.
+The entire routing stack can live under one API. [Mistral Small 4](https://build.nvidia.com/mistralai/mistral-small-4-119b-2603) — a 119B model purpose-built for agentic tool-calling — handles classification and the fast tier. [Mistral Large 3](https://build.nvidia.com/mistralai/mistral-large-3-instruct-2512) (675B MoE) handles complex reasoning. Both served through NVIDIA's API catalog at `integrate.api.nvidia.com`. One key, one endpoint pattern, two tiers of intelligence.
 
-{{< figure src="hybrid-routing-decisions.png" caption="Hybrid routing in practice: a classifier model scores each task's complexity (x-axis), then routes below the threshold to Mistral Nemotron and above to Mistral Large 3. Simple tasks cluster left — fast and cheap. Complex tasks go right — slower but higher quality. Both tiers run through the same NVIDIA API." >}}
+{{< figure src="hybrid-routing-decisions.png" caption="Hybrid routing in practice: a classifier model scores each task's complexity (x-axis), then routes below the threshold to Mistral Small 4 (fast tier) and above to Mistral Large 3 (frontier tier). Simple tasks cluster left — fast and cheap. Complex tasks go right — slower but higher quality. Both tiers run through the same NVIDIA API." >}}
 
 This is exactly what [Mistral's CEO Arthur Mensch means](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) when he says "the fight for AI supremacy is between open and closed systems." Open models don't need to beat closed frontier on every benchmark. They need to own the high-volume layer — the 80% of inference calls that are fast, predictable, and sensitive — and let larger models handle the rest.
 
-NVIDIA agrees. Their [AI-Q](https://developer.nvidia.com/blog/how-to-build-deep-agents-for-enterprise-search-with-nvidia-ai-q-and-langchain/) enterprise research blueprint runs [Nemotron](https://developer.nvidia.com/nemotron) locally and GPT-5.2 via API in the same pipeline. [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/)'s Privacy Router automates this routing — based on data sensitivity policy, not developer preference. **The hybrid model isn't a compromise. It's the reference architecture from the company building the GPUs.** And when you're ready to self-host, the same models run on NIM containers with the same API — swap the URL, keep the code.
+NVIDIA agrees. Their [AI-Q](https://developer.nvidia.com/blog/how-to-build-deep-agents-for-enterprise-search-with-nvidia-ai-q-and-langchain/) enterprise research blueprint runs [Mistral Small 4](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) locally and GPT-5.2 via API in the same pipeline. [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/)'s Privacy Router automates this routing — based on data sensitivity policy, not developer preference. **The hybrid model isn't a compromise. It's the reference architecture from the company building the GPUs.** And when you're ready to self-host, the same models run on NIM containers with the same API — swap the URL, keep the code.
 
 ## The Infrastructure Layer Just Arrived
 
@@ -117,7 +117,7 @@ Three years ago, the question was *which model.* Then *which framework.* Now: **
 
 The stack for agentic AI has three layers:
 
-- **The model layer** — what reasons. Mistral Nemotron for speed, Mistral Large 3 for depth, Llama, DeepSeek — open weights across the capability spectrum.
+- **The model layer** — what reasons. Mistral Small 4 for speed, Mistral Large 3 for depth, Llama, DeepSeek — open weights across the capability spectrum.
 - **The serving layer** — how it runs. NIM containers, TensorRT-LLM optimization, NIXL for KV cache transfer, Dynamo for multi-node orchestration.
 - **The governance layer** — who controls what. OpenShell, privacy routing, policy engines.
 
@@ -125,7 +125,7 @@ Most agent developers — myself included, until recently — only think about t
 
 The developers who understand all three layers will build systems that are faster, cheaper, and actually deployable in enterprises that care about compliance and cost. That is the gap between a demo and a product.
 
-Three weeks ago, I watched builders at the Mistral hackathon hit inference limits with no clear answer. Today, the answer has a name — several names. Dynamo. NIXL. OpenShell. NIM. Mistral Nemotron.
+Three weeks ago, I watched builders at the Mistral hackathon hit inference limits with no clear answer. Today, the answer has a name — several names. Dynamo. NIXL. OpenShell. NIM. Mistral Small 4.
 
 I'm starting there. Rebuilding the same agent workflows — on the [NVIDIA](https://www.nvidia.com/) + [Mistral](https://mistral.ai/) open stack. One API key, two model tiers, zero vendor lock-in. Same skills, different infrastructure. I'll write about what I find.
 
