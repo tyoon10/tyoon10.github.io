@@ -149,10 +149,14 @@ Here's what a single run looks like:
 | Tool calls | 24 total (date range, source listing, 9 feed fetches, 12 article extractions, digest save) |
 | Input tokens | 79,449 |
 | Output tokens | 4,664 |
-| Total latency | 62 seconds |
+| Total latency | 67 seconds |
 | Bottleneck | Turn 4: 47 seconds — the model synthesizes 79K tokens of article data into a ranked digest |
 
 The bottleneck is exactly what you'd expect from the inference patterns described above. Turns 1-3 are fast tool-calling bursts — short prompts, quick responses, parallel fan-out across feeds. Turn 4 is a massive sequential generation: the model processes the entire accumulated context and produces a 6,000-character digest in one pass. **This is the turn where Dynamo's disaggregated serving matters** — separating the prompt processing (79K tokens of prefill) from the token generation (4.6K tokens of decode) so each can scale independently.
+
+{{< figure src="news-trace-analysis.png" caption="Per-turn latency breakdown of the news aggregator agent. Turn 4 — where the model synthesizes 12 articles into a structured digest — consumes 71% of total execution time. This is pure model inference, not I/O. Infrastructure choices at the serving layer (quantization format, batch scheduling, disaggregated prefill/decode) determine whether this turn takes 47 seconds or 20." >}}
+
+And quantization matters here more than anywhere. [NVFP4](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/) — NVIDIA's 4-bit floating point format — delivers higher throughput than FP8 without sacrificing model accuracy. For an agent workflow where Turn 4 spends 47 seconds on pure model inference generating 3,660 tokens, the difference between FP8 and NVFP4 throughput is the difference between a minute-long workflow and a sub-30-second one. The infrastructure choice happens at the quantization level — inside acceleration libraries like [cuBLAS](https://developer.nvidia.com/cublas) and [cuDNN](https://developer.nvidia.com/cudnn) that sit directly above CUDA — but the effect surfaces as agent responsiveness at the application layer.
 
 The real learning wasn't the latency numbers. It was the integration friction. NVIDIA's endpoint rejects message fields that OpenAI's SDK includes by default (`audio`, `refusal`, `annotations`). The default `mistral-nemotron` model returns `finish_reason: "tool_calls"` with an empty tool call list — silently breaking the agent loop. Fixing these required reading error messages, testing model variants, and stripping unsupported fields from the message history.
 
