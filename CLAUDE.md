@@ -27,6 +27,15 @@ Author profile: `content/authors/admin/_index.md` (note the underscore).
 - **Posts:** title, summary, date, authors, tags, projects (cross-links to project slugs)
 - **Projects:** title, summary, tags, date, external_link, links
 
+## Article Readability
+
+Long-form posts should be visually scannable, not walls of text:
+- **Bold key figures and stats** — numbers like percentages, dollar amounts, and headcounts should stand out
+- **Use markdown tables** for structured comparisons (e.g., side-by-side options, data breakdowns, bank-by-bank examples)
+- **Use blockquote callouts** (`> **Key point:**`) for section takeaways — gives readers anchor points to scan
+- **Promote repeated patterns to `###` subheadings** — e.g., a list of 3 approaches becomes three `###` sections, not bold paragraphs
+- **Pull stats into bullet lists or tables** instead of burying them in prose paragraphs
+
 ## Cross-Linking Convention
 
 Events and posts that cover the same occasion should link bidirectionally:

@@ -13,7 +13,6 @@ tags:
 categories:
   - AI Strategy
 date: 2026-03-24
-lastmod: 2026-04-01
 featured: true
 draft: false
 
@@ -155,7 +154,7 @@ Here's what a single run looks like:
 
 The bottleneck is exactly what you'd expect from the inference patterns described above. Turns 1-3 are fast tool-calling bursts — short prompts, quick responses, parallel fan-out across feeds. Turn 4 is a massive sequential generation: the model processes the entire accumulated context and produces a 6,000-character digest in one pass. **This is the turn where Dynamo's disaggregated serving matters** — separating the prompt processing (79K tokens of prefill) from the token generation (4.6K tokens of decode) so each can scale independently.
 
-The real learning wasn't the latency numbers. It was the integration friction. NVIDIA's endpoint rejects message fields that OpenAI's SDK includes by default (`audio`, `refusal`, `annotations`). The default `mistral-nemotron` model returns `finish_reason: "tool_calls"` with an empty tool call list — silently breaking the agent loop. Fixing these required reading error messages, testing model variants, and stripping unsupported fields from the message history. **This is exactly the kind of developer friction a TME blog post should document** — the gap between "it works on OpenAI" and "it works on NIM."
+The real learning wasn't the latency numbers. It was the integration friction. NVIDIA's endpoint rejects message fields that OpenAI's SDK includes by default (`audio`, `refusal`, `annotations`). The default `mistral-nemotron` model returns `finish_reason: "tool_calls"` with an empty tool call list — silently breaking the agent loop. Fixing these required reading error messages, testing model variants, and stripping unsupported fields from the message history.
 
 The [companion repo](https://github.com/tyoon10/agentic-inference) includes all three projects with verbose agent logging, trace capture, and the fixes described above.
 
