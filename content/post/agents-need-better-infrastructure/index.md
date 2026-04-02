@@ -30,8 +30,8 @@ links:
     url: /post/mistral-worldwide-hackathon-2026-recap/
   - icon: github
     icon_pack: fab
-    name: NVIDIA Dynamo
-    url: https://github.com/ai-dynamo/dynamo
+    name: Agentic Inference Repo
+    url: https://github.com/tyoon10/agentic-inference
 ---
 
 At 9 AM on February 28th, Verci Flatiron in Manhattan was already buzzing. Laptops open, monitors set up, French croissants on the tables. Builders settling in for [Mistral AI](https://mistral.ai/)'s first-ever Worldwide Hackathon — a 36-hour sprint running simultaneously across seven cities, from Paris to Tokyo. I was there as a judge.
