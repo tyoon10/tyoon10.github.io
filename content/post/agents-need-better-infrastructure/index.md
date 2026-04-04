@@ -46,7 +46,7 @@ Three weeks later, [GTC 2026](https://www.nvidia.com/en-us/gtc/). NVIDIA and Mis
 
 The through-line clicked. **The hackathon showed me the problem. GTC showed me the answer.**
 
-I didn't think about inference infrastructure until I watched it break — first on the hackathon floor, then in my own agent workflows. I built a job scanner that checks 23 company career pages daily. Each company: fetch listings, filter titles, classify job descriptions for fit, push results to [Notion](https://www.notion.so/). One task from the user's perspective. Fifteen inference calls under the hood. On API pricing, every run adds to a growing line item. Scale this to a team — to a company — and the math stops working.
+I didn't think about inference infrastructure until I watched it break — first on the hackathon floor, then in my own agent workflows. I built a job scanner that checks 23 company career pages daily — one task from the user's perspective, fifteen inference calls under the hood. Scale this to a team and the math stops working.
 
 **The bottleneck in agentic AI isn't the model. It's the inference layer.** And the stack forming between [Mistral](https://mistral.ai/) and [NVIDIA](https://www.nvidia.com/) — from open weights to optimized serving — is where the answer is taking shape.
 
@@ -64,31 +64,29 @@ Consider three workflows I run regularly. Each one stresses infrastructure in a 
 
 **The evaluator loop** is iterative refinement. Draft a referral essay, evaluate against criteria, revise, re-evaluate. The same growing context reprocessed each pass — and the context *grows* with every iteration as prior drafts and feedback accumulate. Three iterations means three times the token bill for the same output. The model isn't doing three times the thinking. The infrastructure is doing three times the work.
 
-The pattern is clear. Agents don't just make *more* calls than chatbots. They make *different kinds* of calls — bursty, sequential, iterative, unpredictable — often within the same task. A single agent workflow might fan out in parallel, chain results in sequence, then loop over them iteratively. Infrastructure designed for steady-state chatbot traffic — one request in, one response out — can't handle this.
+Agents don't just make *more* calls than chatbots. They make *different kinds* of calls — bursty, sequential, iterative, unpredictable — often within the same task. Infrastructure designed for steady-state chatbot traffic can't handle this.
 
 {{< figure src="agent-loop-trace.png" caption="A single agent task — 'read the repo and summarize it' — generates 4 model turns and 3 tool calls. Each blue card is an LLM inference call. Each orange-green pair is a tool round-trip. A chatbot would be one blue card." >}}
 
-This is exactly what NVIDIA's [Dynamo 1.0](https://github.com/ai-dynamo/dynamo) targets. An orchestration layer that routes requests to GPUs with cached context, scales prompt processing and token generation independently, and autoscales based on latency SLAs instead of fixed capacity. Not a new inference engine — a coordination layer above the engines that already exist.
+This is exactly what NVIDIA's [Dynamo 1.0](https://github.com/ai-dynamo/dynamo) targets — an orchestration layer that routes requests to GPUs with cached context and autoscales based on latency SLAs. More on that below.
 
 ## The Bill Is the Bottleneck
 
-My job scanner: 23 companies, roughly 15 calls each, running daily. That is 345 inference calls per day for a single workflow. At API pricing, it is a real line item. On a self-hosted GPU running [Mistral Small 4](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) via [NIM](https://build.nvidia.com/) — the marginal cost per call approaches zero after the fixed hardware investment.
+My job scanner runs 345 inference calls per day. At API pricing, it is a real line item. On a self-hosted GPU running [Mistral Small 4](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) via [NIM](https://build.nvidia.com/) — the marginal cost per call approaches zero after the fixed hardware investment.
 
-For a single developer, APIs win on simplicity. For a team running dozens of agent workflows daily, self-hosted wins on economics. For an enterprise with compliance requirements — finance, healthcare, defense — self-hosted isn't optional. The data can't leave the network.
+For a single developer, APIs win on simplicity. For a team running dozens of agent workflows daily, self-hosted wins on economics. For an enterprise with compliance requirements — finance, healthcare, defense — self-hosted isn't optional.
 
 {{< figure src="agent-cost-crossover.png" caption="At ~5,500 agent calls per day, self-hosted GPU cost drops below API pricing. My job scanner sits at 345 — well in API territory. A small team crosses the line fast." >}}
 
 But here's the thing. This isn't either/or.
 
-I saw it at the hackathon too. Teams that tried to run *everything* locally hit quality limits on complex reasoning. Classification, extraction, routing? Those run on a 12-billion-parameter model without breaking a sweat. Multi-step analysis, ambiguous problem-solving? That's where larger models justify their cost. **The architecture that wins is hybrid: route easy calls to small, fast models — hard calls to frontier-class models.**
+Classification, extraction, routing? Those run on a 12-billion-parameter model without breaking a sweat. Multi-step analysis, ambiguous problem-solving? That's where larger models justify their cost. **The architecture that wins is hybrid: route easy calls to small, fast models — hard calls to frontier-class models.**
 
 The entire routing stack can live under one API. [Mistral Small 4](https://build.nvidia.com/mistralai/mistral-small-4-119b-2603) — a 119B model purpose-built for agentic tool-calling — handles classification and the fast tier. [Mistral Large 3](https://build.nvidia.com/mistralai/mistral-large-3-instruct-2512) (675B MoE) handles complex reasoning. Both served through NVIDIA's API catalog at `integrate.api.nvidia.com`. One key, one endpoint pattern, two tiers of intelligence.
 
 {{< figure src="hybrid-routing-decisions.png" caption="Hybrid routing in practice: a classifier model scores each task's complexity (x-axis), then routes below the threshold to Mistral Small 4 (fast tier) and above to Mistral Large 3 (frontier tier). Simple tasks cluster left — fast and cheap. Complex tasks go right — slower but higher quality. Both tiers run through the same NVIDIA API." >}}
 
-This is exactly what [Mistral's CEO Arthur Mensch means](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) when he says "the fight for AI supremacy is between open and closed systems." Open models don't need to beat closed frontier on every benchmark. They need to own the high-volume layer — the 80% of inference calls that are fast, predictable, and sensitive — and let larger models handle the rest.
-
-NVIDIA agrees. Their [AI-Q](https://developer.nvidia.com/blog/how-to-build-deep-agents-for-enterprise-search-with-nvidia-ai-q-and-langchain/) enterprise research blueprint runs [Mistral Small 4](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) locally and GPT-5.2 via API in the same pipeline. [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/)'s Privacy Router automates this routing — based on data sensitivity policy, not developer preference. **The hybrid model isn't a compromise. It's the reference architecture from the company building the GPUs.** And when you're ready to self-host, the same models run on NIM containers with the same API — swap the URL, keep the code.
+NVIDIA's [AI-Q](https://developer.nvidia.com/blog/how-to-build-deep-agents-for-enterprise-search-with-nvidia-ai-q-and-langchain/) enterprise research blueprint runs [Mistral Small 4](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) locally and GPT-5.2 via API in the same pipeline. [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/)'s Privacy Router automates this routing — based on data sensitivity policy, not developer preference. **The hybrid model isn't a compromise. It's the reference architecture from the company building the GPUs.** And when you're ready to self-host, the same models run on NIM containers with the same API — swap the URL, keep the code.
 
 ## The Infrastructure Layer Just Arrived
 
@@ -98,7 +96,7 @@ I am not going to recap the GTC keynote. Two announcements matter for anyone bui
 
 Before Dynamo, scaling inference meant manually configuring [Triton](https://developer.nvidia.com/triton-inference-server) across nodes. Dynamo coordinates inference engines — [TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), [vLLM](https://github.com/vllm-project/vllm), [NIM](https://build.nvidia.com/) — into a unified multi-node system. It routes requests to GPUs that already cached relevant context, cutting time-to-first-token in half. It separates prompt processing from token generation so each can scale independently. And it autoscales on latency SLAs — not fixed capacity, but actual performance targets.
 
-Under the hood, Dynamo's disaggregated serving relies on [NIXL](https://developer.nvidia.com/blog/enhancing-distributed-inference-performance-with-the-nvidia-inference-transfer-library/) — the NVIDIA Inference Transfer Library. When prefill and decode run on separate GPU workers, the KV cache generated during prefill has to move to the decode worker fast enough that the split doesn't add latency. NIXL does this via zero-copy RDMA transfers across a unified memory hierarchy that spans GPU memory, CPU memory, NVMe, and cloud storage. It's already integrated into TensorRT-LLM, vLLM, and Dynamo itself — the plumbing that makes disaggregated serving work at production speed.
+Under the hood, Dynamo's disaggregated serving relies on [NIXL](https://developer.nvidia.com/blog/enhancing-distributed-inference-performance-with-the-nvidia-inference-transfer-library/) — the NVIDIA Inference Transfer Library. When prefill and decode run on separate GPU workers, NIXL handles zero-copy KV cache transfer between them — the plumbing that makes disaggregated serving fast.
 
 The headline number: **7x throughput per GPU** on [DeepSeek R1](https://huggingface.co/deepseek-ai/DeepSeek-R1). Built in Rust with Python extensibility — open source from day one. You don't need this for a single GPU. You need it when agent traffic becomes unpredictable at scale — when the fan-outs, chains, and loops from dozens of concurrent workflows collide on the same cluster.
 
@@ -106,13 +104,11 @@ The headline number: **7x throughput per GPU** on [DeepSeek R1](https://huggingf
 
 The enterprise blockers for autonomous agents aren't technical — they're trust. OpenShell moves safety controls *outside* the agent runtime. A deny-by-default policy engine that constrains file access, network calls, and subprocess execution at the OS level. Not in the system prompt. Not overridable by the model. [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) and [Codex](https://openai.com/index/introducing-codex/) run unmodified inside it.
 
-The Privacy Router is the part that makes the hybrid architecture real. It decides — based on organizational policy — which inference calls touch frontier APIs and which stay on local infrastructure. The routing diagram from the previous section isn't speculative. It's a shipping product.
+The Privacy Router is the part that makes the hybrid architecture real. It decides — based on organizational policy — which inference calls touch frontier APIs and which stay on local infrastructure.
 
-**The pattern across both:** NVIDIA is not retrofitting chatbot infrastructure for agents. They are building infrastructure that understands how agents actually work — bursty traffic, shared context across calls, policy constraints on data flow, and KV caches that need to move between workers without adding latency. Purpose-built, not patched.
+**The pattern across both:** NVIDIA is not retrofitting chatbot infrastructure for agents. They are building infrastructure that understands how agents actually work — bursty traffic, shared context across calls, policy constraints on data flow. Purpose-built, not patched.
 
 ## Three Layers, Not One
-
-Three years ago, the question was *which model.* Then *which framework.* Now: **which inference architecture.**
 
 The stack for agentic AI has three layers:
 
@@ -120,13 +116,9 @@ The stack for agentic AI has three layers:
 - **The serving layer** — how it runs. NIM containers, TensorRT-LLM optimization, NIXL for KV cache transfer, Dynamo for multi-node orchestration.
 - **The governance layer** — who controls what. OpenShell, privacy routing, policy engines.
 
-Most agent developers — myself included, until recently — only think about the first. We pick a model, write the prompts, chain the calls, and treat everything below the API as someone else's problem. That works when you're prototyping. It stops working when you're deploying — when the bill scales with every agent loop, when compliance requires data to stay local, when a burst of concurrent workflows overwhelms a rate limiter designed for chatbots.
+The developers who understand all three layers — not just the first — will build systems that are faster, cheaper, and actually deployable in enterprises that care about compliance and cost. That is the gap between a demo and a product.
 
-The developers who understand all three layers will build systems that are faster, cheaper, and actually deployable in enterprises that care about compliance and cost. That is the gap between a demo and a product.
-
-Three weeks ago, I watched builders at the Mistral hackathon hit inference limits with no clear answer. Today, the answer has a name — several names. Dynamo. NIXL. OpenShell. NIM. Mistral Small 4.
-
-I started there. Rebuilt the same agent workflows — on the [NVIDIA](https://www.nvidia.com/) + [Mistral](https://mistral.ai/) open stack. One API key, two model tiers, zero vendor lock-in. Same skills, different infrastructure. Here's what I found.
+I rebuilt the same agent workflows on the [NVIDIA](https://www.nvidia.com/) + [Mistral](https://mistral.ai/) open stack. One API key, two model tiers, zero vendor lock-in. Here's what I found.
 
 ## Update: Running Real Agents on NVIDIA's API
 
@@ -134,7 +126,7 @@ I started there. Rebuilt the same agent workflows — on the [NVIDIA](https://ww
 
 I put the theory to the test. Three working projects, all running on [Mistral Small 4](https://build.nvidia.com/mistralai/mistral-small-4-119b-2603) via NVIDIA's hosted API at `integrate.api.nvidia.com`:
 
-**Project 1 — Tool-calling agent loop.** The core `while(tool_use)` pattern. The model autonomously decides which tools to call, what arguments to pass, and when to stop. No hardcoded step sequence. This is the pattern underneath every agent framework — stripped to its essentials.
+**Project 1 — Tool-calling agent loop.** The `while(tool_use)` pattern — the model decides which tools to call and when to stop. No hardcoded steps.
 
 **Project 2 — Hybrid router.** A complexity classifier routes easy calls to Mistral Small 4 and hard calls to [Mistral Large 3](https://build.nvidia.com/mistralai/mistral-large-3-instruct-2512). One API key, two intelligence tiers. The same architecture NVIDIA's OpenShell Privacy Router implements at the infrastructure level.
 
@@ -156,7 +148,7 @@ The bottleneck is exactly what you'd expect from the inference patterns describe
 
 {{< figure src="news-trace-analysis.png" caption="Per-turn latency breakdown of the news aggregator agent. Turn 4 — where the model synthesizes 12 articles into a structured digest — consumes 71% of total execution time. This is pure model inference, not I/O. Infrastructure choices at the serving layer (quantization format, batch scheduling, disaggregated prefill/decode) determine whether this turn takes 47 seconds or 20." >}}
 
-And quantization matters here more than anywhere. [NVFP4](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/) — NVIDIA's 4-bit floating point format — delivers higher throughput than FP8 without sacrificing model accuracy. For an agent workflow where Turn 4 spends 47 seconds on pure model inference generating 3,660 tokens, the difference between FP8 and NVFP4 throughput is the difference between a minute-long workflow and a sub-30-second one. The infrastructure choice happens at the quantization level — inside acceleration libraries like [cuBLAS](https://developer.nvidia.com/cublas) and [cuDNN](https://developer.nvidia.com/cudnn) that sit directly above CUDA — but the effect surfaces as agent responsiveness at the application layer.
+Quantization matters here more than anywhere. [NVFP4](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/) — NVIDIA's 4-bit floating point format — delivers higher throughput than FP8 without sacrificing model accuracy. For Turn 4's 47 seconds of pure model inference, the difference between FP8 and NVFP4 throughput is the difference between a minute-long workflow and a sub-30-second one.
 
 The real learning wasn't the latency numbers. It was the integration friction. NVIDIA's endpoint rejects message fields that OpenAI's SDK includes by default (`audio`, `refusal`, `annotations`). The default `mistral-nemotron` model returns `finish_reason: "tool_calls"` with an empty tool call list — silently breaking the agent loop. Fixing these required reading error messages, testing model variants, and stripping unsupported fields from the message history.
 
