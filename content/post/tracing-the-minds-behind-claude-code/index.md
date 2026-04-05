@@ -1,6 +1,6 @@
 ---
 title: "Tracing the Minds Behind Claude Code"
-subtitle: "What 1,000+ Lines of TypeScript Reveal About How Anthropic Thinks"
+subtitle: "What Thousands of Lines of TypeScript Reveal About How Anthropic Thinks"
 summary: "I spent a weekend reading every line of two leaked Claude Code source trees — v0.2.8 and v2.1.88. Not to exploit them. Not to build on top of them. To understand how Anthropic's engineering team thinks about building a system that actually works."
 authors:
   - admin
@@ -29,7 +29,7 @@ I spent an entire weekend reading leaked source code.
 
 Not skimming. Not searching for keywords. Reading — file by file, function by function — through two versions of Claude Code that Anthropic never intended to be public. The first, v0.2.8, was a research preview from February 2025: **211 files, 26,000 lines of TypeScript**. The second, v2.1.88, was the mature product from March 2026: **1,902 files, 514,000 lines**. Thirteen months of evolution, compressed into a single weekend.
 
-By Monday I had written over **1,000 lines of notes** across a structured knowledge base, a seven-module curriculum, and this article.
+By Monday I had read through **thousands of lines of TypeScript** — tracing execution paths, mapping subsystem boundaries, and extracting design decisions into a structured knowledge base, a seven-module curriculum, and this article.
 
 ## Why I Did This
 
