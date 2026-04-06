@@ -252,11 +252,9 @@
 
 <!-- ================ 1. OPENING ================ -->
 
-<div class="divider">Session 1 &mdash; Where to Start</div>
-
 <div class="user-msg">
   <div class="user-bubble">
-    <p>I have the extracted source of Claude Code v0.2.8. Walk me through the end-to-end architecture &mdash; from when a user types a command to when they see the response. Start from the top.</p>
+    <p>I have the extracted source of Claude Code v0.2.8. Walk me through the end-to-end architecture, from when a user types a command to when they see the response. Start from the top.</p>
   </div>
 </div>
 
@@ -290,8 +288,6 @@
 
 <!-- ================ 2. SYSTEM PROMPT ================ -->
 
-<div class="divider">Session 2 &mdash; The System Prompt</div>
-
 <div class="user-msg">
   <div class="user-bubble">
     <p>How is the system prompt assembled? Is prompts.ts appended to some original Claude system prompt, or is it the whole thing?</p>
@@ -317,7 +313,7 @@
 
 <div class="user-msg">
   <div class="user-bubble">
-    <p>Wait &mdash; why are the safety guardrails repeated at the beginning AND end of the prompt?</p>
+    <p>Why are the safety guardrails repeated at the beginning AND end of the prompt?</p>
   </div>
 </div>
 
@@ -334,11 +330,9 @@
 
 <!-- ================ 3-4. THINKING ================ -->
 
-<div class="divider">Sessions 3&ndash;4 &mdash; Extended Thinking &amp; ThinkTool</div>
-
 <div class="user-msg">
   <div class="user-bubble">
-    <p>There's a comment in query.ts that reads like a wizard's rules &mdash; something about thinking constraints. What does it actually mean? And why are there two separate mechanisms for thinking?</p>
+    <p>There's a comment in query.ts that reads like a wizard's rules, something about thinking constraints. What does it actually mean? And why are there two separate mechanisms for thinking?</p>
   </div>
 </div>
 
@@ -378,8 +372,6 @@
 
 <!-- ================ 5. SUB-AGENTS ================ -->
 
-<div class="divider">Session 5 &mdash; How Sub-Agents Work</div>
-
 <div class="user-msg">
   <div class="user-bubble">
     <p>How does the AgentTool actually spawn sub-agents? Does it launch a separate process?</p>
@@ -401,8 +393,6 @@
 </div>
 
 <!-- ================ 6-7. EVOLUTION ================ -->
-
-<div class="divider">Sessions 6&ndash;7 &mdash; Tracing the Creators' Intent</div>
 
 <div class="user-msg">
   <div class="user-bubble">
@@ -444,8 +434,6 @@
 
 <!-- ================ 8. SUPPORTING SYSTEMS ================ -->
 
-<div class="divider">Session 8 &mdash; VCR, Binary Feedback, MCP</div>
-
 <div class="user-msg">
   <div class="user-bubble">
     <p>I keep seeing references to VCR, binary feedback, Statsig, MCP. What are all these supporting systems around the core loop?</p>
@@ -464,8 +452,6 @@
 
 <!-- ================ 9. LEAK PROVENANCE ================ -->
 
-<div class="divider">Session 9 &mdash; How Was This Leaked?</div>
-
 <div class="user-msg">
   <div class="user-bubble">
     <p>How was the v0.2.8 source actually leaked? Can we trace the provenance?</p>
@@ -481,8 +467,6 @@
 </div>
 
 <!-- ================ 10. V2 INVESTIGATION ================ -->
-
-<div class="divider">Session 10 &mdash; The v2.1.88 Source Leak</div>
 
 <div class="user-msg">
   <div class="user-bubble">
@@ -515,7 +499,7 @@
 
 <div class="user-msg">
   <div class="user-bubble">
-    <p>Push the cloned directory into my private GitHub repo. Then download claw-code and tell me &mdash; why does this exist?</p>
+    <p>Push the cloned directory into my private GitHub repo. Then download claw-code and tell me, why does this exist?</p>
   </div>
 </div>
 
@@ -558,11 +542,9 @@
 
 <!-- ================ 11. ASYNC GENERATOR ================ -->
 
-<div class="divider">Session 11 &mdash; The Recursive Async Generator</div>
-
 <div class="user-msg">
   <div class="user-bubble">
-    <p>Explain the recursive async generator as a mechanism. Use a file system analogy &mdash; I want to build the intuition from first principles.</p>
+    <p>Explain the recursive async generator as a mechanism. Use a file system analogy. I want to build the intuition from first principles.</p>
   </div>
 </div>
 
@@ -612,8 +594,6 @@ async function* getAllFiles(dir): AsyncGenerator&lt;string&gt; {
 
 <!-- ================ 12. PROMPT CACHING ================ -->
 
-<div class="divider">Session 12 &mdash; Prompt Caching &amp; the DYNAMIC_BOUNDARY</div>
-
 <div class="user-msg">
   <div class="user-bubble">
     <p>How does prompt caching work differently before and after the DYNAMIC_BOUNDARY marker?</p>
@@ -643,8 +623,6 @@ Block 4: Content AFTER boundary           -> not cached</div>
 
 <!-- ================ 13. SYSTEM PROMPT PRIORITY ================ -->
 
-<div class="divider">Session 13 &mdash; System Prompt Priority Hierarchy</div>
-
 <div class="user-msg">
   <div class="user-bubble">
     <p>What are all the categories of system prompts and how are they prioritized? How do they interact differently?</p>
@@ -669,8 +647,6 @@ Block 4: Content AFTER boundary           -> not cached</div>
 </div>
 
 <!-- ================ 14. KAIROS & ULTRAPLAN ================ -->
-
-<div class="divider">Session 14 &mdash; KAIROS, autoDream, ULTRAPLAN, Teleport</div>
 
 <div class="claude-msg">
   <div class="thinking">Reading cronScheduler.ts (531 lines), autoDream.ts (325 lines), ultraplan.tsx, ccrSession.ts, teleport/</div>
@@ -701,11 +677,9 @@ Block 4: Content AFTER boundary           -> not cached</div>
 
 <!-- ================ CLOSING ================ -->
 
-<div class="divider">Synthesis</div>
-
 <div class="user-msg">
   <div class="user-bubble">
-    <p>Log the entire conversation history to KNOWLEDGE.md and draft a blog article comparing the two versions &mdash; trace the minds of the creators of Claude Code.</p>
+    <p>Log the entire conversation history to KNOWLEDGE.md and draft a blog article comparing the two versions. Trace the minds of the creators of Claude Code.</p>
   </div>
 </div>
 
