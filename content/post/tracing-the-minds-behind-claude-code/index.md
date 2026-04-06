@@ -23,6 +23,12 @@ image:
   preview_only: false
 
 projects: []
+
+links:
+  - icon: comment-dots
+    icon_pack: fas
+    name: Conversation Log
+    url: /post/tracing-the-minds-behind-claude-code/chat.html
 ---
 
 I spent an entire weekend reading leaked source code.

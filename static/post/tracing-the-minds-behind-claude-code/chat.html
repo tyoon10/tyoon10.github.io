@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep-Diving into Claude Code Source — Conversation Log</title>
+<style>
+  :root {
+    --bg: #f5f4ef;
+    --user-bubble: #ebe9e1;
+    --text: #1a1a19;
+    --text-dim: #8b8880;
+    --border: #e0ded6;
+    --code-bg: #efeeea;
+    --col-width: 680px;
+    --font-body: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    --font-heading: 'Georgia', 'Times New Roman', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .chat {
+    max-width: var(--col-width);
+    margin: 0 auto;
+    padding: 32px 20px 120px;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    text-align: center;
+    padding: 48px 0 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .hero p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .hero-tags {
+    display: flex; gap: 8px; justify-content: center;
+    margin-top: 12px; flex-wrap: wrap;
+  }
+  .hero-tags span {
+    font-size: 11px;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* ---- User messages ---- */
+  .user-msg {
+    display: flex;
+    justify-content: flex-end;
+    margin: 24px 0;
+  }
+  .user-bubble {
+    background: var(--user-bubble);
+    border-radius: 20px;
+    padding: 12px 18px;
+    max-width: 85%;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .user-bubble p { margin-bottom: 8px; }
+  .user-bubble p:last-child { margin-bottom: 0; }
+
+  /* ---- Claude messages ---- */
+  .claude-msg {
+    margin: 24px 0 32px;
+    padding: 0;
+  }
+
+  .thinking {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .thinking::after {
+    content: '›';
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+
+  .claude-body {
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+
+  .claude-body p { margin-bottom: 14px; }
+  .claude-body p:last-child { margin-bottom: 0; }
+  .claude-body strong { font-weight: 600; }
+
+  .claude-body h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    margin: 24px 0 10px;
+  }
+  .claude-body h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 18px 0 8px;
+  }
+
+  .claude-body blockquote {
+    border-left: 3px solid #c4a882;
+    padding: 8px 16px;
+    margin: 14px 0;
+    background: rgba(196, 168, 130, 0.06);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+  }
+
+  .claude-body ul, .claude-body ol {
+    padding-left: 22px;
+    margin: 8px 0 14px;
+  }
+  .claude-body li { margin: 5px 0; }
+
+  .claude-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  .claude-body th, .claude-body td {
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .claude-body th {
+    background: var(--code-bg);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .claude-body .code-block {
+    background: #292524;
+    color: #e7e5e4;
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 14px 0;
+    overflow-x: auto;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre;
+  }
+
+  .claude-body code {
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+
+  /* Truncated note */
+  .truncated {
+    color: var(--text-dim);
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 10px;
+    padding: 6px 12px;
+    border-left: 2px solid var(--border);
+  }
+
+  /* Section divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Tool calls */
+  .tool-call {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+  .tool-call .tool-name {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* File count badge */
+  .file-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 4px;
+    background: rgba(34,120,65,0.1);
+    color: #227841;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    color: var(--text-dim);
+    font-size: 13px;
+    max-width: var(--col-width);
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+  }
+  .footer a { color: #8b6f47; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .chat { padding: 20px 14px 80px; }
+    .claude-body { font-size: 15px; }
+    .user-bubble { max-width: 92%; font-size: 14.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="chat">
+
+<div class="hero">
+  <h1>Deep-Diving into Claude Code Source</h1>
+  <p>A reconstructed conversation log from a weekend-long first-principles investigation of two leaked Claude Code source trees</p>
+  <div class="hero-tags">
+    <span>April 5&ndash;6, 2026</span>
+    <span>14 sessions</span>
+    <span>540,000+ lines read</span>
+    <span>Claude Opus 4.6</span>
+  </div>
+  <p style="margin-top:16px;"><a href="." style="color:#8b6f47;text-decoration:none;font-size:14px;border:1px solid var(--border);padding:6px 16px;border-radius:20px;">Read the Blog Post &rarr;</a></p>
+</div>
+
+<!-- ================ SESSION 10: THE LEAK ================ -->
+
+<div class="divider">Session 10 &mdash; Investigating the v2.1.88 Leak</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>THIS IS the exact leakage I need to investigate. Search for the sources, build the plan, update the KNOWLEDGE.md file.</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Searching for Claude Code v2.1.88 source mirrors on GitHub</div>
+  <div class="claude-body">
+    <p>Found the source. <code>Exhen/claude-code-2.1.88</code> is still live. Let me clone it and analyze the structure.</p>
+    <div class="tool-call"><span class="tool-name">Bash</span> git clone https://github.com/Exhen/claude-code-2.1.88 claude-code-v2</div>
+    <p>The numbers are staggering compared to v0.2.8:</p>
+    <table>
+      <tr><th></th><th>v0.2.8</th><th>v2.1.88</th></tr>
+      <tr><td>Files</td><td>211</td><td><strong>1,902</strong></td></tr>
+      <tr><td>Lines of TypeScript</td><td>26,000</td><td><strong>514,587</strong></td></tr>
+      <tr><td>Top-level src/ dirs</td><td>9</td><td><strong>35</strong></td></tr>
+      <tr><td>Tool directories</td><td>16</td><td><strong>40</strong></td></tr>
+    </table>
+    <p>New subsystems discovered: <strong>coordinator/</strong> (multi-agent orchestration), <strong>buddy/</strong> (virtual pet Easter egg), <strong>voice/</strong> (voice mode), <strong>bridge/</strong> (local-to-cloud session transfer), <strong>memdir/</strong> (structured memory), <strong>bootstrap/</strong> (startup), <strong>state/</strong> (app state management), <strong>tasks/</strong> (background tasks), <strong>skills/</strong> (bundled slash commands), <strong>keybindings/</strong>, <strong>vim/</strong>.</p>
+  </div>
+</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>Push the cloned directory into the private GitHub repo.</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Handling shallow clone push failure, reinitializing git history</div>
+  <div class="claude-body">
+    <p>The initial push failed &mdash; the clone had a <code>.git/shallow</code> file creating graft points where parent objects weren't downloaded. <code>git push</code> tried to send objects the remote couldn't resolve.</p>
+    <p>Fix: stripped the shallow git history and reinitialized.</p>
+    <div class="tool-call"><span class="tool-name">Bash</span> rm -rf .git && git init && git add -A && git commit -m "Claude Code v2.1.88 source" && git push -u origin main</div>
+    <p>Pushed successfully. GitHub warned about a 57MB <code>cli.js.map</code> exceeding the recommended 50MB limit, but the push completed.</p>
+  </div>
+</div>
+
+<!-- ================ CLAW-CODE ================ -->
+
+<div class="divider">Investigating claw-code</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>Download the claw-code repo into my local directory for investigation. How is this different from the original source code? Why does this exist (for real)?</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Analyzing claw-code structure and comparing to original</div>
+  <div class="claude-body">
+    <p>claw-code is <strong>not</strong> a copy of Claude Code. It is a clean-room rewrite in <strong>Python + Rust</strong> &mdash; different language, different legal status, different purpose.</p>
+    <ul>
+      <li><strong>48,599 lines of Rust</strong> across 9 workspace crates, built in <strong>3 days</strong> (292 commits, March 31 &ndash; April 3)</li>
+      <li>Python <code>src/</code> with 99 files porting the v2.1.88 directory structure</li>
+      <li>Maintained entirely by autonomous AI agents coordinated through Discord</li>
+      <li>PHILOSOPHY.md: <em>"humans set direction; claws perform the labor"</em></li>
+    </ul>
+    <p>Why it exists: DMCA-proof alternative. The TypeScript leaks are legally risky to use or distribute. A clean-room rewrite in a different language establishes independent creation. It is also a demo of what autonomous AI agents can produce &mdash; 48K lines of systems Rust in 72 hours.</p>
+  </div>
+</div>
+
+<!-- ================ CURRICULUM ================ -->
+
+<div class="divider">Session 10&ndash;11 &mdash; Building the Curriculum</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>Design the curriculum to understand how the Claude Code works, starting from the high level and into the deep dive of critical approaches in deliberate choices made by Anthropic.</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Designing a 7-module curriculum from first principles to organizational culture</div>
+  <div class="claude-body">
+    <p>Built a structured curriculum (<code>CURRICULUM.md</code>) with 7 modules, each with a concept, ordered reading list with file paths, key questions, and design choice analysis:</p>
+    <ol>
+      <li><strong>The Agentic Loop</strong> &mdash; <code>query.ts</code> v0.2.8 &rarr; v2.1.88 &rarr; <code>QueryEngine.ts</code></li>
+      <li><strong>System Prompt Engineering</strong> &mdash; <code>prompts.ts</code> &rarr; <code>systemPromptSections.ts</code> &rarr; <code>buildEffectiveSystemPrompt</code></li>
+      <li><strong>The Tool System</strong> &mdash; <code>tools.ts</code> &rarr; <code>Tool.ts</code> &rarr; <code>ToolSearchTool</code> (deferred loading)</li>
+      <li><strong>Permission &amp; Safety</strong> &mdash; <code>permissions.ts</code> &rarr; <code>yoloClassifier.ts</code> &rarr; <code>bashSecurity.ts</code></li>
+      <li><strong>Memory &amp; Context</strong> &mdash; <code>MemoryReadTool</code> &rarr; <code>memdir/</code> &rarr; <code>compact/</code> (5-stage stack)</li>
+      <li><strong>Multi-Agent</strong> &mdash; <code>AgentTool</code> v0.2.8 &rarr; fork/teammate/worktree/remote &rarr; coordinator</li>
+      <li><strong>Telemetry &amp; Culture</strong> &mdash; <code>statsig.ts</code> &rarr; <code>growthbook.ts</code> &rarr; BUDDY &rarr; hooks</li>
+    </ol>
+    <p>Each module includes the cross-cutting design belief it reveals. Three study paths: Quick Overview (2&ndash;3h), Deep Dive (full weekend), and Research Track (open-ended investigation).</p>
+  </div>
+</div>
+
+<!-- ================ SESSION 11: ASYNC GENERATOR ================ -->
+
+<div class="divider">Session 11 &mdash; The Recursive Async Generator</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>Explain the recursive async generator as a mechanism to navigate the file system.</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Building the async generator explanation from file system traversal to query.ts</div>
+  <div class="claude-body">
+    <p>Three building blocks:</p>
+    <ul>
+      <li><code>yield</code> &mdash; <strong>suspend and hand a value to the caller.</strong> The function resumes only when the caller asks for the next value. Gives the caller control over pacing (backpressure).</li>
+      <li><code>yield*</code> &mdash; <strong>delegate to another generator.</strong> "Stream every value from this sub-generator into my own stream." Does not collect &mdash; it pipes.</li>
+      <li><code>async</code> &mdash; each <code>await</code> pauses for I/O without blocking. The generator suspends at both <code>yield</code> (waiting for caller) and <code>await</code> (waiting for network/disk).</li>
+    </ul>
+
+    <h4>File system analogy</h4>
+    <div class="code-block">// COLLECT-FIRST: caller waits for the entire tree
+async function getAllFiles(dir): Promise&lt;string[]&gt; {
+  for (const entry of await readdir(dir)) {
+    if (isDir(entry))
+      results.push(...await getAllFiles(sub))  // waits for entire subtree
+    else
+      results.push(path)
+  }
+  return results
+}
+
+// STREAM-AS-YOU-GO: caller gets each file immediately
+async function* getAllFiles(dir): AsyncGenerator&lt;string&gt; {
+  for (const entry of await readdir(dir)) {
+    if (isDir(entry))
+      yield* getAllFiles(sub)  // recurse AND pipe results up immediately
+    else
+      yield path              // caller gets this right now
+  }
+}</div>
+
+    <h4>Mapping to <code>query.ts</code></h4>
+    <table>
+      <tr><th>File traversal</th><th>Claude Code agentic loop</th></tr>
+      <tr><td><code>getAllFiles(dir)</code></td><td><code>query(messages, prompt, tools)</code></td></tr>
+      <tr><td><code>readdir(dir)</code></td><td><code>callClaudeAPI(...)</code></td></tr>
+      <tr><td><code>yield file</code></td><td><code>yield streamEvent</code> (token, tool_result)</td></tr>
+      <tr><td><code>isDirectory?</code></td><td><code>stop_reason === 'tool_use'?</code></td></tr>
+      <tr><td><code>yield* getAllFiles(sub)</code></td><td><code>yield* query([...messages, toolResults])</code></td></tr>
+      <tr><td>function ends</td><td><code>stop_reason === 'end_turn'</code></td></tr>
+    </table>
+
+    <p>The REPL's <code>for await (const msg of query(...))</code> sees a flat stream of events regardless of how many tool-call rounds occurred internally. Three properties gained: <strong>streaming without buffering</strong> (first token in ~300ms), <strong>composability</strong> (<code>AgentTool.call()</code> does <code>yield* query(agentMessages)</code>), and <strong>backpressure</strong> (Ctrl+C breaks the generator mid-execution).</p>
+  </div>
+</div>
+
+<!-- ================ SESSION 12: PROMPT CACHING ================ -->
+
+<div class="divider">Session 12 &mdash; Prompt Caching &amp; DYNAMIC_BOUNDARY</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>How does the prompt caching treated differently before and after the DYNAMIC_BOUNDARY marker?</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Tracing splitSysPromptPrefix() through to wire format</div>
+  <div class="claude-body">
+    <p><code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY = '__SYSTEM_PROMPT_DYNAMIC_BOUNDARY__'</code></p>
+    <p>Before every API call, <code>splitSysPromptPrefix()</code> splits the system prompt into <strong>4 blocks</strong>:</p>
+    <div class="code-block">Block 1: Attribution header              → cacheScope: null
+Block 2: "You are Claude Code..." prefix  → cacheScope: null
+Block 3: All content BEFORE boundary      → cacheScope: 'global'
+Block 4: All content AFTER boundary       → cacheScope: null</div>
+
+    <p><strong><code>scope: 'global'</code></strong> (before the boundary): Cross-org cache. The block is identical for every Claude Code user worldwide &mdash; same instructions, tool descriptions, safety rules. Cached once, shared globally.</p>
+    <p><strong>No <code>cache_control</code></strong> (after the boundary): Environment info, memory, CLAUDE.md, git status. Changes per user, per project, per session. Processed fresh every request.</p>
+
+    <h4>Three scenarios</h4>
+    <table>
+      <tr><th>Scenario</th><th>Static blocks</th><th>Dynamic blocks</th></tr>
+      <tr><td>Normal (1P, no MCP)</td><td><code>global</code></td><td>uncached</td></tr>
+      <tr><td>MCP tools present</td><td><code>org</code></td><td><code>org</code></td></tr>
+      <tr><td>3P providers (Bedrock/Vertex)</td><td><code>org</code></td><td><code>org</code></td></tr>
+    </table>
+    <p>MCP tools break global caching because schemas are registered per-user &mdash; two users with different MCP servers generate different tool content for the "same" static block.</p>
+    <p>The source comment confirms: <em>"IMPORTANT: Do not add any more blocks for caching or you will get a 400."</em> The boundary marker is load-bearing: moving the wrong content before it silently corrupts other users' caches.</p>
+  </div>
+</div>
+
+<!-- ================ SESSION 13: SYSTEM PROMPT PRIORITY ================ -->
+
+<div class="divider">Session 13 &mdash; System Prompt Priority Hierarchy</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>What are the list/category of system prompts and how they are prioritized? How do they take into effect differently?</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Reading buildEffectiveSystemPrompt() to map the full priority chain</div>
+  <div class="claude-body">
+    <p><code>buildEffectiveSystemPrompt()</code> resolves <strong>6 categories</strong> in strict priority. First match wins and replaces everything below it:</p>
+    <div class="code-block">Priority  Category              Effect
+0         Override              REPLACES ALL + drops append
+1         Coordinator           REPLACES default, keeps append
+2a        Agent (normal)        REPLACES default, keeps append
+2b        Agent (proactive)     APPENDS to default
+3         Custom                REPLACES default, keeps append
+4         Default               Base prompt
++         Append                Always last (except priority 0)</div>
+
+    <h4>The non-obvious case: proactive/KAIROS mode</h4>
+    <p>Normal agents <strong>replace</strong> the default prompt entirely. But when <code>isProactiveActive()</code> is true, agent instructions <strong>append to</strong> the default instead. The KAIROS daemon already has the right base identity &mdash; the agent definition adds domain-specific behavior on top.</p>
+
+    <h4>Two axes of control</h4>
+    <ol>
+      <li><strong>Identity axis</strong> &mdash; what kind of agent is this? Winner-takes-all priority chain.</li>
+      <li><strong>Constraint axis</strong> &mdash; what additional rules apply? <code>appendSystemPrompt</code>, always composable.</li>
+    </ol>
+    <p>Override dropping <code>appendSystemPrompt</code> is intentional: loop mode needs total determinism. No external rules can leak in.</p>
+  </div>
+</div>
+
+<!-- ================ SESSION 14: KAIROS ================ -->
+
+<div class="divider">Session 14 &mdash; KAIROS, autoDream, ULTRAPLAN</div>
+
+<div class="claude-msg">
+  <div class="thinking">Reading cronScheduler.ts (531 lines), autoDream.ts (325 lines), ultraplan.tsx, ccrSession.ts, teleport/</div>
+  <div class="claude-body">
+    <h3>KAIROS &mdash; The Full Cron Scheduler</h3>
+    <p>KAIROS is a non-React cron scheduler core (<code>cronScheduler.ts</code>, 531 lines) shared by the REPL and Agent SDK. It polls <code>scheduled_tasks.json</code> every second, uses chokidar for file watching, and employs a per-project lock so that when multiple Claude sessions share a working directory, only one fires tasks.</p>
+    <ul>
+      <li><strong>Lock-based ownership:</strong> only the lock owner fires file-backed tasks. Non-owners probe every 5s to take over if the owner crashes.</li>
+      <li><strong><code>isKilled</code> killswitch:</strong> <code>() =&gt; !isKairosCronEnabled()</code> &mdash; flipping the GrowthBook gate stops <em>already-running</em> schedulers mid-session.</li>
+      <li><strong>Jitter config:</strong> GrowthBook-backed; ops can widen the jitter window live during a <code>:00</code> load spike without restarting clients.</li>
+      <li><strong>Missed tasks:</strong> on startup, wraps missed one-shot prompts in a dynamic-length code fence (prevents prompt injection) and requires user confirmation via <code>AskUserQuestion</code> before executing.</li>
+    </ul>
+
+    <h3>autoDream &mdash; Background Memory Consolidation</h3>
+    <p>Triple gate (cheapest first): (1) time &ge;24h since last consolidation, (2) &ge;5 sessions accumulated, (3) no other process mid-consolidation. Fires a <strong>forked subagent</strong> with bash restricted to read-only commands &mdash; it can only <em>read</em> the codebase and <em>write</em> to the memory directory.</p>
+    <p><code>getKairosActive()</code> skips the normal gate &mdash; KAIROS uses a separate disk-skill dream path.</p>
+
+    <h3>ULTRAPLAN &mdash; Remote Opus Planning</h3>
+    <p><code>/ultraplan</code> creates a Cloud Code Runner (CCR) session, runs Opus in browser plan mode, and the user approves the plan in a web UI. The local repo is teleported via a <strong>git bundle</strong> with three-tier fallback:</p>
+    <ol>
+      <li><code>git bundle create --all</code> &mdash; full history (100MB max)</li>
+      <li><code>git bundle create HEAD</code> &mdash; current branch only</li>
+      <li><code>git commit-tree HEAD^{tree}</code> &mdash; single parentless commit (just the snapshot)</li>
+    </ol>
+
+    <h4>The teleport sentinel &mdash; answered</h4>
+    <p><code>ULTRAPLAN_TELEPORT_SENTINEL = '__ULTRAPLAN_TELEPORT_LOCAL__'</code></p>
+    <p>When the user clicks "teleport back to terminal" in the browser PlanModal, it sends an <code>is_error: true</code> tool_result with the sentinel on the first line and the plan text on the next. The <code>ExitPlanModeScanner</code> &mdash; a pure stateful classifier with no I/O &mdash; detects it and returns the plan to the local CLI.</p>
+    <p>Two exit paths: <strong>teleport</strong> (plan comes back to terminal, remote archived) or <strong>remote</strong> (CCR executes, results land as a pull request).</p>
+  </div>
+</div>
+
+<!-- ================ SYNTHESIS ================ -->
+
+<div class="divider">Synthesis &mdash; The Knowledge Base</div>
+
+<div class="user-msg">
+  <div class="user-bubble">
+    <p>Continue updating the KNOWLEDGE.md; log the entire conversation history to the document. THE GOAL is to draft a comprehensive repository of documenting the inner workings and my learning journey of Claude Code, as well as a blog article comparing between the older and newer versions of Claude Code to "trace the minds of creators of Claude Code."</p>
+  </div>
+</div>
+
+<div class="claude-msg">
+  <div class="thinking">Appending Sessions 11&ndash;14 and the blog article to KNOWLEDGE.md</div>
+  <div class="claude-body">
+    <p>Updated <code>KNOWLEDGE.md</code> with all session logs and drafted a blog article: <strong>"Tracing the Minds of the Claude Code Creators"</strong> &mdash; 7 design beliefs extracted from the code:</p>
+    <ol>
+      <li><strong>The Loop Is the Product</strong> &mdash; recursive async generator, unchanged from v0.2.8 to v2.1.88</li>
+      <li><strong>Safety Is the Architecture</strong> &mdash; 3-tier permissions &rarr; 6 modes + LLM classifier + invisible sandbox bypass</li>
+      <li><strong>Context Is the Scarce Resource</strong> &mdash; 1-stage compaction &rarr; 5-stage stack; tool deferral via ToolSearch</li>
+      <li><strong>One Model Is Not Enough</strong> &mdash; single AgentTool &rarr; 4 execution models + coordinator</li>
+      <li><strong>The Internal/External Boundary Is Architectural</strong> &mdash; compile-time dead-code elimination, undercover mode</li>
+      <li><strong>Shipping Is a System</strong> &mdash; Statsig &rarr; GrowthBook + 35 compile-time flags + runtime kill switches</li>
+      <li><strong>Joy Is Not Optional</strong> &mdash; BUDDY virtual pet, hex-encoded species names, 187 spinner verbs</li>
+    </ol>
+    <p>Core thesis: <em>"An agentic coding tool should be a reliable system, not a capable demo. v0.2.8 was the capable demo. v2.1.88 is the beginning of the system."</em></p>
+  </div>
+</div>
+
+<!-- ================ CLOSING ================ -->
+
+<div class="divider">Closing</div>
+
+<div class="claude-msg">
+  <div class="claude-body">
+    <p>14 sessions. Two source trees. Seven design beliefs. One conclusion:</p>
+    <blockquote>The code is the artifact. The thinking is the product.</blockquote>
+    <p>The full knowledge base is in <code>claude-code-leaked/KNOWLEDGE.md</code> &mdash; 1,800+ lines covering every subsystem from the agentic loop to the BUDDY virtual pet. The curriculum is in <code>CURRICULUM.md</code>. The blog article is published at <a href=".">twyoon.com</a>.</p>
+  </div>
+</div>
+
+</div><!-- .chat -->
+
+<div class="footer">
+  <p>Conversation with <a href="https://claude.ai">Claude</a> by Anthropic &middot; <a href=".">Blog Post</a> &middot; <a href="https://github.com/tyoon10">Source</a></p>
+</div>
+
+</body>
+</html>
