@@ -25,6 +25,10 @@ image:
 projects: []
 
 links:
+  - icon: linkedin
+    icon_pack: fab
+    name: LinkedIn Post
+    url: https://www.linkedin.com/posts/taewan-yoon_claudepartner-share-7447007153242050561-5Yrn
   - icon: comment-dots
     icon_pack: fas
     name: Conversation Log
