@@ -23,15 +23,21 @@ image:
 
 ## Why This Post Exists
 
-People ask me, *what skincare products do you use?*
+One of the common questions I receive has nothing to do with AI. People ask me, *what skincare products do you use?*
+
+It feels good when people see me embody K-beauty standards. I usually try to laugh it off. But when the question gets asked more than twice, I know it's no longer just a compliment — they're asking for real solutions to their own problem.
 
 The honest answer is that the products matter much less than the principles. Most of what works is upstream of the brand on the bottle — water temperature, pH, timing, what you eat, when you see the sun. This is a written response to the recurring question, so I can send a link instead of repeating myself.
+
+These principles are deeply embedded in the routine I've kept for 20+ years. I even carried the key items — cleanser, lotion, sunscreen — with me to military boot camp and used them every day in the tight window I had for personal time.
 
 What follows is my actual routine paired with the research that justifies each step. Wherever possible I've cited the peer-reviewed source rather than the influencer who relayed it.
 
 ---
 
 ## 1. Cleansing
+
+I don't remember anyone teaching me how to wash my face properly, and I assume most people weren't taught either. Below I lay out the overlapping face-washing tips from verified sources, and share YouTube videos of Korean dermatologists demonstrating the proper technique.
 
 **Twice daily — morning and evening.** I use a hairband so I can clean the hairline without wetting my hair.
 
@@ -75,10 +81,10 @@ Mechanical friction is the enemy of the stratum corneum. The Korean phrase I use
 
 ## 2. Moisturizing
 
-**Within 10 seconds of patting dry**, I apply a hydrating essence, then a lotion on top.
+**Within 10 seconds of patting dry**, I apply a hydrating essence, then a lotion on top. Aestura is a cosmeceutical brand from Amorepacific, and its separate medical-grade lineup is often preferred by dermatologists. I've been using the consumer-grade retail products for 5+ years.
 
-- Essence: **아토베리어365 하이드로 에센스** (Atobarrier 365 Hydro Essence)
-- Lotion: **아토베리어365 로션** (Atobarrier 365 Lotion)
+- Essence: **아토베리어365 하이드로 에센스** ([Atobarrier 365 Hydro Essence](https://www.aestura.com/web/product/view.do?prdSeq=1071))
+- Lotion: **아토베리어365 로션** ([Atobarrier 365 Lotion](https://www.aestura.com/web/product/view.do?prdSeq=1117))
 
 ### The 3-minute rule (and why I shortened it to 10 seconds)
 
@@ -93,6 +99,10 @@ I shorten that window to 10 seconds because the math gets worse the longer you w
 A moisturizer that's only humectant (glycerin, hyaluronic acid) pulls water into the stratum corneum but doesn't fix the leak. **Ceramides** are 30–40% of the intercellular lipid matrix that holds the skin barrier together; the Atobarrier line is formulated around ceramide NP and a cholesterol/fatty-acid blend that mimics the natural lipid ratio.
 
 Topical ceramide-containing moisturizers have been shown in randomized trials to restore barrier function and reduce TEWL in damaged or atopic-prone skin — performance closer to a barrier *repair* product than a basic emollient.<sup>[4](#ref-4),[5](#ref-5)</sup>
+
+### Neck and eye care
+
+These are the areas a lot of people miss. As people age, the neck and the skin around the eyes are the parts that aren't easily covered by makeup. Use extra moisturizer to build a sufficient hydration barrier in both. Well-moisturized neck and eye areas pay off over time.
 
 ---
 
