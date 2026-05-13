@@ -1,7 +1,7 @@
 ---
 title: "Tracing the Minds Behind Claude Code"
 subtitle: "What the Delta Between Two Source Trees Reveals About How Anthropic Thinks"
-summary: "I spent a weekend reading two Claude Code source trees side by side — not to catalogue features, but to find what survived. The things that didn't change across 90 versions are the real design beliefs."
+summary: "I spent a weekend reading two Claude Code source trees side by side, to find what changed and hasn't across 13 months of the most successful AI product."
 authors:
   - admin
 tags:
@@ -35,11 +35,11 @@ links:
     url: /post/tracing-the-minds-behind-claude-code/chat.html
 ---
 
-Saturday morning, 7 AM. Coffee, terminal open, two browser tabs with GitHub repos I probably shouldn't have access to. One was Claude Code v0.2.8 from February 2025 — 211 files, 26,000 lines. The other was v2.1.88 from March 2026 — 1,902 files, 514,000 lines. Thirteen months of a team's best thinking, sitting in two directories on my laptop.
+Saturday morning, I had two tabs open in my VS Code side-by-side, with GitHub repos I probably shouldn't have access to. One was Claude Code v0.2.8 from February 2025 (211 files, 26,000 lines). The other was v2.1.88 from March 2026 (1,902 files, 514,000 lines). 13 months of the hottest product of our time, sitting in two directories on my laptop.
 
-Most people reading those leaks went feature-hunting — KAIROS, BUDDY, voice mode. Others built a [clean-room Python/Rust rewrite](https://github.com/ultraworkers/claw-code) in 72 hours. I wanted something different. I use Claude Code every day — for this website, for job scanners, for managing meeting notes. When you understand how your tool works at the system level, you stop fighting it and start working with it.
+Both versions came out of community deobfuscation of the published npm package — Claude Code ships as minified JavaScript, and someone ran it back through a reverse-engineering pipeline to reconstruct readable TypeScript. Most people reading those leaks went feature-hunting (unreleased features such as KAIROS, BUDDY, voice mode, etc.). Others built a [clean-room Python/Rust rewrite](https://github.com/ultraworkers/claw-code) in 72 hours. I wanted something different. I use Claude Code every day — for this website, for job scanners, for managing meeting notes. I understood how the tool works at the system level, so I could stop fighting it and start working with it.
 
-So I asked a different question: *what survived?*
+So I asked a different question: *what has changed, and what hasn't?*
 
 <!-- {{< figure src="stats-comparison.png" caption="v0.2.8 vs v2.1.88: 211 → 1,902 files. 26K → 514K lines of TypeScript. 16 → 40 tool directories. 1 agent type → 4 execution models." >}} -->
 
