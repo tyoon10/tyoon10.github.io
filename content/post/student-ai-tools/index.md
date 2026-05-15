@@ -69,21 +69,16 @@ Sign up: [cursor.com — student discount](https://cursor.com/help/account-and-b
 
 ---
 
-### 3. BizCrush — **1 month free** (limited codes)
+### 3. BizCrush — **5 month free** (limited codes)
 
-Real-time AI meeting agent built for **in-person** conversations — networking events, recruiting coffee chats, conference floors, founder-customer calls. Two things make it different from a typical post-call notetaker:
-
-- **Live multi-language transcription and translation** (up to 5 languages) so you can hold a real conversation across language barriers and still walk away with clean structured notes.
-- **Follow-up intelligence** — drafts a personalized follow-up email for each attendee right after the meeting, with optional HubSpot CRM sync so the contact and summary land in the right place automatically.
-
-I use BizCrush whenever I'm walking into a room with people rather than dialing into a call.
+Real-time AI meeting agent built for in-person conversations, excellent for networking events, recruiting coffee chats, conference floors, founder-customer calls. It's especially strong at live multi-language transcription and translation.
 
 | Field | Value |
 |---|---|
 | Original price | Paid Pro plan |
 | Student offer | **1 month free** via access code |
 | Limit | Number of codes is **limited** — first come, first served |
-| Access code | `[STUDENT-CODE-PLACEHOLDER]` *(I'll paste the live code here — ping me if it's not yet filled in)* |
+| Access code | STUDENT2026 |
 
 Sign up: [bizcrush.app](https://bizcrush.app/) (iOS / Android)
 
