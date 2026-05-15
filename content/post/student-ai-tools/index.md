@@ -69,14 +69,14 @@ Sign up: [cursor.com — student discount](https://cursor.com/help/account-and-b
 
 ---
 
-### 3. BizCrush — **5 month free** (limited codes)
+### 3. BizCrush — **5 month free** (limited credit)
 
 Real-time AI meeting agent built for in-person conversations, excellent for networking events, recruiting coffee chats, conference floors, founder-customer calls. It's especially strong at live multi-language transcription and translation.
 
 | Field | Value |
 |---|---|
 | Original price | Paid Pro plan |
-| Student offer | **1 month free** via access code |
+| Student offer | **5 month free** until credit runs out |
 | Limit | Number of codes is **limited** — first come, first served |
 | Access code | STUDENT2026 |
 
