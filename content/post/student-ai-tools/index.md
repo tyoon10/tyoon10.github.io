@@ -1,7 +1,7 @@
 ---
 title: "AI Tools Worth Setting Up Today (with Student Benefit)"
 subtitle: "Summer is the right time to build. If you're graduating, the window is closing faster than you think."
-summary: "The five AI tools I actually use, plus a curated secondary list. Verified against official sources as of May 2026."
+summary: "The six AI tools I actually use, plus a curated secondary list. Verified against official sources as of May 2026."
 authors:
   - admin
 tags:
@@ -34,7 +34,7 @@ So: go claim these TODAY, if they're still live while you're reading this.
 
 ---
 
-## The five I actually use every day
+## The six I actually use every day
 
 Tried, used extensively, kept. These are the offers I'd tell a classmate to set up first.
 
@@ -69,7 +69,27 @@ Sign up: [cursor.com — student discount](https://cursor.com/help/account-and-b
 
 ---
 
-### 3. Figma Professional — **Free**
+### 3. BizCrush — **1 month free** (limited codes)
+
+Real-time AI meeting agent built for **in-person** conversations — networking events, recruiting coffee chats, conference floors, founder-customer calls. Two things make it different from a typical post-call notetaker:
+
+- **Live multi-language transcription and translation** (up to 5 languages) so you can hold a real conversation across language barriers and still walk away with clean structured notes.
+- **Follow-up intelligence** — drafts a personalized follow-up email for each attendee right after the meeting, with optional HubSpot CRM sync so the contact and summary land in the right place automatically.
+
+I use BizCrush whenever I'm walking into a room with people rather than dialing into a call.
+
+| Field | Value |
+|---|---|
+| Original price | Paid Pro plan |
+| Student offer | **1 month free** via access code |
+| Limit | Number of codes is **limited** — first come, first served |
+| Access code | `[STUDENT-CODE-PLACEHOLDER]` *(I'll paste the live code here — ping me if it's not yet filled in)* |
+
+Sign up: [bizcrush.app](https://bizcrush.app/) (iOS / Android)
+
+---
+
+### 4. Figma Professional — **Free**
 
 Full Professional plan for verified higher-ed students. Slide alternatives, mockups, quick visuals, case-comp decks. It is still one of the most preferred design system tool for Product Designers and PMs.
 
@@ -84,9 +104,9 @@ Sign up: [figma.com — Figma for Education](https://help.figma.com/hc/en-us/art
 
 ---
 
-### 4. Granola Business — **Free for 12 months**
+### 5. Granola Business — **Free for 12 months**
 
-AI meeting / lecture notepad. Transcript capture + structured searchable notes.
+AI notepad for the meetings I'm *not* leading. Granola listens in the background (no bot joins your call) and generates clean structured notes after the fact — I rely on it for lectures, internal team meetings, and 1:1s where I want to stay present and read the notes later. It pairs naturally with BizCrush: **BizCrush for live in-person work, Granola for everything else.**
 
 | Field | Value |
 |---|---|
@@ -101,7 +121,7 @@ Note: Promo is marked as limited edition.
 
 ---
 
-### 5. GitHub Student Developer Pack — **Free**
+### 6. GitHub Student Developer Pack — **Free**
 
 The gold standard student bundle. Copilot, DigitalOcean credits, Namecheap domain, JetBrains, and roughly 30 other dev tools — all included once you verify.
 
