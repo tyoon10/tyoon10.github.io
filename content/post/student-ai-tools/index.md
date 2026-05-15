@@ -1,7 +1,7 @@
 ---
-title: "AI Tools Worth Setting Up as a Student"
-subtitle: "The short list — verified offers, no deal-hunter padding"
-summary: "Which AI tools actually have student offers worth the signup. Verified against official sources as of May 2026, with referral upsides flagged where they exist."
+title: "AI Tools Worth Setting Up as a Student — Before You Lose Access"
+subtitle: "Summer is the right time to build. If you're graduating, the window is closing faster than you think."
+summary: "The five AI tools I actually use every day, plus a curated secondary list. Verified against official sources as of May 2026, with referral upsides flagged where they exist."
 authors:
   - admin
 tags:
@@ -22,55 +22,31 @@ image:
   preview_only: false
 ---
 
-There are thousands of "best AI tools for students" articles. Most are SEO bait, padded with deals that expired or that no individual student can actually claim.
+The school year is wrapping up and summer is the best time of the year to **build, learn, and try new tools** without the pressure of coursework. It's also the moment to lock in every student-only AI offer you can — especially if you're graduating.
 
-This is the short list I'd give a classmate. Every offer is **individually claimable** (no IT-department dependency), verified against official sources, and dated. If it's not on this list, it's either institution-only, no real discount, or a campaign I couldn't confirm is currently active.
+> **If you're a graduating student: move fast.** Most of these offers verify against your .edu email or active student status. The day you lose either, you lose the offer.
 
-> **Last refreshed:** 2026-05-14. Working notes (deeper per-tool research, ruled-out tools, validation log) live at [github.com/tyoon10/student-ai-tools](https://github.com/tyoon10/student-ai-tools).
+There's a bigger pattern at work too. AI tools open up free or deeply discounted student plans early to drive adoption — and then quietly close the door once they have enough traction. Google's Gemini student offer is the most recent example: **the free year of Google AI Pro for students ended March 11, 2026** ([source](https://gemini.google/students/) — the page now reads "Our previous student offer ended on March 11, 2026 and is no longer available in your region"). It is not coming back in its old form.
 
-## A note on referral links
+So: go claim these now, while they're live.
 
-Most AI tools don't have a peer-referral program. Notion's was discontinued in 2020. Grammarly's is being phased out. GitHub, Cursor, Zed, Figma, full Adobe Creative Cloud — none.
-
-The two tools where signing up through me gets **you** something extra:
-
-- **Perplexity** — we both get **1 free month of Pro**, stackable up to **24 months** under the current student program (program ends 2026-05-31).
-- **Otter.ai** — you get **1 month of Pro Lite** (300 min); I earn referral minutes.
-
-Everywhere else, sign up directly through the official link. No invite-link advantage exists.
+> **Last refreshed:** 2026-05-14. Deeper notes (ruled-out tools, validation log, pending audits) live at [github.com/tyoon10/student-ai-tools](https://github.com/tyoon10/student-ai-tools).
 
 ---
 
-## The Short List
+## The five I actually use every day
 
-### Perplexity Pro — **$10/month** (50% off)
+Tried, used extensively, kept. These are the offers I'd tell a classmate to set up first.
 
-The best AI search tool for academic work. Citations, Learn Mode, full Pro model access.
+### 1. Notion Plus — **Free**
 
-| Field | Value |
-|---|---|
-| Original price | **$20/month** |
-| Student price | **$10/month** |
-| Verification | SheerID |
-| Length | Recurring while verified |
-| Referral | **Both get 1 free month**, stackable up to 24 months |
-
-Sign up: [perplexity.ai education plan info](https://www.perplexity.ai/help-center/en/articles/12590157-what-is-education-pro)
-
-> **Use my invite link to get a free month on top of the student price** _(link added after I sign up — placeholder for now)_
-
----
-
-### Notion Plus — **Free**
-
-Free Plus plan for a 1-member workspace with an eligible school email. The single best note / knowledge tool for grad school.
+The single best note / knowledge tool for grad school. Free Plus plan for a 1-member workspace if you have an eligible school email. This one quietly became the operating system for my coursework, side projects, and job search.
 
 | Field | Value |
 |---|---|
 | Original price | Paid for general users |
 | Student price | **Free** |
 | Verification | School email |
-| Referral | None (program discontinued 2020) |
 
 Sign up: [notion.com — Notion for Education](https://www.notion.com/help/notion-for-education)
 
@@ -78,9 +54,9 @@ Notion AI is a separate add-on and is **not** included free.
 
 ---
 
-### Cursor Pro — **Free for 1 year**
+### 2. Cursor Pro — **Free for 1 year**
 
-AI code editor. Worth installing even if you're not an engineer — Excel formulas, SQL, scripting, prototyping, data wrangling.
+AI code editor. Worth installing even if you're not an engineer — Excel formulas, SQL, scripting, prototyping, data cleanup. Anyone touching a spreadsheet or wrangling data benefits.
 
 | Field | Value |
 |---|---|
@@ -91,27 +67,13 @@ AI code editor. Worth installing even if you're not an engineer — Excel formul
 
 Sign up: [cursor.com — student discount](https://cursor.com/help/account-and-billing/student-discount)
 
-> **Calendar reminder at month 11.** Auto-renewal at full price catches people.
+> **Calendar reminder at month 11.** Auto-renewal at full price catches people off-guard.
 
 ---
 
-### Adobe Creative Cloud — **~70% off first year**
+### 3. Figma Professional — **Free**
 
-All Apps plan + Firefly generative AI in Photoshop, Illustrator, Premiere.
-
-| Field | Value |
-|---|---|
-| Student discount | **Up to 70% off** first year (US market example) |
-| Verification | In Adobe checkout |
-| After year 1 | Higher renewal price — set a reminder |
-
-Sign up: [adobe.com — Creative Cloud for students](https://www.adobe.com/creativecloud/buy/students/explore/ccforstudents.html)
-
----
-
-### Figma Professional — **Free**
-
-Full Professional plan for verified higher-ed students. Decks, mockups, slide alternatives, quick visuals.
+Full Professional plan for verified higher-ed students. Slide alternatives, mockups, quick visuals, case-comp decks — Figma is faster than PowerPoint once you're in it.
 
 | Field | Value |
 |---|---|
@@ -124,9 +86,9 @@ Sign up: [figma.com — Figma for Education](https://help.figma.com/hc/en-us/art
 
 ---
 
-### Granola Business — **Free for 12 months**
+### 4. Granola Business — **Free for 12 months**
 
-AI meeting / lecture notepad. Transcript capture + structured searchable notes. Limited-edition student promo.
+AI meeting / lecture notepad. Transcript capture + structured searchable notes. The note quality is genuinely a step above Otter for the way I work.
 
 | Field | Value |
 |---|---|
@@ -137,36 +99,60 @@ AI meeting / lecture notepad. Transcript capture + structured searchable notes. 
 
 Sign up: [granola.ai — student program](https://www.granola.ai/students)
 
+Promo is marked as limited edition — don't bank on it being available indefinitely.
+
 ---
 
-### Otter.ai Pro — **20% off**
+### 5. GitHub Student Developer Pack — **Free**
 
-Transcription for lectures, interviews, group meetings.
+The gold standard student bundle. Copilot, DigitalOcean credits, Namecheap domain, JetBrains, and roughly 30 other dev tools — all included once you verify.
 
 | Field | Value |
 |---|---|
-| Discount | **20% off** Pro Monthly and Annual |
-| Discounted annual | **$6.67/month** ($79.99 billed annually) |
-| Verification | .edu email |
-| Referral | **You get 1 month Pro Lite** via my invite; I earn minutes |
-
-Sign up: [otter.ai — student & teacher discount](https://help.otter.ai/hc/en-us/articles/4402467517847-Student-Teacher-discount-program-for-the-Pro-plan)
-
-Individual Pro only — not workspace / team plans.
-
----
-
-### GitHub Student Pack (Copilot) — **Free** *(new signups currently paused)*
-
-Gold standard student bundle. Includes Copilot, DigitalOcean credits, Namecheap domain, JetBrains, and ~30 other dev tools.
+| Cost | **Free** |
+| Verification | GitHub Education benefits application |
+| Prereq | Add and verify your **school-issued email** (e.g., `columbia.edu`) in your GitHub account settings *before* applying |
+| Length | Re-evaluated as your student status persists |
 
 Apply: [education.github.com/pack](https://education.github.com/pack/)
 
-> **Status check:** as of May 2026, GitHub has temporarily paused new student sign-ups for Copilot Student. Worth applying once it reopens — track [GitHub's docs page](https://docs.github.com/copilot/how-tos/manage-your-account/free-access-with-copilot-student).
+> **One-time blocker most students hit:** the application checks for a verified school email on your GitHub account. If your account is set up with a personal email, add the school email under Settings → Emails → "Add email address," verify it, then return to the application.
 
 ---
 
-## Worth Knowing About (Secondary)
+## Worth knowing about
+
+Strong offers, just not in my daily stack. Two of these (Perplexity and Otter.ai) have working peer-referral programs — sign up via my invite link and we both get extra credit.
+
+> **The referral mechanic:**
+> - **Perplexity** — we both get **1 free month of Pro**, stackable up to **24 months** under the current student program (ends 2026-05-31).
+> - **Otter.ai** — you get **1 month of Pro Lite** (300 min); I earn referral minutes.
+>
+> Every other tool below: just use the official link. No invite advantage.
+
+### Perplexity Pro — **$10/month** (50% off)
+
+The best AI search tool for academic work. Citations, Learn Mode, full Pro model access. If you do research-heavy coursework, this is probably the biggest single win on the list.
+
+- Sign up: [perplexity.ai — Education Pro](https://www.perplexity.ai/help-center/en/articles/12590157-what-is-education-pro)
+- Verification: SheerID
+- **Referral bonus:** Use my invite link and we both get a free month _(link added after I sign up — placeholder for now)_
+
+### Adobe Creative Cloud — **~70% off** first year
+
+All Apps plan + Firefly generative AI in Photoshop, Illustrator, Premiere. Discount is steep in year one, less so after — set a renewal reminder.
+
+- Sign up: [adobe.com — Creative Cloud for students](https://www.adobe.com/creativecloud/buy/students/explore/ccforstudents.html)
+
+### Otter.ai Pro — **20% off**
+
+Transcription for lectures, interviews, group meetings. Individual Pro only — not workspace / team plans.
+
+- Sign up: [otter.ai — student & teacher discount](https://help.otter.ai/hc/en-us/articles/4402467517847-Student-Teacher-discount-program-for-the-Pro-plan)
+- Verification: .edu email
+- **Referral bonus:** Use my invite for 1 month free Pro Lite _(link added after I sign up — placeholder)_
+
+### The rest
 
 | Tool | Offer | Notes |
 |---|---|---|
@@ -176,25 +162,25 @@ Apply: [education.github.com/pack](https://education.github.com/pack/)
 | **Grammarly Premium** | **50% off** (seasonal) | SheerID campaign — sometimes live, sometimes not. [Check campaign](https://shop.sheerid.com/brands/grammarly/) |
 | **QuillBot Premium** | **Up to 25% off** | Via StudentBeans. [Sign up](https://quillbot.com/upgrade/studentbeans) |
 | **Microsoft Azure for Students** | **$100 credit**, no card | 12-month window. Good for anyone building with cloud AI. [Sign up](https://azure.microsoft.com/en-us/free/students/) |
-| **Google Cloud for Students** | **200 Skills credits** | Learning tracks. [Sign up](https://cloud.google.com/edu/students) |
+| **Google Cloud for Students** | **200 Skills credits** | Learning tracks, not deployment. [Sign up](https://cloud.google.com/edu/students) |
 | **AWS Educate** | **Free** self-paced labs | No card required. [Sign up](https://aws.amazon.com/education/awseducate/) |
 
 ---
 
-## What's *Not* On This List (and Why)
+## What's *not* on this list (and why)
 
 > Quick reference for the tools people most often ask about.
 
+- **Google Gemini Pro** — The 1-year free Google AI Pro for students **ended March 11, 2026**. The page still resolves but the offer doesn't. Monitor [gemini.google/students](https://gemini.google/students/) if you want to know when (or if) it relaunches.
 - **ChatGPT Plus** — No standing global student discount on consumer pricing. OpenAI's student credits offer is for **Codex specifically**, not Plus.
 - **Claude Pro** — No individual student discount. Anthropic has an institutional education path; check with your school IT.
 - **Microsoft Copilot (Office 365 Education)** — Depends on whether your school's tenant has Copilot Chat enabled. Worth checking the school IT portal.
 - **Canva Pro** — Higher-ed access is institution-led Canva Campus, not a universal individual claim.
-- **Google Gemini student offer** — The prior free-year offer ended; no reliably active individual student offer captured as of this refresh.
 - **Midjourney** — No student-specific discount.
 
 ---
 
-## How to Verify Anything Here
+## How to verify anything here
 
 1. **Click the official link.** I've linked help-center / pricing pages, not third-party deal sites.
 2. **Check the refresh date** at the top. If it's stale (>3 months), re-verify before sharing publicly. Offers change quietly.
