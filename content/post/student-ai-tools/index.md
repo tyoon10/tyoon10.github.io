@@ -69,14 +69,14 @@ Sign up: [cursor.com — student discount](https://cursor.com/help/account-and-b
 
 ---
 
-### 3. BizCrush — **5 month free** (limited credit)
+### 3. BizCrush — **5 month free**
 
 Real-time AI meeting agent built for in-person conversations, excellent for networking events, recruiting coffee chats, conference floors, founder-customer calls. It's especially strong at live multi-language transcription and translation.
 
 | Field | Value |
 |---|---|
 | Original price | Paid Pro plan |
-| Student offer | **5 month free** until credit runs out |
+| Student offer | **5 month free** |
 | Limit | Number of codes is **limited** — first come, first served |
 | Access code | STUDENT2026 |
 
@@ -101,7 +101,7 @@ Sign up: [figma.com — Figma for Education](https://help.figma.com/hc/en-us/art
 
 ### 5. Granola Business — **Free for 12 months**
 
-AI notepad for the meetings I'm *not* leading. Granola listens in the background (no bot joins your call) and generates clean structured notes after the fact — I rely on it for lectures, internal team meetings, and 1:1s where I want to stay present and read the notes later. It pairs naturally with BizCrush: **BizCrush for live in-person work, Granola for everything else.**
+Another AI notepad for meetings. Granola generates clean structured summary notes after the fact, which I have been using for internal team meetings.
 
 | Field | Value |
 |---|---|
