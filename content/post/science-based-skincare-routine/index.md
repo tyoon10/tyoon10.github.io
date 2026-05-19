@@ -212,7 +212,7 @@ A short, deliberately negative list — because the absence of bad inputs matter
 
 The Korean dermatologist YouTube channels demo proper cleansing. Totally worth watching even if you don't speak Korean (the demonstrations are visual):
 
-- [피부좋아지는 사람들이 하는 세안법, 피부좋은 사람은 이렇게 세수합니다.](https://youtu.be/2dYrl89dfGU?si=GkPTmSXafambUzrh) — board-certified dermatologist demonstrates proper cleansing
+- [피부좋아지는 사람들이 하는 세안법, 피부좋은 사람은 이렇게 세수합니다.](https://youtu.be/2dYrl89dfGU?si=GkPTmSXafambUzrh) — dermatology practitioner demonstrates proper cleansing
 - [피부심: 피부과전문의가 직접 보여주는 완벽한 세안법](https://www.youtube.com/watch?v=L69YXj-Xuu4) — board-certified dermatologist walkthrough of cleansing technique
 - [30대 피부과의사의 모닝케어루틴](https://www.youtube.com/watch?v=6Tz0RQUIqh4) — a dermatologist's own morning routine
 - [Cleansing tips from a Dermatologist (subtitled)](https://www.youtube.com/watch?v=siPoC7zxWp0) — low-irritation cleansing for sensitive skin
