@@ -148,3 +148,23 @@
     margin-bottom: 0.75rem;
   }
 }
+
+/* In-article figures (iframe-embedded SVG diagrams) */
+.article-figure {
+  margin: 2.5rem 0;
+
+  iframe {
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    border-radius: 6px;
+    background: transparent;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: rgba(128, 128, 128, 0.95);
+    text-align: left;
+  }
+}

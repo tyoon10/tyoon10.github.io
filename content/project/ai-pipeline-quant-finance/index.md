@@ -33,6 +33,8 @@ Professional investors rely on being "plugged in" to find strategies — a proce
 
 The central question: **How do you systematically surface niche, contrarian investment ideas from an ocean of academic literature?**
 
+Most retrieval systems converge on consensus papers — by design. This pipeline is built to do the opposite: surface high-quality work the consensus has missed.
+
 ## Approach
 
 Built an end-to-end, five-stage AI pipeline with Prof. Michael Robbins (six-time CIO, author of *Quantitative Asset Management*, McGraw-Hill) at Columbia.
@@ -69,6 +71,13 @@ All computed features are written back into the JSON as enriched metadata — cr
 
 ### 4. Ingestion & Vector Database (LightRAG)
 
+*What structural elements survive ingestion?* The architecture choice rides on this question — every downstream query depends on what isn't flattened here.
+
+<figure class="article-figure">
+  <iframe src="figures/01-structural-preservation.html" loading="lazy" title="Structural preservation under three retrieval architectures" style="display:block; width:100%; aspect-ratio: 16 / 9; border: 0;"></iframe>
+  <figcaption>One paper, three architectures. Naive RAG flattens hierarchy, tables, citations, and metadata into undifferentiated text. Full Graph RAG preserves everything but requires rebuild on each ingest. LightRAG preserves the structural signals downstream queries depend on while supporting incremental ingestion.</figcaption>
+</figure>
+
 Evaluated three retrieval architectures:
 
 - **Naive RAG**: Flattened our structured metadata. Author relationships, citation networks, and section hierarchies were lost. Generic, short responses.
@@ -88,6 +97,13 @@ Evaluated three retrieval architectures:
 
 ### 5. Prompting & Evaluation
 
+Every query in this section rides on metadata pre-computed by an earlier stage. Drop a stage and the query dies.
+
+<figure class="article-figure">
+  <iframe src="figures/02-backward-dependency-trace.html" loading="lazy" title="Backward dependency trace from query to pipeline stages" style="display:block; width:100%; aspect-ratio: 16 / 9; border: 0;"></iframe>
+  <figcaption>One advanced query, traced backward to the upstream pipeline stages that made it possible. Linguistic complexity, author affiliation, citation depth, and embedding identity each come from a different stage — drop any one and the query returns nothing.</figcaption>
+</figure>
+
 Iterative prompt refinement against professional analyst standards. The enriched metadata enables queries like:
 
 > *"Show me papers with high linguistic complexity, referenced by authors from top-tier universities, that are not widely cited."*
@@ -97,6 +113,11 @@ Iterative prompt refinement against professional analyst standards. The enriched
 These queries are only possible because we pre-calculated and embedded esoteric metadata into the database. You can't drag 4,000 PDFs into an LLM and expect this — you have to build the data foundation first.
 
 ## Results
+
+<figure class="article-figure">
+  <iframe src="figures/03-strategic-geometry.html" loading="lazy" title="Strategic geometry — why the pipeline targets the alpha zone" style="display:block; width:100%; aspect-ratio: 16 / 9; border: 0;"></iframe>
+  <figcaption>Citation count × quality. Standard RAG retrieves from the consensus zone — high-citation, well-trodden papers. This pipeline is built to target the alpha zone: high-quality work the consensus has missed, surfaced by linguistic-complexity, author-affiliation, and citation-depth filters layered on top of LightRAG.</figcaption>
+</figure>
 
 | Metric | Value |
 |--------|-------|

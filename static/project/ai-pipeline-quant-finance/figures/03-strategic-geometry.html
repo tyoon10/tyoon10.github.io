@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Fig 03 — Strategic geometry of retrieval</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: oklch(0.985 0.003 80);
+    --bg-sub: oklch(0.965 0.004 80);
+    --fg: oklch(0.18 0.01 270);
+    --fg-muted: oklch(0.46 0.006 270);
+    --fg-faint: oklch(0.62 0.005 270);
+    --hairline: oklch(0.86 0.005 80);
+    --hairline-strong: oklch(0.74 0.006 80);
+
+    --accent:       oklch(0.58 0.16 28);
+    --accent-soft:  oklch(0.58 0.16 28 / 0.10);
+    --accent-medium:oklch(0.58 0.16 28 / 0.22);
+    --accent-ink:   oklch(0.46 0.18 28);
+
+    --consensus:        oklch(0.48 0.03 260);
+    --consensus-soft:   oklch(0.48 0.03 260 / 0.10);
+
+    --noise: oklch(0.78 0.005 80);
+
+    --sans: 'Geist', system-ui, -apple-system, sans-serif;
+    --mono: 'Geist Mono', ui-monospace, monospace;
+  }
+  [data-theme="dark"] {
+    --bg: oklch(0.16 0.008 270);
+    --bg-sub: oklch(0.20 0.008 270);
+    --fg: oklch(0.96 0.003 80);
+    --fg-muted: oklch(0.70 0.005 80);
+    --fg-faint: oklch(0.48 0.005 80);
+    --hairline: oklch(0.28 0.008 270);
+    --hairline-strong: oklch(0.42 0.008 270);
+
+    --accent:       oklch(0.72 0.17 28);
+    --accent-soft:  oklch(0.72 0.17 28 / 0.16);
+    --accent-medium:oklch(0.72 0.17 28 / 0.32);
+    --accent-ink:   oklch(0.82 0.16 28);
+
+    --consensus:        oklch(0.72 0.04 260);
+    --consensus-soft:   oklch(0.72 0.04 260 / 0.12);
+
+    --noise: oklch(0.36 0.005 270);
+  }
+
+  html, body { margin: 0; background: var(--bg-sub); color: var(--fg); font-family: var(--sans); }
+  .variant { padding: 28px clamp(20px, 4vw, 64px) 48px; background: var(--bg); border-bottom: 1px solid var(--hairline); }
+  .variant-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted); }
+  .variant-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .variant-head .meta { color: var(--fg-faint); margin-left: auto; }
+  .figure-wrap { border: 1px solid var(--hairline); background: var(--bg); max-width: 1600px; }
+  svg.fig { width: 100%; height: auto; display: block; }
+
+  .fig .hair    { stroke: var(--hairline); fill: none; }
+  .fig .hair-s  { stroke: var(--hairline-strong); fill: none; }
+  .fig .ink     { fill: var(--fg); }
+  .fig .ink-muted { fill: var(--fg-muted); }
+  .fig .ink-faint { fill: var(--fg-faint); }
+
+  .fig .acc-f      { fill: var(--accent); }
+  .fig .acc-s      { stroke: var(--accent); fill: none; }
+  .fig .acc-ink    { fill: var(--accent-ink); }
+  .fig .acc-soft   { fill: var(--accent-soft); }
+  .fig .acc-medium { fill: var(--accent-medium); }
+
+  .fig .con-f      { fill: var(--consensus); }
+  .fig .con-s      { stroke: var(--consensus); fill: none; }
+  .fig .con-soft   { fill: var(--consensus-soft); }
+
+  .fig text { font-family: var(--mono); fill: var(--fg); }
+  .fig .t-tiny    { font-family: var(--mono); font-size: 9px;  letter-spacing: 0.12em; fill: var(--fg-faint); text-transform: uppercase; }
+  .fig .t-cap     { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.10em; fill: var(--fg-muted); text-transform: uppercase; }
+  .fig .t-label   { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; fill: var(--fg); }
+  .fig .t-num     { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; fill: var(--fg-muted); font-feature-settings: "tnum"; }
+  .fig .t-axis    { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; fill: var(--fg-muted); text-transform: uppercase; }
+  .fig .t-zone    { font-family: var(--mono); font-size: 14px; letter-spacing: 0.10em; fill: var(--fg); text-transform: uppercase; }
+  .fig .t-zone-acc{ font-family: var(--mono); font-size: 14px; letter-spacing: 0.10em; fill: var(--accent-ink); text-transform: uppercase; }
+  .fig .t-cap-zone{ font-family: var(--mono); font-size: 11px; fill: var(--fg-muted); letter-spacing: 0.02em; }
+  .fig .t-mid     { font-family: var(--mono); font-size: 13px; letter-spacing: 0.10em; fill: var(--fg); }
+
+  .fig .dot-noise     { fill: var(--noise); opacity: 0.55; }
+  .fig .dot-bg        { fill: var(--fg-faint); opacity: 0.45; }
+  .fig .dot-consensus { fill: var(--consensus); opacity: 0.72; }
+  .fig .dot-alpha     { fill: var(--accent); opacity: 0.96; }
+
+  /* In-article iframe overrides */
+  html, body { background: var(--bg); }
+  body.variant { padding: 0; border-bottom: 0; }
+  .figure-wrap { border: 0; max-width: none; }
+  svg.fig { width: 100%; height: auto; display: block; }
+</style>
+</head>
+<body id="figure-host" class="variant">
+  <div class="figure-wrap" id="wrap"></div>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, children = []) => {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v === false || v == null) continue;
+    n.setAttribute(k, v);
+  }
+  for (const c of [].concat(children)) {
+    if (c == null) continue;
+    if (typeof c === 'string') n.appendChild(document.createTextNode(c));
+    else n.appendChild(c);
+  }
+  return n;
+};
+const text = (x, y, str, cls, extra = {}) => el('text', { x, y, class: cls, ...extra }, str);
+
+/* ============================================================
+   Geometry
+   ============================================================ */
+const W = 1600, H = 900;
+
+const PLOT_X1 = 130, PLOT_X2 = 1140;
+const PLOT_Y1 = 110, PLOT_Y2 = 740;
+const PLOT_W  = PLOT_X2 - PLOT_X1;
+const PLOT_H  = PLOT_Y2 - PLOT_Y1;
+
+// log-citation range: 0..4 → 1, 10, 100, 1k, 10k
+const LOG_MIN = 0, LOG_MAX = 4;
+// quality range 0..1
+const Q_MIN = 0, Q_MAX = 1;
+
+const toX = (logCite) => PLOT_X1 + ((logCite - LOG_MIN) / (LOG_MAX - LOG_MIN)) * PLOT_W;
+const toY = (quality) => PLOT_Y2 - ((quality - Q_MIN) / (Q_MAX - Q_MIN)) * PLOT_H;
+
+/* Seeded RNG */
+function makeRnd(seed) {
+  let s = seed;
+  return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+}
+
+function gauss(rnd, mean, std) {
+  let u1 = rnd(); if (u1 < 1e-7) u1 = 1e-7;
+  const u2 = rnd();
+  const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  return mean + z * std;
+}
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* ============================================================
+   Defs
+   ============================================================ */
+function buildDefs() {
+  const defs = el('defs');
+
+  // Clip-path for plot area
+  const clip = el('clipPath', { id: 'plot-clip' });
+  clip.appendChild(el('rect', { x: PLOT_X1, y: PLOT_Y1, width: PLOT_W, height: PLOT_H }));
+  defs.appendChild(clip);
+
+  // Hatching for noise band
+  const hatch = el('pattern', {
+    id: 'noise-hatch', patternUnits: 'userSpaceOnUse',
+    width: 6, height: 6, patternTransform: 'rotate(45)',
+  });
+  hatch.appendChild(el('rect', { width: 6, height: 6, fill: 'var(--noise)', opacity: 0.10 }));
+  hatch.appendChild(el('line', { x1: 0, y1: 0, x2: 0, y2: 6, stroke: 'var(--noise)', 'stroke-width': 1, opacity: 0.45 }));
+  defs.appendChild(hatch);
+
+  // Markers
+  const make = (id, cls, size = 6) => {
+    const m = el('marker', {
+      id, viewBox: '0 0 10 10', refX: 8, refY: 5,
+      markerWidth: size, markerHeight: size, orient: 'auto-start-reverse',
+    });
+    m.appendChild(el('path', { d: 'M0,1 L10,5 L0,9 Z', class: cls }));
+    defs.appendChild(m);
+  };
+  make('arr-acc', 'acc-f', 6);
+  make('arr-quiet', 'ink-faint', 5);
+  return defs;
+}
+
+/* ============================================================
+   Chrome
+   ============================================================ */
+function buildChrome(svg) {
+  svg.appendChild(el('rect', { x: 0, y: 0, width: W, height: H, fill: 'var(--bg)' }));
+  svg.appendChild(text(80, 36, 'STRATEGIC GEOMETRY OF RETRIEVAL', 't-mid'));
+  svg.appendChild(text(1540, 36, '4,000+ PAPERS · CITATION × QUALITY', 't-cap', { 'text-anchor': 'end' }));
+  svg.appendChild(el('line', { x1: 80, y1: 54, x2: 1540, y2: 54, class: 'hair', 'stroke-width': 1 }));
+
+  svg.appendChild(el('line', { x1: 80, y1: 854, x2: 1540, y2: 854, class: 'hair', 'stroke-width': 1 }));
+  svg.appendChild(text(80, 876, 'EACH MARK · ONE PAPER FROM THE SOURCED CORPUS. X-AXIS LOG-SCALED.', 't-tiny'));
+  svg.appendChild(text(1540, 876, 'AI PIPELINE FOR QUANTITATIVE FINANCE RESEARCH · FIG. 03', 't-tiny', { 'text-anchor': 'end' }));
+}
+
+/* ============================================================
+   Axes
+   ============================================================ */
+function buildAxes(svg) {
+  // Plot frame — left + bottom only (FT-style)
+  svg.appendChild(el('line', { x1: PLOT_X1, y1: PLOT_Y1, x2: PLOT_X1, y2: PLOT_Y2, class: 'hair-s', 'stroke-width': 1 }));
+  svg.appendChild(el('line', { x1: PLOT_X1, y1: PLOT_Y2, x2: PLOT_X2, y2: PLOT_Y2, class: 'hair-s', 'stroke-width': 1 }));
+
+  // X ticks at log positions 0..4 (citation 1, 10, 100, 1k, 10k)
+  const xTicks = [
+    { v: 0, label: '1' },
+    { v: 1, label: '10' },
+    { v: 2, label: '100' },
+    { v: 3, label: '1k' },
+    { v: 4, label: '10k+' },
+  ];
+  // minor ticks at intermediate log positions
+  for (let dec = 0; dec < 4; dec++) {
+    for (let m = 2; m <= 9; m++) {
+      const v = dec + Math.log10(m);
+      const x = toX(v);
+      svg.appendChild(el('line', { x1: x, y1: PLOT_Y2, x2: x, y2: PLOT_Y2 + 3, class: 'hair', 'stroke-width': 1 }));
+    }
+  }
+  for (const t of xTicks) {
+    const x = toX(t.v);
+    svg.appendChild(el('line', { x1: x, y1: PLOT_Y2, x2: x, y2: PLOT_Y2 + 7, class: 'hair-s', 'stroke-width': 1 }));
+    svg.appendChild(text(x, PLOT_Y2 + 22, t.label, 't-num', { 'text-anchor': 'middle' }));
+    // light vertical guide
+    svg.appendChild(el('line', { x1: x, y1: PLOT_Y1, x2: x, y2: PLOT_Y2, class: 'hair', 'stroke-width': 1, opacity: 0.5 }));
+  }
+
+  // Y ticks
+  const yTicks = [
+    { v: 0.0, label: 'LOW' },
+    { v: 0.25, label: '·' },
+    { v: 0.5, label: 'MID' },
+    { v: 0.75, label: '·' },
+    { v: 1.0, label: 'HIGH' },
+  ];
+  for (const t of yTicks) {
+    const y = toY(t.v);
+    svg.appendChild(el('line', { x1: PLOT_X1 - 7, y1: y, x2: PLOT_X1, y2: y, class: 'hair-s', 'stroke-width': 1 }));
+    if (t.label !== '·') {
+      svg.appendChild(text(PLOT_X1 - 12, y + 4, t.label, 't-tiny', { 'text-anchor': 'end' }));
+    } else {
+      svg.appendChild(el('circle', { cx: PLOT_X1 - 14, cy: y, r: 1.2, class: 'ink-faint' }));
+    }
+    svg.appendChild(el('line', { x1: PLOT_X1, y1: y, x2: PLOT_X2, y2: y, class: 'hair', 'stroke-width': 1, opacity: 0.5 }));
+  }
+
+  // X-axis title
+  svg.appendChild(text(PLOT_X1, PLOT_Y2 + 50, 'X · CITATION COUNT', 't-axis'));
+  svg.appendChild(text(PLOT_X1, PLOT_Y2 + 66, 'the consensus signal · log scale', 't-cap', { fill: 'var(--fg-faint)', 'letter-spacing': '0.02em', 'text-transform': 'none' }));
+  // X arrow
+  svg.appendChild(el('line', { x1: PLOT_X2 - 80, y1: PLOT_Y2 + 56, x2: PLOT_X2, y2: PLOT_Y2 + 56, class: 'hair-s', 'stroke-width': 1, 'marker-end': 'url(#arr-quiet)' }));
+  svg.appendChild(text(PLOT_X2 - 84, PLOT_Y2 + 52, 'MORE CITED', 't-tiny', { 'text-anchor': 'end' }));
+
+  // Y-axis title (vertical, rotated)
+  svg.appendChild(text(0, 0, 'Y · QUALITY SIGNALS', 't-axis', {
+    transform: `translate(60, ${PLOT_Y1 - 20}) rotate(0)`,
+  }));
+  svg.appendChild(text(0, 0, 'linguistic depth · methodology rigor · author lineage', 't-cap', {
+    transform: `translate(60, ${PLOT_Y1 - 4}) rotate(0)`,
+    'letter-spacing': '0.02em', 'text-transform': 'none',
+    fill: 'var(--fg-faint)',
+  }));
+  // Y arrow
+  svg.appendChild(el('line', { x1: 100, y1: PLOT_Y1 + 6, x2: 100, y2: PLOT_Y1 + 80, class: 'hair-s', 'stroke-width': 1, 'marker-start': 'url(#arr-quiet)' }));
+  svg.appendChild(text(106, PLOT_Y1 + 14, 'HIGHER', 't-tiny'));
+}
+
+/* ============================================================
+   Dots (4,000+ papers)
+   ============================================================ */
+function buildDots(svg) {
+  const g = el('g', { 'clip-path': 'url(#plot-clip)' });
+
+  const rnd = makeRnd(20260526);
+
+  const dists = [
+    // Noise zone — bottom-left, faint, filtered at Stage 1
+    { n: 1450, cite: { m: 0.30, s: 0.50 }, qual: { m: 0.08, s: 0.09 }, cls: 'dot-noise', r: () => 0.9 + rnd() * 0.5 },
+    // Background mid-fill
+    { n: 700,  cite: { m: 1.80, s: 0.95 }, qual: { m: 0.42, s: 0.18 }, cls: 'dot-bg',    r: () => 0.9 + rnd() * 0.6 },
+    // Consensus cluster — high citation, mid-to-high quality
+    { n: 1650, cite: { m: 3.05, s: 0.35 }, qual: { m: 0.55, s: 0.13 }, cls: 'dot-consensus', r: () => 1.0 + rnd() * 0.6 },
+    // Sub-cluster bridging consensus down (well-cited but lower quality)
+    { n: 380,  cite: { m: 2.7,  s: 0.45 }, qual: { m: 0.32, s: 0.10 }, cls: 'dot-bg',    r: () => 0.9 + rnd() * 0.5 },
+    // Alpha zone — high quality, low citation
+    { n: 115,  cite: { m: 0.75, s: 0.30 }, qual: { m: 0.82, s: 0.07 }, cls: 'dot-alpha', r: () => 1.5 + rnd() * 0.7 },
+    // Sparse fill across upper-mid (so alpha isn't suspiciously orphaned)
+    { n: 220,  cite: { m: 1.9,  s: 1.10 }, qual: { m: 0.70, s: 0.10 }, cls: 'dot-bg',    r: () => 0.9 + rnd() * 0.5 },
+  ];
+
+  let total = 0;
+  for (const d of dists) {
+    for (let i = 0; i < d.n; i++) {
+      const lc = gauss(rnd, d.cite.m, d.cite.s);
+      const q  = gauss(rnd, d.qual.m, d.qual.s);
+      // soft clamp into plot area (with a little overflow that gets clipped)
+      if (lc < -0.4 || lc > 4.4) continue;
+      if (q < -0.05 || q > 1.05) continue;
+      const x = toX(clamp(lc, -0.4, 4.4));
+      const y = toY(clamp(q, -0.05, 1.05));
+      g.appendChild(el('circle', { cx: x.toFixed(1), cy: y.toFixed(1), r: d.r().toFixed(2), class: d.cls }));
+      total++;
+    }
+  }
+
+  // Sprinkle of stragglers (15 dots) deep in alpha zone for the rare-find feel
+  for (let i = 0; i < 14; i++) {
+    const lc = gauss(rnd, 0.6, 0.45);
+    const q  = gauss(rnd, 0.88, 0.05);
+    if (lc < -0.4 || lc > 4.4) continue;
+    if (q < 0 || q > 1) continue;
+    g.appendChild(el('circle', { cx: toX(clamp(lc, -0.4, 4.4)).toFixed(1), cy: toY(clamp(q, 0, 1)).toFixed(1), r: (1.6 + rnd() * 0.7).toFixed(2), class: 'dot-alpha' }));
+    total++;
+  }
+
+  svg.appendChild(g);
+
+  // Total counter (top-right inside plot)
+  svg.appendChild(text(PLOT_X2 - 8, PLOT_Y1 + 16, `n = ${total.toLocaleString()}`, 't-tiny', { 'text-anchor': 'end' }));
+}
+
+/* ============================================================
+   Zone outlines & annotations
+   ============================================================ */
+function buildZones(svg) {
+  // --- Noise region: hatched band at bottom-left ---
+  // Soft curved polygon
+  const noisePath = `
+    M ${PLOT_X1} ${toY(0.20)}
+    C ${toX(0.6)} ${toY(0.22)}, ${toX(1.0)} ${toY(0.18)}, ${toX(1.35)} ${toY(0.14)}
+    C ${toX(1.55)} ${toY(0.10)}, ${toX(1.7)} ${toY(0.06)}, ${toX(1.75)} ${toY(0.0)}
+    L ${PLOT_X1} ${PLOT_Y2}
+    Z
+  `.replace(/\s+/g, ' ').trim();
+
+  svg.appendChild(el('path', { d: noisePath, fill: 'url(#noise-hatch)', opacity: 0.85, 'clip-path': 'url(#plot-clip)' }));
+  svg.appendChild(el('path', { d: noisePath, fill: 'none', stroke: 'var(--noise)', 'stroke-width': 1, 'stroke-dasharray': '4 3', opacity: 0.7, 'clip-path': 'url(#plot-clip)' }));
+
+  // Noise label
+  const nx = toX(0.55), ny = toY(0.04);
+  svg.appendChild(text(nx, ny - 6, 'Z3 · NOISE', 't-tiny'));
+  svg.appendChild(text(nx, ny + 8, 'FILTERED AT STAGE 1 SOURCING', 't-cap', { fill: 'var(--fg-faint)' }));
+
+  // --- Consensus ellipse ---
+  const ccx = toX(3.05), ccy = toY(0.55);
+  const crx = (toX(3.6) - toX(2.45)) / 2; // span ~1.2 in log
+  const cry = (toY(0.30) - toY(0.78)) / 2;
+  svg.appendChild(el('ellipse', { cx: ccx, cy: ccy, rx: crx, ry: cry, class: 'con-soft' }));
+  svg.appendChild(el('ellipse', { cx: ccx, cy: ccy, rx: crx, ry: cry, fill: 'none', stroke: 'var(--consensus)', 'stroke-width': 1.2, 'stroke-dasharray': '5 3', opacity: 0.85 }));
+
+  // Consensus label — BELOW the ellipse, centered, with opaque backing so dots stay legible
+  const cLabelX = ccx;
+  const cLabelY = ccy + cry + 26;
+  svg.appendChild(el('rect', {
+    x: cLabelX - 168, y: cLabelY - 18, width: 336, height: 64,
+    fill: 'var(--bg)', opacity: 0.92,
+  }));
+  svg.appendChild(el('line', {
+    x1: ccx, y1: ccy + cry - 2, x2: ccx, y2: cLabelY - 18,
+    class: 'con-s', 'stroke-width': 1, 'stroke-dasharray': '2 3', opacity: 0.7,
+  }));
+  svg.appendChild(text(cLabelX, cLabelY, 'Z1 · CONSENSUS ZONE', 't-zone', { 'text-anchor': 'middle' }));
+  svg.appendChild(text(cLabelX, cLabelY + 18, 'Where standard RAG retrieves by default.', 't-cap-zone', { 'text-anchor': 'middle' }));
+  svg.appendChild(text(cLabelX, cLabelY + 34, 'High citation count, conventional quality.', 't-cap-zone', { 'text-anchor': 'middle' }));
+
+  // --- Alpha ellipse ---
+  const acx = toX(0.75), acy = toY(0.82);
+  const arx = (toX(1.45) - toX(0.05)) / 2;
+  const ary = (toY(0.72) - toY(0.92)) / 2;
+  svg.appendChild(el('ellipse', { cx: acx, cy: acy, rx: arx, ry: ary, class: 'acc-soft' }));
+  svg.appendChild(el('ellipse', { cx: acx, cy: acy, rx: arx, ry: ary, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1.4, 'stroke-dasharray': '5 3' }));
+
+  // Alpha label
+  const aLabelX = acx + arx + 14;
+  const aLabelY = acy - 22;
+  svg.appendChild(el('line', { x1: acx + arx - 4, y1: acy, x2: aLabelX - 6, y2: aLabelY + 4, class: 'acc-s', 'stroke-width': 1.2 }));
+  svg.appendChild(text(aLabelX, aLabelY, 'Z2 · ALPHA ZONE', 't-zone-acc'));
+  svg.appendChild(text(aLabelX, aLabelY + 18, 'Where this pipeline is built to look.', 't-cap-zone', { fill: 'var(--accent-ink)' }));
+  svg.appendChild(text(aLabelX, aLabelY + 34, 'High signal quality, low consensus attention.', 't-cap-zone'));
+
+  // diagonal "frontier" — a thin dashed line separating consensus from alpha
+  // It hints at the inverse relationship Z1↔Z2
+  svg.appendChild(el('line', {
+    x1: toX(0.0), y1: toY(0.55),
+    x2: toX(3.5), y2: toY(0.42),
+    class: 'hair', 'stroke-width': 1, 'stroke-dasharray': '2 4', opacity: 0.5,
+  }));
+
+  return { acx: acx + arx - 4, acy };
+}
+
+/* ============================================================
+   Right callout — the filter stack that recovers the alpha zone
+   ============================================================ */
+function buildCallout(svg, alphaAnchor) {
+  const x = 1180, y = 130, w = 360, h = 320;
+
+  // shadow
+  svg.appendChild(el('rect', { x: x + 6, y: y + 8, width: w, height: h, fill: 'color-mix(in srgb, var(--fg) 5%, transparent)' }));
+  // card
+  svg.appendChild(el('rect', { x, y, width: w, height: h, fill: 'var(--bg-sub)' }));
+  svg.appendChild(el('rect', { x, y, width: w, height: h, fill: 'none', class: 'acc-s', 'stroke-width': 1.2 }));
+  svg.appendChild(el('rect', { x, y, width: 3, height: h, class: 'acc-f' }));
+
+  // header
+  svg.appendChild(text(x + 16, y + 26, 'WHY THIS PIPELINE EXISTS', 't-cap', { fill: 'var(--accent-ink)' }));
+  svg.appendChild(text(x + 16, y + 60, 'Recover signal from', 't-mid', { fill: 'var(--fg)', 'font-size': 18, 'letter-spacing': '0.04em' }));
+  svg.appendChild(text(x + 16, y + 84, 'the alpha zone — where', 't-mid', { fill: 'var(--fg)', 'font-size': 18, 'letter-spacing': '0.04em' }));
+  svg.appendChild(text(x + 16, y + 108, 'consensus stops looking.', 't-mid', { fill: 'var(--accent-ink)', 'font-size': 18, 'letter-spacing': '0.04em' }));
+
+  svg.appendChild(el('line', { x1: x + 16, y1: y + 130, x2: x + w - 16, y2: y + 130, class: 'hair', 'stroke-width': 1 }));
+
+  svg.appendChild(text(x + 16, y + 152, 'FILTERS LAYERED ON LIGHTRAG', 't-cap'));
+
+  // Three filter bands
+  const filters = [
+    { tag: 'F1', name: 'LINGUISTIC COMPLEXITY', sub: 'lexicon coverage · sentiment depth' },
+    { tag: 'F2', name: 'AUTHOR AFFILIATION',    sub: 'top-tier · h-index · network' },
+    { tag: 'F3', name: 'CITATION DEPTH',        sub: 'reference-graph centrality' },
+  ];
+  let fy = y + 168;
+  for (const f of filters) {
+    svg.appendChild(el('line', { x1: x + 16, y1: fy, x2: x + 16, y2: fy + 36, class: 'acc-s', 'stroke-width': 2 }));
+    svg.appendChild(text(x + 26, fy + 4, f.tag, 't-cap', { fill: 'var(--accent-ink)' }));
+    svg.appendChild(text(x + 50, fy + 4, f.name, 't-label', { 'font-weight': 500 }));
+    svg.appendChild(text(x + 50, fy + 22, f.sub, 't-cap', { fill: 'var(--fg-muted)', 'letter-spacing': '0.02em', 'text-transform': 'none' }));
+    fy += 44;
+  }
+
+  // Connector from alpha zone to callout
+  // The callout's anchor: left side at vertical center of the title
+  const tx = x;
+  const ty = y + 70;
+  const ax = alphaAnchor.acx;
+  const ay = alphaAnchor.acy;
+  const midX = (ax + tx) / 2;
+  svg.appendChild(el('path', {
+    d: `M ${ax} ${ay} C ${midX} ${ay}, ${midX} ${ty}, ${tx - 2} ${ty}`,
+    fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1.4,
+    'stroke-dasharray': '5 3',
+  }));
+  // anchor dot on the zone
+  svg.appendChild(el('circle', { cx: ax, cy: ay, r: 3, class: 'acc-f' }));
+  svg.appendChild(el('circle', { cx: tx - 2, cy: ty, r: 3, class: 'acc-f' }));
+}
+
+/* ============================================================
+   Legend (top-left, small)
+   ============================================================ */
+function buildLegend(svg) {
+  const x = PLOT_X1 + 14, y = PLOT_Y1 + 38, lh = 18;
+  svg.appendChild(text(x, y, 'LEGEND', 't-cap'));
+  const items = [
+    { cls: 'dot-noise',     label: 'Z3  noise · filtered' },
+    { cls: 'dot-bg',        label: 'background corpus' },
+    { cls: 'dot-consensus', label: 'Z1  consensus' },
+    { cls: 'dot-alpha',     label: 'Z2  alpha · target' },
+  ];
+  items.forEach((it, i) => {
+    const ly = y + 12 + i * lh;
+    svg.appendChild(el('circle', { cx: x + 4, cy: ly - 3, r: it.cls === 'dot-alpha' ? 2.6 : 2.0, class: it.cls }));
+    svg.appendChild(text(x + 16, ly, it.label, 't-tiny', { fill: 'var(--fg-muted)' }));
+  });
+}
+
+/* ============================================================
+   Build SVG
+   ============================================================ */
+function buildSVG() {
+  const svg = el('svg', {
+    class: 'fig',
+    viewBox: `0 0 ${W} ${H}`,
+    xmlns: NS,
+    preserveAspectRatio: 'xMidYMid meet',
+  });
+  svg.appendChild(buildDefs());
+  buildChrome(svg);
+  buildAxes(svg);
+  buildDots(svg);
+  const alphaAnchor = buildZones(svg);
+  buildCallout(svg, alphaAnchor);
+  buildLegend(svg);
+  return svg;
+}
+
+document.getElementById('wrap').appendChild(buildSVG());
+
+const host = document.getElementById('figure-host');
+const mq = matchMedia('(prefers-color-scheme: dark)');
+const setTheme = (t) => { host.dataset.theme = t; };
+setTheme(mq.matches ? 'dark' : 'light');
+mq.addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
+window.addEventListener('message', (e) => {
+  const d = e.data || {};
+  if (d.type === 'theme' && (d.theme === 'dark' || d.theme === 'light')) setTheme(d.theme);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Fig 02 — Backward dependency trace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: oklch(0.985 0.003 80);
+    --bg-sub: oklch(0.965 0.004 80);
+    --paper: #ffffff;
+    --fg: oklch(0.18 0.01 270);
+    --fg-muted: oklch(0.46 0.006 270);
+    --fg-faint: oklch(0.62 0.005 270);
+    --hairline: oklch(0.86 0.005 80);
+    --hairline-strong: oklch(0.72 0.006 80);
+    --neutral-fill: oklch(0.95 0.004 80);
+    --neutral-fill-2: oklch(0.92 0.004 80);
+
+    --accent:       oklch(0.58 0.16 28);
+    --accent-soft:  oklch(0.58 0.16 28 / 0.10);
+    --accent-medium:oklch(0.58 0.16 28 / 0.22);
+    --accent-ink:   oklch(0.46 0.18 28);
+
+    --sans: 'Geist', system-ui, -apple-system, sans-serif;
+    --mono: 'Geist Mono', ui-monospace, monospace;
+  }
+  [data-theme="dark"] {
+    --bg: oklch(0.16 0.008 270);
+    --bg-sub: oklch(0.20 0.008 270);
+    --paper: oklch(0.215 0.008 270);
+    --fg: oklch(0.96 0.003 80);
+    --fg-muted: oklch(0.70 0.005 80);
+    --fg-faint: oklch(0.48 0.005 80);
+    --hairline: oklch(0.28 0.008 270);
+    --hairline-strong: oklch(0.44 0.008 270);
+    --neutral-fill: oklch(0.22 0.008 270);
+    --neutral-fill-2: oklch(0.26 0.008 270);
+
+    --accent:       oklch(0.72 0.17 28);
+    --accent-soft:  oklch(0.72 0.17 28 / 0.15);
+    --accent-medium:oklch(0.72 0.17 28 / 0.30);
+    --accent-ink:   oklch(0.80 0.16 28);
+  }
+
+  html, body { margin: 0; background: var(--bg-sub); color: var(--fg); font-family: var(--sans); }
+
+  .variant { padding: 28px clamp(20px, 4vw, 64px) 48px; background: var(--bg); border-bottom: 1px solid var(--hairline); }
+  .variant-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted); }
+  .variant-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .variant-head .meta { color: var(--fg-faint); margin-left: auto; }
+  .figure-wrap { border: 1px solid var(--hairline); background: var(--bg); max-width: 1600px; }
+  svg.fig { width: 100%; height: auto; display: block; }
+
+  /* SVG styles */
+  .fig .hair    { stroke: var(--hairline); fill: none; }
+  .fig .hair-s  { stroke: var(--hairline-strong); fill: none; }
+  .fig .ink     { fill: var(--fg); }
+  .fig .ink-muted { fill: var(--fg-muted); }
+  .fig .ink-faint { fill: var(--fg-faint); }
+  .fig .ink-stroke { stroke: var(--fg); fill: none; }
+
+  .fig .acc-f      { fill: var(--accent); }
+  .fig .acc-s      { stroke: var(--accent); fill: none; }
+  .fig .acc-ink    { fill: var(--accent-ink); }
+  .fig .acc-soft   { fill: var(--accent-soft); }
+  .fig .acc-medium { fill: var(--accent-medium); }
+
+  .fig .neutral-fill   { fill: var(--neutral-fill); }
+  .fig .neutral-fill-2 { fill: var(--neutral-fill-2); }
+
+  .fig text { font-family: var(--mono); fill: var(--fg); }
+  .fig .t-mono-tiny  { font-family: var(--mono); font-size: 9px;  letter-spacing: 0.12em; fill: var(--fg-faint); text-transform: uppercase; }
+  .fig .t-mono-cap   { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.10em; fill: var(--fg-muted); text-transform: uppercase; }
+  .fig .t-mono-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; fill: var(--fg); }
+  .fig .t-mono-num   { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; fill: var(--fg-faint); }
+  .fig .t-mono-mid   { font-family: var(--mono); font-size: 13px; letter-spacing: 0.10em; fill: var(--fg); }
+
+  .fig .t-quote      { font-family: var(--sans); font-size: 26px; letter-spacing: -0.01em; fill: var(--fg); font-weight: 400; }
+  .fig .t-quote-mark { font-family: var(--sans); font-size: 26px; letter-spacing: -0.01em; fill: var(--accent-ink); font-weight: 500; }
+  .fig .t-stage      { font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; fill: var(--fg); }
+  .fig .t-stage-desc { font-family: var(--mono); font-size: 10.5px; fill: var(--fg-muted); letter-spacing: 0.02em; }
+  .fig .t-pill       { font-family: var(--mono); font-size: 12px; fill: var(--fg); letter-spacing: 0.02em; }
+  .fig .t-pill-desc  { font-family: var(--mono); font-size: 10px; fill: var(--fg-faint); letter-spacing: 0.04em; text-transform: uppercase; }
+
+  .fig .strike-line { stroke: var(--accent); fill: none; stroke-dasharray: 6 4; stroke-width: 1.6; }
+  .fig .strike-line-thin { stroke: var(--accent); fill: none; stroke-dasharray: 4 3; stroke-width: 1.2; }
+
+  /* In-article iframe overrides */
+  html, body { background: var(--bg); }
+  body.variant { padding: 0; border-bottom: 0; }
+  .figure-wrap { border: 0; max-width: none; }
+  svg.fig { width: 100%; height: auto; display: block; }
+</style>
+</head>
+<body id="figure-host" class="variant">
+  <div class="figure-wrap" id="wrap"></div>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, children = []) => {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v === false || v == null) continue;
+    n.setAttribute(k, v);
+  }
+  for (const c of [].concat(children)) {
+    if (c == null) continue;
+    if (typeof c === 'string') n.appendChild(document.createTextNode(c));
+    else n.appendChild(c);
+  }
+  return n;
+};
+const text = (x, y, str, cls, extra = {}) => el('text', { x, y, class: cls, ...extra }, str);
+
+/* ============================================================
+   Geometry
+   ============================================================ */
+const W = 1600, H = 900;
+const MAIN_X1 = 80, MAIN_X2 = 1380;   // main diagram area
+const RAIL_X1 = 1410, RAIL_X2 = 1540; // right rail
+
+// Layer y-bands
+const L1_Y = 88;   const L1_H = 168;  // query
+const L2_Y = 304;  const L2_H = 64;   // metadata pills
+const L3_Y = 432;  const L3_H = 168;  // pipeline stages
+const L4_Y = 668;  const L4_H = 76;   // raw corpus
+
+// Four columns
+const COL_CENTERS = [215, 505, 795, 1085];
+const PILL_W = 240, STAGE_W = 270;
+
+// Which column to strike (0-indexed) — affiliation enrichment
+const STRIKE_COL = 1;
+
+/* ============================================================
+   Data
+   ============================================================ */
+const COLUMNS = [
+  {
+    id: 'M1',
+    pill: { title: 'LINGUISTIC COMPLEXITY', sub: 'numeric score · 0–1' },
+    stage: {
+      n: 'S3',
+      title: 'STAGE 3 · ANALYZING STRUCTURES',
+      bullets: [
+        '— Market-Lexicon Coverage',
+        '— Finance Sentiment Profile',
+        '— vocabulary depth · token rarity',
+      ],
+    },
+  },
+  {
+    id: 'M2',
+    pill: { title: 'AUTHOR AFFILIATION', sub: 'institution · tier · h-index' },
+    stage: {
+      n: 'S2',
+      title: 'STAGE 2 · CLEANING & STRUCTURING',
+      bullets: [
+        '— OpenAlex author enrichment',
+        '— Semantic Scholar lookup',
+        '— affiliation resolution + tier',
+      ],
+    },
+  },
+  {
+    id: 'M3',
+    pill: { title: 'CITATION COUNT', sub: 'n · year-normalized' },
+    stage: {
+      n: 'S3',
+      title: 'STAGE 3 · ANALYZING STRUCTURES',
+      bullets: [
+        '— Citation network graph',
+        '— inbound edge count',
+        '— year-normalized centrality',
+      ],
+    },
+  },
+  {
+    id: 'M4',
+    pill: { title: 'PAPER IDENTITY', sub: 'doc id · vector embedding' },
+    stage: {
+      n: 'S4',
+      title: 'STAGE 4 · INGESTION',
+      bullets: [
+        '— LightRAG graph + embeddings',
+        '— hierarchical chunk index',
+        '— entity-relationship store',
+      ],
+    },
+  },
+];
+
+const RAIL = [
+  { n: '01', y: 172, title: 'QUESTION', sub: 'The analyst asks' },
+  { n: '02', y: 336, title: 'SIGNALS', sub: 'The answer requires' },
+  { n: '03', y: 516, title: 'PROVENANCE', sub: 'Where the signal was manufactured' },
+  { n: '04', y: 706, title: 'SOURCE', sub: 'Raw input — answers nothing on its own' },
+];
+
+/* ============================================================
+   Markers (defs)
+   ============================================================ */
+function buildDefs() {
+  const defs = el('defs');
+  const make = (id, cls, size = 6) => {
+    const m = el('marker', {
+      id, viewBox: '0 0 10 10', refX: 8, refY: 5,
+      markerWidth: size, markerHeight: size, orient: 'auto-start-reverse',
+    });
+    m.appendChild(el('path', { d: 'M0,1 L10,5 L0,9 Z', class: cls }));
+    defs.appendChild(m);
+  };
+  make('arr-quiet', 'ink-faint');
+  make('arr-mid', 'ink-muted');
+  make('arr-acc', 'acc-f', 7);
+  return defs;
+}
+
+/* ============================================================
+   Chrome — caption + bottom footnotes
+   ============================================================ */
+function buildChrome(svg) {
+  svg.appendChild(el('rect', { x: 0, y: 0, width: W, height: H, fill: 'var(--bg)' }));
+  svg.appendChild(text(MAIN_X1, 36, 'BACKWARD DEPENDENCY TRACE', 't-mono-mid'));
+  svg.appendChild(text(MAIN_X2, 36, 'ONE ADVANCED QUERY · FOUR UPSTREAM DEBTS', 't-mono-cap', { 'text-anchor': 'end' }));
+  svg.appendChild(el('line', { x1: MAIN_X1, y1: 54, x2: RAIL_X2, y2: 54, class: 'hair', 'stroke-width': 1 }));
+
+  // bottom hairline + footnote
+  svg.appendChild(el('line', { x1: MAIN_X1, y1: 838, x2: RAIL_X2, y2: 838, class: 'hair', 'stroke-width': 1 }));
+  svg.appendChild(text(MAIN_X1, 862, 'READ TOP-DOWN. EACH SIGNAL HAS EXACTLY ONE MANUFACTURER. THE CORPUS ALONE ANSWERS NOTHING.', 't-mono-tiny'));
+  svg.appendChild(text(MAIN_X2, 862, 'AI PIPELINE FOR QUANTITATIVE FINANCE RESEARCH · FIG. 02', 't-mono-tiny', { 'text-anchor': 'end' }));
+}
+
+/* ============================================================
+   Right rail — layer captions
+   ============================================================ */
+function buildRail(svg) {
+  // outer ticks
+  svg.appendChild(el('line', { x1: RAIL_X1, y1: 80, x2: RAIL_X1, y2: 820, class: 'hair', 'stroke-width': 1 }));
+
+  for (const r of RAIL) {
+    // tick from main area into rail
+    svg.appendChild(el('line', { x1: MAIN_X2 + 8, y1: r.y, x2: RAIL_X1, y2: r.y, class: 'hair', 'stroke-width': 1 }));
+    // number
+    svg.appendChild(text(RAIL_X1 + 12, r.y - 2, r.n, 't-mono-num'));
+    // title
+    svg.appendChild(text(RAIL_X1 + 12, r.y + 16, r.title, 't-mono-cap', { fill: 'var(--fg)' }));
+    // sub (wraps)
+    const words = r.sub.split(' ');
+    let line = '', lines = [];
+    for (const w of words) {
+      if ((line + ' ' + w).trim().length > 22) { lines.push(line.trim()); line = w; }
+      else line = (line + ' ' + w).trim();
+    }
+    if (line) lines.push(line);
+    for (let i = 0; i < lines.length; i++) {
+      svg.appendChild(text(RAIL_X1 + 12, r.y + 32 + i * 12, lines[i], 't-mono-tiny'));
+    }
+  }
+}
+
+/* ============================================================
+   Layer 1 — Query card (the protagonist)
+   ============================================================ */
+function buildQuery(svg) {
+  const x = 280, y = L1_Y, w = 820, h = L1_H;
+
+  // Card: soft accent fill, accent left bar
+  svg.appendChild(el('rect', { x: x + 8, y: y + 10, width: w, height: h, fill: 'color-mix(in srgb, var(--fg) 4%, transparent)' }));
+  svg.appendChild(el('rect', { x, y, width: w, height: h, class: 'acc-soft' }));
+  svg.appendChild(el('rect', { x, y, width: w, height: h, fill: 'none', class: 'acc-s', 'stroke-width': 1 }));
+  svg.appendChild(el('rect', { x, y, width: 4, height: h, class: 'acc-f' }));
+
+  // Eyebrow
+  svg.appendChild(text(x + 22, y + 28, 'L1 · THE QUESTION  ·  QUANT ANALYST QUERIES THE PIPELINE', 't-mono-cap', { fill: 'var(--accent-ink)' }));
+
+  // Quote mark
+  svg.appendChild(text(x + 22, y + 76, '"', 't-quote-mark'));
+
+  // Body — three lines with key phrases emphasized
+  // Line 1
+  const line1y = y + 76;
+  svg.appendChild(text(x + 42, line1y, 'Show me papers with ', 't-quote'));
+  // bracket the key phrase
+  const phr1x = x + 42 + textWidth('Show me papers with ', 26, 'sans');
+  svg.appendChild(el('rect', { x: phr1x - 4, y: line1y - 24, width: 350, height: 32, class: 'acc-medium' }));
+  svg.appendChild(text(phr1x, line1y, 'HIGH LINGUISTIC COMPLEXITY,', 't-quote', { fill: 'var(--accent-ink)', 'font-weight': 600 }));
+
+  // Line 2
+  const line2y = y + 110;
+  svg.appendChild(text(x + 42, line2y, 'referenced by ', 't-quote'));
+  const phr2x = x + 42 + textWidth('referenced by ', 26, 'sans');
+  svg.appendChild(el('rect', { x: phr2x - 4, y: line2y - 24, width: 380, height: 32, class: 'acc-medium' }));
+  svg.appendChild(text(phr2x, line2y, 'AUTHORS FROM TOP-TIER UNIVERSITIES,', 't-quote', { fill: 'var(--accent-ink)', 'font-weight': 600 }));
+
+  // Line 3
+  const line3y = y + 144;
+  svg.appendChild(text(x + 42, line3y, 'that are ', 't-quote'));
+  const phr3x = x + 42 + textWidth('that are ', 26, 'sans');
+  svg.appendChild(el('rect', { x: phr3x - 4, y: line3y - 24, width: 250, height: 32, class: 'acc-medium' }));
+  svg.appendChild(text(phr3x, line3y, 'NOT WIDELY CITED.', 't-quote', { fill: 'var(--accent-ink)', 'font-weight': 600 }));
+  svg.appendChild(text(phr3x + 250 - 4, line3y, '"', 't-quote-mark'));
+
+  // Trailing identity in mono right side
+  svg.appendChild(text(x + w - 22, y + h - 14, 'Q–001', 't-mono-num', { 'text-anchor': 'end' }));
+}
+
+/* approximate text width — for emphasizing phrases */
+function textWidth(s, fontSize, family = 'sans') {
+  const factor = family === 'mono' ? 0.60 : 0.54;
+  return s.length * fontSize * factor;
+}
+
+/* ============================================================
+   Layer 2 — Metadata pills
+   ============================================================ */
+function buildPills(svg) {
+  COLUMNS.forEach((col, i) => {
+    const cx = COL_CENTERS[i];
+    const x = cx - PILL_W / 2, y = L2_Y, w = PILL_W, h = L2_H;
+    const isStruck = (i === STRIKE_COL);
+
+    // shadow
+    svg.appendChild(el('rect', { x: x + 4, y: y + 5, width: w, height: h, fill: 'color-mix(in srgb, var(--fg) 4%, transparent)' }));
+
+    // pill fill
+    svg.appendChild(el('rect', { x, y, width: w, height: h, class: isStruck ? 'acc-soft' : 'neutral-fill' }));
+    // pill outline
+    svg.appendChild(el('rect', {
+      x, y, width: w, height: h, fill: 'none',
+      stroke: isStruck ? 'var(--accent)' : 'var(--hairline-strong)',
+      'stroke-width': 1,
+      'stroke-dasharray': isStruck ? '4 3' : null,
+    }));
+
+    // Index tag (left edge)
+    svg.appendChild(el('rect', { x, y, width: 3, height: h, fill: isStruck ? 'var(--accent)' : 'var(--hairline-strong)' }));
+    svg.appendChild(text(x + 10, y + 16, `M${i + 1}`, 't-mono-tiny', { fill: isStruck ? 'var(--accent-ink)' : 'var(--fg-faint)' }));
+
+    // Title
+    svg.appendChild(text(x + 10, y + 36, col.pill.title, 't-pill', { fill: isStruck ? 'var(--accent-ink)' : 'var(--fg)' }));
+    // Sub
+    svg.appendChild(text(x + 10, y + 52, col.pill.sub, 't-pill-desc'));
+
+    // Strike-through line on the pill itself
+    if (isStruck) {
+      svg.appendChild(el('line', {
+        x1: x + 6, y1: y + 36, x2: x + w - 6, y2: y + 36,
+        class: 'strike-line-thin',
+      }));
+    }
+  });
+}
+
+/* ============================================================
+   Layer 3 — Stage cards
+   ============================================================ */
+function buildStages(svg) {
+  COLUMNS.forEach((col, i) => {
+    const cx = COL_CENTERS[i];
+    const x = cx - STAGE_W / 2, y = L3_Y, w = STAGE_W, h = L3_H;
+    const isStruck = (i === STRIKE_COL);
+
+    // shadow
+    svg.appendChild(el('rect', { x: x + 4, y: y + 6, width: w, height: h, fill: 'color-mix(in srgb, var(--fg) 5%, transparent)' }));
+
+    // card fill
+    svg.appendChild(el('rect', { x, y, width: w, height: h, class: 'neutral-fill' }));
+
+    // border
+    svg.appendChild(el('rect', {
+      x, y, width: w, height: h, fill: 'none',
+      stroke: isStruck ? 'var(--accent)' : 'var(--hairline-strong)',
+      'stroke-width': 1,
+      'stroke-dasharray': isStruck ? '5 3' : null,
+    }));
+
+    // header strip
+    svg.appendChild(el('rect', { x, y, width: w, height: 26, class: isStruck ? 'acc-medium' : 'neutral-fill-2' }));
+    svg.appendChild(el('line', { x1: x, y1: y + 26, x2: x + w, y2: y + 26, class: 'hair-s', 'stroke-width': 1 }));
+
+    // Stage number badge
+    svg.appendChild(text(x + 12, y + 18, col.stage.n, 't-mono-cap', { fill: isStruck ? 'var(--accent-ink)' : 'var(--fg)' }));
+    // header text
+    svg.appendChild(text(x + 42, y + 18, col.stage.title.replace(`${col.stage.n} · `, ''), 't-mono-cap', { fill: isStruck ? 'var(--accent-ink)' : 'var(--fg-muted)' }));
+
+    // Bullets
+    let by = y + 50;
+    for (const b of col.stage.bullets) {
+      svg.appendChild(text(x + 14, by, b, 't-stage-desc', { fill: isStruck ? 'var(--accent-ink)' : 'var(--fg-muted)' }));
+      by += 18;
+    }
+
+    // Output → metadata signature on the bottom
+    svg.appendChild(el('line', { x1: x + 14, y1: y + h - 26, x2: x + w - 14, y2: y + h - 26, class: 'hair', 'stroke-width': 1 }));
+    svg.appendChild(text(x + 14, y + h - 10, `OUTPUTS → M${i + 1}`, 't-mono-tiny', { fill: isStruck ? 'var(--accent-ink)' : 'var(--fg-faint)' }));
+
+    // Strike-through diagonal
+    if (isStruck) {
+      svg.appendChild(el('line', {
+        x1: x - 6, y1: y + h + 6, x2: x + w + 6, y2: y - 6,
+        class: 'strike-line',
+      }));
+    }
+  });
+}
+
+/* ============================================================
+   Layer 4 — Raw corpus
+   ============================================================ */
+function buildCorpus(svg) {
+  const x = MAIN_X1, y = L4_Y, w = MAIN_X2 - MAIN_X1, h = L4_H;
+
+  svg.appendChild(el('rect', { x, y, width: w, height: h, class: 'neutral-fill' }));
+  svg.appendChild(el('rect', { x, y, width: w, height: h, fill: 'none', class: 'hair-s', 'stroke-width': 1 }));
+  // top hairline accent
+  svg.appendChild(el('line', { x1: x, y1: y, x2: x + w, y2: y, class: 'hair-s', 'stroke-width': 1 }));
+
+  // tag
+  svg.appendChild(text(x + 16, y + 22, 'L4 · SOURCE CORPUS', 't-mono-cap'));
+
+  // big title
+  svg.appendChild(text(x + 16, y + 52, '4,000+ ACADEMIC PAPERS', 't-mono-mid', { 'font-size': 18, 'letter-spacing': '0.10em' }));
+  svg.appendChild(text(x + 290, y + 52, 'AS RAW PDFs', 't-mono-mid', { fill: 'var(--fg-muted)', 'font-size': 18, 'letter-spacing': '0.10em' }));
+
+  // Sparkline of tiny page glyphs spanning the bar
+  const glyphStart = x + 520;
+  const glyphEnd = x + w - 16;
+  const glyphCount = 60;
+  const step = (glyphEnd - glyphStart) / glyphCount;
+  for (let i = 0; i < glyphCount; i++) {
+    const gx = glyphStart + i * step;
+    svg.appendChild(el('rect', { x: gx, y: y + 32, width: step * 0.5, height: 32, fill: 'var(--hairline-strong)', opacity: 0.55 }));
+  }
+  // ellipsis end
+  svg.appendChild(text(x + w - 16, y + h - 10, '∞ NO STRUCTURE · NO ENRICHMENT', 't-mono-tiny', { 'text-anchor': 'end' }));
+
+  // bottom-left tag
+  svg.appendChild(text(x + 16, y + h - 10, '↳ ON ITS OWN, ANSWERS NOTHING', 't-mono-tiny'));
+}
+
+/* ============================================================
+   Connectors — Query → pills, pills → stages, stages → corpus
+   ============================================================ */
+function buildConnectors(svg) {
+  const queryBottomY = L1_Y + L1_H;        // 256
+  const pillTopY = L2_Y;                   // 304
+  const pillBottomY = L2_Y + L2_H;         // 368
+  const stageTopY = L3_Y;                  // 432
+  const stageBottomY = L3_Y + L3_H;        // 600
+  const corpusTopY = L4_Y;                 // 668
+
+  const queryCenter = 280 + 820 / 2;       // 690
+
+  // Group: Query → pills (splaying)
+  COLUMNS.forEach((col, i) => {
+    const isStruck = (i === STRIKE_COL);
+    const cx = COL_CENTERS[i];
+    const cls = isStruck ? 'strike-line-thin' : 'hair-s';
+    const marker = isStruck ? 'url(#arr-acc)' : 'url(#arr-mid)';
+
+    // S-curve from queryCenter,queryBottomY to cx, pillTopY
+    const midY = (queryBottomY + pillTopY) / 2;
+    const d = `M ${queryCenter} ${queryBottomY} C ${queryCenter} ${midY} ${cx} ${midY} ${cx} ${pillTopY - 2}`;
+    svg.appendChild(el('path', {
+      d, class: cls,
+      stroke: isStruck ? 'var(--accent)' : 'var(--hairline-strong)',
+      'stroke-width': isStruck ? 1.4 : 1,
+      'stroke-dasharray': isStruck ? '4 3' : null,
+      fill: 'none',
+      'marker-end': marker,
+    }));
+  });
+
+  // Pills → Stages (straight verticals)
+  COLUMNS.forEach((col, i) => {
+    const isStruck = (i === STRIKE_COL);
+    const cx = COL_CENTERS[i];
+
+    // label between pill and stage: "← produced by"
+    svg.appendChild(text(cx + 10, (pillBottomY + stageTopY) / 2 + 2, 'PRODUCED BY ↓', 't-mono-tiny', {
+      fill: isStruck ? 'var(--accent-ink)' : 'var(--fg-faint)',
+    }));
+
+    svg.appendChild(el('path', {
+      d: `M ${cx} ${pillBottomY + 2} L ${cx} ${stageTopY - 2}`,
+      stroke: isStruck ? 'var(--accent)' : 'var(--hairline-strong)',
+      'stroke-width': isStruck ? 1.4 : 1,
+      'stroke-dasharray': isStruck ? '4 3' : null,
+      fill: 'none',
+      'marker-end': isStruck ? 'url(#arr-acc)' : 'url(#arr-mid)',
+    }));
+  });
+
+  // Stages → Corpus (4 lines down) — suppressed for struck column (callout sits there)
+  COLUMNS.forEach((col, i) => {
+    if (i === STRIKE_COL) return;
+    const cx = COL_CENTERS[i];
+
+    // label
+    svg.appendChild(text(cx + 10, (stageBottomY + corpusTopY) / 2 + 2, 'READS FROM ↓', 't-mono-tiny', { fill: 'var(--fg-faint)' }));
+
+    svg.appendChild(el('path', {
+      d: `M ${cx} ${stageBottomY + 2} L ${cx} ${corpusTopY - 2}`,
+      stroke: 'var(--hairline-strong)',
+      'stroke-width': 1,
+      fill: 'none',
+      'marker-end': 'url(#arr-mid)',
+    }));
+  });
+}
+
+/* ============================================================
+   Strike callout box
+   ============================================================ */
+function buildStrikeCallout(svg) {
+  const cx = COL_CENTERS[STRIKE_COL];
+  const stageBottomY = L3_Y + L3_H; // 600
+  const w = 290, h = 48;
+  const x = cx - w / 2, y = stageBottomY + 14; // sits in the L3→L4 gap (614–662)
+
+  // short red dashed connector from struck stage bottom down into the callout
+  svg.appendChild(el('line', {
+    x1: cx, y1: stageBottomY + 2, x2: cx, y2: y - 1,
+    stroke: 'var(--accent)', 'stroke-width': 1.4, 'stroke-dasharray': '4 3', fill: 'none',
+  }));
+
+  // opaque background so it cleanly covers any passing-through lines
+  svg.appendChild(el('rect', { x, y, width: w, height: h, fill: 'var(--bg)' }));
+  svg.appendChild(el('rect', { x, y, width: w, height: h, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1.2, 'stroke-dasharray': '5 3' }));
+  svg.appendChild(el('rect', { x, y, width: 3, height: h, class: 'acc-f' }));
+
+  svg.appendChild(text(x + 12, y + 17, 'COUNTERFACTUAL', 't-mono-cap', { fill: 'var(--accent-ink)' }));
+  svg.appendChild(text(x + 12, y + 36, 'DROP STAGE 2 → QUERY RETURNS NOTHING.', 't-mono-label', { fill: 'var(--fg)', 'font-weight': 500 }));
+}
+
+/* ============================================================
+   Build SVG
+   ============================================================ */
+function buildSVG() {
+  const svg = el('svg', {
+    class: 'fig',
+    viewBox: `0 0 ${W} ${H}`,
+    xmlns: NS,
+    preserveAspectRatio: 'xMidYMid meet',
+  });
+  svg.appendChild(buildDefs());
+  buildChrome(svg);
+  buildRail(svg);
+  buildQuery(svg);
+  buildConnectors(svg);
+  buildPills(svg);
+  buildStages(svg);
+  buildCorpus(svg);
+  buildStrikeCallout(svg);
+  return svg;
+}
+
+document.getElementById('wrap').appendChild(buildSVG());
+
+const host = document.getElementById('figure-host');
+const mq = matchMedia('(prefers-color-scheme: dark)');
+const setTheme = (t) => { host.dataset.theme = t; };
+setTheme(mq.matches ? 'dark' : 'light');
+mq.addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
+window.addEventListener('message', (e) => {
+  const d = e.data || {};
+  if (d.type === 'theme' && (d.theme === 'dark' || d.theme === 'light')) setTheme(d.theme);
+});
+</script>
+</body>
+</html>
