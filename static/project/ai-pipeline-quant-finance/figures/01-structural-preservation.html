@@ -21,11 +21,11 @@
     --bleached-mid: oklch(0.74 0.004 80);
     --bleached-deep: oklch(0.58 0.005 80);
 
-    /* Element-coded palette — same chroma, varied hue */
-    --c-hier:  oklch(0.58 0.16 28);    /* §-sections   — accent red */
-    --c-tab:   oklch(0.58 0.11 200);   /* tables       — teal */
-    --c-cite:  oklch(0.55 0.14 268);   /* citations    — indigo */
-    --c-meta:  oklch(0.62 0.10 132);   /* metadata     — olive */
+    /* Element-coded palette */
+    --c-hier:  oklch(0.58 0.16 28);
+    --c-tab:   oklch(0.58 0.11 200);
+    --c-cite:  oklch(0.55 0.14 268);
+    --c-meta:  oklch(0.62 0.10 132);
 
     --c-hier-soft: oklch(0.58 0.16 28 / 0.14);
     --c-tab-soft:  oklch(0.58 0.11 200 / 0.14);
@@ -49,12 +49,12 @@
     --bleached-mid: oklch(0.44 0.005 270);
     --bleached-deep: oklch(0.58 0.005 270);
 
-    --c-hier:  oklch(0.70 0.17 28);
+    --c-hier:  oklch(0.72 0.17 28);
     --c-tab:   oklch(0.72 0.11 200);
     --c-cite:  oklch(0.70 0.14 268);
     --c-meta:  oklch(0.76 0.10 132);
 
-    --c-hier-soft: oklch(0.70 0.17 28 / 0.20);
+    --c-hier-soft: oklch(0.72 0.17 28 / 0.22);
     --c-tab-soft:  oklch(0.72 0.11 200 / 0.18);
     --c-cite-soft: oklch(0.70 0.14 268 / 0.22);
     --c-meta-soft: oklch(0.76 0.10 132 / 0.20);
@@ -62,50 +62,21 @@
 
   html, body { margin: 0; background: var(--bg-sub); color: var(--fg); font-family: var(--sans); }
 
-  .review {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .variant {
-    padding: 28px clamp(20px, 4vw, 64px) 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--hairline);
-  }
-  .variant-head {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 18px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--fg-muted);
-  }
-  .variant-head .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--c-hier);
-    display: inline-block;
-  }
+  .review { display: flex; flex-direction: column; gap: 0; }
+  .variant { padding: 28px clamp(20px, 4vw, 64px) 48px; background: var(--bg); border-bottom: 1px solid var(--hairline); }
+  .variant-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted); }
+  .variant-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-hier); display: inline-block; }
   .variant-head .meta { color: var(--fg-faint); margin-left: auto; }
-
-  .figure-wrap {
-    border: 1px solid var(--hairline);
-    background: var(--bg);
-    max-width: 1600px;
-  }
+  .figure-wrap { border: 1px solid var(--hairline); background: var(--bg); max-width: 1600px; }
   svg.fig { width: 100%; height: auto; display: block; }
 
-  /* SVG element styles via CSS so theme cascades */
   .fig .paper-bg     { fill: var(--paper); stroke: var(--paper-edge); }
-  .fig .paper-shadow { fill: color-mix(in srgb, var(--fg) 8%, transparent); }
+  .fig .paper-shadow { fill: color-mix(in srgb, var(--fg) 9%, transparent); }
   .fig .hair         { stroke: var(--hairline); }
   .fig .hair-s       { stroke: var(--hairline-strong); }
   .fig .ink          { fill: var(--fg); }
   .fig .ink-muted    { fill: var(--fg-muted); }
   .fig .ink-faint    { fill: var(--fg-faint); }
-  .fig .ink-stroke   { stroke: var(--fg); }
 
   .fig .c-hier-f { fill: var(--c-hier); }
   .fig .c-hier-s { stroke: var(--c-hier); }
@@ -124,29 +95,25 @@
   .fig .bleach-mid { fill: var(--bleached-mid); }
   .fig .bleach-deep{ fill: var(--bleached-deep); }
 
+  /* Type — mobile-readable floor is 22px native */
   .fig text { font-family: var(--mono); fill: var(--fg); }
-  .fig .t-mono       { font-family: var(--mono); }
-  .fig .t-sans       { font-family: var(--sans); }
-  .fig .t-header     { font-family: var(--mono); font-size: 13px; letter-spacing: 0.10em; fill: var(--fg); }
-  .fig .t-sub        { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.10em; fill: var(--fg-muted); text-transform: uppercase; }
-  .fig .t-label      { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; fill: var(--fg-faint); text-transform: uppercase; }
-  .fig .t-axis       { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; fill: var(--fg-muted); text-transform: uppercase; }
-  .fig .t-anno       { font-family: var(--mono); font-size: 11px; fill: var(--fg-muted); }
-  .fig .t-anno-strong{ font-family: var(--mono); font-size: 11px; fill: var(--fg); }
-  .fig .t-section    { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; fill: var(--fg); }
-  .fig .t-body-bar   { fill: color-mix(in srgb, var(--fg) 22%, transparent); }
-  .fig .t-cap        { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.12em; fill: var(--fg-faint); text-transform: uppercase; }
-  .fig .t-cite-num   { font-family: var(--mono); font-size: 8px; fill: var(--c-cite); font-weight: 500; }
+  .fig .t-title   { font-family: var(--mono); font-size: 32px; letter-spacing: 0.04em; fill: var(--fg); font-weight: 500; }
+  .fig .t-header  { font-family: var(--mono); font-size: 30px; letter-spacing: 0.04em; fill: var(--fg); font-weight: 500; }
+  .fig .t-section { font-family: var(--mono); font-size: 24px; letter-spacing: 0.02em; fill: var(--fg); font-weight: 500; }
+  .fig .t-anno    { font-family: var(--mono); font-size: 26px; fill: var(--fg-muted); }
+  .fig .t-anno-strong { font-family: var(--mono); font-size: 26px; fill: var(--fg); font-weight: 500; }
+  .fig .t-meta    { font-family: var(--mono); font-size: 22px; fill: var(--fg); }
+  .fig .t-cap     { font-family: var(--mono); font-size: 22px; letter-spacing: 0.08em; fill: var(--fg-muted); text-transform: uppercase; }
+  .fig .t-cite    { font-family: var(--mono); font-size: 20px; fill: var(--c-cite); font-weight: 500; }
+  .fig .t-body-bar { fill: color-mix(in srgb, var(--fg) 26%, transparent); }
 
-  .fig .col-divider { stroke: var(--hairline); stroke-dasharray: 2 4; }
+  .fig .col-divider { stroke: var(--hairline); stroke-dasharray: 3 5; }
   .fig .arrow-quiet { stroke: var(--hairline-strong); fill: none; }
   .fig .arrow-loud  { stroke: var(--c-hier); fill: none; }
 
-  /* Graph */
-  .fig .edge-dense   { stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1; fill: none; }
-  .fig .edge-clean   { stroke-width: 1.4; fill: none; }
+  .fig .edge-dense   { stroke: color-mix(in srgb, var(--fg) 36%, transparent); stroke-width: 1.2; fill: none; }
+  .fig .edge-clean   { stroke-width: 1.8; fill: none; }
   .fig .node         { stroke-width: 1.2; }
-  .fig .node-bleach  { fill: var(--bleached); stroke: var(--bleached-deep); }
 
   /* In-article iframe overrides */
   html, body { background: var(--bg); }
@@ -159,13 +126,8 @@
   <div class="figure-wrap" id="wrap"></div>
 
 <script>
-/* ============================================================
-   Build the SVG once and inject into both light + dark wrappers.
-   ============================================================ */
-
 const NS = 'http://www.w3.org/2000/svg';
-
-function el(tag, attrs = {}, children = []) {
+const el = (tag, attrs = {}, children = []) => {
   const n = document.createElementNS(NS, tag);
   for (const [k, v] of Object.entries(attrs)) {
     if (v === false || v == null) continue;
@@ -177,554 +139,291 @@ function el(tag, attrs = {}, children = []) {
     else n.appendChild(c);
   }
   return n;
-}
-function text(x, y, str, cls, extra = {}) {
-  return el('text', { x, y, class: cls, ...extra }, str);
-}
+};
+const text = (x, y, str, cls, extra = {}) => el('text', { x, y, class: cls, ...extra }, str);
 
-/* ---------- LEFT ZONE — the paper ---------- */
+/* ============================================================
+   LEFT — the paper (the structured source)
+   ============================================================ */
 function buildPaper() {
-  const g = el('g', { class: 'paper', transform: 'translate(60, 70)' });
-  const W = 400, H = 760;
+  const g = el('g', { transform: 'translate(50, 100)' });
+  const W = 430, H = 700;
 
-  // shadow + paper
-  g.appendChild(el('rect', { x: 6, y: 8, width: W, height: H, rx: 2, class: 'paper-shadow' }));
+  g.appendChild(el('rect', { x: 8, y: 10, width: W, height: H, rx: 2, class: 'paper-shadow' }));
   g.appendChild(el('rect', { x: 0, y: 0, width: W, height: H, rx: 2, class: 'paper-bg', 'stroke-width': 1 }));
 
-  // doc header strip
-  g.appendChild(text(20, 32, 'STRUCTURED DOCUMENT', 't-sub'));
-  g.appendChild(text(W - 20, 32, 'DOC #4001', 't-cap', { 'text-anchor': 'end' }));
-  g.appendChild(el('line', { x1: 20, y1: 44, x2: W - 20, y2: 44, class: 'hair', 'stroke-width': 1 }));
+  // Title bars
+  g.appendChild(el('rect', { x: 28, y: 36, width: 320, height: 22, fill: 'currentColor', class: 'ink', opacity: 0.88 }));
+  g.appendChild(el('rect', { x: 28, y: 66, width: 220, height: 12, fill: 'currentColor', class: 'ink', opacity: 0.45 }));
 
-  // Title block (heavier ink, no §)
-  g.appendChild(el('rect', { x: 20, y: 60, width: 240, height: 12, fill: 'currentColor', class: 'ink', opacity: 0.85 }));
-  g.appendChild(el('rect', { x: 20, y: 78, width: 160, height: 8,  fill: 'currentColor', class: 'ink', opacity: 0.5 }));
-
-  // Mini-tag glossary (legend, top right)
-  const lg = el('g', { transform: 'translate(280, 60)' });
-  const legendItems = [
-    { c: 'c-hier-f',  label: 'HIER',  y: 0 },
-    { c: 'c-tab-f',   label: 'TABLE', y: 14 },
-    { c: 'c-cite-f',  label: 'CITE',  y: 28 },
-    { c: 'c-meta-f',  label: 'META',  y: 42 },
-  ];
-  for (const li of legendItems) {
-    lg.appendChild(el('rect', { x: 0, y: li.y - 6, width: 8, height: 8, class: li.c }));
-    lg.appendChild(text(14, li.y, li.label, 't-cap'));
-  }
-  g.appendChild(lg);
-
-  // -- § 1 INTRODUCTION
-  let y = 116;
-  const drawSection = (indent, code, title, lineWidths, citeAfter = null) => {
-    const x = 20 + indent;
-    // colored tag bar
-    g.appendChild(el('rect', { x, y: y - 9, width: 4, height: 12, class: 'c-hier-f' }));
-    g.appendChild(text(x + 10, y, `§ ${code}  ${title}`, 't-section'));
-    let ly = y + 12;
+  // -- Sections (hierarchy)
+  let y = 130;
+  const drawSection = (indent, code, title, lineWidths, cite = null) => {
+    const x = 28 + indent;
+    g.appendChild(el('rect', { x, y: y - 22, width: 8, height: 30, class: 'c-hier-f' }));
+    g.appendChild(text(x + 18, y, `§ ${code}  ${title}`, 't-section'));
+    let ly = y + 26;
     for (const w of lineWidths) {
-      g.appendChild(el('rect', { x: x + 10, y: ly, width: w, height: 4, rx: 1, class: 't-body-bar' }));
-      ly += 9;
+      g.appendChild(el('rect', { x: x + 18, y: ly, width: w, height: 7, rx: 1, class: 't-body-bar' }));
+      ly += 16;
     }
-    if (citeAfter) {
-      // little superscript pill
-      g.appendChild(el('rect', { x: x + 10 + citeAfter.afterW + 4, y: ly - 10, width: 14, height: 8, rx: 4, class: 'c-cite-soft' }));
-      g.appendChild(text(x + 10 + citeAfter.afterW + 4 + 7, ly - 4, citeAfter.n, 't-cite-num', { 'text-anchor': 'middle' }));
+    if (cite) {
+      const px = x + 18 + cite.afterW + 8;
+      const py = ly - 26;
+      g.appendChild(el('rect', { x: px, y: py, width: 48, height: 26, rx: 8, class: 'c-cite-soft' }));
+      g.appendChild(text(px + 24, py + 19, cite.n, 't-cite', { 'text-anchor': 'middle' }));
     }
-    return ly + 8;
+    return ly + 18;
   };
 
-  y = drawSection(0,  '1',   'INTRODUCTION', [220, 200, 170]);
-  y = drawSection(14, '1.1', 'Hypothesis',   [180, 150], { afterW: 150, n: '[12]' });
-  y = drawSection(14, '1.2', 'Data sources', [200]);
+  y = drawSection(0,  '1',   'INTRODUCTION', [300, 260, 200]);
+  y = drawSection(22, '1.1', 'Hypothesis',   [220, 180], { afterW: 180, n: '[12]' });
+  y = drawSection(0,  '2',   'RESULTS',      [260, 220], { afterW: 220, n: '[27]' });
 
-  // --- TABLE 1 (teal) ---
-  const t1y = y + 4;
-  drawTable(g, 24, t1y, 280, 64, {
-    cols: 4, rows: 3,
-    title: 'TABLE 1 · STRATEGY × HORIZON',
-    highlights: [[1, 1], [1, 2], [2, 1]],
-    arrow: { from: [1, 1], to: [2, 1] },
-  });
-  y = t1y + 64 + 14;
-
-  // --- § 2 RESULTS
-  y = drawSection(0, '2', 'RESULTS', [220, 180], { afterW: 180, n: '[27]' });
-
-  // --- TABLE 2 (teal) ---
-  const t2y = y + 4;
-  drawTable(g, 24, t2y, 280, 56, {
-    cols: 5, rows: 2,
-    title: 'TABLE 2 · FACTOR LOADINGS',
-    highlights: [[1, 2], [1, 3], [1, 4]],
-    arrow: { from: [1, 2], to: [1, 4], curved: true },
-  });
-  y = t2y + 56 + 18;
-
-  // --- METADATA pills (olive) ---
-  g.appendChild(text(20, y, 'ENRICHED METADATA', 't-sub', { class: 't-sub' }));
-  y += 8;
-  const metaPills = [
-    'AUTHOR · LIN ET AL.   ·   MIT SLOAN',
-    'CITED 412×   ·   h-INDEX 31',
-    'PUBLISHED 2023   ·   PEER-REVIEWED',
-  ];
-  for (const m of metaPills) {
-    y += 14;
-    g.appendChild(el('rect', { x: 20, y: y - 11, width: 360, height: 16, rx: 8, class: 'c-meta-soft' }));
-    g.appendChild(el('rect', { x: 20, y: y - 11, width: 3,   height: 16, class: 'c-meta-f' }));
-    g.appendChild(text(30, y + 0.5, m, 't-cap', { class: 't-cap', fill: 'var(--fg)' }));
+  // -- TABLE (single, larger)
+  const tx = 28, ty = y + 8, tw = 374, th = 130;
+  g.appendChild(text(tx, ty - 8, 'TABLE · FACTOR × HORIZON', 't-cap', { fill: 'var(--c-tab)' }));
+  g.appendChild(el('rect', { x: tx, y: ty, width: tw, height: th, fill: 'none', class: 'c-tab-s', 'stroke-width': 1.4 }));
+  g.appendChild(el('rect', { x: tx, y: ty, width: tw, height: 22, class: 'c-tab-soft' }));
+  // grid
+  const cols = 4, rows = 3, cw = tw / cols, rh = (th - 22) / rows;
+  for (let i = 1; i < cols; i++) {
+    g.appendChild(el('line', { x1: tx + i * cw, y1: ty, x2: tx + i * cw, y2: ty + th, class: 'c-tab-s', 'stroke-width': 1, opacity: 0.55 }));
   }
+  for (let i = 1; i < rows; i++) {
+    g.appendChild(el('line', { x1: tx, y1: ty + 22 + i * rh, x2: tx + tw, y2: ty + 22 + i * rh, class: 'c-tab-s', 'stroke-width': 1, opacity: 0.45 }));
+  }
+  g.appendChild(el('line', { x1: tx, y1: ty + 22, x2: tx + tw, y2: ty + 22, class: 'c-tab-s', 'stroke-width': 1.2 }));
+  // header glyphs
+  for (let c = 0; c < cols; c++) {
+    g.appendChild(el('rect', { x: tx + c * cw + 8, y: ty + 8, width: cw - 16, height: 6, rx: 1, class: 'c-tab-f', opacity: 0.7 }));
+  }
+  // body glyphs
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      g.appendChild(el('rect', { x: tx + c * cw + 10, y: ty + 22 + r * rh + (rh - 5) / 2, width: cw - 20, height: 5, rx: 1, class: 'ink', opacity: 0.26 }));
+    }
+  }
+  // highlights + arrow
+  const cell = (r, c) => ({ x: tx + c * cw, y: ty + 22 + r * rh, w: cw, h: rh });
+  const h1 = cell(0, 1), h2 = cell(1, 2);
+  g.appendChild(el('rect', { x: h1.x, y: h1.y, width: h1.w, height: h1.h, class: 'c-tab-soft' }));
+  g.appendChild(el('rect', { x: h2.x, y: h2.y, width: h2.w, height: h2.h, class: 'c-tab-soft' }));
+  g.appendChild(el('path', {
+    d: `M ${h1.x + h1.w / 2} ${h1.y + h1.h / 2} L ${h2.x + h2.w / 2} ${h2.y + h2.h / 2}`,
+    class: 'c-tab-s', 'stroke-width': 1.6, fill: 'none', 'marker-end': 'url(#arrow-tab)',
+  }));
 
-  // --- Bibliography footer
-  y += 22;
-  g.appendChild(el('line', { x1: 20, y1: y, x2: W - 20, y2: y, class: 'hair', 'stroke-width': 1 }));
-  y += 14;
-  g.appendChild(text(20, y, 'BIBLIOGRAPHY', 't-sub'));
-  y += 14;
-  const refs = [
-    { n: '12', t: 'Carhart, M.M.  Mutual fund performance' },
-    { n: '27', t: 'Fama & French.  Five-factor asset pricing' },
-    { n: '41', t: 'Asness et al.  Quality minus junk' },
-  ];
-  for (const r of refs) {
-    g.appendChild(el('circle', { cx: 26, cy: y - 3, r: 6, class: 'c-cite-soft' }));
-    g.appendChild(text(26, y, r.n, 't-cite-num', { 'text-anchor': 'middle' }));
-    g.appendChild(text(40, y, r.t, 't-cap'));
-    y += 14;
+  y = ty + th + 36;
+
+  // -- METADATA pills
+  g.appendChild(text(28, y, 'METADATA', 't-cap', { fill: 'var(--c-meta)' }));
+  const pills = ['LIN ET AL.  ·  MIT SLOAN', 'CITED 412×  ·  2023'];
+  for (let i = 0; i < pills.length; i++) {
+    const py = y + 14 + i * 48;
+    g.appendChild(el('rect', { x: 28, y: py, width: 374, height: 40, rx: 3, class: 'c-meta-soft' }));
+    g.appendChild(el('rect', { x: 28, y: py, width: 6, height: 40, class: 'c-meta-f' }));
+    g.appendChild(text(46, py + 27, pills[i], 't-meta'));
   }
 
   return g;
 }
 
-function drawTable(parent, x, y, w, h, opts) {
-  const { cols, rows, title, highlights = [], arrow } = opts;
-  const cw = w / cols;
-  const rh = (h - 12) / rows;
-
-  // caption
-  parent.appendChild(text(x, y - 4, title, 't-cap'));
-
-  const tg = el('g');
-  // outer frame
-  tg.appendChild(el('rect', { x, y, width: w, height: h, fill: 'none', class: 'c-tab-s', 'stroke-width': 1 }));
-  // header row tint
-  tg.appendChild(el('rect', { x, y, width: w, height: 12, class: 'c-tab-soft' }));
-
-  // highlights (under grid)
-  for (const [r, c] of highlights) {
-    tg.appendChild(el('rect', {
-      x: x + c * cw, y: y + 12 + (r - 1) * rh,
-      width: cw, height: rh, class: 'c-tab-soft',
-    }));
-  }
-
-  // grid lines
-  for (let i = 1; i < cols; i++) {
-    tg.appendChild(el('line', { x1: x + i * cw, y1: y, x2: x + i * cw, y2: y + h, class: 'c-tab-s', 'stroke-width': 0.8, opacity: 0.55 }));
-  }
-  tg.appendChild(el('line', { x1: x, y1: y + 12, x2: x + w, y2: y + 12, class: 'c-tab-s', 'stroke-width': 1 }));
-  for (let i = 1; i < rows; i++) {
-    tg.appendChild(el('line', { x1: x, y1: y + 12 + i * rh, x2: x + w, y2: y + 12 + i * rh, class: 'c-tab-s', 'stroke-width': 0.8, opacity: 0.45 }));
-  }
-
-  // header glyphs (tiny rectangles inside header cells)
-  for (let c = 0; c < cols; c++) {
-    tg.appendChild(el('rect', { x: x + c * cw + 4, y: y + 4, width: cw - 8, height: 4, rx: 1, class: 'c-tab-f', opacity: 0.7 }));
-  }
-  // body glyphs
-  for (let r = 1; r <= rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      tg.appendChild(el('rect', { x: x + c * cw + 5, y: y + 12 + (r - 1) * rh + (rh - 4) / 2, width: cw - 10, height: 3, rx: 1, fill: 'currentColor', class: 'ink', opacity: 0.25 }));
-    }
-  }
-
-  // arrow showing row/column relationship
-  if (arrow) {
-    const [fr, fc] = arrow.from;
-    const [tr, tc] = arrow.to;
-    const x1 = x + fc * cw + cw / 2;
-    const y1 = y + 12 + (fr - 1) * rh + rh / 2;
-    const x2 = x + tc * cw + cw / 2;
-    const y2 = y + 12 + (tr - 1) * rh + rh / 2;
-    if (arrow.curved) {
-      const cx = (x1 + x2) / 2;
-      const cy = y - 10;
-      tg.appendChild(el('path', {
-        d: `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,
-        class: 'c-tab-s', 'stroke-width': 1.2, fill: 'none',
-        'marker-end': 'url(#arrow-tab)',
-      }));
-    } else {
-      tg.appendChild(el('path', {
-        d: `M ${x1} ${y1} L ${x2} ${y2}`,
-        class: 'c-tab-s', 'stroke-width': 1.2, fill: 'none',
-        'marker-end': 'url(#arrow-tab)',
-      }));
-    }
-  }
-  parent.appendChild(tg);
-}
-
-/* ---------- RIGHT ZONE — three columns ---------- */
+/* ============================================================
+   RIGHT — three columns
+   ============================================================ */
 function buildRightZone() {
-  const g = el('g', { class: 'right' });
+  const g = el('g');
 
-  // Axis at top
-  const axisY = 122;
-  const axisX1 = 540, axisX2 = 1540;
-  g.appendChild(text((axisX1 + axisX2) / 2, axisY - 18, 'WHAT DOWNSTREAM QUERIES CAN ASK', 't-axis', { 'text-anchor': 'middle' }));
-  g.appendChild(el('line', { x1: axisX1, y1: axisY, x2: axisX2, y2: axisY, class: 'hair-s', 'stroke-width': 1 }));
-  // ticks
-  for (let x = axisX1; x <= axisX2; x += 50) {
-    g.appendChild(el('line', { x1: x, y1: axisY, x2: x, y2: axisY + 4, class: 'hair', 'stroke-width': 1 }));
-  }
-
-  // Column centers
   const cols = [
-    { id: 'A', cx: 700,  label: 'A · NAIVE RAG',           loud: false },
-    { id: 'B', cx: 1040, label: 'B · FULL GRAPH RAG',      loud: false },
-    { id: 'C', cx: 1380, label: 'C · LIGHTRAG (SELECTED)', loud: true  },
+    { id: 'A', cx: 720,  label: 'A · NAIVE RAG',      loud: false },
+    { id: 'B', cx: 1060, label: 'B · FULL GRAPH RAG', loud: false },
+    { id: 'C', cx: 1400, label: 'C · LIGHTRAG',       loud: true  },
   ];
-
-  // Drop arrows from axis into columns
-  for (const c of cols) {
-    const cls = c.loud ? 'arrow-loud' : 'arrow-quiet';
-    g.appendChild(el('path', {
-      d: `M ${c.cx} ${axisY} L ${c.cx} ${axisY + 56}`,
-      class: cls, 'stroke-width': c.loud ? 1.6 : 1,
-      'marker-end': c.loud ? 'url(#arrow-loud)' : 'url(#arrow-quiet)',
-    }));
-  }
 
   // Column headers
-  const headerY = 210;
+  const headerY = 130;
   for (const c of cols) {
-    const halfw = 158;
+    const halfw = 160;
     const x = c.cx - halfw;
-    g.appendChild(el('line', { x1: x, y1: headerY + 10, x2: x + halfw * 2, y2: headerY + 10, class: 'hair-s', 'stroke-width': 1 }));
-    g.appendChild(text(x, headerY, c.label, 't-header'));
-    if (c.loud) {
-      g.appendChild(el('circle', { cx: x + 160, cy: headerY - 4, r: 4, class: 'c-hier-f' }));
-    }
+    g.appendChild(text(x, headerY, c.label, 't-header', { fill: c.loud ? 'var(--c-hier)' : 'var(--fg)' }));
+    g.appendChild(el('line', { x1: x, y1: headerY + 14, x2: x + halfw * 2, y2: headerY + 14,
+      stroke: c.loud ? 'var(--c-hier)' : 'var(--hairline-strong)', 'stroke-width': c.loud ? 1.8 : 1 }));
   }
 
-  // === Column A — bleached chunks ===
-  buildColA(g, 700);
+  // Column bodies
+  buildColA(g, 720);
+  buildColB(g, 1060);
+  buildColC(g, 1400);
 
-  // === Column B — dense graph ===
-  buildColB(g, 1040);
-
-  // === Column C — sparse, structured graph ===
-  buildColC(g, 1380);
-
-  // === Annotations ===
-  const annoY = 760;
+  // Annotations under columns — 2 short lines each
+  const annoY = 720;
   const annotations = [
-    { cx: 700,  lines: [
-        ['Hierarchy, tables, and citation graph', 't-anno'],
-        ['lost. Embeddings index ', 't-anno', 'flat text.', 't-anno-strong'],
-    ]},
-    { cx: 1040, lines: [
-        ['All structure preserved. ', 't-anno-strong', 'Rebuild', 't-anno-strong'],
-        ['required to ingest each new paper.', 't-anno'],
-        ['2–3× slower throughput.', 't-anno'],
-    ]},
-    { cx: 1380, lines: [
-        ['Hierarchy + entity relationships', 't-anno-strong'],
-        ['preserved. ', 't-anno', 'Incremental ingestion', 't-anno-strong'],
-        ['— no rebuild on each new paper.', 't-anno'],
-    ]},
+    [['Hierarchy, tables,', 't-anno'], ['citations bleached out.', 't-anno-strong']],
+    [['All structure kept.', 't-anno-strong'], ['Rebuild on every paper.', 't-anno']],
+    [['Structure kept.', 't-anno-strong'], ['Incremental — no rebuild.', 't-anno']],
   ];
-
   for (let i = 0; i < cols.length; i++) {
     const c = cols[i];
     const a = annotations[i];
-    // hairline above annotation block
-    g.appendChild(el('line', { x1: c.cx - 158, y1: annoY - 22, x2: c.cx + 158, y2: annoY - 22, class: 'hair', 'stroke-width': 1 }));
-    // small index pill
-    g.appendChild(text(c.cx - 158, annoY - 6, '↳ ' + c.id, 't-cap'));
-    // lines
-    let ty = annoY + 14;
-    for (const line of a.lines) {
-      // assemble tspans
-      const txt = el('text', { x: c.cx - 158, y: ty, class: 't-anno' });
-      for (let k = 0; k < line.length; k += 2) {
-        const t = el('tspan', { class: line[k + 1] }, line[k]);
-        txt.appendChild(t);
-      }
-      g.appendChild(txt);
-      ty += 16;
+    g.appendChild(el('line', { x1: c.cx - 160, y1: annoY - 28, x2: c.cx + 160, y2: annoY - 28, class: 'hair', 'stroke-width': 1 }));
+    let ty = annoY;
+    for (const line of a) {
+      const t = el('text', { x: c.cx - 160, y: ty, class: line[1] });
+      t.appendChild(document.createTextNode(line[0]));
+      g.appendChild(t);
+      ty += 36;
     }
   }
-
   return g;
 }
 
-/* === Column A : bleached chunks (Naive RAG) === */
+/* === A · bleached chunks === */
 function buildColA(parent, cx) {
-  const x = cx - 110, w = 220;
-  let y = 250;
-  const rows = 9;
+  const x = cx - 130, w = 260;
+  const y0 = 180, rows = 6, rh = 64;
   for (let i = 0; i < rows; i++) {
-    const chunkY = y + i * 50;
-    parent.appendChild(el('rect', { x, y: chunkY, width: w, height: 42, class: 'bleach', stroke: 'var(--bleached-deep)', 'stroke-width': 0.8 }));
-    // chunk index
-    parent.appendChild(text(x + 6, chunkY + 12, `CHUNK·${String(i + 1).padStart(3, '0')}`, 't-cap', { fill: 'var(--bleached-deep)' }));
-    // text lines (uniform bleached)
+    const cy = y0 + i * rh;
+    parent.appendChild(el('rect', { x, y: cy, width: w, height: 52, class: 'bleach', stroke: 'var(--bleached-deep)', 'stroke-width': 1 }));
     for (let j = 0; j < 3; j++) {
-      const lw = w - 16 - (j === 2 ? 36 : 0) - (j === 1 ? 12 : 0);
-      parent.appendChild(el('rect', { x: x + 8, y: chunkY + 18 + j * 7, width: lw, height: 3, rx: 1, class: 'bleach-mid' }));
+      const lw = w - 24 - (j === 2 ? 50 : 0);
+      parent.appendChild(el('rect', { x: x + 12, y: cy + 14 + j * 11, width: lw, height: 5, rx: 1, class: 'bleach-mid' }));
     }
   }
-  // bleach fade at bottom
-  const fadeY = y + rows * 50;
-  parent.appendChild(el('rect', { x, y: fadeY, width: w, height: 12, fill: 'var(--bleached)', opacity: 0.4 }));
-  // index label
-  parent.appendChild(text(cx, fadeY + 28, '→ FLAT VECTOR INDEX', 't-cap', { 'text-anchor': 'middle' }));
 }
 
-/* === Column B : dense graph (Full Graph RAG) === */
+/* === B · dense graph === */
 function buildColB(parent, cx) {
-  // Bounded box
-  const bx = cx - 158, by = 250, bw = 316, bh = 460;
-
-  // Seeded RNG so positions are stable
+  const bx = cx - 160, by = 180, bw = 320, bh = 480;
   let seed = 1337;
   const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
 
-  // Generate ~38 nodes in a jittered grid
   const nodes = [];
-  const colorClasses = ['c-hier-f', 'c-tab-f', 'c-cite-f', 'c-meta-f'];
-  // bias colors to roughly match paper composition
-  const colorMix = ['c-hier-f','c-hier-f','c-hier-f','c-hier-f','c-tab-f','c-tab-f','c-tab-f','c-cite-f','c-cite-f','c-meta-f'];
-
-  const cols = 5, rows = 8;
-  const cellW = bw / (cols + 1);
-  const cellH = bh / (rows + 1);
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const jitterX = (rnd() - 0.5) * cellW * 0.8;
-      const jitterY = (rnd() - 0.5) * cellH * 0.8;
-      const x = bx + cellW * (c + 1) + jitterX;
-      const y = by + cellH * (r + 1) + jitterY;
-      const cc = colorMix[Math.floor(rnd() * colorMix.length)];
-      const rad = 3 + rnd() * 2;
-      nodes.push({ x, y, cc, rad });
+  const colorMix = ['c-hier-f','c-hier-f','c-hier-f','c-tab-f','c-tab-f','c-cite-f','c-cite-f','c-meta-f'];
+  const colC = 5, rowC = 7;
+  const cellW = bw / (colC + 1), cellH = bh / (rowC + 1);
+  for (let r = 0; r < rowC; r++) {
+    for (let c = 0; c < colC; c++) {
+      const jx = (rnd() - 0.5) * cellW * 0.85;
+      const jy = (rnd() - 0.5) * cellH * 0.85;
+      nodes.push({
+        x: bx + cellW * (c + 1) + jx,
+        y: by + cellH * (r + 1) + jy,
+        cc: colorMix[Math.floor(rnd() * colorMix.length)],
+        rad: 5 + rnd() * 3,
+      });
     }
   }
 
-  // Edges: each node connects to ~2-3 nearest neighbors (chaotic mess)
   const edges = [];
   for (let i = 0; i < nodes.length; i++) {
     const dists = nodes.map((n, j) => ({ j, d: (n.x - nodes[i].x) ** 2 + (n.y - nodes[i].y) ** 2 }))
-      .filter(o => o.j !== i)
-      .sort((a, b) => a.d - b.d);
+      .filter(o => o.j !== i).sort((a, b) => a.d - b.d);
     const k = 2 + Math.floor(rnd() * 2);
-    for (let m = 0; m < k; m++) {
-      const j = dists[m].j;
-      if (j > i) edges.push([i, j]);
-    }
+    for (let m = 0; m < k; m++) if (dists[m].j > i) edges.push([i, dists[m].j]);
   }
-  // Add a few long-range edges
-  for (let k = 0; k < 10; k++) {
-    const a = Math.floor(rnd() * nodes.length);
-    const b = Math.floor(rnd() * nodes.length);
+  for (let k = 0; k < 8; k++) {
+    const a = Math.floor(rnd() * nodes.length), b = Math.floor(rnd() * nodes.length);
     if (a !== b) edges.push([a, b]);
   }
 
-  // Draw edges first
   for (const [a, b] of edges) {
-    parent.appendChild(el('line', {
-      x1: nodes[a].x, y1: nodes[a].y, x2: nodes[b].x, y2: nodes[b].y,
-      class: 'edge-dense',
-    }));
+    parent.appendChild(el('line', { x1: nodes[a].x, y1: nodes[a].y, x2: nodes[b].x, y2: nodes[b].y, class: 'edge-dense' }));
   }
-  // Draw nodes
   for (const n of nodes) {
-    parent.appendChild(el('circle', { cx: n.x, cy: n.y, r: n.rad, class: `node ${n.cc}` , stroke: 'var(--bg)' }));
+    parent.appendChild(el('circle', { cx: n.x, cy: n.y, r: n.rad, class: `node ${n.cc}`, stroke: 'var(--bg)' }));
   }
-
-  // Footer label
-  parent.appendChild(text(cx, by + bh + 28, '→ FULL KNOWLEDGE GRAPH (REBUILD)', 't-cap', { 'text-anchor': 'middle' }));
-
-  // Size badge top-right of column
-  parent.appendChild(el('rect', { x: bx + bw - 70, y: by - 16, width: 70, height: 14, rx: 7, class: 'hair', fill: 'none', stroke: 'var(--hairline-strong)' }));
-  parent.appendChild(text(bx + bw - 35, by - 6, `${nodes.length} NODES`, 't-cap', { 'text-anchor': 'middle' }));
 }
 
-/* === Column C : sparse, structured graph (LightRAG) === */
+/* === C · sparse structured graph === */
 function buildColC(parent, cx) {
-  const bx = cx - 158, by = 250, bw = 316, bh = 460;
+  const bx = cx - 160, by = 180, bw = 320, bh = 480;
 
-  // ---- Clusters ----
-  // Hierarchy tree (top): Title → §1, §2 → §1.1, §1.2 / §2.1
-  const hier = [
-    { id: 'T',   x: cx,        y: by + 26, r: 8, cls: 'c-hier-f' },
-    { id: '1',   x: cx - 56,   y: by + 70, r: 6, cls: 'c-hier-f' },
-    { id: '2',   x: cx + 56,   y: by + 70, r: 6, cls: 'c-hier-f' },
-    { id: '1.1', x: cx - 90,   y: by + 112, r: 4, cls: 'c-hier-f' },
-    { id: '1.2', x: cx - 28,   y: by + 112, r: 4, cls: 'c-hier-f' },
-    { id: '2.1', x: cx + 56,   y: by + 112, r: 4, cls: 'c-hier-f' },
-  ];
-  const hierEdges = [
-    ['T','1'], ['T','2'],
-    ['1','1.1'], ['1','1.2'],
-    ['2','2.1'],
-  ];
-
-  // Table cluster (middle-left)
-  const tables = [
-    // table 1
-    { id: 't1a', x: cx - 90,  y: by + 180, r: 4, cls: 'c-tab-f' },
-    { id: 't1b', x: cx - 60,  y: by + 196, r: 4, cls: 'c-tab-f' },
-    { id: 't1c', x: cx - 75,  y: by + 220, r: 4, cls: 'c-tab-f' },
-    // table 2
-    { id: 't2a', x: cx + 50,  y: by + 188, r: 4, cls: 'c-tab-f' },
-    { id: 't2b', x: cx + 86,  y: by + 200, r: 4, cls: 'c-tab-f' },
-    { id: 't2c', x: cx + 70,  y: by + 222, r: 4, cls: 'c-tab-f' },
-  ];
-  const tableEdges = [
-    ['t1a','t1b'], ['t1b','t1c'], ['t1a','t1c'],
-    ['t2a','t2b'], ['t2b','t2c'], ['t2a','t2c'],
-  ];
-
-  // Section → Table relations
-  const sectToTable = [
-    ['1.2','t1a'],
-    ['2.1','t2a'],
-  ];
-
-  // Citations (lower)
-  const cites = [
-    { id: 'c12', x: cx - 60,  y: by + 280, r: 5, cls: 'c-cite-f' },
-    { id: 'c27', x: cx + 0,   y: by + 296, r: 5, cls: 'c-cite-f' },
-    { id: 'c41', x: cx + 70,  y: by + 280, r: 5, cls: 'c-cite-f' },
-  ];
-  const sectToCite = [
-    ['1.1','c12'],
-    ['2.1','c27'],
-    ['c12','t2a'],
-    ['c41','c27'],
-  ];
-
-  // Metadata (bottom)
-  const metas = [
-    { id: 'mA', x: cx - 70, y: by + 360, r: 5, cls: 'c-meta-f' },
-    { id: 'mB', x: cx,      y: by + 372, r: 5, cls: 'c-meta-f' },
-    { id: 'mC', x: cx + 70, y: by + 360, r: 5, cls: 'c-meta-f' },
-  ];
-  const metaToDoc = [
-    ['mA','T'], ['mB','T'], ['mC','T'],
-  ];
-
-  const allNodes = [...hier, ...tables, ...cites, ...metas];
-  const idx = id => allNodes.find(n => n.id === id);
-
-  // Cluster ring shadows
+  // Cluster regions (no labels — colors carry the message)
   const ring = (x, y, w, h, cls) => {
-    parent.appendChild(el('rect', { x: x - w/2, y: y - h/2, width: w, height: h, rx: 10, fill: 'none', class: cls, 'stroke-width': 0.6, 'stroke-dasharray': '2 3', opacity: 0.55 }));
+    parent.appendChild(el('rect', { x: x - w/2, y: y - h/2, width: w, height: h, rx: 14, fill: 'none',
+      stroke: cls, 'stroke-width': 0.8, 'stroke-dasharray': '3 4', opacity: 0.55 }));
   };
-  ring(cx,        by + 70,  240, 110, 'c-hier-s');
-  ring(cx,        by + 200, 260, 70,  'c-tab-s');
-  ring(cx,        by + 288, 220, 40,  'c-cite-s');
-  ring(cx,        by + 368, 220, 36,  'c-meta-s');
+  ring(cx, by + 100, 290, 150, 'var(--c-hier)');
+  ring(cx, by + 250, 280, 70,  'var(--c-tab)');
+  ring(cx, by + 340, 240, 60,  'var(--c-cite)');
+  ring(cx, by + 420, 240, 50,  'var(--c-meta)');
 
-  // cluster labels (left side)
-  const labelCol = bx + 6;
-  parent.appendChild(text(labelCol, by + 18, 'HIERARCHY', 't-cap'));
-  parent.appendChild(text(labelCol, by + 165, 'TABLES', 't-cap'));
-  parent.appendChild(text(labelCol, by + 268, 'CITATIONS', 't-cap'));
-  parent.appendChild(text(labelCol, by + 352, 'METADATA', 't-cap'));
+  const nodes = {
+    T:   { x: cx,       y: by + 50,  r: 12, cls: 'c-hier-f' },
+    s1:  { x: cx - 80,  y: by + 110, r: 9,  cls: 'c-hier-f' },
+    s2:  { x: cx + 80,  y: by + 110, r: 9,  cls: 'c-hier-f' },
+    s11: { x: cx - 110, y: by + 160, r: 7,  cls: 'c-hier-f' },
+    s12: { x: cx - 50,  y: by + 160, r: 7,  cls: 'c-hier-f' },
+    s21: { x: cx + 80,  y: by + 160, r: 7,  cls: 'c-hier-f' },
 
-  // Draw edges
-  const drawEdges = (pairs, cls, opacity = 1) => {
+    t1a: { x: cx - 90,  y: by + 240, r: 7, cls: 'c-tab-f' },
+    t1b: { x: cx - 50,  y: by + 264, r: 7, cls: 'c-tab-f' },
+    t2a: { x: cx + 60,  y: by + 240, r: 7, cls: 'c-tab-f' },
+    t2b: { x: cx + 100, y: by + 264, r: 7, cls: 'c-tab-f' },
+
+    c12: { x: cx - 60,  y: by + 340, r: 9, cls: 'c-cite-f' },
+    c27: { x: cx + 60,  y: by + 340, r: 9, cls: 'c-cite-f' },
+
+    m1:  { x: cx - 70,  y: by + 420, r: 9, cls: 'c-meta-f' },
+    m2:  { x: cx + 70,  y: by + 420, r: 9, cls: 'c-meta-f' },
+  };
+
+  const drawEdges = (pairs, color, opacity = 1) => {
     for (const [a, b] of pairs) {
-      const na = idx(a), nb = idx(b);
-      if (!na || !nb) continue;
+      const na = nodes[a], nb = nodes[b];
       parent.appendChild(el('line', {
         x1: na.x, y1: na.y, x2: nb.x, y2: nb.y,
-        class: `edge-clean ${cls}`, opacity,
+        stroke: color, 'stroke-width': 1.8, fill: 'none', opacity,
       }));
     }
   };
 
-  drawEdges(hierEdges, 'c-hier-s');
-  drawEdges(tableEdges, 'c-tab-s', 0.8);
-  drawEdges(sectToTable, 'hair-s', 0.65);
-  drawEdges(sectToCite, 'c-cite-s', 0.7);
-  drawEdges(metaToDoc, 'c-meta-s', 0.5);
+  drawEdges([['T','s1'],['T','s2'],['s1','s11'],['s1','s12'],['s2','s21']], 'var(--c-hier)');
+  drawEdges([['t1a','t1b'],['t2a','t2b'],['s12','t1a'],['s21','t2a']], 'var(--c-tab)', 0.85);
+  drawEdges([['s11','c12'],['s21','c27']], 'var(--c-cite)', 0.75);
+  drawEdges([['m1','T'],['m2','T']], 'var(--c-meta)', 0.55);
 
-  // Draw nodes (with bg-colored stroke ring for clarity)
-  for (const n of allNodes) {
-    parent.appendChild(el('circle', { cx: n.x, cy: n.y, r: n.r, class: `node ${n.cls}`, stroke: 'var(--bg)', 'stroke-width': 1.4 }));
+  for (const id in nodes) {
+    const n = nodes[id];
+    parent.appendChild(el('circle', { cx: n.x, cy: n.y, r: n.r, class: `node ${n.cls}`, stroke: 'var(--bg)', 'stroke-width': 1.5 }));
   }
-
-  // Node labels for hierarchy
-  for (const n of hier) {
-    parent.appendChild(text(n.x, n.y - n.r - 4, `§${n.id === 'T' ? 'T' : n.id}`, 't-cap', { 'text-anchor': 'middle', fill: 'var(--c-hier)' }));
-  }
-  // Citation labels
-  for (const c of cites) {
-    parent.appendChild(text(c.x, c.y + 3, c.id.slice(1), 't-cite-num', { 'text-anchor': 'middle', fill: 'var(--bg)' }));
-  }
-
-  // Right-aligned size badge
-  parent.appendChild(el('rect', { x: bx + bw - 130, y: by - 16, width: 130, height: 14, rx: 7, class: 'c-hier-s', fill: 'var(--c-hier-soft)' }));
-  parent.appendChild(text(bx + bw - 65, by - 6, `+1 PAPER · NO REBUILD`, 't-cap', { 'text-anchor': 'middle', fill: 'var(--c-hier)' }));
-
-  // Footer
-  parent.appendChild(text(cx, by + 440, '→ INCREMENTAL · STRUCTURE-AWARE', 't-cap', { 'text-anchor': 'middle' }));
 }
 
-/* ---------- Defs (arrow markers) ---------- */
+/* ============================================================
+   Defs
+   ============================================================ */
 function buildDefs() {
   const defs = el('defs');
-  const markers = [
-    { id: 'arrow-tab',   cls: 'c-tab-f',  size: 6 },
-    { id: 'arrow-loud',  cls: 'c-hier-f', size: 7 },
-    { id: 'arrow-quiet', cls: 'ink-faint', size: 6 },
-  ];
-  for (const m of markers) {
-    const mk = el('marker', {
-      id: m.id, viewBox: '0 0 10 10', refX: 7, refY: 5,
-      markerWidth: m.size, markerHeight: m.size,
-      orient: 'auto-start-reverse',
-    });
-    mk.appendChild(el('path', { d: 'M0,0 L10,5 L0,10 Z', class: m.cls }));
-    defs.appendChild(mk);
-  }
+  const make = (id, cls, size = 7) => {
+    const m = el('marker', { id, viewBox: '0 0 10 10', refX: 7, refY: 5, markerWidth: size, markerHeight: size, orient: 'auto-start-reverse' });
+    m.appendChild(el('path', { d: 'M0,1 L10,5 L0,9 Z', class: cls }));
+    defs.appendChild(m);
+  };
+  make('arrow-tab', 'c-tab-f');
+  make('arrow-loud', 'c-hier-f');
+  make('arrow-quiet', 'ink-faint');
   return defs;
 }
 
-/* ---------- Build the whole SVG ---------- */
+/* ============================================================
+   Build SVG
+   ============================================================ */
 function buildSVG() {
-  const svg = el('svg', {
-    class: 'fig',
-    viewBox: '0 0 1600 900',
-    xmlns: NS,
-    preserveAspectRatio: 'xMidYMid meet',
-  });
+  const svg = el('svg', { class: 'fig', viewBox: '0 0 1600 900', xmlns: NS, preserveAspectRatio: 'xMidYMid meet' });
   svg.appendChild(buildDefs());
-
-  // Background fill (so PNG export reads it)
   svg.appendChild(el('rect', { x: 0, y: 0, width: 1600, height: 900, fill: 'var(--bg)' }));
 
-  // Caption strip top
-  svg.appendChild(text(60, 40, 'STRUCTURAL PRESERVATION MATRIX', 't-header', { fill: 'var(--fg)' }));
-  svg.appendChild(text(1540, 40, 'INGESTION · 1 PAPER → 3 ARCHITECTURES', 't-cap', { 'text-anchor': 'end' }));
-  svg.appendChild(el('line', { x1: 60, y1: 56, x2: 1540, y2: 56, class: 'hair', 'stroke-width': 1 }));
+  // Top title
+  svg.appendChild(text(50, 56, 'STRUCTURAL PRESERVATION', 't-title'));
+  svg.appendChild(text(1540, 56, '1 PAPER → 3 ARCHITECTURES', 't-cap', { 'text-anchor': 'end' }));
+  svg.appendChild(el('line', { x1: 50, y1: 76, x2: 1540, y2: 76, class: 'hair', 'stroke-width': 1 }));
 
-  // Vertical zone divider
-  svg.appendChild(el('line', { x1: 500, y1: 70, x2: 500, y2: 830, class: 'col-divider', 'stroke-width': 1 }));
+  // Zone divider
+  svg.appendChild(el('line', { x1: 510, y1: 90, x2: 510, y2: 830, class: 'col-divider', 'stroke-width': 1 }));
 
   svg.appendChild(buildPaper());
   svg.appendChild(buildRightZone());
-
-  // Bottom hairline + footnote
-  svg.appendChild(el('line', { x1: 60, y1: 854, x2: 1540, y2: 854, class: 'hair', 'stroke-width': 1 }));
-  svg.appendChild(text(60, 876, 'COLOR-CODED: §-HIERARCHY · TABLES · CITATIONS · ENRICHED METADATA', 't-cap'));
-  svg.appendChild(text(1540, 876, 'BLEACHED = STRUCTURE LOST · SOLID = STRUCTURE PRESERVED', 't-cap', { 'text-anchor': 'end' }));
 
   return svg;
 }
