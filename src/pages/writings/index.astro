@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allWritings = await getCollection('writings');
+const sortedWritings = allWritings.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Writings & Insights" description="Deep dives into model architectures, startup pipelines, skincare photobiology, and strategic product roadmaps by Taewan Yoon.">
+  <section class="section-spacing">
+    <h2 class="section-heading">All Writings & Insights</h2>
+    <p class="hero-lead" style="margin-bottom: 40px; max-width: 700px;">
+      A catalog of verified tactical checklists, strategic research audits, and structural frameworks exploring advanced AI ecosystems and data science.
+    </p>
+
+    <div class="writings-showcase-container" style="gap: 28px;">
+      {sortedWritings.map((writing, index) => (
+        <a href={`/writings/${writing.id}`} class:list={["article-grid-card", { "featured-outline": writing.data.featured }]} style="flex-direction: row; min-height: 180px;">
+          <div class="grid-card-visual" style={`width: 180px; height: auto; flex-shrink: 0; font-size: 2.5rem; display: flex; align-items: center; justify-content: center; ${!writing.data.coverImage ? 'background: var(--gradient-card-a);' : 'overflow: hidden;'}`}>
+            {writing.data.coverImage ? (
+              <Image src={writing.data.coverImage} alt={writing.data.title} width={360} height={240} style="width: 100%; height: 100%; object-fit: cover;" />
+            ) : (
+              <i class={index % 2 === 0 ? 'fas fa-terminal' : 'fas fa-cubes'}></i>
+            )}
+          </div>
+          <div class="grid-card-body" style="padding: 28px; width: 100%;">
+            <div>
+              <div class="article-card-meta">
+                {writing.data.featured && <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>}
+                <span class="category-chip">{writing.data.tags[0] || 'AI Strategy'}</span>
+                {writing.data.tags[1] && <span class="category-chip" style="color: #a855f7 !important; background: rgba(168, 85, 247, 0.05); border-color: rgba(168, 85, 247, 0.12);">{writing.data.tags[1]}</span>}
+                <span>•</span>
+                <span>{writing.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+              </div>
+              <h3 class="article-card-title" style="margin-bottom: 8px; font-size: 1.35rem;">{writing.data.title}</h3>
+              <p class="article-card-excerpt" style="margin-bottom: 0;">{writing.data.description}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media (max-width: 768px) {
+    .article-grid-card {
+      flex-direction: column !important;
+    }
+    .grid-card-visual {
+      width: 100% !important;
+      height: 120px !important;
+    }
+  }
+</style>

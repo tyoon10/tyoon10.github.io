@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Projects" description="Project case studies and strategic showcases by Taewan Yoon — product strategy, causal inference, and enterprise AI deployments.">
+  <section class="section-spacing subpage-content" style="max-width: 720px; margin: 0 auto;">
+    <h2 class="section-heading">All Projects</h2>
+    <p class="hero-lead" style="margin-bottom: 40px; max-width: 700px;">
+      Product strategy case studies, interactive data science tools, and enterprise AI deployment showcases.
+    </p>
+
+    <div class="writings-showcase-container" style="gap: 28px;">
+      {sortedProjects.map((project, index) => (
+        <a href={`/projects/${project.id}`} class:list={["article-grid-card", { "featured-outline": project.data.featured }]} style="flex-direction: row; min-height: 180px;">
+          <div class="grid-card-visual project-card-visual" style={`background: ${index % 2 === 0 ? 'var(--gradient-card-a)' : 'var(--gradient-card-b)'};`}>
+            {project.data.coverImage ? (
+              <Image src={project.data.coverImage} alt={project.data.title} widths={[360, 540, 720]} sizes="(max-width: 768px) 100vw, 220px" />
+            ) : (
+              <i class={index % 2 === 0 ? 'fas fa-layer-group' : 'fas fa-chart-line'} style="font-size: 2.5rem;"></i>
+            )}
+          </div>
+          <div class="grid-card-body" style="padding: 28px; width: 100%;">
+            <div>
+              <div class="article-card-meta">
+                {project.data.featured && <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>}
+                <span class="category-chip">{project.data.tags[0] || 'Project'}</span>
+                {project.data.tags[1] && <span class="category-chip" style="color: #a855f7 !important; background: rgba(168, 85, 247, 0.05); border-color: rgba(168, 85, 247, 0.12);">{project.data.tags[1]}</span>}
+                <span>•</span>
+                <span class="meta-date">{project.data.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
+              </div>
+              <h3 class="article-card-title" style="margin-bottom: 8px; font-size: 1.35rem;">{project.data.title}</h3>
+              <p class="article-card-excerpt" style="margin-bottom: 0;">{project.data.description}</p>
+            </div>
+            <div class="grid-card-footer" style="border: none; padding-top: 0; margin-top: 14px;">
+              <div class="tech-chips">
+                {project.data.tags.slice(2).map(tag => (
+                  <span class="chip-badge">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Back to Homepage -->
+    <div style="margin-top: 40px;">
+      <a href="/" class="action-anchor" style="font-size: 0.9rem;">
+        <i class="fas fa-arrow-left" style="margin-right: 6px;"></i> Back to homepage
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-card-visual {
+    width: 220px;
+    height: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    overflow: hidden;
+    color: var(--text-muted);
+  }
+  .project-card-visual img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  @media (max-width: 768px) {
+    .article-grid-card {
+      flex-direction: column !important;
+    }
+    .grid-card-visual,
+    .project-card-visual {
+      width: 100% !important;
+      height: 160px !important;
+    }
+  }
+</style>

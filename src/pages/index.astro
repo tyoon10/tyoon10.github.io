@@ -1,0 +1,355 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LogoTray from '../components/LogoTray.astro';
+import { events } from '../data/events';
+
+// Fetch projects and writings dynamically from Astro Content Collections
+const allProjects = await getCollection('projects');
+const allWritings = await getCollection('writings');
+
+// Sort writings by date descending
+const sortedWritings = allWritings.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Filter featured posts (pinned on top) and latest posts (grid below)
+const featuredWritings = sortedWritings.filter(w => w.data.featured).slice(0, 2);
+const featuredIds = new Set(featuredWritings.map(w => w.id));
+const latestWritings = sortedWritings.filter(w => !featuredIds.has(w.id)).slice(0, 2);
+
+// Filter projects — featured pinned on top, latest in 2-column grid (mirrors writings)
+const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 2);
+const featuredProjectIds = new Set(featuredProjects.map(p => p.id));
+const latestProjects = sortedProjects.filter(p => !featuredProjectIds.has(p.id)).slice(0, 2);
+
+// Events — newest first; show latest 3, collapse the rest
+const sortedEvents = events.slice().sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+const visibleEvents = sortedEvents.slice(0, 3);
+const hiddenEvents = sortedEvents.slice(3);
+const fmtEventDate = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const roleStyles: Record<string, { pill: string; marker: string }> = {
+  organizer: { pill: 'status-organizer', marker: '#9333ea' },
+  keynote: { pill: 'status-keynote', marker: '#0d9488' },
+  host: { pill: 'status-host', marker: '#0ea5e9' },
+  neutral: { pill: 'status-neutral', marker: '#64748b' },
+};
+const iconClass = (icon: string) => ({
+  linkedin: 'fab fa-linkedin',
+  github: 'fab fa-github',
+  globe: 'fas fa-globe',
+  'book-open': 'fas fa-book-open',
+  comments: 'fas fa-comments',
+  video: 'fas fa-video',
+  code: 'fas fa-code',
+}[icon] || 'fas fa-link');
+---
+
+<BaseLayout title="Deploying Frontier AI" description="Personal portfolio of Taewan Yoon — leading AI ecosystems, PM, and strategic enterprise AI deployment.">
+  
+  <!-- MINIMALIST HERO TITLE SECTION -->
+  <section class="hero-section">
+    <div class="hero-drift-spot"></div>
+    <div class="hero-content">
+      <h1 class="hero-headline">
+        Deploying <span>Frontier AI</span> inside <span>Enterprise Finance</span>
+      </h1>
+      <p class="hero-lead">
+        I bridge the gap between model breakthroughs and institutional deployment. I translate what the best models can do into strategies that institutions can actually deploy, and I'm always working to understand both sides more deeply.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="action-anchor">Explore Projects <i class="fas fa-arrow-right"></i></a>
+        <a href="/writings" class="action-anchor">Read My Writing <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ME SECTION -->
+  <section id="about" class="section-spacing">
+    <h2 class="section-heading">About Me</h2>
+    <div class="profile-bento">
+      <div class="profile-bio-card">
+        <div class="profile-header" style="margin-bottom: 20px;">
+          <div class="profile-info" style="display: flex; align-items: center; gap: 12px;">
+            <h2 style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;">Taewan Yoon, CFA</h2>
+            <a href="https://www.linkedin.com/in/taewan-yoon/" target="_blank" rel="noopener" class="profile-linkedin" title="LinkedIn" aria-label="Taewan Yoon on LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-body-text">
+          <p>
+            Columbia MBA/MS. Built and scaled Claude's NYC builder ecosystem from 0 to 1,000+ members. Leading the AI Club and AI Startup Challenge, and founded BRAIN NYC—a startup network tackling the hardest business challenges with frontier AI.
+          </p>
+          <p>
+            AI strategist, product manager, and startup community builder. Shipped agentic workflows as a Manus AI Fellow and co-founded AI-native fintech startup (acquired by a major insurance firm). Mentor at CFA Society New York.
+          </p>
+        </div>
+
+        <!-- DIRECT BRAND LOGOS ROW -->
+        <LogoTray />
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION: BENTO PINNED LAYOUT -->
+  <section id="projects" class="section-spacing">
+    <h2 class="section-heading">Projects</h2>
+    
+    <div class="writings-showcase-container">
+
+      <!-- 1) Featured Projects: Pinned Widescreen Cards (stacked) -->
+      {featuredProjects.map(fp => (
+        <div class="pinned-article-card featured-outline">
+          <div class="pinned-article-visual">
+            {fp.data.coverImage ? (
+              <Image src={fp.data.coverImage} alt={fp.data.title} width={400} height={260} style="width: 100%; height: 100%; object-fit: cover;" />
+            ) : (
+              <i class="fas fa-layer-group"></i>
+            )}
+          </div>
+          <div class="pinned-article-content">
+            <div class="article-card-meta">
+              <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
+              <span class="category-chip">{fp.data.tags[0] || 'Project'}</span>
+              <span>{fp.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+            </div>
+            <a href={`/projects/${fp.id}`} class="card-stretch-link"><h3 class="article-card-title">{fp.data.title}</h3></a>
+            <p class="article-card-excerpt">{fp.data.description}</p>
+            {fp.data.links && fp.data.links.length > 0 && (
+              <div class="pinned-card-links">
+                {fp.data.links.map(l => (
+                  <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null} class="arrow-link-action">
+                    {l.icon === 'linkedin' && <i class="fab fa-linkedin"></i>}
+                    {l.icon === 'github' && <i class="fab fa-github"></i>}
+                    {l.icon === 'globe' && <i class="fas fa-globe"></i>}
+                    {l.icon === 'book-open' && <i class="fas fa-book-open"></i>}
+                    {l.icon === 'comments' && <i class="fas fa-comments"></i>}
+                    {l.icon === 'video' && <i class="fas fa-video"></i>}
+                    {l.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+
+      <!-- 2) Latest Projects: 2-Column Grid -->
+      <div class="latest-articles-grid">
+        {latestProjects.map((p, index) => (
+          <a href={`/projects/${p.id}`} class="article-grid-card">
+            <div class={`grid-card-visual ${!p.data.coverImage ? (index % 2 === 0 ? 'header-gradient-b' : 'header-gradient-c') : ''}`}>
+              {p.data.coverImage ? (
+                <Image src={p.data.coverImage} alt={p.data.title} width={400} height={200} style="width: 100%; height: 100%; object-fit: cover;" />
+              ) : (
+                <i class={index % 2 === 0 ? 'fas fa-layer-group' : 'fas fa-chart-line'}></i>
+              )}
+            </div>
+            <div class="grid-card-body">
+              <div>
+                <div class="article-card-meta">
+                  <span class="category-chip">{p.data.tags[0] || 'Project'}</span>
+                </div>
+                <h3 class="article-card-title">{p.data.title}</h3>
+                <p class="article-card-excerpt">{p.data.description}</p>
+              </div>
+              <div class="grid-card-footer">
+                <span>{p.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- See All Projects Link -->
+    <div class="more-writings-row" style="margin-top: 28px;">
+      <a href="/projects" class="action-anchor">See all projects <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- WRITINGS SHOWCASE: PINNED / LATEST / MORE -->
+  <section id="posts" class="section-spacing">
+    <h2 class="section-heading">Writings & Insights</h2>
+    
+    <div class="writings-showcase-container">
+      
+      <!-- 1) Featured Articles: Pinned Widescreen Cards (stacked) -->
+      {featuredWritings.map(fw => (
+        <a href={`/writings/${fw.id}`} class="pinned-article-card featured-outline">
+          <div class="pinned-article-visual">
+            {fw.data.coverImage ? (
+              <Image src={fw.data.coverImage} alt={fw.data.title} width={400} height={260} style="width: 100%; height: 100%; object-fit: cover;" />
+            ) : (
+              <i class="fas fa-cubes"></i>
+            )}
+          </div>
+          <div class="pinned-article-content">
+            <div class="article-card-meta">
+              <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
+              <span class="category-chip">{fw.data.tags[0] || 'AI Strategy'}</span>
+              <span>{fw.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+            </div>
+            <h3 class="article-card-title">{fw.data.title}</h3>
+            <p class="article-card-excerpt">
+              {fw.data.description}
+            </p>
+          </div>
+        </a>
+      ))}
+
+      <!-- 2) Latest Articles: Refined 2-Column Grid Below Pinned Card -->
+      <div class="latest-articles-grid">
+        {latestWritings.map((writing, index) => (
+          <a href={`/writings/${writing.id}`} class="article-grid-card">
+            <div class={`grid-card-visual ${!writing.data.coverImage ? (index % 2 === 0 ? 'header-gradient-b' : 'header-gradient-c') : ''}`}>
+              {writing.data.coverImage ? (
+                <Image src={writing.data.coverImage} alt={writing.data.title} width={400} height={200} style="width: 100%; height: 100%; object-fit: cover;" />
+              ) : (
+                <i class={index % 2 === 0 ? 'fas fa-terminal' : 'fas fa-seedling'}></i>
+              )}
+            </div>
+            <div class="grid-card-body">
+              <div>
+                <div class="article-card-meta">
+                  <span class="category-chip">{writing.data.tags[0] || 'AI Strategy'}</span>
+                </div>
+                <h3 class="article-card-title">{writing.data.title}</h3>
+                <p class="article-card-excerpt">{writing.data.description}</p>
+              </div>
+              <div class="grid-card-footer">
+                <span>{writing.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- 3) Minimal 'More' Link Action -->
+      <div class="more-writings-row">
+        <a href="/writings" class="action-anchor">See all articles <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EVENTS TIMELINE -->
+  <section id="events" class="section-spacing">
+    <h2 class="section-heading">Events</h2>
+    
+    <div class="ecosystem-timeline">
+      {visibleEvents.map(ev => (
+        <div class="timeline-row">
+          <div class="timeline-marker" style={`border-color: ${roleStyles[ev.roleStyle].marker};`}></div>
+          <div class="timeline-card">
+            <div class="timeline-details">
+              <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="timeline-title-link">
+                <h3 class="timeline-title">{ev.title}</h3>
+              </a>
+              <div class="timeline-meta-row">
+                <span class={`status-pill ${roleStyles[ev.roleStyle].pill}`}>{ev.role}</span>
+                <span class="meta-info"><span class="meta-date">{fmtEventDate(ev.date)}</span><span class="meta-sep">•</span><span class="meta-loc">{ev.location}</span></span>
+              </div>
+            </div>
+            <div class="timeline-actions">
+              {ev.links.map(l => (
+                <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null} class="timeline-action-btn"><i class={iconClass(l.icon)}></i> {l.name}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {hiddenEvents.length > 0 && (
+        <div id="more-events" hidden>
+          {hiddenEvents.map(ev => (
+            <div class="timeline-row">
+              <div class="timeline-marker" style={`border-color: ${roleStyles[ev.roleStyle].marker};`}></div>
+              <div class="timeline-card">
+                <div class="timeline-details">
+                  <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="timeline-title-link">
+                    <h3 class="timeline-title">{ev.title}</h3>
+                  </a>
+                  <div class="timeline-meta-row">
+                    <span class={`status-pill ${roleStyles[ev.roleStyle].pill}`}>{ev.role}</span>
+                    <span class="meta-info"><span class="meta-date">{fmtEventDate(ev.date)}</span><span class="meta-sep">•</span><span class="meta-loc">{ev.location}</span></span>
+                  </div>
+                </div>
+                <div class="timeline-actions">
+                  {ev.links.map(l => (
+                    <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null} class="timeline-action-btn"><i class={iconClass(l.icon)}></i> {l.name}</a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {hiddenEvents.length > 0 && (
+      <div class="more-writings-row" style="margin-top: 28px;">
+        <button type="button" id="toggle-events" class="action-anchor" aria-expanded="false" aria-controls="more-events" style="background: none; border: none; cursor: pointer; font: inherit;">
+          Show {hiddenEvents.length} more events <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+    )}
+  </section>
+
+  <!-- CONVERSION BOX (GTM LEAD CAPTURE) -->
+  <section id="contact" class="section-spacing">
+    <div class="gtm-contact-card">
+      <h2 class="contact-title">Let's Build on Enterprise AI</h2>
+      <p class="contact-subtitle">
+        Selectively pursuing roles in DevRel, AI Product Strategy, and Solutions Architecture where deep FinTech expertise and hands-on AI deployment experience create value.
+      </p>
+      <div class="contact-buttons-row">
+        <button class="email-copy-btn" id="email-btn">
+          <i class="far fa-envelope"></i> <span id="email-btn-text">contact@twyoon.com</span>
+        </button>
+        <a href="https://linkedin.com/in/taewan-yoon" target="_blank" class="social-anchor-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/tyoon10" target="_blank" class="social-anchor-btn" title="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clipboard Copy + Events Toggle Logic -->
+  <script is:inline>
+    const emailBtn = document.getElementById('email-btn');
+    const textSpan = document.getElementById('email-btn-text');
+
+    if (emailBtn && textSpan) {
+      emailBtn.addEventListener('click', () => {
+        const email = 'contact@twyoon.com';
+        navigator.clipboard.writeText(email).then(() => {
+          textSpan.innerHTML = '<i class="fas fa-check" style="color: #38bdf8;"></i> Copied Email!';
+          setTimeout(() => {
+            textSpan.textContent = email;
+          }, 1800);
+        }).catch(err => {
+          console.error('Could not copy email: ', err);
+        });
+      });
+    }
+
+    // Events expand / collapse
+    const toggleBtn = document.getElementById('toggle-events');
+    const moreEvents = document.getElementById('more-events');
+
+    if (toggleBtn && moreEvents) {
+      toggleBtn.addEventListener('click', () => {
+        const expanded = moreEvents.hidden === false;
+        moreEvents.hidden = expanded;
+        toggleBtn.setAttribute('aria-expanded', String(!expanded));
+        const count = moreEvents.querySelectorAll('.timeline-row').length;
+        toggleBtn.innerHTML = expanded
+          ? `Show ${count} more events <i class="fas fa-chevron-down"></i>`
+          : `Show fewer events <i class="fas fa-chevron-up"></i>`;
+      });
+    }
+  </script>
+
+</BaseLayout>

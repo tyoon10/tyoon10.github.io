@@ -1,76 +1,98 @@
-# twyoon.com — Personal Portfolio Site
+# twyoon.com — Astro Codebase Reference
 
-Hugo/HugoBlox static site deployed via GitHub Pages. Nested git repo inside Chief of Staff, excluded from parent `.gitignore`.
+Astro v5 personal portfolio and technical writings site, deployed via GitHub Pages.
 
 - **Live:** https://twyoon.com
 - **Repo:** https://github.com/tyoon10/tyoon10.github.io (branch: `main`)
-- **Engine:** Hugo Extended v0.155.1, HugoBlox blox-bootstrap/v5
-- **Deploy:** Push to `main` → GitHub Actions auto-builds → GitHub Pages
+- **Engine:** Astro v5 (Static Site Generator)
+- **Active Directory:** `/home/taewan/projects/code/twyoon` (WSL)
+- **Legacy Backup:** `/home/taewan/projects/code/twyoon-backup` (WSL)
 
-## Content Structure
+---
 
-Content types: `event/`, `post/`, `project/`. Each item is a **folder** with `index.md` inside:
+## 📂 Content Collections Structure
+
+Content is organized inside type-safe collections matching the Zod schemas configured in `src/content.config.ts`.
+*   **Writings (`src/content/writings/`):** Folders containing an `index.md` entry.
+*   **Projects (`src/content/projects/`):** Folders containing an `index.md` entry.
+
+Every entry must be a **folder** with `index.md` inside:
 ```
-content/
-  event/mistral-worldwide-hackathon-2026/index.md
-  post/iterate-columbia-hackathon-2026-recap/index.md
-  project/ai-pipeline-quant-finance/index.md
+src/content/
+  projects/access-to-experts/index.md
+  writings/tracing-the-minds-behind-claude-code/index.md
+```
+*Note: The loader matches `**/index.{md,mdx}` to automatically ignore helper draft files like `REVIEW.md` inside content folders.*
+
+---
+
+## 📑 Schema Front-Matter Conventions
+
+### Writings Collection Schema:
+```yaml
+title: "Tracing the Minds Behind Claude Code"
+date: 2026-04-06
+description: "I spent a weekend reading two Claude Code source trees side by side."
+featured: true
+tags:
+  - "Claude Code"
+  - "Anthropic"
 ```
 
-Templates live in `content/{type}/_template/index.md` — copy to create new items.
+### Projects Collection Schema:
+```yaml
+title: "Causal Inference — Interactive Study Guide"
+date: 2026-03-01
+description: "A single-page interactive guide detailing potential outcomes."
+featured: true
+tags:
+  - "Double ML"
+  - "JavaScript"
+links:
+  - name: "Live App"
+    url: "https://tyoon10.github.io/causal-inference/"
+    icon: "globe"
+  - name: "Codebase"
+    url: "https://github.com/tyoon10/causal-inference"
+    icon: "github"
+```
 
-Author profile: `content/authors/admin/_index.md` (note the underscore).
+---
 
-## Frontmatter Conventions
+## 🎨 Visual Design System (Alabaster Light Default)
 
-- **Events:** title, event, event_url, location, summary, date, date_end, all_day, authors, tags, links (with icon/icon_pack/name/url)
-- **Posts:** title, summary, date, authors, tags, projects (cross-links to project slugs)
-- **Projects:** title, summary, tags, date, external_link, links
+The site is strictly locked into the **clean, high-contrast Alabaster Light theme** (no dark-mode toggle or system-bars are rendered):
+*   **Base Variables:** Background base `#fafafc`, base surface white `rgba(255,255,255,0.65)`, high-contrast text Slate-900 `#0f172a`, caption text Slate-500 `#64748b`.
+*   **Backdrop Overlay:** Subtly styled dot-matrix overlay (`radial-gradient` using border opacity) with active radial glow blooms in background.
+*   **Brand Affiliate Logos:** Rendered as physical images in `src/components/LogoTray.astro` loaded from `/media/logos/` with premium grayscale transition rules.
+*   **Typography Presets:** Custom line-heights and margins defined for long-form reading under the `.markdown-body` class inside `global.css`.
 
-## Article Readability
+---
 
-Long-form posts should be visually scannable, not walls of text:
-- **Bold key figures and stats** — numbers like percentages, dollar amounts, and headcounts should stand out
-- **Use markdown tables** for structured comparisons (e.g., side-by-side options, data breakdowns, bank-by-bank examples)
-- **Use blockquote callouts** (`> **Key point:**`) for section takeaways — gives readers anchor points to scan
-- **Promote repeated patterns to `###` subheadings** — e.g., a list of 3 approaches becomes three `###` sections, not bold paragraphs
-- **Pull stats into bullet lists or tables** instead of burying them in prose paragraphs
+## 🖼️ Image Integration inside Markdown
 
-## Cross-Linking Convention
+*   Always use standard **relative Markdown syntax** to load local images from inside the entry folder:
+    `![The Compaction Stages](./compaction-stages.png)`
+*   Follow up the image block with a captioned paragraph for visual anchors:
+    `<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Compaction stages caption...</p>`
+*   At compile time, Astro v5 automatically checks, compresses, and outputs optimized `.webp` copies of your images into server assets.
 
-Events and posts that cover the same occasion should link bidirectionally:
-- **Event → Post**: Add a `links` entry with `icon: book-open` and `name: Read the Article`
-- **Post → Event**: Add a `links` entry with `icon: calendar-alt` and `name: Workshop Event` (or similar)
+---
 
-## Math Mode & Dollar Signs
+## 🛠️ CLI Development Commands
 
-Global math is **disabled** (`hugo.yaml` → `params.features.math.enable: false`). Dollar signs work as plain text with no escaping needed.
-
-If a page needs LaTeX, enable per-page via frontmatter `math: true` — but note that `$...$` will then trigger KaTeX on that page. Use `\(...\)` for inline math on math-enabled pages to avoid conflicts with currency.
-
-## Future-Dated Content
-
-Hugo skips pages where `date` is in the future. CI now includes `--buildFuture` (added 2026-03-10), but as a belt-and-suspenders approach:
-- **Always set `publishDate: {today}` on future-dated events** so they render even without `--buildFuture`
-- The `date` field controls the event date displayed; `publishDate` controls when Hugo considers the page eligible for rendering
-
-## Build Commands
+Ensure you are inside the native `/home/taewan/projects/code/twyoon` directory and have NVM node environment sourced:
 
 ```bash
-hugo server                  # Dev server at localhost:1313
-hugo --gc --minify           # Production build (outputs to public/)
-hugo --gc --minify --buildFuture  # Include future-dated content
+npm run dev        # Launch local dev server at http://localhost:4321
+npm run build      # Trigger production static HTML compiling (outputs to dist/)
+npm run preview    # Preview compiled dist/ build locally
+npx astro check    # Run schema checks and type validation
 ```
 
-## Git Workflow
+---
 
-- Stage specific files — never `git add -A` or `git add .`
-- Never commit `public/` or `resources/_gen/` (both in `.gitignore`, regenerated by CI)
-- Single branch (`main`); every push triggers deploy
-- Resume PDF: `static/resume.pdf` (served at twyoon.com/resume.pdf)
+## 🧹 Housekeeping Guidelines
 
-## What NOT to Do
-
-- Don't duplicate content from README.md — it has full human docs (theme modules, DNS, troubleshooting)
-- Don't modify `hugo.yaml` without understanding HugoBlox config structure
-- Don't create content files outside folder-based structure (no bare `.md` in content root)
+*   The auxiliary script `scripts/migrate-content.cjs` is retained temporarily for workspace migration reference.
+*   Do not delete `/home/taewan/projects/code/twyoon-backup` as it acts as your absolute safety net backup of the original Hugo site.
