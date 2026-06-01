@@ -3,58 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <title>Designing the Memory Architecture — Conversation</title>
+<!-- Built from tools/chat-artifact/template.html. Minimal variant: no header,
+     thinking lines, toolbar, or footer — just the turns. claude.ai-faithful:
+     SERIF Claude responses, SANS user bubbles. Render at 2x + crop.cjs sentinel. -->
 <style>
   :root {
-    --bg: #f5f4ef;
-    --user-bubble: #ebe9e1;
-    --text: #1a1a19;
-    --text-dim: #8b8880;
-    --border: #e0ded6;
-    --code-bg: #efeeea;
-    --accent: #c4a882;
-    --col-width: 760px;
-    --font-body: -apple-system, 'Segoe UI', system-ui, sans-serif;
-    --font-heading: 'Georgia', 'Times New Roman', serif;
+    --bg:          #faf9f5;
+    --user-bubble: #f0ede4;
+    --text:        #1a1a18;
+    --muted:       #8d8a82;
+    --border:      #e6e3da;
+    --code-bg:     #f0ede4;
+    --clay:        #d97757;
+    --serif: 'Tiempos Text', Georgia, 'Times New Roman', serif;   /* ASSISTANT */
+    --sans:  -apple-system, 'Segoe UI', system-ui, sans-serif;     /* USER / UI  */
+    --mono:  'SF Mono', 'Fira Code', Consolas, monospace;
+    --col-width: 720px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { background: #FF00FF; }   /* sentinel for auto-crop */
+  html, body { background: #FF00FF; }            /* sentinel for auto-crop */
 
   .card {
     width: var(--col-width);
     margin: 0 auto;
     background: var(--bg);
-    border: 1px solid var(--border);
-    padding: 40px 48px 44px;
-    font-family: var(--font-body);
+    padding: 40px 40px 40px;
     color: var(--text);
-    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  .user-msg { display: flex; justify-content: flex-end; margin: 22px 0 8px; }
+  /* USER MESSAGE — sans, right-aligned pill */
+  .user-msg { display: flex; justify-content: flex-end; margin: 32px 0 0; }
   .card > .user-msg:first-child { margin-top: 0; }
   .user-bubble {
     background: var(--user-bubble);
-    border-radius: 18px;
-    padding: 11px 17px;
-    max-width: 82%;
-    font-size: 15px;
+    border-radius: 22px;
+    padding: 13px 20px;
+    max-width: 75%;
+    font-family: var(--sans);
+    font-size: 16px;
     line-height: 1.55;
     color: var(--text);
   }
 
-  .claude-msg { margin: 10px 0 26px; }
+  /* ASSISTANT RESPONSE — serif, left-aligned */
+  .claude-msg { margin: 22px 0 0; }
   .card > .claude-msg:last-child { margin-bottom: 0; }
-  .claude-body { font-size: 15px; line-height: 1.72; }
-  .claude-body p { margin-bottom: 0; }
+  .claude-body { font-family: var(--serif); font-size: 17px; line-height: 1.75; color: var(--text); }
+  .claude-body p { margin: 0; }
   .claude-body strong { font-weight: 700; }
   .claude-body em { font-style: italic; }
   .claude-body code {
     background: var(--code-bg);
-    padding: 1.5px 5px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    padding: 1.5px 5px; border-radius: 4px;
+    font-family: var(--mono); font-size: 0.86em;
   }
 </style>
 </head>
