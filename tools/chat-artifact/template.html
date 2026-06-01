@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chat Artifact</title>
+<!--
+  CHAT ARTIFACT TEMPLATE  (claude.ai-faithful)
+  See README.md for the full design spec and rendering pipeline.
+
+  Authoring:
+    - Each turn = one .user-msg block + one .claude-msg block. Repeat.
+    - Optional per-response: .thinking line (collapsed extended-thinking header).
+    - Optional at the very end: .toolbar (action icons) and .brand (clay sunburst).
+    - Entities: &lt; for <, &amp; for &, &rsquo;/&ldquo;/&rdquo; for curly quotes.
+    - Do NOT change the #FF00FF sentinel background — the cropper keys on it.
+
+  Render (2x) then crop:
+    chrome --headless=new --force-device-scale-factor=2 --hide-scrollbars \
+      --screenshot=raw.png --window-size=860,9000 a.html
+    node crop.cjs raw.png out.png
+-->
+<style>
+  :root {
+    /* ---- design tokens (see README §2) ---- */
+    --bg:          #faf9f5;
+    --user-bubble: #f0ede4;
+    --text:        #1a1a18;
+    --muted:       #8d8a82;
+    --border:      #e6e3da;
+    --code-bg:     #f0ede4;
+    --clay:        #d97757;
+
+    /* ---- type stacks (see README §3) ---- */
+    --serif: 'Tiempos Text', Georgia, 'Times New Roman', serif;  /* ASSISTANT */
+    --sans:  -apple-system, 'Segoe UI', system-ui, sans-serif;    /* USER / UI  */
+    --mono:  'SF Mono', 'Fira Code', Consolas, monospace;
+
+    --col-width: 720px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #FF00FF; }            /* sentinel for auto-crop */
+
+  .card {
+    width: var(--col-width);
+    margin: 0 auto;
+    background: var(--bg);
+    /* square outer edge so no sentinel bleeds into corners */
+    padding: 44px 40px 40px;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ---- 1. USER MESSAGE (sans, right-aligned pill) ---- */
+  .user-msg { display: flex; justify-content: flex-end; margin: 32px 0 0; }
+  .card > .user-msg:first-child { margin-top: 0; }
+  .user-bubble {
+    background: var(--user-bubble);
+    border-radius: 22px;
+    padding: 13px 20px;
+    max-width: 75%;
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  /* ---- 2. THINKING SUMMARY (muted sans line + chevron) ---- */
+  .thinking {
+    font-family: var(--sans);
+    font-size: 14.5px;
+    color: var(--muted);
+    margin: 36px 0 12px;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .thinking::after { content: '›'; font-size: 17px; line-height: 1; }
+
+  /* ---- 3. ASSISTANT RESPONSE (serif, left-aligned) ---- */
+  .claude-msg { margin: 12px 0 0; }
+  /* when there is no thinking line, give the response top breathing room */
+  .user-msg + .claude-msg { margin-top: 22px; }
+  .claude-body {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .claude-body p { margin: 0 0 16px; }
+  .claude-body p:last-child { margin-bottom: 0; }
+  .claude-body strong { font-weight: 700; }
+  .claude-body em { font-style: italic; }
+  .claude-body h3 { font-family: var(--serif); font-size: 19px; font-weight: 700; margin: 22px 0 10px; }
+  .claude-body h4 { font-family: var(--serif); font-size: 16px; font-weight: 700; margin: 18px 0 8px; }
+  .claude-body ul, .claude-body ol { padding-left: 24px; margin: 0 0 16px; }
+  .claude-body li { margin: 5px 0; }
+  .claude-body blockquote {
+    border-left: 2px solid var(--clay);
+    padding: 4px 16px; margin: 14px 0;
+    color: var(--text); font-style: italic;
+  }
+  .claude-body code {
+    background: var(--code-bg);
+    padding: 1.5px 5px; border-radius: 4px;
+    font-family: var(--mono); font-size: 0.86em;
+  }
+  .claude-body table { width: 100%; border-collapse: collapse; margin: 14px 0; font-family: var(--sans); font-size: 14px; }
+  .claude-body th, .claude-body td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; }
+  .claude-body th { background: var(--code-bg); font-weight: 600; }
+
+  /* ---- 4. ACTION TOOLBAR (muted outline icons) ---- */
+  .toolbar { display: flex; gap: 18px; margin: 20px 0 0; color: var(--muted); }
+  .toolbar svg { width: 19px; height: 19px; stroke: var(--muted); fill: none; stroke-width: 1.6; }
+
+  /* ---- 5. BRAND GLYPH (clay sunburst, end only) ---- */
+  .brand { margin: 34px 0 0; }
+  .brand svg { width: 30px; height: 30px; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- ============ TURN 1 ============ -->
+  <div class="user-msg"><div class="user-bubble">First user message goes here.</div></div>
+
+  <!-- optional collapsed extended-thinking header -->
+  <div class="thinking">Short summary of what Claude weighed</div>
+
+  <div class="claude-msg">
+    <div class="claude-body">
+      <p>First paragraph of Claude&rsquo;s response. Use <em>italics</em> for the one key
+      word, <strong>bold</strong> for the load-bearing clause, em dashes for asides,
+      and inline <code>code</code> where appropriate.</p>
+      <p>A second paragraph. Keep the line-height generous and the prose in Claude&rsquo;s
+      actual register.</p>
+    </div>
+  </div>
+
+  <!-- ============ TURN 2 (no thinking line example) ============ -->
+  <div class="user-msg"><div class="user-bubble">A follow-up question.</div></div>
+  <div class="claude-msg">
+    <div class="claude-body">
+      <p>The follow-up answer.</p>
+    </div>
+  </div>
+
+  <!-- optional: action toolbar after the final response -->
+  <div class="toolbar">
+    <!-- copy -->
+    <svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+    <!-- thumbs up -->
+    <svg viewBox="0 0 24 24"><path d="M7 11v9H4v-9zM7 11l4-7a2 2 0 0 1 3 2l-1 5h5a2 2 0 0 1 2 2.4l-1.5 6A2 2 0 0 1 19.5 20H7"/></svg>
+    <!-- thumbs down -->
+    <svg viewBox="0 0 24 24"><path d="M17 13V4h3v9zM17 13l-4 7a2 2 0 0 1-3-2l1-5H6a2 2 0 0 1-2-2.4l1.5-6A2 2 0 0 1 7.5 4H17"/></svg>
+    <!-- retry -->
+    <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v5h-5"/></svg>
+  </div>
+
+  <!-- optional: Claude sunburst (clay) — approximation of the brand mark -->
+  <div class="brand">
+    <svg viewBox="0 0 100 100" aria-label="Claude">
+      <g fill="#d97757">
+        <!-- 12 tapered spokes radiating from center -->
+        <g transform="translate(50,50)">
+          <g><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(30)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(60)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(90)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(120)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(150)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(180)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(210)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(240)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(270)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(300)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+          <g transform="rotate(330)"><rect x="-3.2" y="-46" width="6.4" height="34" rx="3.2"/></g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+</div>
+</body>
+</html>
