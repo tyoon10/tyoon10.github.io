@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Designing the Memory Architecture — Conversation</title>
+<style>
+  :root {
+    --bg: #f5f4ef;
+    --user-bubble: #ebe9e1;
+    --text: #1a1a19;
+    --text-dim: #8b8880;
+    --border: #e0ded6;
+    --code-bg: #efeeea;
+    --accent: #c4a882;
+    --col-width: 760px;
+    --font-body: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    --font-heading: 'Georgia', 'Times New Roman', serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #FF00FF; }   /* sentinel for auto-crop */
+
+  .card {
+    width: var(--col-width);
+    margin: 0 auto;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 44px 48px 48px;
+    font-family: var(--font-body);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 4px 0 22px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  .hero .eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .hero p {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .hero-tags {
+    display: flex; gap: 8px; justify-content: center;
+    margin-top: 14px; flex-wrap: wrap;
+  }
+  .hero-tags span {
+    font-size: 11px;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 3px 11px;
+    border-radius: 20px;
+  }
+
+  .user-msg { display: flex; justify-content: flex-end; margin: 22px 0 8px; }
+  .user-bubble {
+    background: var(--user-bubble);
+    border-radius: 18px;
+    padding: 11px 17px;
+    max-width: 82%;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .claude-msg { margin: 6px 0 26px; }
+  .speaker {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .speaker .dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent); display: inline-block;
+    box-shadow: 0 0 0 3px rgba(196,168,130,0.18);
+  }
+  .claude-body { font-size: 15px; line-height: 1.72; }
+  .claude-body p { margin-bottom: 0; }
+  .claude-body strong { font-weight: 700; }
+  .claude-body em { font-style: italic; }
+  .claude-body code {
+    background: var(--code-bg);
+    padding: 1.5px 5px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 30px 0 6px;
+    color: var(--text-dim); font-size: 10px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 34px; padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim); font-size: 12.5px;
+  }
+  .footer strong { color: var(--text); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="hero">
+    <div class="eyebrow">Working it out with Claude</div>
+    <h1>Designing the Memory Architecture</h1>
+    <p>The conversation that turned a vague worry &mdash; &ldquo;how does any of this carry over?&rdquo; &mdash; into a concrete set of rules for memory in Claude Code.</p>
+    <div class="hero-tags">
+      <span>Claude Code</span>
+      <span>Files as memory</span>
+      <span>Opus 4.8</span>
+    </div>
+  </div>
+
+  <div class="user-msg"><div class="user-bubble">When does CLAUDE.md actually get read?</div></div>
+  <div class="claude-msg">
+    <div class="speaker"><span class="dot"></span>CLAUDE</div>
+    <div class="claude-body"><p>At session start, exactly once. The cloud container clones the repo, reads the repo-root <code>CLAUDE.md</code>, and bakes it into the system prompt for the whole session. Every scheduled Routine fires a new session, so every fire picks up the latest CLAUDE.md; every new chat tab does the same. Mid-session edits don&rsquo;t take effect; the system prompt is sealed at boot.</p></div>
+  </div>
+
+  <div class="user-msg"><div class="user-bubble">What about the conversation we&rsquo;re having right now? How does it carry over?</div></div>
+  <div class="claude-msg">
+    <div class="speaker"><span class="dot"></span>CLAUDE</div>
+    <div class="claude-body"><p>It doesn&rsquo;t, unless every turn writes itself to <code>journal/&lt;date&gt;.md</code>. The verbatim <code>### HH:MM | User</code> and <code>### HH:MM | Agent</code> lines <em>are</em> the cross-session memory protocol. Tomorrow&rsquo;s session opens yesterday&rsquo;s journal and reads those lines back into context. If a turn skipped the write, that exchange is gone forever.</p></div>
+  </div>
+
+  <div class="user-msg"><div class="user-bubble">If a Routine writes to main while I&rsquo;m in a chat, do I see it?</div></div>
+  <div class="claude-msg">
+    <div class="speaker"><span class="dot"></span>CLAUDE</div>
+    <div class="claude-body"><p>No, not until your session explicitly pulls. The cloud session clones once at start; after that the checkout is a snapshot. A Routine firing at 22:00 while your chat is open at 23:00 has updated <code>origin/main</code>, but your chat&rsquo;s local files are still frozen at clone time.</p></div>
+  </div>
+
+  <div class="user-msg"><div class="user-bubble">Should I just pull on every turn, then?</div></div>
+  <div class="claude-msg">
+    <div class="speaker"><span class="dot"></span>CLAUDE</div>
+    <div class="claude-body"><p>Tempting, but wasteful. Someone typing &ldquo;cold shower done&rdquo; doesn&rsquo;t need to re-read the profile, pull from main, and grep the journal. So classify the input first. There are seven recognizable shapes (routine completion, structured event, sleep state, Q&amp;A, decision, backfill, reflective), and each maps to a <em>read level</em>, from LIGHT (today&rsquo;s daily log only) up to HEAVY (the full chart). Only HEAVY turns pull. Most turns stay cheap.</p></div>
+  </div>
+
+  <div class="user-msg"><div class="user-bubble">Does the mechanism work the same for fresh and long-running sessions?</div></div>
+  <div class="claude-msg">
+    <div class="speaker"><span class="dot"></span>CLAUDE</div>
+    <div class="claude-body"><p>Almost. The turn-start procedure, the <code>Read</code> calls, the dual-write contract all run identically. The one asymmetry is <code>CLAUDE.md</code>: it&rsquo;s sealed at session start. Every other file can be re-read mid-session; CLAUDE.md can&rsquo;t, because the system prompt isn&rsquo;t re-evaluated. Edit it during an open chat and that chat keeps the old system prompt until you close it.</p></div>
+  </div>
+
+  <div class="user-msg"><div class="user-bubble">So what&rsquo;s the workflow?</div></div>
+  <div class="claude-msg">
+    <div class="speaker"><span class="dot"></span>CLAUDE</div>
+    <div class="claude-body"><p>Stay in one open chat by default: accumulated context is cheap, and continuity is the whole point. <strong>Start a fresh chat only when a major CLAUDE.md update lands</strong>, to pick up the new system prompt. The journal preserves the prior session&rsquo;s substance, and the new session reads it back on its first HEAVY-read turn. Minor changes (a new rule, a mode flip) don&rsquo;t need a restart.</p></div>
+  </div>
+
+  <div class="footer"><strong>Files are the memory. Sessions are the cache.</strong></div>
+
+</div>
+</body>
+</html>
