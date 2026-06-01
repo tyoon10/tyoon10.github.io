@@ -71,7 +71,7 @@ That framing produces three concrete failure modes the architecture has to handl
 
 ## How the Solution Emerged
 
-The clean version above hides a messy path. The design actually fell out of a back-and-forth, with my friend poking at each claim and me realizing what I'd missed. Here's that conversation, compressed.
+The clean version above hides a messy path. The design actually fell out of a back-and-forth, poking at each claim and me realizing what I'd missed. Here's that conversation, compressed.
 
 **"When does CLAUDE.md actually get read?"**
 At session start, exactly once. The cloud container clones the repo, reads the repo-root `CLAUDE.md`, and bakes it into the system prompt for the whole session. Every scheduled Routine fires a new session, so every fire picks up the latest CLAUDE.md; every new chat tab does the same. Mid-session edits don't take effect; the system prompt is sealed at boot.
@@ -84,9 +84,6 @@ No, not until your session explicitly pulls. The cloud session clones once at st
 
 **"Should I just pull on every turn, then?"**
 Tempting, but wasteful. Someone typing "cold shower done" doesn't need to re-read the profile, pull from main, and grep the journal. So classify the input first. There are seven recognizable shapes (routine completion, structured event, sleep state, Q&A, decision, backfill, reflective), and each maps to a *read level*, from LIGHT (today's daily log only) up to HEAVY (the full chart). Only HEAVY turns pull. Most turns stay cheap.
-
-**"What about a SessionStart hook to auto-pull?"**
-I proposed exactly that. My friend, sharper than me here, asked: how is that different from the fresh clone that already runs at session start? It isn't. A fresh clone is already at `origin/main` HEAD; a hook pulling right after is a no-op. A hook only helps a session that's been *alive* a while, but hooks fire at start. Dropped it.
 
 **"Does the mechanism work the same for fresh and long-running sessions?"**
 Almost. The turn-start procedure, the `Read` calls, the dual-write contract all run identically. The one asymmetry is `CLAUDE.md`: it's sealed at session start. Every other file can be re-read mid-session; CLAUDE.md can't, because the system prompt isn't re-evaluated. Edit it during an open chat and that chat keeps the old system prompt until you close it.
@@ -113,9 +110,9 @@ Strip away OptiMind and a transferable playbook remains:
 
 **Your repo is your durable memory.** The connected GitHub repo is the only thing that survives the session. Design what lives there with the same care you'd give a database schema, because that's exactly what it is.
 
-**CLAUDE.md is your highest-leverage lever.** Every new session reloads it. Every Routine fire reloads it. Every edit propagates to every future session for free. Spend ten times more time on it than feels reasonable.
+**CLAUDE.md is your highest-leverage lever.** Every new session reloads it. Every Routine fire reloads it. Every edit propagates to every future session for free. Spend 10x more time on it than feels reasonable.
 
-**Don't make the session remember; make it disciplined at reading.** The model has no memory between sessions. Your only knobs are what you write to files and the reading procedure you encode in the system prompt. Stop fighting statelessness; treat it as a strength, since every session starts fresh and clean.
+**Don't make the session remember; make it disciplined at READING.** The model has no memory between sessions. Your only knobs are what you write to files and the reading procedure you encode in the system prompt. Stop fighting statelessness; treat it as a strength, since every session starts fresh and clean.
 
 **Verbatim capture is the protocol.** Whatever the user types *is* the record. The agent's job is to log it faithfully and respond on top of it. Mess with the verbatim layer and continuity breaks.
 
