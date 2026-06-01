@@ -17,25 +17,25 @@ links:
 ---
 
 
-A friend working in finance asked me a question recently that I couldn't stop thinking about. He wanted to carry an AI agent that actually understood his context through access to all his files, and carry it *with him, on the road*. Between client meetings. Between schedules. This could be his executive assistant that he carries on through his day.
+A friend in finance asked me a question recently that stuck with me. He wanted to carry an AI agent that understood his context through access to all his files, *with him, on the road*: between client meetings, between schedules. An executive assistant that travels with him through the day.
 
-His first surprise was that this already exists. When I showed him the Code feature inside the Claude mobile app, he hadn't known you could run Claude Code from a phone at all. Understandably, the feature is largely underutilized because most people don't know what to do about it. In a [recent interview](https://youtu.be/SlGRN8jh2RI?si=pgKLycpE7T1l0JTN), Boris (creator of Claude Code) mentioned he now does most of his work DIRECTLY from his phone. It was the moment I saw potential of the coding assistant (your terminal companion) is becoming a mobile-first general agent.
+His first surprise was that this already exists. When I showed him the Code feature in the Claude mobile app, he hadn't known you could run Claude Code from a phone at all. Most people don't, so the feature stays underused. In a [recent interview](https://youtu.be/SlGRN8jh2RI?si=pgKLycpE7T1l0JTN), Boris (creator of Claude Code) mentioned he now does most of his work directly from his phone. That was when it clicked for me: the coding assistant, your terminal companion, is becoming a mobile-first general agent.
 
-But his real question was harder than "what's possible." Running Claude Code with your phone may not sound entirely new. The real challenge comes from "how to make Claude *remember* effectively." I have already been dealing with this problem over the past month the hard way: memory is the difficult part, and I'm sharing my learnings and solutions I came up with.  
+But his real question was harder than "what's possible." Running Claude Code from a phone isn't the hard part. The hard part is making Claude *remember* across sessions, and I'd spent the past month working through it. Here's what I learned, and what I ended up building.
 
 ## From VS Code to the Phone: Why the Surface Matters
 
-If you are a Claude Code user, you'll be familiar with the desktop loop. You open an IDE, the model reads your documents and codebase, and you accept in-line edits. You may review the code outputs and making edits in-line.
+If you use Claude Code, the desktop loop is familiar. You open an IDE, the model reads your documents and codebase, and you review its output and accept in-line edits.
 
-As models get better (and I believe this week's Opus 4.8 release is a real jump), the work shifts toward **delegation**. You spend less time reviewing lines of code and more time reviewing *decisions*: the documentation, the rationale, the architecture. Reasoning in natural language instead of code is a genuine paradigm shift in **system thinking**, a different way of using your brain to build a system.
+As models get better (and the recent Opus 4.8 release is a real jump), the work shifts toward **delegation**. You spend less time reviewing lines of code and more time reviewing *decisions*: the documentation, the rationale, the architecture. Reasoning in natural language instead of code is a shift in **system thinking**, a different way of using your brain to build a system.
 
-Moving that loop onto a phone changes it in three ways. It becomes **iterative**: turn latency drops to near-zero, tap-read-tap-read, and the session feels like thinking out loud rather than composing a prompt. It becomes **spontaneous**: you capture intent the moment it arises, mid-walk or after a workout, before the gap bleaches it out. And it becomes **integrated**: the phone is a sensor. Camera, clipboard, screenshots, recent chats and emails all paste in with natural UX flow of tapping.
+Moving that loop onto a phone changes it in three ways. It becomes **iterative**: turn latency drops to near-zero, tap-read-tap-read, and the session feels like thinking out loud rather than composing a prompt. It becomes **spontaneous**: you capture intent the moment it arises, mid-walk or after a workout, before the gap bleaches it out. And it becomes **integrated**: the phone is a sensor. Camera, clipboard, screenshots, recent chats and emails all paste in with a tap.
 
-Mobile is a wonderful surface. But it exposes a problem the desktop case quietly hides: **every session is ephemeral**. The chat you start tomorrow doesn't remember today's. So how do you carry the context with you?
+Mobile is a great surface. But it exposes a problem the desktop quietly hides: **every session is ephemeral**. The chat you start tomorrow doesn't remember today's. So how do you carry the context with you?
 
 ## What I Tried to Build
 
-To make the problem concrete, here's what I was building when I hit it: **OptiMind**, a hyper-personalized performance optimizer. A daily protocol (circadian rhythm, deep work, meal and supplements, workout) with coach-grade reasoning over my own data, reachable from my phone.
+To make the problem concrete, here's what I was building when I hit it: **OptiMind**, a personal performance optimizer. A daily protocol (circadian rhythm, deep work, meal and supplements, workout) with coach-grade reasoning over my own data, reachable from my phone.
 
 The architecture is two repos. `optimind` holds the *system*: canonical schemas, scheduled-routine prompts, a dashboard PWA. `optimind-journal` holds the *memory*: `user_profile.json` (durable rules), `state.json` (current mode), `journal/YYYY-MM-DD.md` (verbatim conversation), `daily/YYYY-MM-DD.json` (structured logs), and a `comprehensive_memory.md` of first principles.
 
@@ -46,7 +46,7 @@ There are three surfaces: the Claude mobile app as the primary chat, three sched
 
 ## Memory Is a Hard Problem
 
-Here's the thing it took me weeks to internalize. What *looks* like one continuous relationship with an AI assistant is actually a sequence of disconnected, ephemeral sessions. The model has no persistent state. Anthropic doesn't store your chats as retrievable memory, which is prone to compaction as the context window gets maxed out. If you want memory, **you have to build it yourself**, somewhere that survives the session.
+It took me weeks to internalize this. What *looks* like one continuous relationship with an AI assistant is really a sequence of disconnected, ephemeral sessions. The model has no persistent state, and even within a session the context window gets compacted as it fills. If you want memory, **you have to build it yourself**, somewhere that survives the session.
 
 The problem has three sources.
 
@@ -71,25 +71,31 @@ That framing produces three concrete failure modes the architecture has to handl
 
 ## How the Solution Emerged
 
-The clean version above hides a messy path. The design actually fell out of a back-and-forth, poking at each claim and me realizing what I'd missed. Here's that conversation, compressed.
+The clean version above hides a messy path. I didn't design it up front. I worked it out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions as the answers came back. Here's that exchange, compressed.
 
-**"When does CLAUDE.md actually get read?"**
-At session start, exactly once. The cloud container clones the repo, reads the repo-root `CLAUDE.md`, and bakes it into the system prompt for the whole session. Every scheduled Routine fires a new session, so every fire picks up the latest CLAUDE.md; every new chat tab does the same. Mid-session edits don't take effect; the system prompt is sealed at boot.
+**Me:** When does CLAUDE.md actually get read?
 
-**"What about the conversation we're having right now, how does it carry over?"**
-It doesn't, unless every turn writes itself to `journal/<date>.md`. The verbatim `### HH:MM | User` and `### HH:MM | Agent` lines *are* the cross-session memory protocol. Tomorrow's session opens yesterday's journal and reads those lines back into context. If a turn skipped the write, that exchange is gone forever.
+**Claude:** At session start, exactly once. The cloud container clones the repo, reads the repo-root `CLAUDE.md`, and bakes it into the system prompt for the whole session. Every scheduled Routine fires a new session, so every fire picks up the latest CLAUDE.md; every new chat tab does the same. Mid-session edits don't take effect; the system prompt is sealed at boot.
 
-**"If a Routine writes to main while I'm in a chat, do I see it?"**
-No, not until your session explicitly pulls. The cloud session clones once at start; after that the checkout is a snapshot. A Routine firing at 22:00 while your chat is open at 23:00 has updated `origin/main`, but your chat's local files are still frozen at clone time.
+**Me:** What about the conversation we're having right now? How does it carry over?
 
-**"Should I just pull on every turn, then?"**
-Tempting, but wasteful. Someone typing "cold shower done" doesn't need to re-read the profile, pull from main, and grep the journal. So classify the input first. There are seven recognizable shapes (routine completion, structured event, sleep state, Q&A, decision, backfill, reflective), and each maps to a *read level*, from LIGHT (today's daily log only) up to HEAVY (the full chart). Only HEAVY turns pull. Most turns stay cheap.
+**Claude:** It doesn't, unless every turn writes itself to `journal/<date>.md`. The verbatim `### HH:MM | User` and `### HH:MM | Agent` lines *are* the cross-session memory protocol. Tomorrow's session opens yesterday's journal and reads those lines back into context. If a turn skipped the write, that exchange is gone forever.
 
-**"Does the mechanism work the same for fresh and long-running sessions?"**
-Almost. The turn-start procedure, the `Read` calls, the dual-write contract all run identically. The one asymmetry is `CLAUDE.md`: it's sealed at session start. Every other file can be re-read mid-session; CLAUDE.md can't, because the system prompt isn't re-evaluated. Edit it during an open chat and that chat keeps the old system prompt until you close it.
+**Me:** If a Routine writes to main while I'm in a chat, do I see it?
 
-**"So what's the workflow?"**
-Stay in one open chat by default: accumulated context is cheap, and continuity is the whole point. **Start a fresh chat only when a major CLAUDE.md update lands**, to pick up the new system prompt. The journal preserves the prior session's substance, and the new session reads it back on its first HEAVY-read turn. Minor changes (a new rule, a mode flip) don't need a restart.
+**Claude:** No, not until your session explicitly pulls. The cloud session clones once at start; after that the checkout is a snapshot. A Routine firing at 22:00 while your chat is open at 23:00 has updated `origin/main`, but your chat's local files are still frozen at clone time.
+
+**Me:** Should I just pull on every turn, then?
+
+**Claude:** Tempting, but wasteful. Someone typing "cold shower done" doesn't need to re-read the profile, pull from main, and grep the journal. So classify the input first. There are seven recognizable shapes (routine completion, structured event, sleep state, Q&A, decision, backfill, reflective), and each maps to a *read level*, from LIGHT (today's daily log only) up to HEAVY (the full chart). Only HEAVY turns pull. Most turns stay cheap.
+
+**Me:** Does the mechanism work the same for fresh and long-running sessions?
+
+**Claude:** Almost. The turn-start procedure, the `Read` calls, the dual-write contract all run identically. The one asymmetry is `CLAUDE.md`: it's sealed at session start. Every other file can be re-read mid-session; CLAUDE.md can't, because the system prompt isn't re-evaluated. Edit it during an open chat and that chat keeps the old system prompt until you close it.
+
+**Me:** So what's the workflow?
+
+**Claude:** Stay in one open chat by default: accumulated context is cheap, and continuity is the whole point. **Start a fresh chat only when a major CLAUDE.md update lands**, to pick up the new system prompt. The journal preserves the prior session's substance, and the new session reads it back on its first HEAVY-read turn. Minor changes (a new rule, a mode flip) don't need a restart.
 
 ![Turn-start decision tree: classify the input shape, then branch to a LIGHT or HEAVY read path](./turn-start-decision-tree.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
@@ -112,7 +118,7 @@ Strip away OptiMind and a transferable playbook remains:
 
 **CLAUDE.md is your highest-leverage lever.** Every new session reloads it. Every Routine fire reloads it. Every edit propagates to every future session for free. Spend 10x more time on it than feels reasonable.
 
-**Don't make the session remember; make it disciplined at READING.** The model has no memory between sessions. Your only knobs are what you write to files and the reading procedure you encode in the system prompt. Stop fighting statelessness; treat it as a strength, since every session starts fresh and clean.
+**Don't make the session remember; make it disciplined at *reading*.** The model has no memory between sessions. Your only knobs are what you write to files and the reading procedure you encode in the system prompt. Stop fighting statelessness; treat it as a strength, since every session starts fresh and clean.
 
 **Verbatim capture is the protocol.** Whatever the user types *is* the record. The agent's job is to log it faithfully and respond on top of it. Mess with the verbatim layer and continuity breaks.
 
