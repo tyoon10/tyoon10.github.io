@@ -1,14 +1,14 @@
 ---
 title: "The Doctor and the Chart: Memory Architecture for Claude Code on Mobile"
 date: 2026-05-30
-description: "What I learned building a personal AI around a GitHub repo and Claude Code on mobile, and why memory is a harder problem than it looks."
+description: "What I learned building a memory-enabled agent around a GitHub repo and Claude Code, and why memory is a harder problem than it looks."
 featured: true
 coverImage: "./closing-visual.png"
 tags:
+  - "System Design"
   - "Claude Code"
   - "Agentic AI"
-  - "Personal AI"
-  - "System Design"
+  - "Context Engineering"
   - "Memory"
 links:
   - name: "Tracing the Minds Behind Claude Code"
@@ -17,25 +17,25 @@ links:
 ---
 
 
-A friend asked me a question this week that I couldn't stop thinking about. He wanted to carry an AI agent that actually understood his context through access to all his files, and carry it *with him, on the road*. Between client meetings. Between schedules. Not the assistant chained to his desk, but the one that knew everything, riding shotgun through his day.
+A friend working in finance asked me a question recently that I couldn't stop thinking about. He wanted to carry an AI agent that actually understood his context through access to all his files, and carry it *with him, on the road*. Between client meetings. Between schedules. This could be his executive assistant that he carries on through his day.
 
-His first surprise was that this already exists. When I showed him the Code feature inside the Claude mobile app, he hadn't known you could run Claude Code from a phone at all. Most people don't. In a [recent interview](https://youtu.be/SlGRN8jh2RI?si=pgKLycpE7T1l0JTN), Boris, the Claude Code lead, mentioned he now does most of his work directly from his phone. The tool you think of as a terminal companion is, quietly, a mobile-first agent.
+His first surprise was that this already exists. When I showed him the Code feature inside the Claude mobile app, he hadn't known you could run Claude Code from a phone at all. Understandably, the feature is largely underutilized because most people don't know what to do about it. In a [recent interview](https://youtu.be/SlGRN8jh2RI?si=pgKLycpE7T1l0JTN), Boris (creator of Claude Code) mentioned he now does most of his work DIRECTLY from his phone. It was the moment I saw potential of the coding assistant (your terminal companion) is becoming a mobile-first general agent.
 
-But his real question was harder than "can I do this." It was "how do I make it *remember*." Answering that honestly meant admitting something I'd spent weeks learning the hard way: memory is the difficult part, and almost none of it lives where you'd expect.
+But his real question was harder than "what's possible." Running Claude Code with your phone may not sound entirely new. The real challenge comes from "how to make Claude *remember* effectively." I have already been dealing with this problem over the past month the hard way: memory is the difficult part, and I'm sharing my learnings and solutions I came up with.  
 
 ## From VS Code to the Phone: Why the Surface Matters
 
-The desktop loop is familiar. You open an IDE, the model reads your documents and codebase, and you accept in-line edits. Reading and writing code, line by line.
+If you are a Claude Code user, you'll be familiar with the desktop loop. You open an IDE, the model reads your documents and codebase, and you accept in-line edits. You may review the code outputs and making edits in-line.
 
-As models get better, and Opus 4.8 is a real jump, the work shifts toward **delegation**. You spend less time reviewing lines of code and more time reviewing *decisions*: the documentation, the rationale, the architecture. Reasoning in natural language instead of code is a genuine paradigm shift in **system thinking**, a different way of using your brain to build a system.
+As models get better (and I believe this week's Opus 4.8 release is a real jump), the work shifts toward **delegation**. You spend less time reviewing lines of code and more time reviewing *decisions*: the documentation, the rationale, the architecture. Reasoning in natural language instead of code is a genuine paradigm shift in **system thinking**, a different way of using your brain to build a system.
 
-Moving that loop onto a phone changes it in three ways. It becomes **iterative**: turn latency drops to near-zero, tap-read-tap-read, and the session feels like thinking out loud rather than composing a prompt. It becomes **spontaneous**: you capture intent the moment it arises, mid-walk or after a workout, before the gap bleaches it out. And it becomes **integrated**: the phone is a sensor. Camera, clipboard, screenshots, recent chats and emails all paste in with one tap, where the desktop would take four or five manual steps.
+Moving that loop onto a phone changes it in three ways. It becomes **iterative**: turn latency drops to near-zero, tap-read-tap-read, and the session feels like thinking out loud rather than composing a prompt. It becomes **spontaneous**: you capture intent the moment it arises, mid-walk or after a workout, before the gap bleaches it out. And it becomes **integrated**: the phone is a sensor. Camera, clipboard, screenshots, recent chats and emails all paste in with natural UX flow of tapping.
 
 Mobile is a wonderful surface. But it exposes a problem the desktop case quietly hides: **every session is ephemeral**. The chat you start tomorrow doesn't remember today's. So how do you carry the context with you?
 
 ## What I Tried to Build
 
-To make the problem concrete, here's what I was building when I hit it: **OptiMind**, a personal performance-and-health coaching system. A daily protocol (sleep, sunlight, cold shower, deep work, supplements, workout, wind-down) with coach-grade reasoning over my own data, reachable from my phone.
+To make the problem concrete, here's what I was building when I hit it: **OptiMind**, a hyper-personalized performance optimizer. A daily protocol (circadian rhythm, deep work, meal and supplements, workout) with coach-grade reasoning over my own data, reachable from my phone.
 
 The architecture is two repos. `optimind` holds the *system*: canonical schemas, scheduled-routine prompts, a dashboard PWA. `optimind-journal` holds the *memory*: `user_profile.json` (durable rules), `state.json` (current mode), `journal/YYYY-MM-DD.md` (verbatim conversation), `daily/YYYY-MM-DD.json` (structured logs), and a `comprehensive_memory.md` of first principles.
 
@@ -46,25 +46,20 @@ There are three surfaces: the Claude mobile app as the primary chat, three sched
 
 ## Memory Is a Hard Problem
 
-Here's the thing it took me weeks to internalize. What *looks* like one continuous relationship with an AI assistant is actually a sequence of disconnected, ephemeral sessions. The chat you're in right now will be gone tomorrow. The model has no persistent state. Anthropic doesn't store your chats as retrievable memory. And even Claude Code's cloud sessions are spun up fresh and destroyed when you close the tab. If you want memory, **you have to build it yourself**, somewhere that survives the session.
+Here's the thing it took me weeks to internalize. What *looks* like one continuous relationship with an AI assistant is actually a sequence of disconnected, ephemeral sessions. The model has no persistent state. Anthropic doesn't store your chats as retrievable memory, which is prone to compaction as the context window gets maxed out. If you want memory, **you have to build it yourself**, somewhere that survives the session.
 
 The problem has three sources.
 
-**Sessions are stateless caches, not minds.** Each new chat is a fresh container, a fresh clone, a fresh model with no recall of anything prior. There is no Anthropic-side "show me what I discussed yesterday" knob. The conversation in the tab is the *entire* memory of the system, and it dies when the tab closes.
+**Sessions are stateless caches, not minds.** Each new chat is a fresh container, a fresh clone, a fresh model with no recall of anything prior. There is no Anthropic-side "show me what I discussed yesterday" knob. The conversation in the tab is the *entire* memory of the system, and it dies when you switch out of it.
 
-**Files are the only durable layer.** For continuity to exist, every substantive turn has to be **written to a file in a place the next session will clone**. The git repo connected to your session is that place. If a fact didn't make it into `journal/*.md`, `daily/*.json`, `user_profile.json`, or `state.json`, it doesn't exist for tomorrow.
+**Files are the only durable layer.** For continuity to exist, every substantive turn has to be **written to a file in a place the next session will clone**. The git repo connected to your session is that place. For OptiMind, if a fact didn't make it into `journal/*.md`, `daily/*.json`, `user_profile.json`, or `state.json`, it doesn't exist for tomorrow.
 
-**"File on disk" is not "in the model's context."** This was the subtlest one. Even when the files are perfectly up to date on the container's disk, the model **doesn't see them** until an explicit `Read` call pulls their bytes into the conversation. The model reasons only on what's in its context window, not on what's sitting on disk three directories over. Two operations have to compose:
-
-```
-origin/main  --[git pull]-->  files on disk  --[Read tool call]-->  LLM context
-  (truth)                      (cache layer)                       (what model sees)
-```
+**"File on disk" is not "in the model's context."** Even when the files are perfectly up to date on the container's disk, the model **doesn't see them** until an explicit `Read` call pulls their bytes into the conversation. The model reasons only on what's in its context window, not on what's sitting on disk three directories over. Two operations have to compose:
 
 `git pull` refreshes the files. `Read` refreshes the context. Both are required; neither is sufficient alone.
 
 ![Three-stage refresh: origin/main to files on disk via git pull, files on disk to the model's context via a Read tool call](./three-stage-refresh-diagram.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Two operations. Both required. Neither sufficient alone. git pull moves truth onto disk; Read moves disk into the model's context.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">git pull moves truth onto disk; Read moves disk into the model's context.</p>
 
 That framing produces three concrete failure modes the architecture has to handle:
 
