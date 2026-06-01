@@ -71,31 +71,10 @@ That framing produces three concrete failure modes the architecture has to handl
 
 ## How the Solution Emerged
 
-The clean version above hides a messy path. I didn't design it up front. I worked it out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions as the answers came back. Here's that exchange, compressed.
+The clean version above hides a messy path. I didn't design it up front. I worked it out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions as the answers came back. Here's that exchange, recreated.
 
-**Me:** When does CLAUDE.md actually get read?
-
-**Claude:** At session start, exactly once. The cloud container clones the repo, reads the repo-root `CLAUDE.md`, and bakes it into the system prompt for the whole session. Every scheduled Routine fires a new session, so every fire picks up the latest CLAUDE.md; every new chat tab does the same. Mid-session edits don't take effect; the system prompt is sealed at boot.
-
-**Me:** What about the conversation we're having right now? How does it carry over?
-
-**Claude:** It doesn't, unless every turn writes itself to `journal/<date>.md`. The verbatim `### HH:MM | User` and `### HH:MM | Agent` lines *are* the cross-session memory protocol. Tomorrow's session opens yesterday's journal and reads those lines back into context. If a turn skipped the write, that exchange is gone forever.
-
-**Me:** If a Routine writes to main while I'm in a chat, do I see it?
-
-**Claude:** No, not until your session explicitly pulls. The cloud session clones once at start; after that the checkout is a snapshot. A Routine firing at 22:00 while your chat is open at 23:00 has updated `origin/main`, but your chat's local files are still frozen at clone time.
-
-**Me:** Should I just pull on every turn, then?
-
-**Claude:** Tempting, but wasteful. Someone typing "cold shower done" doesn't need to re-read the profile, pull from main, and grep the journal. So classify the input first. There are seven recognizable shapes (routine completion, structured event, sleep state, Q&A, decision, backfill, reflective), and each maps to a *read level*, from LIGHT (today's daily log only) up to HEAVY (the full chart). Only HEAVY turns pull. Most turns stay cheap.
-
-**Me:** Does the mechanism work the same for fresh and long-running sessions?
-
-**Claude:** Almost. The turn-start procedure, the `Read` calls, the dual-write contract all run identically. The one asymmetry is `CLAUDE.md`: it's sealed at session start. Every other file can be re-read mid-session; CLAUDE.md can't, because the system prompt isn't re-evaluated. Edit it during an open chat and that chat keeps the old system prompt until you close it.
-
-**Me:** So what's the workflow?
-
-**Claude:** Stay in one open chat by default: accumulated context is cheap, and continuity is the whole point. **Start a fresh chat only when a major CLAUDE.md update lands**, to pick up the new system prompt. The journal preserves the prior session's substance, and the new session reads it back on its first HEAVY-read turn. Minor changes (a new rule, a mode flip) don't need a restart.
+![A recreated conversation between me and Claude about Claude Code's memory model. Me: When does CLAUDE.md actually get read? Claude: At session start, exactly once, baked into the system prompt for the whole session. Me: How does the current conversation carry over? Claude: It doesn't, unless every turn writes itself to journal/<date>.md. Me: If a Routine writes to main while I'm in a chat, do I see it? Claude: No, not until your session explicitly pulls. Me: Should I just pull on every turn? Claude: Wasteful; classify the input into seven shapes and only HEAVY turns pull. Me: Does it work the same for fresh and long-running sessions? Claude: Almost; the one asymmetry is that CLAUDE.md is sealed at session start. Me: So what's the workflow? Claude: Stay in one chat by default; start a fresh one only when a major CLAUDE.md update lands.](./conversation.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The actual back-and-forth, compressed. Each of my questions exposed an assumption; each of Claude's answers became one of the load-bearing rules below.</p>
 
 ![Turn-start decision tree: classify the input shape, then branch to a LIGHT or HEAVY read path](./turn-start-decision-tree.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
