@@ -112,12 +112,12 @@ The OptiMind system repo is public: **[github.com/tyoon10/optimind](https://gith
 
 If you want to trace where each idea in this article actually lives:
 
-- **The 7-shape input playbook + the turn-start procedure** are in [`optimind-journal/CLAUDE.md`](https://github.com/tyoon10/optimind/blob/main/optimind-sdk/CLAUDE.md) (the reference template — the runtime version is in the private repo, but the structure is identical).
+- **The 7-shape input playbook and the intent-keyed turn-start procedure** are publicly documented in [`docs/USER_FLOW_PLAN.md`](https://github.com/tyoon10/optimind/blob/main/docs/USER_FLOW_PLAN.md) — playbook in §4.2, turn-start in §6.5. Both are mirrored into the runtime journal's private `CLAUDE.md`, where they actually drive the agent.
 - **The schemas** that make the dual-write contract concrete: [`schemas/daily_log.schema.json`](https://github.com/tyoon10/optimind/blob/main/schemas/daily_log.schema.json), [`schemas/journal_entry.schema.md`](https://github.com/tyoon10/optimind/blob/main/schemas/journal_entry.schema.md), [`schemas/user_profile.schema.json`](https://github.com/tyoon10/optimind/blob/main/schemas/user_profile.schema.json).
 - **The three scheduled-Routine prompts** in their paste-ready form: [`routines/morning_brief.md`](https://github.com/tyoon10/optimind/blob/main/routines/morning_brief.md), [`routines/reflection.md`](https://github.com/tyoon10/optimind/blob/main/routines/reflection.md), [`routines/weekly_review.md`](https://github.com/tyoon10/optimind/blob/main/routines/weekly_review.md).
 - **The dashboard PWA**: [`dashboard/`](https://github.com/tyoon10/optimind/tree/main/dashboard) — SvelteKit + GitHub OAuth (PKCE) + a Cloudflare Pages Function for the token exchange.
 - **The reference implementation of the dual-write logic** in Python: [`optimind-sdk/src/tools/daily.py`](https://github.com/tyoon10/optimind/blob/main/optimind-sdk/src/tools/daily.py).
-- **The full design doc and decision log** — every architectural choice in this article traces back to an entry: [`docs/USER_FLOW_PLAN.md`](https://github.com/tyoon10/optimind/blob/main/docs/USER_FLOW_PLAN.md). The doctor-and-chart framing is §4.7; the memory persistence model is §4.8; the intent-keyed turn-start procedure is §6.5; the engineering decisions sit in §9.
+- **The full design doc and decision log** — every architectural choice in this article traces back to an entry: [`docs/USER_FLOW_PLAN.md`](https://github.com/tyoon10/optimind/blob/main/docs/USER_FLOW_PLAN.md). The doctor-and-chart framing is §4.7; the memory persistence model is §4.8; the engineering decisions log is §9.
 
 It's MIT-licensed. Fork it if you want to build your own variant against a private journal of your own.
 
