@@ -84,7 +84,7 @@ That framing produces three concrete failure modes the architecture has to handl
 
 ## How the Solution Emerged
 
-The clean version above hides a messy path. I didn't design it up front. I worked the design out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions. Here's that exchange, recreated.
+I worked the design out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions. Here's that exchange, recreated.
 
 <div class="chat-artifact">
 
@@ -93,7 +93,7 @@ The clean version above hides a messy path. I didn't design it up front. I worke
 </div>
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each of my questions exposed an assumption; each of Claude's answers became one of the load-bearing rules below.</p>
 
-The fourth exchange, *classify the input first*, is where most of the engineering went, and it's the one choice worth dwelling on. Both naive policies fail: reading the full chart on every turn makes a trivial 'logging' needlessly slow and expensive, while reading nothing leaves the agent guessing. So the turn-start branches on intent. Claude sorts each input into one of seven shapes, and the shape sets the read depth: trivial shapes stay **LIGHT** (today's log only), high-stakes ones go **HEAVY** (`git pull` plus the full chart). The cost of a turn then tracks what's actually at stake, rather than being paid flat on every message.
+Here's the rationale behind *classifying the input first* (the fourth exchange). Both naive policies fail: 'reading the full chart on every turn' makes a trivial 'logging' needlessly slow and expensive, while 'reading nothing' leaves the agent guessing (and hallucinate). So I made turn-start branches on intent. The LLM sorts each input into one of seven shapes, and the shape sets the read depth: trivial shapes stay **LIGHT** (today's log only), high-stakes ones go **HEAVY** (`git pull` plus the full chart).
 
 ![Turn-start decision tree: an input arrives, gets classified into one of seven shapes, then branches to a LIGHT read (today's log only) or a HEAVY read (git pull plus the full chart) before Claude responds and logs the turn.](./turn-start-decision-tree.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
@@ -102,13 +102,12 @@ The fourth exchange, *classify the input first*, is where most of the engineerin
 
 Strip away OptiMind and a transferable playbook remains:
 
-1. **Files are the memory; sessions are stateless caches.** The doctor-and-chart analogy. Don't try to make the bot *remember*; make the chart authoritative and the bot disciplined about reading it.
-2. **The dual-write contract.** Every structured fact lands in both `daily/<date>.json` *and* `journal/<date>.md` as a mirror line, the same contract whether the writer is the chat agent, a Routine, or a dashboard form. No orphans.
+1. **Files are the memory; sessions are stateless caches.** Don't try to make the bot *remember*; make the files authoritative and the bot disciplined about reading it.
+2. **The dual-write contract.** Every structured fact lands in both `daily/<date>.json` *and* `journal/<date>.md` as a mirror line, the same contract whether the writer is the chat agent, a Routine, or a dashboard form.
 3. **Critical write rules live in CLAUDE.md.** Branch is always `main`; exact file paths only; re-read `user_profile.json` before naming any specific rule. Encoded once in the system prompt, binding on every session.
-4. **The seven-shape input playbook.** Each shape maps to a dual-write action *and* a read level. Classification is the first cognitive step every turn anyway, so attaching read levels adds zero overhead.
-5. **Intent-keyed turn-start.** LIGHT / LIGHT+ / MEDIUM / HEAVY, with `git pull` only on HEAVY. Trivial turns stay cheap; high-stakes turns pay for fidelity.
-6. **Verbatim-first writes.** Append the user's input to `journal/<date>.md` verbatim, before the response is finalized and committed. If anything fails between the turn's start and the push to `main`, the input is already in the audit log — and tomorrow's session reads it like nothing happened.
-7. **CLAUDE.md is standing orders; everything else is the chart on the wall.** That single asymmetry, sealed at start versus re-readable mid-session, is what drives the user-side rule: **continue in one chat by default; start a fresh one only when CLAUDE.md materially changes.** Cost is trivial; benefit is that the system prompt always tracks what's on disk.
+4. **The seven-shape input playbook drives an intent-keyed turn-start.** Classifying the input is the first cognitive step every turn anyway, so each shape carries both a dual-write action *and* a read level (LIGHT / LIGHT+ / MEDIUM / HEAVY, with `git pull` only on HEAVY). Trivial turns stay cheap; high-stakes turns pay for fidelity.
+5. **Verbatim-first writes.** Append the user's input to `journal/<date>.md` verbatim, before the response is finalized and committed. If anything fails between the turn's start and the push to `main`, the input is already in the audit log — and tomorrow's session reads it like nothing happened.
+6. **CLAUDE.md is standing orders; everything else is the chart on the wall.** That single asymmetry, sealed at start versus re-readable mid-session, is what drives the user-side rule: **continue in one chat by default; start a fresh one only when CLAUDE.md materially changes.** Cost is trivial; benefit is that the system prompt always tracks what's on disk.
 
 ## What This Means for Anyone Building with Claude Code
 
