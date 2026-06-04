@@ -23,7 +23,7 @@ const { Content } = await render(entry);
       <div class="article-card-meta" style="margin-bottom: 16px;">
         <span class="category-chip">{entry.data.tags[0] || 'AI Strategy'}</span>
         {entry.data.tags.slice(1).map(tag => (
-          <span class="category-chip" style="color: #a855f7 !important; background: rgba(168, 85, 247, 0.05); border-color: rgba(168, 85, 247, 0.12); margin-left: 6px;">{tag}</span>
+          <span class="category-chip" style="color: #a855f7 !important; background: rgba(168, 85, 247, 0.05); border-color: rgba(168, 85, 247, 0.12);">{tag}</span>
         ))}
         <span style="margin: 0 8px;">•</span>
         <span>{entry.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>

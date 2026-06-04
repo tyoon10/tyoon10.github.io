@@ -191,6 +191,21 @@ body::before {
   background: rgba(56, 189, 248, 0.15);
 }
 
+/* Mobile: stack the logo above wrapping nav links so the pill never overflows the viewport */
+@media (max-width: 600px) {
+  .glass-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 22px;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 18px;
+  }
+}
+
 /* 4. MINIMAL HERO SECTION */
 .hero-section {
   position: relative;
@@ -767,7 +782,8 @@ body::before {
 .article-card-meta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px 10px;
   font-size: 0.72rem;
   color: var(--text-muted);
   margin-bottom: 8px;
