@@ -54,7 +54,15 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
   position: relative;
+  padding-top: 64px;
   padding-bottom: 120px;
+}
+
+/* On mobile the fixed bar stacks (logo over links), so it is taller — offset more */
+@media (max-width: 600px) {
+  body {
+    padding-top: 104px;
+  }
 }
 
 /* Subtle dot-matrix overlay across the background */
@@ -133,21 +141,26 @@ body::before {
 }
 
 .glass-header {
-  position: sticky;
-  top: 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 99;
-  margin: 20px auto;
-  background: var(--bg-surface);
+  background: rgba(250, 250, 252, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
-  border-radius: 30px;
-  padding: 10px 24px;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px -14px rgba(15, 23, 42, 0.5);
+  transition: var(--physic-transition);
+}
+
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-  transition: var(--physic-transition);
 }
 
 .logo {
@@ -179,25 +192,12 @@ body::before {
   color: var(--text-main);
 }
 
-.nav-contact-badge {
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid var(--border-glow);
-  padding: 4px 12px;
-  border-radius: 20px;
-  color: var(--text-highlight) !important;
-}
-
-.nav-contact-badge:hover {
-  background: rgba(56, 189, 248, 0.15);
-}
-
-/* Mobile: stack the logo above wrapping nav links so the pill never overflows the viewport */
+/* Mobile: stack the logo above wrapping nav links so the bar never overflows the viewport */
 @media (max-width: 600px) {
-  .glass-header {
+  .nav-inner {
     flex-direction: column;
     gap: 12px;
-    padding: 14px 20px;
-    border-radius: 22px;
+    padding: 12px 20px;
   }
   .nav-links {
     flex-wrap: wrap;
