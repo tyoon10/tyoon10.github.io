@@ -1,15 +1,15 @@
 ---
 title: "The Doctor and the Chart: Memory Architecture for Claude Code on Mobile"
 date: 2026-05-30
-description: "What I learned building a memory-enabled agent around a GitHub repo and Claude Code, and why memory is a harder problem than it looks."
+description: "Agentic memory is a harder problem than it looks. Here's what I learned building a memory-enabled agent around GitHub and Claude Code."
 featured: true
 coverImage: "./closing-visual.png"
 tags:
+  - "Agentic Memory"
   - "System Design"
   - "Claude Code"
   - "Agentic AI"
   - "Context Engineering"
-  - "Memory"
 links:
   - name: "OptiMind on GitHub"
     url: "https://github.com/tyoon10/optimind"
@@ -34,22 +34,32 @@ As models get better (and the recent Opus 4.8 release is a real jump), the work 
 
 Moving that loop onto a phone changes it in three ways. It becomes **iterative**: turn latency drops to near-zero, tap-read-tap-read, and the session feels like thinking out loud rather than composing a prompt. It becomes **spontaneous**: you capture intent the moment it arises, mid-walk or after a workout, before the gap bleaches it out. And it becomes **integrated**: the phone is a sensor. Camera, clipboard, screenshots, recent chats and emails all paste in with a tap.
 
-Mobile is a great surface. But it exposes a problem the desktop quietly hides: **every session is ephemeral**. The chat you start tomorrow doesn't remember today's. So how do you carry the context with you?
+Mobile is a great surface. But it exposes a problem the desktop quietly hides: **every session is ephemeral**. You ask a question, Claude (or Gemini or GPT) gives you a response. But the chat does not automatically build its memory given your inputs. So how do you carry the context with you?
 
 ## What I Tried to Build
 
-To make the problem concrete, here's what I was building when I hit it: **OptiMind**, a personal performance optimizer. A daily protocol (circadian rhythm, deep work, meal and supplements, workout) with coach-grade reasoning over my own data, reachable from my phone.
+I have been building **OptiMind**, a personal performance coach over the last few months. The goal is to optimize my daily protocol in every way (circadian rhythm, deep work, meal and supplements, workout) with coach-grade reasoning over my own data. Given my need to interact with the agent during the day (updating schedule changes, logging meals and workout, etc.) I needed to access the whole system directly from my phone.
 
-The architecture is two repos. [`optimind`](https://github.com/tyoon10/optimind) (public) holds the *system*: canonical schemas, the paste-ready prompts for the scheduled routines, a dashboard PWA, and the design doc with the engineering history that produced everything else. `optimind-journal` (private) holds the *memory*: the active system prompt at `CLAUDE.md`, `user_profile.json` (durable rules), `state.json` (current mode), `journal/YYYY-MM-DD.md` (verbatim conversation), `daily/YYYY-MM-DD.json` (structured logs), and a `comprehensive_memory.md` of first principles. The split is the abstraction line: *system* is the code and the patterns, *memory* is the user's data.
+The architecture is two repos: 
 
-There are three surfaces: the Claude mobile app as the primary chat, three scheduled cloud Routines (a Morning Brief at 05:55, a Nightly Reflection at 22:00, a Weekly Review on Sundays), and a static PWA dashboard for structured logging. **There is no local machine and no 24/7 host.** Everything is Anthropic cloud plus GitHub.
+[`optimind`](https://github.com/tyoon10/optimind) (public) holds the *system*
+
+Canonical schemas, the paste-ready prompts for the scheduled routines, a dashboard PWA, and the design doc with the engineering history that produced everything else. 
+
+`optimind-journal` (private) holds the *memory*
+
+The active system prompt at `CLAUDE.md`, `user_profile.json` (durable rules), `state.json` (current mode), `journal/YYYY-MM-DD.md` (verbatim conversation), `daily/YYYY-MM-DD.json` (structured logs), and a `comprehensive_memory.md` of first principles. 
+
+The split is the abstraction line: *system* is the code and the patterns, *memory* is the user's data.
+
+There are three surfaces: the Claude mobile app as the primary chat, three scheduled cloud [Routines](https://code.claude.com/docs/en/routines) (a Morning Brief, a Nightly Reflection, a Weekly Review), and a static PWA dashboard for structured logging. **There is no local machine and no 24/7 host.** Everything is Anthropic cloud plus GitHub.
 
 ![OptiMind architecture: phone, Anthropic cloud, GitHub, and a Cloudflare-hosted dashboard, with the optimind-journal repo as the memory layer](./optimind-architecture.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The files in optimind-journal are the memory. Every cloud session, Routines and chat alike, clones the repo fresh from GitHub. CLAUDE.md is sealed into the system prompt at session start; every other file can be re-read mid-session.</p>
 
 ## Memory Is a Hard Problem
 
-It took me weeks to internalize this. What *looks* like one continuous relationship with an AI assistant is really a sequence of disconnected, ephemeral sessions. The model has no persistent state, and even within a session the context window gets compacted as it fills. If you want memory, **you have to build it yourself**, somewhere that survives the session.
+It took me months to internalize this. What *looks* like one continuous relationship with an AI assistant is really a sequence of disconnected, ephemeral sessions. The model has no persistent state, and even within a session the context window gets compacted as it fills. If you want to give your agent a memory, **you have to be intentional to build it**, somewhere that survives the session.
 
 The problem has three sources.
 
@@ -57,7 +67,7 @@ The problem has three sources.
 
 **Files are the only durable layer.** For continuity to exist, every substantive turn has to be **written to a file in a place the next session will clone**. The git repo connected to your session is that place. For OptiMind, if a fact didn't make it into `journal/*.md`, `daily/*.json`, `user_profile.json`, or `state.json`, it doesn't exist for tomorrow.
 
-**"File on disk" is not "in the model's context."** Even when the files are perfectly up to date on the container's disk, the model **doesn't see them** until an explicit `Read` call pulls their bytes into the conversation. The model reasons only on what's in its context window, not on what's sitting on disk three directories over. Two operations have to compose:
+**"File on disk" is not "in the model's context."** Even when the files are perfectly up to date on the container's disk, the model **doesn't see them** until an explicit `Read` call pulls their bytes into the conversation. The model reasons only on what's in its context window, and that explicit Read call is what informs the agent the context that matters. Two operations have to compose:
 
 `git pull` refreshes the files. `Read` refreshes the context. Both are required; neither is sufficient alone.
 
@@ -74,12 +84,16 @@ That framing produces three concrete failure modes the architecture has to handl
 
 ## How the Solution Emerged
 
-The clean version above hides a messy path. I didn't design it up front. I worked it out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions as the answers came back. Here's that exchange, recreated.
+The clean version above hides a messy path. I didn't design it up front. I worked the design out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions. Here's that exchange, recreated.
 
-![A recreated conversation between me and Claude about Claude Code's memory model. Me: When does CLAUDE.md actually get read? Claude: At session start, exactly once, baked into the system prompt for the whole session. Me: How does the current conversation carry over? Claude: It doesn't, unless every turn writes itself to journal/<date>.md. Me: If a Routine writes to main while I'm in a chat, do I see it? Claude: No, not until your session explicitly pulls. Me: Should I just pull on every turn? Claude: Wasteful; classify the input into seven shapes and only HEAVY turns pull. Me: Does it work the same for fresh and long-running sessions? Claude: Almost; the one asymmetry is that CLAUDE.md is sealed at session start. Me: So what's the workflow? Claude: Stay in one chat by default; start a fresh one only when a major CLAUDE.md update lands.](./conversation.png)
+![A recreated six-turn conversation between me and Claude, working out how Claude Code's memory model actually behaves.](./conversation.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each of my questions exposed an assumption; each of Claude's answers became one of the load-bearing rules below.</p>
 
-![Turn-start decision tree: classify the input shape, then branch to a LIGHT or HEAVY read path](./turn-start-decision-tree.png)
+The fourth exchange — *classify the input first* — is the one that makes the system livable, and it's where most of the engineering went. Every turn begins the same way: before Claude reasons or writes anything, it sorts the input into one of seven shapes, and the shape decides how much of the chart to pull into context.
+
+The diagram below traces that branch. A bare "cold shower done" is a *routine completion*: it needs today's daily log and nothing else, so it stays on the **LIGHT** path. "How's my sleep trending this week?" is a *reflective* turn, so it takes the **HEAVY** path — `git pull` from `main`, then read `state.json`, `user_profile.json`, `comprehensive_memory.md`, and the recent journal before answering. The expensive operations only fire on the turns that actually need them, so the cost of a turn tracks what's at stake instead of being paid on every message.
+
+![Turn-start decision tree: an input arrives, gets classified into one of seven shapes, then branches to a LIGHT read (today's log only) or a HEAVY read (git pull plus the full chart) before Claude responds and logs the turn.](./turn-start-decision-tree.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
 
 ## The Decisions, Distilled
