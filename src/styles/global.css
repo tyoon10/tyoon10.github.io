@@ -1259,9 +1259,12 @@ footer {
 }
 
 /* Chat-artifact screenshots are tall portraits; the global 520px max-height
-   would squeeze them into a sliver on desktop. Let them fill the column. */
+   would squeeze them into a sliver on desktop. Lift the cap and let them fill
+   the width up to a comfortable max (centered), so they read large on mobile
+   but don't dominate the column on desktop. */
 .markdown-body .chat-artifact img {
   width: 100%;
+  max-width: 600px;
   max-height: none;
 }
 
