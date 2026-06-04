@@ -86,10 +86,14 @@ That framing produces three concrete failure modes the architecture has to handl
 
 The clean version above hides a messy path. I didn't design it up front. I worked the design out in conversation with Claude itself, asking how each piece actually behaved and correcting my assumptions. Here's that exchange, recreated.
 
+<div class="chat-artifact">
+
 ![A recreated six-turn conversation between me and Claude, working out how Claude Code's memory model actually behaves.](./conversation.png)
+
+</div>
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each of my questions exposed an assumption; each of Claude's answers became one of the load-bearing rules below.</p>
 
-The fourth exchange, *classify the input first*, is where most of the engineering went, and it's the one choice worth dwelling on. Both naive policies fail: reading the full chart on every turn makes a trivial "cold shower done" needlessly slow and expensive, while reading nothing leaves the agent guessing. So the turn-start branches on intent. Claude sorts each input into one of seven shapes, and the shape sets the read depth: trivial shapes stay **LIGHT** (today's log only), high-stakes ones go **HEAVY** (`git pull` plus the full chart). The cost of a turn then tracks what's actually at stake, rather than being paid flat on every message.
+The fourth exchange, *classify the input first*, is where most of the engineering went, and it's the one choice worth dwelling on. Both naive policies fail: reading the full chart on every turn makes a trivial 'logging' needlessly slow and expensive, while reading nothing leaves the agent guessing. So the turn-start branches on intent. Claude sorts each input into one of seven shapes, and the shape sets the read depth: trivial shapes stay **LIGHT** (today's log only), high-stakes ones go **HEAVY** (`git pull` plus the full chart). The cost of a turn then tracks what's actually at stake, rather than being paid flat on every message.
 
 ![Turn-start decision tree: an input arrives, gets classified into one of seven shapes, then branches to a LIGHT read (today's log only) or a HEAVY read (git pull plus the full chart) before Claude responds and logs the turn.](./turn-start-decision-tree.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>

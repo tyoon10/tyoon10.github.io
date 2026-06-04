@@ -1258,6 +1258,13 @@ footer {
   background: transparent;
 }
 
+/* Chat-artifact screenshots are tall portraits; the global 520px max-height
+   would squeeze them into a sliver on desktop. Let them fill the column. */
+.markdown-body .chat-artifact img {
+  width: 100%;
+  max-height: none;
+}
+
 /* Reusable subpage content spacing */
 .subpage-content {
   padding-top: 100px !important;
