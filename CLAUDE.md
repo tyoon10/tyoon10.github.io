@@ -59,6 +59,23 @@ links:
 
 ---
 
+## ✍️ Writing Voice & Article Drafting
+
+The canonical writing-voice guide lives at `private/writing/identity/voice.md` (**gitignored — local-only, not published**). It is the source of truth for tone, structure, and phrasing across all writings.
+
+**Before drafting or substantially editing any `src/content/writings/**/index.md`:**
+1. Read `private/writing/identity/voice.md` first and apply it. If a sibling `*-outline.md` exists in the article folder, read that too — the outline is the brief, the voice guide is the style contract.
+2. If `voice.md` is absent (e.g., a fresh clone without the local `private/` module), say so and proceed with the article's existing voice rather than inventing one.
+
+**After the user makes direct/manual edits to a draft:**
+1. Isolate the user's own changes: `git diff HEAD -- <file>` (or compare against the last Claude-authored version).
+2. Distill any recurring signal — tone, structure, phrasing, emphasis, punctuation — and update `voice.md`. **Reconcile, don't just append:** if a new preference supersedes an old rule, flag and revise it (bump the "Last updated" line + provenance). Ignore one-off content edits.
+3. In the prose itself, **preserve the user's voice** — flag only genuine grammar issues; never restyle.
+
+Run `/voice-sync` to perform the after-edits review on demand.
+
+---
+
 ## 🎨 Visual Design System (Alabaster Light Default)
 
 The site is strictly locked into the **clean, high-contrast Alabaster Light theme** (no dark-mode toggle or system-bars are rendered):
