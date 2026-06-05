@@ -93,7 +93,7 @@ I worked the design out in conversation with Claude itself, asking how each piec
 </div>
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each of my questions exposed an assumption; each of Claude's answers became one of the load-bearing rules below.</p>
 
-Here's the rationale behind *classifying the input first* (the fourth exchange). Both naive policies fail: 'reading the full chart on every turn' makes a trivial 'logging' needlessly slow and expensive, while 'reading nothing' leaves the agent guessing (and hallucinate). So I made turn-start branches on intent. The LLM sorts each input into one of seven shapes, and the shape sets the read depth: trivial shapes stay **LIGHT** (today's log only), high-stakes ones go **HEAVY** (`git pull` plus the full chart).
+Here's the rationale behind *classifying the input first* (the fourth exchange). Both naive policies fail: 'reading the full chart on every turn' makes a trivial logging turn needlessly slow and expensive, while 'reading nothing' leaves the agent guessing (and hallucinating). So I made the turn-start branch on intent. The LLM sorts each input into one of seven shapes, and the shape sets the read depth: trivial shapes stay **LIGHT** (today's log only), high-stakes ones go **HEAVY** (`git pull` plus the full chart).
 
 ![Turn-start decision tree: an input arrives, gets classified into one of seven shapes, then branches to a LIGHT read (today's log only) or a HEAVY read (git pull plus the full chart) before Claude responds and logs the turn.](./turn-start-decision-tree.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
@@ -107,19 +107,17 @@ Strip away OptiMind and a transferable playbook remains:
 3. **Critical write rules live in CLAUDE.md.** Branch is always `main`; exact file paths only; re-read `user_profile.json` before naming any specific rule. Encoded once in the system prompt, binding on every session.
 4. **The seven-shape input playbook drives an intent-keyed turn-start.** Classifying the input is the first cognitive step every turn anyway, so each shape carries both a dual-write action *and* a read level (LIGHT / LIGHT+ / MEDIUM / HEAVY, with `git pull` only on HEAVY). Trivial turns stay cheap; high-stakes turns pay for fidelity.
 5. **Verbatim-first writes.** Append the user's input to `journal/<date>.md` verbatim, before the response is finalized and committed. If anything fails between the turn's start and the push to `main`, the input is already in the audit log — and tomorrow's session reads it like nothing happened.
-6. **CLAUDE.md is standing orders; everything else is the chart on the wall.** That single asymmetry, sealed at start versus re-readable mid-session, is what drives the user-side rule: **continue in one chat by default; start a fresh one only when CLAUDE.md materially changes.** Cost is trivial; benefit is that the system prompt always tracks what's on disk.
+6. **CLAUDE.md is standing orders; everything else is the chart on the wall.** That single asymmetry, sealed at start versus re-readable mid-session, is what drives the user-side rule: **continue in one chat by default; start a fresh one only when CLAUDE.md materially changes.** This ensures the system prompt always tracks what's on disk.
 
 ## What This Means for Anyone Building with Claude Code
 
-**Your repo is your durable memory.** The connected GitHub repo is the only thing that survives the session. Design what lives there with the same care you'd give a database schema, because that's exactly what it is.
+**Your repo is your durable memory.** The connected GitHub repo is the only thing that survives the session. Design what lives there as a database schema.
 
-**CLAUDE.md is your highest-leverage lever.** Every new session reloads it. Every Routine fire reloads it. Every edit propagates to every future session for free. Spend 10x more time on it than feels reasonable.
+**CLAUDE.md is your highest-leverage lever.** Every new session reloads it. Every Routine fire reloads it. Every edit propagates to every future session. So you should spend 10x more time on it.
 
-**Don't make the session remember; make it disciplined at *reading*.** The model has no memory between sessions. Your only knobs are what you write to files and the reading procedure you encode in the system prompt. Stop fighting statelessness; treat it as a strength, since every session starts fresh and clean.
+**Don't make the session remember; make it disciplined at *reading*.** The model has no memory between sessions. Your only knobs are what you write to files and the reading procedure you encode in the system prompt. Instead of fighting statelessness, build to benefit from it, since every session starts fresh and clean.
 
-**Verbatim capture is the protocol.** Whatever the user types *is* the record. The agent's job is to log it faithfully and respond on top of it. Mess with the verbatim layer and continuity breaks.
-
-**For interactive use, classify intent first, then load.** "Read everything" makes trivial turns slow; "read nothing" produces apologize-for-the-wrong-supplement failures. Intent-keyed reads are the cheap middle.
+**Verbatim capture is the protocol.** Whatever the user types *is* the record. The agent's job is to log it faithfully and respond on top of it. Verbatim layer as a source-of-truth is what ensures continuity.
 
 ## See the system
 
@@ -133,8 +131,6 @@ If you want to trace where each idea in this article actually lives:
 - **The reference implementation of the dual-write logic** in Python: [`optimind-sdk/src/tools/daily.py`](https://github.com/tyoon10/optimind/blob/main/optimind-sdk/src/tools/daily.py).
 - **The full design doc** — every architectural choice in this article traces back to a section: [`docs/USER_FLOW_PLAN.md`](https://github.com/tyoon10/optimind/blob/main/docs/USER_FLOW_PLAN.md). The doctor-and-chart first-principles framing is §4.7; the memory persistence model is §4.8; the 7-shape input playbook is §4.2; the intent-keyed turn-start procedure is §6.5; the engineering decisions log (where each of these patterns was decided and why) is §9. Both the playbook (§4.2) and the turn-start procedure (§6.5) are mirrored into the runtime journal's private `CLAUDE.md`, where they actually drive the agent.
 
-It's MIT-licensed. Fork it if you want to build your own variant against a private journal of your own.
-
 ---
 
-You're not training a chatbot. You're building a clinic. The doctors come and go; the chart persists.
+Instead of training a chatbot, think of building a clinic. The doctors come and go; the chart persists.
