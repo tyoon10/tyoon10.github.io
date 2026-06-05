@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# private writing-identity module (local-only; never publish to the public repo)
+private/
