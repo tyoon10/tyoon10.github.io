@@ -1,5 +1,5 @@
 ---
-title: "The Doctor and the Chart: Memory Architecture for Claude Code on Mobile"
+title: "Building OptiMind: Memory Architecture for Claude Code on Mobile"
 date: 2026-05-30
 description: "Agentic memory is a harder problem than it looks. Here's what I learned building a memory-enabled agent around GitHub and Claude Code."
 featured: true
