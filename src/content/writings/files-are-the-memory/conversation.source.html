@@ -5,7 +5,9 @@
 <title>Designing the Memory Architecture — Conversation</title>
 <!-- Built from tools/chat-artifact/template.html. Minimal variant: no header,
      thinking lines, toolbar, or footer — just the turns. claude.ai-faithful:
-     SERIF Claude responses, SANS user bubbles. Render at 2x + crop.cjs sentinel. -->
+     SERIF Claude responses, SANS user bubbles. Render at 2x + crop.cjs sentinel.
+     Reframed 2026-06-09: user lines now state technical hypotheses or specific
+     mechanism assumptions, not directional opinion or simple concept asks. -->
 <style>
   :root {
     --bg:          #faf9f5;
@@ -67,34 +69,34 @@
 <body>
 <div class="card">
 
-  <div class="user-msg"><div class="user-bubble">When does CLAUDE.md actually get read?</div></div>
+  <div class="user-msg"><div class="user-bubble">I&rsquo;m assuming <code>CLAUDE.md</code> is loaded into the system prompt at session start. Does that mean mid-session edits to it don&rsquo;t take effect until the next new session?</div></div>
   <div class="claude-msg">
-    <div class="claude-body"><p>At session start, exactly once. The cloud container clones the repo, reads the repo-root <code>CLAUDE.md</code>, and bakes it into the system prompt for the whole session. Every scheduled Routine fires a new session, so every fire picks up the latest CLAUDE.md; every new chat tab does the same. Mid-session edits don&rsquo;t take effect; the system prompt is sealed at boot.</p></div>
+    <div class="claude-body"><p>Yes. The system prompt is sealed at boot. Every other file in the connected repo can be re-<code>Read</code> mid-session and the model picks up the new content; <code>CLAUDE.md</code> is the one exception.</p></div>
   </div>
 
-  <div class="user-msg"><div class="user-bubble">What about the conversation we&rsquo;re having right now? How does it carry over?</div></div>
+  <div class="user-msg"><div class="user-bubble">If sessions are stateless, the only thing surviving into tomorrow must be what&rsquo;s on disk. Is the verbatim journal the only carry-over mechanism, or is there an Anthropic-side memory I&rsquo;m missing?</div></div>
   <div class="claude-msg">
-    <div class="claude-body"><p>It doesn&rsquo;t, unless every turn writes itself to <code>journal/&lt;date&gt;.md</code>. The verbatim <code>### HH:MM | User</code> and <code>### HH:MM | Agent</code> lines <em>are</em> the cross-session memory protocol. Tomorrow&rsquo;s session opens yesterday&rsquo;s journal and reads those lines back into context. If a turn skipped the write, that exchange is gone forever.</p></div>
+    <div class="claude-body"><p>No vendor-side memory. The verbatim <code>### HH:MM | User</code> and <code>### HH:MM | Agent</code> lines in <code>journal/&lt;date&gt;.md</code> <em>are</em> the cross-session memory protocol. If a turn skipped that write, tomorrow&rsquo;s session can&rsquo;t see it.</p></div>
   </div>
 
-  <div class="user-msg"><div class="user-bubble">If a Routine writes to main while I&rsquo;m in a chat, do I see it?</div></div>
+  <div class="user-msg"><div class="user-bubble">A Routine fires at 22:00 while my chat is still open at 23:00. The container&rsquo;s working directory was cloned at chat-open time &mdash; does it see the new commits, or does it stay frozen until the agent runs <code>git pull</code>?</div></div>
   <div class="claude-msg">
-    <div class="claude-body"><p>No, not until your session explicitly pulls. The cloud session clones once at start; after that the checkout is a snapshot. A Routine firing at 22:00 while your chat is open at 23:00 has updated <code>origin/main</code>, but your chat&rsquo;s local files are still frozen at clone time.</p></div>
+    <div class="claude-body"><p>Frozen at clone time. The local checkout only refreshes when an explicit pull happens. Push from your chat after the fact fails with a non-fast-forward error if the remote moved during the chat.</p></div>
   </div>
 
-  <div class="user-msg"><div class="user-bubble">Should I just pull on every turn, then?</div></div>
+  <div class="user-msg"><div class="user-bubble">A blanket <code>git pull</code> on every turn would cost roughly one second times turn count, mostly burned on trivial taps that don&rsquo;t need authoritative reads. Is there a way to make freshness scale with the stakes of each turn?</div></div>
   <div class="claude-msg">
-    <div class="claude-body"><p>Tempting, but wasteful. Someone typing &ldquo;cold shower done&rdquo; doesn&rsquo;t need to re-read the profile, pull from main, and grep the journal. So classify the input first. There are seven recognizable shapes (routine completion, structured event, sleep state, Q&amp;A, decision, backfill, reflective), and each maps to a <em>read level</em>, from LIGHT (today&rsquo;s daily log only) up to HEAVY (the full chart). Only HEAVY turns pull. Most turns stay cheap.</p></div>
+    <div class="claude-body"><p>Classify the input shape first; let the shape set the read level. The agent sorts each input into one of seven recognizable shapes (routine completion, structured event, sleep state, Q&amp;A, decision, backfill, reflective). Trivial shapes stay <strong>LIGHT</strong> &mdash; today&rsquo;s log only. Q&amp;A, decisions, and backfills go <strong>HEAVY</strong> &mdash; <code>git pull</code> plus the full chart read. The classification is already happening; you just attach a read depth to it.</p></div>
   </div>
 
-  <div class="user-msg"><div class="user-bubble">Does the mechanism work the same for fresh and long-running sessions?</div></div>
+  <div class="user-msg"><div class="user-bubble">A fresh session boots with a clean clone, so <code>git pull</code> at start is a no-op. A long-running session that&rsquo;s been open for hours genuinely needs it. Does <code>CLAUDE.md</code> behave the same in both cases, or is the system prompt special?</div></div>
   <div class="claude-msg">
-    <div class="claude-body"><p>Almost. The turn-start procedure, the <code>Read</code> calls, the dual-write contract all run identically. The one asymmetry is <code>CLAUDE.md</code>: it&rsquo;s sealed at session start. Every other file can be re-read mid-session; CLAUDE.md can&rsquo;t, because the system prompt isn&rsquo;t re-evaluated. Edit it during an open chat and that chat keeps the old system prompt until you close it.</p></div>
+    <div class="claude-body"><p>The system prompt is the asymmetry. Both sessions can re-<code>Read</code> <code>user_profile.json</code>, journal entries, daily logs &mdash; all refresh in-context. <code>CLAUDE.md</code> is sealed at boot in both. So a long-running session stays current on everything <em>except</em> the system prompt; a <code>CLAUDE.md</code> change requires a fresh chat.</p></div>
   </div>
 
-  <div class="user-msg"><div class="user-bubble">So what&rsquo;s the workflow?</div></div>
+  <div class="user-msg"><div class="user-bubble">So the practical rule is: stay in one chat by default, start a fresh one only when <code>CLAUDE.md</code> materially changes &mdash; minor file edits like a new rule or a state-mode shift propagate via the turn-start procedure. Is that the right boundary?</div></div>
   <div class="claude-msg">
-    <div class="claude-body"><p>Stay in one open chat by default: accumulated context is cheap, and continuity is the whole point. <strong>Start a fresh chat only when a major CLAUDE.md update lands</strong>, to pick up the new system prompt. The journal preserves the prior session&rsquo;s substance, and the new session reads it back on its first HEAVY-read turn. Minor changes (a new rule, a mode flip) don&rsquo;t need a restart.</p></div>
+    <div class="claude-body"><p>Yes. <strong>Only system-prompt-level changes require a session restart.</strong> Even then, the journal preserves continuity &mdash; the new session reads the prior turns on its first HEAVY-read turn.</p></div>
   </div>
 
 </div>
