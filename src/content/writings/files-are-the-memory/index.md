@@ -48,7 +48,7 @@ Canonical schemas, the paste-ready prompts for the scheduled routines, a dashboa
 
 `optimind-journal` (private) holds the *memory*
 
-The active system prompt at `CLAUDE.md`, `user_profile.json` (durable rules), `state.json` (current mode), `journal/YYYY-MM-DD.md` (verbatim conversation), `daily/YYYY-MM-DD.json` (structured logs), and a `comprehensive_memory.md` of first principles. 
+The active system prompt at `CLAUDE.md`, `user_profile.json` (durable rules), `state.json` (current mode), `journal/YYYY-MM-DD.md` (verbatim conversation), `daily/YYYY-MM-DD.json` (structured logs), and a `comprehensive_memory.md` of first principles. Each principle in `comprehensive_memory.md` is now an addressable mechanism record; rules in `user_profile.json` cite them via a connector (see *Protocols and Mechanisms* below).
 
 The split is the abstraction line: *system* is the code and the patterns, *memory* is the user's data.
 
@@ -81,6 +81,9 @@ That framing produces three concrete failure modes the architecture has to handl
 | **Stale clone** | A long-lived chat's files are frozen at clone time while `origin/main` moves on (a Routine fires; another tab pushes) | `git pull` on substantive turns |
 | **Stale read** | Files are current on disk, but the model answered from internal recall instead of reading them | Mandatory `Read` calls on substantive turns |
 | **Lost history** | A turn never made it into `journal/<date>.md` and is invisible to the next session | Verbatim-first write contract + dual-write of structured facts |
+| **Silent protocol drift** | A rule's claimed mechanism is wrong, the model reads it correctly, and propagates the inversion | Rules carry an inline `why_brief` and a connector to a mechanism record; nightly sync-walk catches drift |
+
+The first three are about whether the chart is current. The fourth is about whether the chart is honest.
 
 ## How the Solution Emerged
 
@@ -98,6 +101,27 @@ Here's the rationale behind *classifying the input first* (the fourth exchange).
 ![Turn-start decision tree: an input arrives, gets classified into one of seven shapes, then branches to a LIGHT read (today's log only) or a HEAVY read (git pull plus the full chart) before Claude responds and logs the turn.](./turn-start-decision-tree.png)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
 
+## Protocols and Mechanisms
+
+Take the rule *"no caffeine after 2:30 PM."*
+
+That rule doesn't stand alone. It exists because caffeine has a ~5-hour half-life: a 95mg cup at noon leaves ~24mg still circulating at 10 PM, enough to blunt Stage 3 sleep onset. The cutoff time is a function of pharmacokinetics and the user's target bedtime. That's the *mechanism*.
+
+The mechanism in turn rests on plasma-curve data measured across studies. Those papers are the *sources*.
+
+- **Protocols** shift with user context — moves, seasons, schedules
+- **Mechanisms** shift with science — rare, external, universal
+- **Sources** are the citation trail
+
+> protocol = f(mechanism, user context, parameters)
+
+So the memory got split into three tiers, connector-linked:
+
+![Three-tier knowledge architecture illustrated with caffeine: two protocol rules ("no caffeine after 2:30 PM" and "L-theanine 200mg per serving") both cite a single mechanism record (mech.nutrition.caffeine_pharmacology), which in turn nests two sources.](./protocol-mechanism-source.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Two protocols share one mechanism; one mechanism cites two sources. why_brief is the hot-path cache; mechanism_ref is the connector the nightly Reflection walks for sync.</p>
+
+The freshness work made the agent disciplined at reading. This work makes the chart disciplined about what it carries.
+
 ## The Decisions, Distilled
 
 Strip away OptiMind and a transferable playbook remains:
@@ -108,6 +132,7 @@ Strip away OptiMind and a transferable playbook remains:
 4. **The seven-shape input playbook drives an intent-keyed turn-start.** Classifying the input is the first cognitive step every turn anyway, so each shape carries both a dual-write action *and* a read level (LIGHT / LIGHT+ / MEDIUM / HEAVY, with `git pull` only on HEAVY). Trivial turns stay cheap; high-stakes turns pay for fidelity.
 5. **Verbatim-first writes.** Append the user's input to `journal/<date>.md` verbatim, before the response is finalized and committed. If anything fails between the turn's start and the push to `main`, the input is already in the audit log — and tomorrow's session reads it like nothing happened.
 6. **CLAUDE.md is standing orders; everything else is the chart on the wall.** That single asymmetry, sealed at start versus re-readable mid-session, is what drives the user-side rule: **continue in one chat by default; start a fresh one only when CLAUDE.md materially changes.** This ensures the system prompt always tracks what's on disk.
+7. **Protocols carry their why; mechanisms carry their sources.** Each rule embeds a one-line cached `why_brief` plus a `mechanism_ref` connector to a mechanism record. The cache is what the daily routines read. Mechanism changes walk back to every rule referencing it.
 
 ## What This Means for Anyone Building with Claude Code
 
@@ -130,6 +155,7 @@ If you want to trace where each idea in this article actually lives:
 - **The dashboard PWA**: [`dashboard/`](https://github.com/tyoon10/optimind/tree/main/dashboard) — SvelteKit + GitHub OAuth (PKCE) + a Cloudflare Pages Function for the token exchange.
 - **The reference implementation of the dual-write logic** in Python: [`optimind-sdk/src/tools/daily.py`](https://github.com/tyoon10/optimind/blob/main/optimind-sdk/src/tools/daily.py).
 - **The full design doc** — every architectural choice in this article traces back to a section: [`docs/USER_FLOW_PLAN.md`](https://github.com/tyoon10/optimind/blob/main/docs/USER_FLOW_PLAN.md). The doctor-and-chart first-principles framing is §4.7; the memory persistence model is §4.8; the 7-shape input playbook is §4.2; the intent-keyed turn-start procedure is §6.5; the engineering decisions log (where each of these patterns was decided and why) is §9. Both the playbook (§4.2) and the turn-start procedure (§6.5) are mirrored into the runtime journal's private `CLAUDE.md`, where they actually drive the agent.
+- **The three-tier KB model + mechanism schema**, released in [`CHANGELOG.md` v4.1.0](https://github.com/tyoon10/optimind/blob/main/CHANGELOG.md): full rationale, the new [`mechanism.schema.json`](https://github.com/tyoon10/optimind/blob/main/schemas/mechanism.schema.json), the connector pattern, the three invariants, and the implementation log across both repos.
 
 ---
 
