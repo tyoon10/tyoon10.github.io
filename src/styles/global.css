@@ -1081,22 +1081,23 @@ body::before {
 .profile-social {
   display: inline-flex;
   align-items: center;
+  color: var(--text-muted);
   font-size: 1.4rem;
   line-height: 1;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.profile-social--linkedin {
-  color: #0a66c2;
-}
-
-.profile-social--github {
-  color: #181717;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .profile-social:hover {
-  opacity: 0.75;
   transform: translateY(-1px);
+}
+
+.profile-social--linkedin:hover {
+  color: #0a66c2;
+}
+
+.profile-social--github:hover {
+  color: #181717;
 }
 
 .timeline-action-btn {
