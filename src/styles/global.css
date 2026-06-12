@@ -1078,17 +1078,24 @@ body::before {
   color: var(--text-muted);
 }
 
-.profile-linkedin {
+.profile-social {
   display: inline-flex;
   align-items: center;
-  color: var(--text-muted);
   font-size: 1.4rem;
   line-height: 1;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.profile-linkedin:hover {
+.profile-social--linkedin {
   color: #0a66c2;
+}
+
+.profile-social--github {
+  color: #181717;
+}
+
+.profile-social:hover {
+  opacity: 0.75;
   transform: translateY(-1px);
 }
 
