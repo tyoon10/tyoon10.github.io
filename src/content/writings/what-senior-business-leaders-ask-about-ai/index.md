@@ -8,6 +8,10 @@ tags:
   - "Enterprise AI"
   - "AI Strategy"
   - "Executive Education"
+links:
+  - name: "Program Website"
+    url: "https://execed.business.columbia.edu/programs/business-ai"
+    icon: "globe"
 ---
 
 
