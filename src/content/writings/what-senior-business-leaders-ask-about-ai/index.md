@@ -98,11 +98,9 @@ This was the question the room kept returning to, and rightly so. Not "can AI do
 
 [PwC](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html) measured executives' trust in AI agents by task:
 
-<div style="position: relative; padding-bottom: 72%; height: 0; overflow: hidden; border-radius: 14px; border: 1px solid var(--border-color); margin: 16px 0 8px;">
-  <iframe src="https://flo.uri.sh/visualisation/23165841/embed" title="PwC: How much executives trust AI agents to perform work" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" loading="lazy"></iframe>
-</div>
+![How much executives trust AI agents to perform work, by task](./pwc-ai-agent-trust.png)
 
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: 0; margin-bottom: 24px;">How much executives trust AI agents to perform work, by task. Source: <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html" target="_blank" rel="noopener">PwC AI Agent Survey (2025)</a>.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Executive trust in AI agents, by task. Data: <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html" target="_blank" rel="noopener">PwC AI Agent Survey (2025)</a>; chart by the author.</p>
 
 The gap between capability and confidence is where most enterprises stall. Three approaches came up in the discussion, and the most sophisticated teams seem to use all of them:
 
