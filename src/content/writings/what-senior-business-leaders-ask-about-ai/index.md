@@ -45,6 +45,10 @@ The data supports the urgency. [McKinsey's 2025 State of AI report](https://www.
 
 Meanwhile, **74% of organizations** expect to be using AI agents at least moderately by 2027 (Deloitte). The gap between adoption velocity and governance readiness is where risk lives.
 
+![Deloitte Figure 7: Extent of agentic AI usage, today versus in two years](./deloitte-agentic-usage.png)
+
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Agentic AI usage today vs. expected in two years. Source: <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2026/state-of-ai-2026.pdf" target="_blank" rel="noopener">Deloitte, State of AI in the Enterprise, 9th edition (2026)</a>, Figure 7.</p>
+
 > **The real question isn't "can AI make mistakes?"** It's whether existing review processes catch mistakes regardless of who — or what — made them. If QA relies on the assumption that a human built the model slowly, that's a process gap, not an AI problem.
 
 ## 2. "We'd have to give them everything — all our documents, all our IP. How safe is that?"
@@ -63,6 +67,10 @@ That said, the concern isn't irrational, and the executives in the room were rig
 | **Perceived risk** | Well-understood | High; the **AI risk executives cite most** |
 
 [PwC's 2025 Responsible AI Survey](https://www.pwc.com/us/en/tech-effect/ai-analytics/responsible-ai-survey.html) found that **only one-third of CEOs globally** have high trust in embedding AI into key processes. [Deloitte](https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html) reports that **73% of executives** rank data privacy and security as the AI risk that worries them most.
+
+![Deloitte Figure 8: AI risks most concerning](./deloitte-ai-risks.png)
+
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The AI risks executives cite most. Source: <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2026/state-of-ai-2026.pdf" target="_blank" rel="noopener">Deloitte, State of AI in the Enterprise, 9th edition (2026)</a>, Figure 8.</p>
 
 > What I've observed from firms that move quickly on this: they reframe it from "is it safe?" to **"what data classification does this require, and what's the deployment model that matches our existing governance?"** That turns a philosophical debate into a procurement decision.
 
@@ -88,13 +96,13 @@ But there's a subtlety that one executive in the room flagged: the switching cos
 
 This was the question the room kept returning to, and rightly so. Not "can AI do the work?" They'd just watched it build a complete valuation model. The question was: **"should I trust it?"**
 
-[PwC](https://www.pwc.com/us/en/tech-effect/ai-analytics/responsible-ai-survey.html) measured executives' trust in AI agents by task:
+[PwC](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html) measured executives' trust in AI agents by task:
 
-| Use case | Executive trust level |
-|---|---|
-| Data analysis | **38%** |
-| Performance improvement | **35%** |
-| Financial transactions | **20%** |
+<div style="position: relative; padding-bottom: 72%; height: 0; overflow: hidden; border-radius: 14px; border: 1px solid var(--border-color); margin: 16px 0 8px;">
+  <iframe src="https://flo.uri.sh/visualisation/23165841/embed" title="PwC: How much executives trust AI agents to perform work" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" loading="lazy"></iframe>
+</div>
+
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: 0; margin-bottom: 24px;">How much executives trust AI agents to perform work, by task. Source: <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html" target="_blank" rel="noopener">PwC AI Agent Survey (2025)</a>.</p>
 
 The gap between capability and confidence is where most enterprises stall. Three approaches came up in the discussion, and the most sophisticated teams seem to use all of them:
 
