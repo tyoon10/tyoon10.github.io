@@ -2,7 +2,7 @@
 title: "Tracing the Minds Behind Claude Code"
 date: 2026-04-06
 description: "I spent a weekend reading two Claude Code source trees side by side, to find what changed and hasn't across 13 months of the most successful AI product."
-featured: true
+featured: false
 coverImage: "./hero-image.png"
 tags:
   - "Claude Code"
