@@ -25,3 +25,12 @@ pnpm-debug.log*
 
 # private writing-identity module (local-only; never publish to the public repo)
 private/
+
+# local-only authoring helpers for writings (never publish)
+src/content/writings/**/visuals-brief.md
+src/content/writings/**/visuals-spec.md
+src/content/writings/**/make-visuals.cjs
+src/content/writings/**/generate_visuals.py
+
+# Windows alternate-data-stream junk
+*:Zone.Identifier

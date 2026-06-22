@@ -11,9 +11,9 @@ tags:
   - "Data Governance"
   - "Agentic AI"
 links:
-  - name: "Fusion by J.P. Morgan"
-    url: "https://fusion.jpmorgan.com"
-    icon: "globe"
+  - name: "What Senior Business Leaders Actually Ask About AI"
+    url: "/writings/what-senior-business-leaders-ask-about-ai"
+    icon: "book-open"
   - name: "Data Mesh Principles (Dehghani)"
     url: "https://martinfowler.com/articles/data-mesh-principles.html"
     icon: "book-open"
