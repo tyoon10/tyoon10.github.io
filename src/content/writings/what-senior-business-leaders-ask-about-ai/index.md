@@ -2,7 +2,7 @@
 title: "What Senior Business Leaders Actually Ask About AI"
 date: 2026-03-17
 description: "I guest-lectured to Directors and C-suite leaders at Columbia's executive AI program. Their questions — about liability, talent, and competitive advantage — reveal where leadership's mind actually is on AI right now."
-featured: true
+featured: false
 coverImage: "./featured.png"
 tags:
   - "Enterprise AI"
