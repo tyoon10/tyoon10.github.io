@@ -2,6 +2,7 @@
 title: "How I Think About Knowledge in Finance"
 date: 2026-06-21
 description: "Finance spent 20 years industrializing its data and almost no time on its knowledge. Then AI changed the economics overnight. Drawing on my years as a practitioner, here is my framework."
+coverImage: "./featured.png"
 featured: true
 tags:
   - "Knowledge Management"
@@ -19,9 +20,9 @@ links:
 ---
 
 
-Early in my career, I owned the data room for a client selling a stake to a private equity firm. Due diligence was people and time. The buyer's counsel sent request lists, and I worked them by hand, finding the contract, the board minute, the clause that settled each question, then deciding what the buyer was cleared to see before it crossed into the room. That last call stayed with me: you can hold material information and still be barred from acting on it.
+Early in my career, I owned the data room for a client (a major Korean conglomerate) selling a stake to a private equity firm. Due diligence was people and time, measured in the hourly rates of corporate attorneys, accountants, and investment bankers. The buy-side law firm sent request lists, and I worked them by hand, finding the contract, the board minute, the clause that settled each question, then deciding what the buyer was cleared to see before it crossed into the room. That last call stayed with me: you can hold material information and *still* be barred from acting on it.
 
-The deal almost never turned on the volume of what we handed over. It turned on a handful of facts, and on the one thing the room rarely held: *why* management had decided what they decided. The contract said what was agreed. The financials said what happened. The reasoning behind both lived in people's heads and in email threads no one had filed.
+Howard Marks took me back into that data room during his private credit lecture at Columbia Business School this year. He kept returning to the value private investing overlooks: not the record everyone can read, but the reasoning that produced it (discussed in more detail below). Looking back on that stake sale, the deal almost never turned on the volume of what we handed over; it turned on a handful of facts, and on the one thing the room rarely held: *why* management had decided what they decided. The contract said what was agreed; the financials, what happened. The reasoning behind both lived in people's heads and in email threads no one had filed.
 
 I was a human retrieval system for someone else's high-stakes judgment. I now build the machines that do that work: retrieval and knowledge-graph systems that put AI on top of a firm's own knowledge. Having lived both sides of this transition, here is my framework for **knowledge** in finance under AI, in the order that matters: **data**, the **value** that makes it a moat, the **constraints** that decide whether it can be trusted, and the **stakeholders** who decide everything else.
 
@@ -31,7 +32,13 @@ I was a human retrieval system for someone else's high-stakes judgment. I now bu
 
 Banks industrialized data. Golden sources, lineage, catalogs, master data. They did it because they were forced to: after the financial crisis, [BCBS 239](https://www.bis.org/publ/bcbs239.htm) made traceable, accurate, complete risk data a supervisory requirement, and as of the most recent assessment only a small minority of the world's roughly 31 systemically important banks were judged fully compliant. Platforms like [Fusion by J.P. Morgan](https://fusion.jpmorgan.com) are the visible result: take custody, accounting, and vendor data, [harmonize it into one common semantic model](https://siliconangle.com/2025/06/04/data-management-fusion-snowflake-snowflakesummit/), and deliver it into [Snowflake, Databricks, and notebooks](https://www.jpmorgan.com/about-us/corporate-news/2023/securities-services-fusion-data-mesh). Data, industrialized.
 
+![J.P. Morgan's Fusion data ecosystem: sources normalized into one model and delivered to the client's stack](./fusion-jpm-ecosystem.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Fusion in one view: any source, normalized into a single model, delivered into the client's own stack. Adapted from <a href="https://fusion.jpmorgan.com" target="_blank" rel="noopener">J.P. Morgan's Fusion architecture</a>.</p>
+
 Knowledge stayed feral. It sat in heads, decks, mailboxes, and shared drives. Nobody industrialized it because the extraction cost was prohibitive. It was the same cost I had been paying by hand in that data room, scaled to an entire firm: a human had to read each document and decide what it meant. **LLMs collapsed that cost to near zero.** The moment latent knowledge became cheap to extract, it became an asset class. And an unmanaged asset class, at the scale of a global bank, is simultaneously the largest opportunity and the largest liability on the table. Knowledge management stops being a librarian's job and becomes a balance-sheet conversation.
+
+![Data rose for two decades; knowledge stayed flat until LLMs collapsed the extraction cost](./data-vs-knowledge-curve.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Finance industrialized its data over twenty years. Knowledge stayed feral until the extraction cost collapsed.</p>
 
 ## I. Data: Three Tiers, and the Valuable One Is the One Nobody Captures
 
@@ -43,21 +50,30 @@ Not all knowledge is the same, and its value is inverted from the effort it take
 | **Embedded** | Decisions, and the rationale behind them | Tickets, PRs, threads, meeting notes, deal memos | Barely captured | **Highest** |
 | **Tacit** | Judgment, pattern recognition, relationships | People's heads | Not captured by tools at all | Situational |
 
+![The three tiers: value runs opposite to how well each is captured](./value-inversion.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Value runs opposite to capture. The embedded <em>why</em> is the highest-value tier and the least captured.</p>
+
 The contract says *what* was agreed. The thread says *why*. The next person making a decision needs the *why*, and the *why* is exactly what no system holds. In the data room, the embedded layer was the gap I kept hitting. I could find every number. I could almost never find the reasoning that produced it.
 
 The discipline to fix this already exists. It just got applied to data first. [Zhamak Dehghani's data mesh](https://martinfowler.com/articles/data-mesh-principles.html) named the four principles in 2020: domain ownership, data as a product, a self-serve platform, federated computational governance. Knowledge is the same supply chain. Producers, refinement, distribution, consumers. It needs the same product discipline: named ownership, quality metrics, freshness SLAs, provenance, entitlements, and a clean consumption interface.
 
-One thing about the consumer has changed, and it quietly resets the entire design. The consumer of knowledge is increasingly **an agent calling an API, not a human browsing a portal.** Build for machine consumption (structured, atomic, traceable) and humans benefit as a side effect. Build for humans first and machines get nothing they can use. The reverse does not hold.
+One thing about the consumer has changed, and it quietly resets the entire design. The consumer of knowledge is increasingly **an agent calling an API, not a human browsing a portal.** Build for machine consumption (structured, atomic, traceable) and humans benefit as a side effect. Build for humans first and machines get nothing they can use.
+
+![Run knowledge like a data product](./knowledge-supply-chain.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Run knowledge like a data product — owned, measured, entitled — and design for the consumer that now matters most: an agent calling an API.</p>
 
 ## II. Value: The Model Is the Commodity, the Knowledge Is the Moat
 
 Every firm can buy the same model. None can buy a hundred years of its own deal history, research, post-mortems, and client context. So the competitive question is not which model you license. It is **who feeds their model the highest-quality proprietary knowledge, fastest and safest.** That sentence is what "make data AI ready" actually means.
 
-I felt that most sharply this past January, in a private credit elective at Columbia Business School where Howard Marks guest-lectured. Marks built Oaktree into one of the world's largest credit investors, and the striking thing is what the edge was not. In private credit the data is thin and everyone reads the same agreements. The edge was *second-level thinking*: "a superior ability to figure out what the readily available quantitative information implies," the judgment about which borrower survives the cycle and which does not.
+Marks's CBS lecture is where it got concrete for me. He built Oaktree into one of the world's largest credit investors, and the striking thing is what the edge was not. In private credit the data is thin and everyone reads the same agreements. The edge was *second-level thinking*: "a superior ability to figure out what the readily available quantitative information implies," the judgment about which borrower survives the cycle and which does not.
 
-What stayed with me was his discipline of writing it down. For thirty-five years he has published [memos](https://www.oaktreecapital.com/insights/memo/the-best-of) that record not what he decided but why he decided it, and they became essential reading across the industry. Sitting in that room, I realized he had spent a career doing the thing this essay is about, by hand. The data room had taught me the *why* was the valuable part; Marks made me see it was the defensible part.
+What stayed with me was his discipline of writing it down. For thirty-five years he has published [memos](https://www.oaktreecapital.com/insights/memo/the-best-of) that record not what he decided but why he decided it, and they became essential reading across the industry. Sitting in that room, I realized he had spent a career doing the thing this essay is about, by hand. The data room had taught me the *why* was the valuable part; Marks made me see it was the defensible part. This essay is the same move: the reasoning, written down before it slips back into people's heads.
 
-His definition of the machine, that day, was deflating: "a nerd that has read everything that's ever been written, remembers it, and can find it right away." It can read every credit agreement in a portfolio in minutes. What it cannot do is sit down with five CEOs and figure out which one is Steve Jobs. In private markets especially, the moat was never the documents. It was the reasoning almost no one bothered to write down.
+His definition of the machine, that day, was deflating: "a nerd that has read everything that's ever been written, remembers it, and can find it right away." It can read every credit agreement in a portfolio in minutes. What it cannot do is sit down with five CEOs and figure out which one is Steve Jobs. In private markets especially, the moat was never the documents. It was the **reasoning** almost no one bothered to write down.
+
+![First-level vs. second-level](./first-vs-second-level.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">An LLM can read every agreement in minutes — that's first-level. The moat is the second-level judgment about what they mean.</p>
 
 If knowledge is an asset now, the discipline that applies to it is valuation: pricing it by the cash flows and the risks attached. Once knowledge became cheap to extract, it crossed the line from cost center to asset: it has a value (better, faster, more defensible decisions) and a risk (leakage, staleness, a wrong answer acted on). The firms that will pull ahead are the ones that start treating it on those terms, with the same rigor they already apply to a security.
 
@@ -66,6 +82,9 @@ Value being inverted from effort has a commercial consequence too: **don't boil 
 ## III. Constraints: In Finance, the Constraints Are the Architecture
 
 Generic knowledge management treats compliance as friction to route around. In finance it is the opposite. The constraints are load-bearing, and three of them shape every real design decision.
+
+![The trust stack](./trust-stack.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">In finance the constraints are the architecture. Each is a load-bearing layer, anchored to a rule — and the eval layer is the one holding weight now.</p>
 
 **Access is not uniform.** The same question must return different answers depending on who asks. This is not a product preference; it is the law. I first learned it by hand in that data room, and it is written into the [CFA Code I was tested on](https://www.cfainstitute.org/standards/professionals/code-ethics-standards): a charterholder cannot act on material nonpublic information, and firms must "enact a firewall to restrict the flow of proprietary information." Information barriers and [the Advisers Act's prohibition on misusing nonpublic information](https://www.law.cornell.edu/uscode/text/15/80b-4a) mean entitlements have to be enforced at query time and inherited from the source, never bolted on afterward. A knowledge system that can leak across a wall does not have a quality problem. It has an incident.
 
@@ -105,5 +124,8 @@ A few of these deserve more than a row.
 ## Where This Goes
 
 I started my career between the data and the decision, running the room that one side disclosed and the other had to act on. The work has moved up a layer. The question is no longer how one sponsor reads one data room. It is how a firm turns a century of its own feral knowledge into something an agent can act on and a regulator can audit.
+
+![Control plane](./control-plane.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Today, knowledge answers questions. Next, it becomes the control plane an agent acts inside — instructions, guardrails, and audit trail.</p>
 
 The firms that win this will not be the ones with the best model. Everyone has the same model. They will be the ones whose knowledge was trustworthy enough — structured, entitled, fresh, and measured — to hand to an agent and defend every action it takes. That is the asset finance never got around to industrializing. It is buildable now. And I think it is the most interesting thing in the industry.
