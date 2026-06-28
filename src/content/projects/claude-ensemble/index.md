@@ -24,20 +24,30 @@ It never reached that transition. On June 12th, eleven days early, a US governme
 
 So the most capable model left subscription reach twice over, on two unrelated tracks: first scheduled behind metered billing, then seized before that even happened. For most of us it was briefly on, then gone.
 
-That gap is the motivation here. Two facts about who actually builds on these models:
-
-1. **Most independent builders and early-stage startups are on subscription plans, not API billing.** Token-based usage is unfamiliar, and at any real volume it is often not feasible.
-2. **Most builders commit to one active subscription.** You pick a provider and you live inside it.
-
-I am a Claude subscriber who builds with Claude Code. I wanted frontier-level answers on my hardest tasks without an API key and without a second bill. So I built one.
+As a Claude evangelist, I had no intention of leaving the stack. I build with Claude Code every day, and switching providers over a single missing model was never the plan. But the most capable Claude model had left my plan overnight, first by price and then by policy, with no signal of when it would return, and I had no enterprise contract or trusted-partner slot to fall back on. What I did have was a Claude subscription, Claude Code, and the strong tier sitting just below the frontier. So I decided to build the maximum-performance setup myself, out of the models I could still reach.
 
 ## The problem
 
-Frontier capability for subscription users turned out to be unstable, pulled away by both price and policy. But the tier just below it never moved: Opus 4.8, Sonnet, and Haiku stayed generally available on the same subscription throughout. Waiting for the single most capable model to stay on your plan is not a strategy; building on the strong, stable tier underneath it is.
+The tier just below the frontier never moved. Opus 4.8, Sonnet, and Haiku stayed generally available on the same subscription throughout, untouched by any directive. So the real question was not how to get the frontier model back. It was: **how close to frontier-level answers can a Claude subscriber get on hard tasks, using only what the subscription already provides?**
 
-The question I set out to answer: **how close to frontier-level answers can a Claude subscriber get on hard tasks, using only what the subscription already provides?** That is Claude Code, plus the model tiers (Haiku, Sonnet, Opus) you already pay for and that no directive has touched.
+The bet is orchestration. Instead of reaching for a bigger model, run more coordinated passes of the models you have, and put a verification layer around them so the final answer is checked, not just generated.
 
-The bet is orchestration. Instead of reaching for a bigger model, run more coordinated passes of the models you have, and put a verification layer around them.
+## Who it's for
+
+claude-ensemble is built for one kind of user: a Claude subscriber who builds with Claude Code and regularly hits problems hard enough that a single answer is not good enough. That is most independent builders, solo founders, and early-stage teams. Two things tend to be true of them. They are on a subscription rather than API billing, because token usage is unfamiliar and at real volume often not feasible. And they are committed to one provider, because you pick a stack and you live inside it. If you have a trusted-partner slot or an open API budget, you can just call the top model; this is for the rest of us.
+
+Use it for the genuinely hard tasks, the ones where a single strong pass tends to leave something out:
+
+- Systems and architecture design
+- Debugging and root-causing stubborn failures
+- Hard algorithms and data-structure problems
+- Security threat-modeling
+- Math and proofs
+- Deep research and synthesis
+- Subtle conceptual questions where precision matters
+- Code where correctness is checkable, so the kit can run it to find and fix real defects
+
+It is deliberately not for quick or simple work. The kit sizes up each task first and sends easy ones through a single pass, so you do not spend the premium where one answer already wins. Reach for it when the quality of the answer matters more than the speed or cost of getting it. What it buys you is two things a single call cannot: several independent attempts at the problem, and a judge that fact-checks them before combining them into one answer.
 
 ## claude-ensemble
 
