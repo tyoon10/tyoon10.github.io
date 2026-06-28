@@ -60,7 +60,7 @@ The discipline to fix this already exists. It just got applied to data first. [Z
 One thing about the consumer has changed, and it quietly resets the entire design. The consumer of knowledge is increasingly **an agent calling an API, not a human browsing a portal.** Build for machine consumption (structured, atomic, traceable) and humans benefit as a side effect. Build for humans first and machines get nothing they can use.
 
 ![Run knowledge like a data product](./knowledge-supply-chain.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Run knowledge like a data product — owned, measured, entitled — and design for the consumer that now matters most: an agent calling an API.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Run knowledge like a data product (owned, measured, entitled) and design for the consumer that now matters most: an agent calling an API.</p>
 
 ## II. Value: The Model Is the Commodity, the Knowledge Is the Moat
 
@@ -73,7 +73,7 @@ What stayed with me was his discipline of writing it down. For thirty-five years
 His definition of the machine, that day, was deflating: "a nerd that has read everything that's ever been written, remembers it, and can find it right away." It can read every credit agreement in a portfolio in minutes. What it cannot do is sit down with five CEOs and figure out which one is Steve Jobs. In private markets especially, the moat was never the documents. It was the **reasoning** almost no one bothered to write down.
 
 ![First-level vs. second-level](./first-vs-second-level.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">An LLM can read every agreement in minutes — that's first-level. The moat is the second-level judgment about what they mean.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">An LLM can read every agreement in minutes; that's first-level. The moat is the second-level judgment about what they mean.</p>
 
 If knowledge is an asset now, the discipline that applies to it is valuation: pricing it by the cash flows and the risks attached. Once knowledge became cheap to extract, it crossed the line from cost center to asset: it has a value (better, faster, more defensible decisions) and a risk (leakage, staleness, a wrong answer acted on). The firms that will pull ahead are the ones that start treating it on those terms, with the same rigor they already apply to a security.
 
@@ -84,7 +84,7 @@ Value being inverted from effort has a commercial consequence too: **don't boil 
 Generic knowledge management treats compliance as friction to route around. In finance it is the opposite. The constraints are load-bearing, and three of them shape every real design decision.
 
 ![The trust stack](./trust-stack.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">In finance the constraints are the architecture. Each is a load-bearing layer, anchored to a rule — and the eval layer is the one holding weight now.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">In finance the constraints are the architecture. Each is a load-bearing layer, anchored to a rule, and the eval layer is the one holding weight now.</p>
 
 **Access is not uniform.** The same question must return different answers depending on who asks. This is not a product preference; it is the law. I first learned it by hand in that data room, and it is written into the [CFA Code I was tested on](https://www.cfainstitute.org/standards/professionals/code-ethics-standards): a charterholder cannot act on material nonpublic information, and firms must "enact a firewall to restrict the flow of proprietary information." Information barriers and [the Advisers Act's prohibition on misusing nonpublic information](https://www.law.cornell.edu/uscode/text/15/80b-4a) mean entitlements have to be enforced at query time and inherited from the source, never bolted on afterward. A knowledge system that can leak across a wall does not have a quality problem. It has an incident.
 
@@ -119,13 +119,13 @@ A few of these deserve more than a row.
 
 **The agent as a stakeholder.** Today, knowledge systems retrieve: a human asks, the system answers. Next, agents *act* on knowledge, and the knowledge base becomes their operating instructions, their guardrails, and their audit trail. JPMorgan put an internal LLM assistant in front of [roughly 200,000 employees](https://www.artificialintelligence-news.com/news/jpmorgan-chase-ai-strategy-2025/) within months. On the supply side, the late-2025 convergence on Model Context Protocol servers sends the same signal: [Snowflake](https://www.snowflake.com/en/news/press-releases/snowflake-unveils-cortex-ai-for-financial-services--enterprise-ready-ai-built-to-scale/), [LSEG](https://news.microsoft.com/source/2025/10/12/lseg-and-microsoft-transform-access-to-ai-ready-financial-data-in-customer-workflows/), [Morningstar and PitchBook](https://newsroom.morningstar.com/news/news-details/2025/Morningstar-and-PitchBook-Bring-Trusted-Investing-Intelligence-to-Apps-in-ChatGPT/default.aspx), and [Arcesium](https://www.alternativeswatch.com/2025/12/15/arcesium-aquata-launch-new-ai-features/) all shipped one inside a single quarter. The consumer of financial data stopped being only human. The firm whose knowledge is structured, entitled, fresh, and evaluated is the one that can deploy that new labor safely at scale first.
 
-**The throughline.** Here is what owning that data room taught me, and what I keep coming back to: the deliverable was never the pile of documents I assembled. It was whether the people on the other side of the deal could reach a decision they could defend to their own investment committee. A document nobody could trust or trace was worth nothing to them, however neatly it was filed. Knowledge systems are the same. The deliverable is never the retrieval. It is a defensible action that a specific, accountable person — or now, a specific agent — can stand behind. That is why stakeholders come last on the list and first in importance.
+**The throughline.** Here is what owning that data room taught me, and what I keep coming back to: the deliverable was never the pile of documents I assembled. It was whether the people on the other side of the deal could reach a decision they could defend to their own investment committee. A document nobody could trust or trace was worth nothing to them, however neatly it was filed. Knowledge systems are the same. The deliverable is never the retrieval. It is a defensible action that a specific, accountable person (or now, a specific agent) can stand behind. That is why stakeholders come last on the list and first in importance.
 
 ## Where This Goes
 
 I started my career between the data and the decision, running the room that one side disclosed and the other had to act on. The work has moved up a layer. The question is no longer how one sponsor reads one data room. It is how a firm turns a century of its own feral knowledge into something an agent can act on and a regulator can audit.
 
 ![Control plane](./control-plane.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Today, knowledge answers questions. Next, it becomes the control plane an agent acts inside — instructions, guardrails, and audit trail.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Today, knowledge answers questions. Next, it becomes the control plane an agent acts inside: instructions, guardrails, and audit trail.</p>
 
-The firms that win this will not be the ones with the best model. Everyone has the same model. They will be the ones whose knowledge was trustworthy enough — structured, entitled, fresh, and measured — to hand to an agent and defend every action it takes. That is the asset finance never got around to industrializing. It is buildable now. And I think it is the most interesting thing in the industry.
+The firms that win this will not be the ones with the best model. Everyone has the same model. They will be the ones whose knowledge was trustworthy enough (structured, entitled, fresh, and measured) to hand to an agent and defend every action it takes. That is the asset finance never got around to industrializing. It is buildable now. And I think it is the most interesting thing in the industry.

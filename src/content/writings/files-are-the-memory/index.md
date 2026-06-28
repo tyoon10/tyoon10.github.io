@@ -109,8 +109,8 @@ That rule doesn't stand alone. It exists because caffeine has a ~5-hour half-lif
 
 The mechanism in turn rests on plasma-curve data measured across studies. Those papers are the *sources*.
 
-- **Protocols** shift with user context — moves, seasons, schedules
-- **Mechanisms** shift with science — rare, external, universal
+- **Protocols** shift with user context: moves, seasons, schedules
+- **Mechanisms** shift with science: rare, external, universal
 - **Sources** are the citation trail
 
 > protocol = f(mechanism, user context, parameters)
@@ -130,7 +130,7 @@ Strip away OptiMind and a transferable playbook remains:
 2. **The dual-write contract.** Every structured fact lands in both `daily/<date>.json` *and* `journal/<date>.md` as a mirror line, the same contract whether the writer is the chat agent, a Routine, or a dashboard form.
 3. **Critical write rules live in CLAUDE.md.** Branch is always `main`; exact file paths only; re-read `user_profile.json` before naming any specific rule. Encoded once in the system prompt, binding on every session.
 4. **The seven-shape input playbook drives an intent-keyed turn-start.** Classifying the input is the first cognitive step every turn anyway, so each shape carries both a dual-write action *and* a read level (LIGHT / LIGHT+ / MEDIUM / HEAVY, with `git pull` only on HEAVY). Trivial turns stay cheap; high-stakes turns pay for fidelity.
-5. **Verbatim-first writes.** Append the user's input to `journal/<date>.md` verbatim, before the response is finalized and committed. If anything fails between the turn's start and the push to `main`, the input is already in the audit log — and tomorrow's session reads it like nothing happened.
+5. **Verbatim-first writes.** Append the user's input to `journal/<date>.md` verbatim, before the response is finalized and committed. If anything fails between the turn's start and the push to `main`, the input is already in the audit log, and tomorrow's session reads it like nothing happened.
 6. **CLAUDE.md is standing orders; everything else is the chart on the wall.** That single asymmetry, sealed at start versus re-readable mid-session, is what drives the user-side rule: **continue in one chat by default; start a fresh one only when CLAUDE.md materially changes.** This ensures the system prompt always tracks what's on disk.
 7. **Protocols carry their why; mechanisms carry their sources.** Each rule embeds a one-line cached `why_brief` plus a `mechanism_ref` connector to a mechanism record. The cache is what the daily routines read. Mechanism changes walk back to every rule referencing it.
 
@@ -146,15 +146,15 @@ Strip away OptiMind and a transferable playbook remains:
 
 ## See the system
 
-The OptiMind system repo is public: **[github.com/tyoon10/optimind](https://github.com/tyoon10/optimind)**. The personal data layer — rules, journal, daily logs, the active `CLAUDE.md` — stays in a private companion repo; the public side is the system architecture, not the data. The [README](https://github.com/tyoon10/optimind/blob/main/README.md) encodes the same governance rules I've used here, including a what-lives-where table for the two-repo split.
+The OptiMind system repo is public: **[github.com/tyoon10/optimind](https://github.com/tyoon10/optimind)**. The personal data layer (rules, journal, daily logs, the active `CLAUDE.md`) stays in a private companion repo; the public side is the system architecture, not the data. The [README](https://github.com/tyoon10/optimind/blob/main/README.md) encodes the same governance rules I've used here, including a what-lives-where table for the two-repo split.
 
 If you want to trace where each idea in this article actually lives:
 
 - **The schemas** that make the dual-write contract concrete: [`schemas/daily_log.schema.json`](https://github.com/tyoon10/optimind/blob/main/schemas/daily_log.schema.json), [`schemas/journal_entry.schema.md`](https://github.com/tyoon10/optimind/blob/main/schemas/journal_entry.schema.md), [`schemas/user_profile.schema.json`](https://github.com/tyoon10/optimind/blob/main/schemas/user_profile.schema.json).
 - **The three scheduled-Routine prompts** in their paste-ready form: [`routines/morning_brief.md`](https://github.com/tyoon10/optimind/blob/main/routines/morning_brief.md), [`routines/reflection.md`](https://github.com/tyoon10/optimind/blob/main/routines/reflection.md), [`routines/weekly_review.md`](https://github.com/tyoon10/optimind/blob/main/routines/weekly_review.md).
-- **The dashboard PWA**: [`dashboard/`](https://github.com/tyoon10/optimind/tree/main/dashboard) — SvelteKit + GitHub OAuth (PKCE) + a Cloudflare Pages Function for the token exchange.
+- **The dashboard PWA**: [`dashboard/`](https://github.com/tyoon10/optimind/tree/main/dashboard), SvelteKit + GitHub OAuth (PKCE) + a Cloudflare Pages Function for the token exchange.
 - **The reference implementation of the dual-write logic** in Python: [`optimind-sdk/src/tools/daily.py`](https://github.com/tyoon10/optimind/blob/main/optimind-sdk/src/tools/daily.py).
-- **The full design doc** — every architectural choice in this article traces back to a section: [`docs/USER_FLOW_PLAN.md`](https://github.com/tyoon10/optimind/blob/main/docs/USER_FLOW_PLAN.md). The doctor-and-chart first-principles framing is §4.7; the memory persistence model is §4.8; the 7-shape input playbook is §4.2; the intent-keyed turn-start procedure is §6.5; the engineering decisions log (where each of these patterns was decided and why) is §9. Both the playbook (§4.2) and the turn-start procedure (§6.5) are mirrored into the runtime journal's private `CLAUDE.md`, where they actually drive the agent.
+- **The full design doc**, where every architectural choice in this article traces back to a section: [`docs/USER_FLOW_PLAN.md`](https://github.com/tyoon10/optimind/blob/main/docs/USER_FLOW_PLAN.md). The doctor-and-chart first-principles framing is §4.7; the memory persistence model is §4.8; the 7-shape input playbook is §4.2; the intent-keyed turn-start procedure is §6.5; the engineering decisions log (where each of these patterns was decided and why) is §9. Both the playbook (§4.2) and the turn-start procedure (§6.5) are mirrored into the runtime journal's private `CLAUDE.md`, where they actually drive the agent.
 - **The three-tier KB model + mechanism schema**, released in [`CHANGELOG.md` v4.1.0](https://github.com/tyoon10/optimind/blob/main/CHANGELOG.md): full rationale, the new [`mechanism.schema.json`](https://github.com/tyoon10/optimind/blob/main/schemas/mechanism.schema.json), the connector pattern, the three invariants, and the implementation log across both repos.
 
 ---

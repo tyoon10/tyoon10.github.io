@@ -1,7 +1,7 @@
 ---
 title: "How We Brought 300 Builders to Manhattanville on Valentine's Day"
 date: 2026-02-16
-description: "300 builders, 60+ teams, 8 corporate sponsors, and a 20-person organizing team — inside the Valentine's Day hackathon at Columbia Business School's Geffen Hall."
+description: "300 builders, 60+ teams, 8 corporate sponsors, and a 20-person organizing team. Inside the Valentine's Day hackathon at Columbia Business School's Geffen Hall."
 featured: false
 coverImage: "./featured.jpg"
 tags:
@@ -19,16 +19,16 @@ links:
 ---
 
 
-On Valentine's Day morning at 8:30 AM, the Geffen Hall Board Room at Columbia Business School was packed. Nearly 300 people — strangers from across New York City — had shown up to build.
+On Valentine's Day morning at 8:30 AM, the Geffen Hall Board Room at Columbia Business School was packed. Nearly 300 people (strangers from across New York City) had shown up to build.
 
 This was the AI Club x Iterate NYC Hackathon: 12 hours, $10,000+ in prizes, 8 corporate sponsors, and the largest AI hackathon Columbia Business School has ever hosted. It was the product of months of planning between the CBS AI Club and Iterate, and a deliberate bet that the best things happen when you open the doors to everyone.
 
 
 ## The Idea
 
-Most campus hackathons draw from a single school. We wanted the opposite. The CBS AI Club brought institutional access — the venue, the credibility, the NYC-wide inter-school network — and Iterate brought the multi-national network of partnerships. The combination meant we could pull from business and engineering schools, startup founders and local business owners, seasoned developers and first-time vibe coders. All in one room, all building together.
+Most campus hackathons draw from a single school. We wanted the opposite. The CBS AI Club brought institutional access (the venue, the credibility, the NYC-wide inter-school network), and Iterate brought the multi-national network of partnerships. The combination meant we could pull from business and engineering schools, startup founders and local business owners, seasoned developers and first-time vibe coders. All in one room, all building together.
 
-The venue mattered. Geffen Hall's Board Room at Columbia Business School is where CBS hosts its highest-profile events — dean's receptions, corporate briefings, advisory board meetings. Filling it with 300 hackers on a Saturday sent a clear signal: AI builders belong in these rooms.
+The venue mattered. Geffen Hall's Board Room at Columbia Business School is where CBS hosts its highest-profile events: dean's receptions, corporate briefings, advisory board meetings. Filling it with 300 hackers on a Saturday sent a clear signal: AI builders belong in these rooms.
 
 
 ## By the Numbers
@@ -45,7 +45,7 @@ The venue mattered. Geffen Hall's Board Room at Columbia Business School is wher
 
 Running a 300-person hackathon across 12 hours requires a small army. Our co-organizing team grew to 20+ people spanning AI Club leadership, Iterate operations staff, corporate sponsor liaisons, and day-of volunteers. Each person owned a domain: venue logistics, sponsor communications, registration flow, A/V setup, catering timing, judging coordination, and participant support.
 
-The coordination challenge was real. Each sponsors needed onboarding, booth setup, and API access distribution. The venue required approval through Columbia's Office of Student Affairs and compliance with university event protocols. Catering had to hit precise windows — breakfast before kickoff, lunch mid-build, afternoon fuel for the final push — without disrupting the hacking flow. Judging panels needed briefing on scoring criteria across 60+ teams with vastly different project scopes.
+The coordination challenge was real. Each sponsors needed onboarding, booth setup, and API access distribution. The venue required approval through Columbia's Office of Student Affairs and compliance with university event protocols. Catering had to hit precise windows (breakfast before kickoff, lunch mid-build, afternoon fuel for the final push) without disrupting the hacking flow. Judging panels needed briefing on scoring criteria across 60+ teams with vastly different project scopes.
 
 What made it work was clarity of ownership. Every team member knew their lane, their timeline, and their escalation path. When 300 people are in a room building under time pressure, there is no margin for ambiguity in operations.
 
@@ -63,12 +63,12 @@ Eight organizations put resources behind this event, each contributing something
 - **[BizCrush](https://bizcrush.app/)**
 - **[White Circle](https://whitecircle.ai/)**
 
-On the food and beverage side, we partnered with **Shake Shack** to cater 250 burgers for lunch and **ChaHalo** to deliver 200 milk teas for the afternoon push. Both were gone instantly — 300 people building nonstop for 12 hours generate serious demand.
+On the food and beverage side, we partnered with **Shake Shack** to cater 250 burgers for lunch and **ChaHalo** to deliver 200 milk teas for the afternoon push. Both were gone instantly; 300 people building nonstop for 12 hours generate serious demand.
 
 
 ## The Day: From Kickoff to Final Pitch
 
-**8:30 AM** — Doors open. Registration lines wrapped through the hallway as teams checked in, grabbed breakfast, and found their tables. The Board Room filled faster than expected.
+**8:30 AM**: Doors open. Registration lines wrapped through the hallway as teams checked in, grabbed breakfast, and found their tables. The Board Room filled faster than expected.
 
 
 ### Kick Off
@@ -85,7 +85,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 </div>
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Registration and excited builders huddle together as doors open for Geffen Hall's kickoff.</p>
 
-**9:00 AM** — Opening remarks and sponsor introductions. Teams had already been forming online in the days prior, but many formed on the spot — strangers pairing up based on complementary skills. An MBA with a fintech idea sitting down next to an engineer who could build it in hours.
+**9:00 AM**: Opening remarks and sponsor introductions. Teams had already been forming online in the days prior, but many formed on the spot, strangers pairing up based on complementary skills. An MBA with a fintech idea sitting down next to an engineer who could build it in hours.
 
 
 ### Hacking
@@ -105,12 +105,12 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 </div>
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Focused silence as 300 builders dive into coding and system architectures.</p>
 
-**9:30 AM** — Hacking begins. The room dropped into focused silence punctuated by bursts of discussion. Sponsor engineers circulated, helping teams integrate APIs and debug architecture decisions. The energy was concentrated — no panels, no keynotes, just building.
+**9:30 AM**: Hacking begins. The room dropped into focused silence punctuated by bursts of discussion. Sponsor engineers circulated, helping teams integrate APIs and debug architecture decisions. The energy was concentrated: no panels, no keynotes, just building.
 
 
 ### Lunch
 
-**12:00 PM** — **250 Shake Shack burgers** hit the tables. The line formed before the announcement finished.
+**12:00 PM**: **250 Shake Shack burgers** hit the tables. The line formed before the announcement finished.
 
 <div class="image-gallery-grid">
 
@@ -122,9 +122,9 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 </div>
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">250 Shake Shack burgers delivered to Geffen Hall to fuel the builders.</p>
 
-**12:30 – 5:00 PM** — The long build. This is where projects took shape. Teams that started with ambitious scopes narrowed to shippable demos. Teams that started simple discovered unexpected depth. Mentor rotations continued. All the breakout rooms were on fire.
+**12:30 to 5:00 PM**: The long build. This is where projects took shape. Teams that started with ambitious scopes narrowed to shippable demos. Teams that started simple discovered unexpected depth. Mentor rotations continued. All the breakout rooms were on fire.
 
-**5:00 PM** — **200 ChaHalo milk teas** arrived for the reception while judging was in progress. Also gone instantly.
+**5:00 PM**: **200 ChaHalo milk teas** arrived for the reception while judging was in progress. Also gone instantly.
 
 <div class="image-gallery-grid">
 
@@ -143,7 +143,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 
 ### Pitch and Judging
 
-**6:30 – 7:30 PM** — Demo time. Selected finalists pitched their projects to a judging panel of investors, founders, and technologists. The range was striking — healthcare AI, financial tools, creative applications, developer productivity, education platforms — reflecting the breadth of professions represented in the room.
+**6:30 to 7:30 PM**: Demo time. Selected finalists pitched their projects to a judging panel of investors, founders, and technologists. The range was striking (healthcare AI, financial tools, creative applications, developer productivity, education platforms), reflecting the breadth of professions represented in the room.
 
 <div class="image-gallery-grid">
 
@@ -161,7 +161,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 </div>
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Finalists pitch their AI projects directly to the judging panel in the Board Room.</p>
 
-**8:00 PM** — Prize announcements and closing. Twelve hours after doors opened, the room cleared out with the particular energy of people who shipped something real alongside strangers who became collaborators. Even after closing, many have stayed for another hour sharing their passion and building connections.
+**8:00 PM**: Prize announcements and closing. Twelve hours after doors opened, the room cleared out with the particular energy of people who shipped something real alongside strangers who became collaborators. Even after closing, many have stayed for another hour sharing their passion and building connections.
 
 
 
@@ -169,4 +169,4 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 
 This hackathon confirmed something we already believed: New York City's AI builder community is deeper and more diverse than any single institution can represent. The cross-pollination between business students, engineers, founders, and working professionals produced projects that none of those groups would have built alone. That is the model going forward.
 
-After the successful follow-up from the **[first collaboration last December](https://www.linkedin.com/posts/taewan-yoon_its-been-an-incredible-semester-serving-activity-7402079367054606336-1157?utm_source=share&utm_medium=member_desktop&rcm=ACoAABRMohgBTDAub89p8r8UUED-rE_w8mkBjbk)**, AI Club and Iterate are doubling down on our partnership to help NYC builders hit the ground running. If you are a sponsor, partner, or organization interested in supporting New York's AI builder community, reach out — we’re teaming up with partners who know that when you open the doors and embrace diverse background, you get NYC at its absolute peak.
+After the successful follow-up from the **[first collaboration last December](https://www.linkedin.com/posts/taewan-yoon_its-been-an-incredible-semester-serving-activity-7402079367054606336-1157?utm_source=share&utm_medium=member_desktop&rcm=ACoAABRMohgBTDAub89p8r8UUED-rE_w8mkBjbk)**, AI Club and Iterate are doubling down on our partnership to help NYC builders hit the ground running. If you are a sponsor, partner, or organization interested in supporting New York's AI builder community, reach out; we’re teaming up with partners who know that when you open the doors and embrace diverse background, you get NYC at its absolute peak.
