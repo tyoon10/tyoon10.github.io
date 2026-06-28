@@ -1,7 +1,7 @@
 ---
 title: "claude-ensemble: Frontier-Style Answers on a Claude Subscription Alone"
 date: 2026-06-28
-description: "A drop-in Claude Code kit that runs a best-of-N Opus panel and a verifying judge entirely on a Pro or Max subscription, with no API key. Built when Fable 5 moved behind token billing, and backed by blind, length-controlled A/B evals."
+description: "A drop-in Claude Code kit that runs a best-of-N Opus panel and a verifying judge entirely on a Pro or Max subscription, with no API key. Built when the most capable models slipped out of subscription reach, by price and then by government suspension, and backed by blind, length-controlled A/B evals."
 featured: true
 coverImage: "./cover.png"
 tags:
@@ -18,9 +18,11 @@ links:
 
 ## Background
 
-On June 9th, Anthropic released [Fable 5](https://www.anthropic.com/news/claude-fable-5-mythos-5), its most capable model. By June 12th, access was suspended under a US government directive. Even on its original schedule, Fable 5 was only available through the Claude subscription until June 22nd, after which it would move to token-based API billing.
+On June 9th, Anthropic released [Fable 5](https://www.anthropic.com/news/claude-fable-5-mythos-5), its most capable widely released model. The launch terms were explicit: free on Pro, Max, Team, and Enterprise plans through June 22nd, then removed from those plans on June 23rd, after which using it would require usage credits. It was a capacity-driven move to metered access, with subscription inclusion meant to return "when capacity allows."
 
-So the most capable model was, for most of us, briefly on and then gone. The durable way back to it was the API, billed per token.
+It never reached that transition. On June 12th, eleven days early, a US government export-control directive [suspended Fable 5 entirely](https://www.anthropic.com/news/fable-mythos-access) over a cyber "jailbreak." Access to Anthropic's other models, including Opus 4.8, was not affected. Two weeks later the pattern went industry-wide: OpenAI [limited its new GPT-5.6 models](https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/) to a small set of government-approved partners, and Anthropic's Mythos 5 was cleared only for a list of trusted organizations. As of this writing, Fable 5 is still gone for general use.
+
+So the most capable model left subscription reach twice over, on two unrelated tracks: first scheduled behind metered billing, then seized before that even happened. For most of us it was briefly on, then gone.
 
 That gap is the motivation here. Two facts about who actually builds on these models:
 
@@ -31,9 +33,9 @@ I am a Claude subscriber who builds with Claude Code. I wanted frontier-level an
 
 ## The problem
 
-Frontier capability for subscription users is unstable, and the stable path to it is token billing most subscription users will not take. Waiting for the next model to stay on your plan is not a strategy.
+Frontier capability for subscription users turned out to be unstable, pulled away by both price and policy. But the tier just below it never moved: Opus 4.8, Sonnet, and Haiku stayed generally available on the same subscription throughout. Waiting for the single most capable model to stay on your plan is not a strategy; building on the strong, stable tier underneath it is.
 
-The question I set out to answer: **how close to frontier-level answers can a Claude subscriber get on hard tasks, using only what the subscription already provides?** That is Claude Code, plus the model tiers (Haiku, Sonnet, Opus) you already pay for.
+The question I set out to answer: **how close to frontier-level answers can a Claude subscriber get on hard tasks, using only what the subscription already provides?** That is Claude Code, plus the model tiers (Haiku, Sonnet, Opus) you already pay for and that no directive has touched.
 
 The bet is orchestration. Instead of reaching for a bigger model, run more coordinated passes of the models you have, and put a verification layer around them.
 
