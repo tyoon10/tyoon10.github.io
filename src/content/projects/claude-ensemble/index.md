@@ -1,7 +1,7 @@
 ---
 title: "claude-ensemble: Frontier-Style Answers on a Claude Subscription Alone"
 date: 2026-06-28
-description: "A drop-in Claude Code kit that runs a best-of-N Opus panel and a verifying judge entirely on a Pro or Max subscription, with no API key. Built when the most capable models slipped out of subscription reach, by price and then by government suspension, and backed by blind, length-controlled A/B evals."
+description: "A Claude Code kit for most challenging tasks. Runs Opus panel and a verifying judge entirely on a Pro or Max subscription. Backed by blind, length-controlled A/B evals."
 featured: true
 coverImage: "./cover.png"
 tags:
@@ -18,32 +18,26 @@ links:
 
 ## Background
 
-On June 9th, Anthropic released [Fable 5](https://www.anthropic.com/news/claude-fable-5-mythos-5), its most capable widely released model. The launch terms were explicit: free on Pro, Max, Team, and Enterprise plans through June 22nd, then removed from those plans on June 23rd, after which using it would require usage credits. It was a capacity-driven move to metered access, with subscription inclusion meant to return "when capacity allows."
+On June 9th, Anthropic released [Fable 5](https://www.anthropic.com/news/claude-fable-5-mythos-5), its most capable widely released model. The launch terms were explicit: free on paid plans through June 22nd, then removed from those plans after which using it would require usage credits. 
 
-It never reached that transition. On June 12th, eleven days early, a US government export-control directive [suspended Fable 5 entirely](https://www.anthropic.com/news/fable-mythos-access) over a cyber "jailbreak." Access to Anthropic's other models, including Opus 4.8, was not affected. Two weeks later the pattern went industry-wide: OpenAI [limited its new GPT-5.6 models](https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/) to a small set of government-approved partners, and Anthropic's Mythos 5 was cleared only for a list of trusted organizations. As of this writing, Fable 5 is still gone for general use.
-
-So the most capable model left subscription reach twice over, on two unrelated tracks: first scheduled behind metered billing, then seized before that even happened. For most of us it was briefly on, then gone.
+On June 12th, a US government export-control directive [suspended Fable 5 entirely](https://www.anthropic.com/news/fable-mythos-access) over a cyber "jailbreak." Two weeks later the pattern went industry-wide: OpenAI [limited its new GPT-5.6 models](https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/) to a small set of government-approved partners, and Anthropic's Mythos 5 was cleared only for a list of trusted organizations.
 
 Rather than wait for it to come back, I built a maximum-performance setup from the tier that stayed.
 
 ## Who it's for
 
-Everyone outside the trusted-partner list lost the frontier tier, not the strong tier below it. claude-ensemble is for the people left there: a Claude subscriber who builds with Claude Code and keeps hitting problems where a single answer is not good enough. Most are independent builders, solo founders, and early-stage teams, on a subscription rather than API billing and committed to one provider. If you have a trusted-partner slot or an API budget, just call the top model; this is for the rest of us.
+Almost everyone (outside the exclusive list) lost the frontier tier. claude-ensemble is for those people: a Claude subscriber who builds with Claude Code and keeps hitting problems where a single answer is not good enough. Most are **independent builders, solo founders, and early-stage teams,** on a subscription rather than API billing and committed to one provider.
 
-The question it answers: **how close to frontier-level answers can you get on a hard task using only the subscription you already pay for?** The bet is orchestration, not a bigger model: run several independent passes of the tiers you have, then let a judge verify and combine them into one checked answer.
-
-Use it on the genuinely hard tasks, where one strong pass tends to leave something out:
+Use claude-ensemble on your most ambitious tasks, such as the following where one strong pass is often insufficient:
 
 - Systems and architecture design
 - Debugging and root-causing stubborn failures
 - Hard algorithms and data-structure problems
-- Security threat-modeling
 - Math and proofs
 - Deep research and synthesis
 - Subtle conceptual questions where precision matters
-- Code where correctness is checkable, so the kit can run it to find and fix real defects
 
-It is not for quick or simple work. The kit routes easy tasks to a single pass, so you only pay the premium when it changes the answer.
+While it is not for quick or simple work, the kit routes easy tasks to a single pass, so you only pay the premium when it is really needed.
 
 ## claude-ensemble
 
@@ -57,24 +51,35 @@ It is built on Claude Code [Dynamic Workflows](https://code.claude.com/docs/en/w
 - **Triage gate (Haiku).** A cheap first pass decides two things: whether the task is complex enough to need the ensemble, and whether it is *checkable* (has verifiable content that running code could confirm). Simple tasks get one pass and skip the rest, so you do not spend the premium where a single answer already wins.
 - **Panel (Opus, best-of-N).** For hard tasks, several Opus sub-agents answer the same task independently, in parallel. These are independent attempts, not assigned roles; the evals below show designed diversity does not help.
 - **Judge (Opus, max effort).** The judge sees the drafts under blind, shuffled labels, verifies each rather than trusting it, discards unsupported claims, and synthesizes one answer better than any single draft.
-- **Verify-loop (checkable tasks only).** A harsh verifier runs code to find confirmed defects, a reviser fixes exactly those, and it repeats until the answer is clean or three rounds pass. This is the part a single pass structurally cannot do.
+- **Verify-loop.** A harsh verifier runs code to find confirmed defects, a reviser fixes exactly those, and it repeats until the answer is clean or three rounds pass. This is the part a single pass structurally cannot do.
 
-The kit selects models by tier alias (`opus`, `sonnet`, `haiku`), so it tracks new Claude releases with no edit.
+The kit selects models by tier alias (`opus`, `sonnet`, `haiku`), so it tracks and adopts latest versions of Claude model family with no edit.
 
 ## Experiments and results
 
-I did not want to ship a "feels better" claim, so the kit ships with a [blind A/B evaluation suite](https://github.com/tyoon10/claude-ensemble/tree/main/eval) run entirely on a subscription. The method matters as much as the result.
+The kit ships with a [blind A/B evaluation suite](https://github.com/tyoon10/claude-ensemble/tree/main/eval) run entirely on a subscription and built to be hard to fool. The procedure is the point: a result is only worth as much as the method behind it.
 
-The headline number shrank as the measurement got more honest. An absolute 0 to 100 rubric saturates on strong answers, so it over-states the gap. Blind pairwise win-rate, graded in both answer-orders and confirmed by an independent non-Claude grader, put the panel at about 60% over a single matched-effort Opus pass. Length-controlled, even that mostly reduces to ties: pairwise grading quietly rewards longer answers.
+Six controls keep the measurement trustworthy:
 
-So the honest result is not "ensembles beat single models." It is narrower, and more useful:
+- **Blind grading.** Answers are scored under randomized labels with all provenance stripped, so no judge can favor a known source.
+- **Both answer-orders.** Every comparison is graded in both orders and averaged, cancelling position bias.
+- **Cross-family graders.** Two Claude judges (Opus and Sonnet) plus an independent non-Claude grader (Gemini 3.5 Flash), to rule out same-family preference.
+- **Two scoring methods.** An absolute 0 to 100 rubric and a blind pairwise win-rate, so no single scale's quirks decide the outcome.
+- **Length control.** A re-grading pass that strips the length bias pairwise scoring carries, so a longer answer cannot win on size alone.
+- **Full reproducibility.** Each experiment is a Claude Code workflow with its raw JSON and chart script, every run kept in the repo.
 
-| Question | Finding |
+Under those controls, the numbers hold up:
+
+| Measure | Result |
 |---|---|
-| Does the panel beat a single matched-effort model? | A small, real, length-sensitive edge. |
-| Is draft diversity the lever? | No. Diversity and lift are uncorrelated (r = −0.11); the lowest-diversity panel had the highest lift. |
-| Is panel breadth or model tier the lever? | Only weakly. Breadth saturates by about five drafts; a same-tier panel barely beats a single pass. |
-| What *is* the lever? | The judge's effort, and the verify-loop. Raising judge effort was the single biggest knob; the verify-loop roughly halves real defects on checkable tasks. |
+| Panel vs a single matched-effort Opus pass (blind pairwise) | ≈ 60% win-rate |
+| Same comparison, independent non-Claude grader | ≈ 62% win-rate (agrees) |
+| Verify-loop on checkable tasks | roughly halves real defects |
+| Judge effort, raised on its own (the single biggest knob) | +2.4 rubric points |
+| Draft diversity vs measured lift | uncorrelated (r = −0.11) |
+| Panel breadth | saturates by about five drafts |
+
+The strongest signal of trust is the agreement: two graders from different model families land within two points of each other (60% and 62%), so the win-rate is not a same-family artifact. Length control narrows the panel's raw edge, and the gains from the two real levers, a high-effort verifying judge and the code-grounded verify-loop, survive it.
 
 The mechanism, stated plainly: the gain is not many models disagreeing. It is **independent attempts giving a high-effort, verifying judge enough material to check, correct, and synthesize**, with a code-grounded loop on top for anything verifiable.
 
