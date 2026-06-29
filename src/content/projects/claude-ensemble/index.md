@@ -81,13 +81,15 @@ Under those controls, the numbers hold up:
 
 The strongest signal of trust is the agreement: two graders from different model families land within two points of each other (60% and 62%), so the win-rate is not a single-family artifact. Length control narrows the panel's raw edge, and the gains from the two real levers, **a high-effort verifying judge and the code-grounded verify-loop,** survive it.
 
+The gain comes from independent attempts giving the judge enough material to check, correct, and combine into an answer stronger than any single draft.
+
 ![Cost versus quality of the design choices](./cost-performance.svg)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each design at its real cost and quality. The panel tier is the quality jump; the verify-loop is the top; a Sonnet panel does not beat a single pass, so the kit skips it.</p>
 
-The trade is **cost** for running multiple Opus at high effort. A complex run is several Opus calls plus the verify-loop, so it is Opus-heavy; Max effort is called for the most difficult challenges, and the triage gate keeps easy work off it. The [full methodology trail](https://github.com/tyoon10/claude-ensemble/tree/main/eval), including every reversal, is in the repo.
+The trade is **cost** for running multiple Opus at high effort. A complex run is several Opus calls plus the verify-loop, so it is Opus-heavy; max effort is called for the most difficult challenges, and the triage gate keeps easy work off it. The [full methodology trail](https://github.com/tyoon10/claude-ensemble/tree/main/eval), including every reversal, is in the repo.
 
 ## Conclusion
 
-Access to the most advanced frontier models is moving towards exclusivity. For independent builders, claude-ensemble helps achieve the frontier-level performance through orchestration and verify loop, so that more of the model's capability actually reaches the answer. The moat is not the model; it is the process you put around it.
+Access to the most advanced frontier models is moving towards exclusivity. For independent builders, claude-ensemble helps achieve frontier-level performance through orchestration and verify loop, so that more of the model's capability actually reaches the answer. The moat is not the model; it is the process you put around it.
 
-claude-ensemble is open source under MIT, runs on a Pro or Max subscription with no API key, and adopts new Claude models automatically. I built it for Claude Code builders who are solving problems that the current models cannot, which includes myself.
+claude-ensemble is open source under MIT, runs on a Pro or Max subscription with no API key, and adopts new Claude models automatically. I built it for Claude Code builders, including myself, who are solving problems that the current models alone cannot.
