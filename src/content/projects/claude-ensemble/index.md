@@ -3,7 +3,7 @@ title: "claude-ensemble: Frontier-Style Answers on a Claude Subscription Alone"
 date: 2026-06-28
 description: "A Claude Code kit for most challenging tasks. Runs Opus panel and a verifying judge entirely on a Pro or Max subscription. Backed by blind, length-controlled A/B evals."
 featured: true
-coverImage: "./cover.png"
+coverImage: "./cost-performance.svg"
 tags:
   - "Claude Code"
   - "Agent Orchestration"
