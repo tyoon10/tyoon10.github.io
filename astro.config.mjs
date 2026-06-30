@@ -5,7 +5,10 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://twyoon.com',
-  integrations: [sitemap()],
+  // Keep unlisted, direct-link-only writings out of the public sitemap.
+  integrations: [sitemap({
+    filter: (page) => !page.includes('/writings/why-i-love-community-building'),
+  })],
 
   // Preserve legacy Hugo URLs (indexed + externally linked) by redirecting
   // them to the new Astro routes. Slugs are unchanged; only the section

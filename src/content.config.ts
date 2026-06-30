@@ -8,6 +8,9 @@ const writings = defineCollection({
     date: z.coerce.date(),
     description: z.string(),
     featured: z.boolean().default(false),
+    // unlisted: page still builds at its direct URL, but is hidden from the
+    // writings index, the homepage, and the sitemap (direct-link-only sharing).
+    unlisted: z.boolean().default(false),
     coverImage: image().optional(),
     tags: z.array(z.string()).default([]),
     links: z.array(z.object({

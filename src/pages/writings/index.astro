@@ -4,7 +4,9 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const allWritings = await getCollection('writings');
-const sortedWritings = allWritings.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedWritings = allWritings
+  .filter(w => !w.data.unlisted)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <BaseLayout title="Writings & Insights" description="Deep dives into model architectures, startup pipelines, skincare photobiology, and strategic product roadmaps by Taewan Yoon.">

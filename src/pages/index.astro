@@ -9,8 +9,10 @@ import { events } from '../data/events';
 const allProjects = await getCollection('projects');
 const allWritings = await getCollection('writings');
 
-// Sort writings by date descending
-const sortedWritings = allWritings.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+// Sort writings by date descending (drop unlisted, direct-link-only pages)
+const sortedWritings = allWritings
+  .filter(w => !w.data.unlisted)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 // Filter featured posts (pinned on top) and latest posts (grid below)
 const featuredWritings = sortedWritings.filter(w => w.data.featured).slice(0, 2);
