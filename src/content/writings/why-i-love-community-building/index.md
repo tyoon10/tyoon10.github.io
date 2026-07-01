@@ -33,10 +33,13 @@ A community is what makes that moment keep happening after everyone goes home. S
 
 I love being the front door. On Valentine's Day I helped pack a [Columbia board room](/writings/iterate-columbia-hackathon-2026-recap/) with nearly 300 strangers who came to build for twelve hours: 60+ teams, 8 sponsors, one deliberate rule. Most campus hackathons draw from a single school; we opened ours to business and engineering students, founders, and first-time builders in the same room.
 
-![Registration lines as the doors opened at the Columbia hackathon](./convene.jpg)
+![Registration and kickoff at the Columbia hackathon](./iterate-kickoff.jpg)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Registration lines as the doors opened on Valentine's Day; full recap <a href="https://twyoon.com/writings/iterate-columbia-hackathon-2026-recap">here</a>.</p>
 
 But the door is not only a hackathon. It is a room of [Directors and C-suite leaders](/writings/what-senior-business-leaders-ask-about-ai/) asking their first honest questions about the technology. It is a [workshop that turns product managers into people who build with AI instead of around it](/writings/ai-superpower-for-pm/). It is a session for people who think they showed up to AI too late. Belonging is not an abstraction to me: I came here as an international student, and I know what it is to stand in a room unsure you are allowed to be in it. Every time, the job is the same, move someone from *AI is happening to me* to *I can build with this*, and put them where they belong. Watching that shift is the part I never tire of.
+
+![A workshop teaching product managers to build with AI](./pm-workshop.webp)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">A workshop turning product managers into people who build with AI, not around it; more <a href="https://twyoon.com/writings/ai-superpower-for-pm">here</a>.</p>
 
 ## Reason 2: A way they get better once inside
 
@@ -46,6 +49,9 @@ Getting people in is the start; then they have to get better, and that is a mult
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">A mentoring circle, judges and builders huddled over a project; full recap <a href="https://twyoon.com/writings/mistral-worldwide-hackathon-2026-recap">here</a>.</p>
 
 That question about responsibility is not a checklist item for me; it is the part of this work I take most seriously. At the Claude Builder Hackathon I ran this spring, a team called [Pulse](https://lnkd.in/eJ5jA-FZ) showed me why. Four first-time hackers looked at overlapping pharmacy closures and fentanyl overdose deaths in the Bronx, found that pharmacy job postings dry up three to six months before a closure, and built a forecasting model that dispatches mobile naloxone units before the gap opens. That is what a room gives you when you convene it around real problems and hold it to a real standard.
+
+![The Claude Builder Hackathon at Columbia Business School](./claude-hackathon.jpeg)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The Claude Builder Hackathon, a joint Columbia and NYU event, where the Pulse team built.</p>
 
 Mentoring one team at a time does not scale, so I also teach in public. I write deep-dives that reach past any single room, on [why agents need better infrastructure than better models](/writings/agents-need-better-infrastructure/), [what memory should look like for a coding agent](/writings/files-are-the-memory/), and [what held across thirteen months of Claude Code's source](/writings/tracing-the-minds-behind-claude-code/), and I build the tools I wish builders had, like [claude-ensemble](https://github.com/tyoon10/claude-ensemble). A question, an essay, or a tool: each one keeps working in someone else's hands after I am gone.
 
