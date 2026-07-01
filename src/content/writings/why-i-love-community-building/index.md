@@ -25,7 +25,7 @@ It was past midnight at a 36-hour hackathon in Manhattan, and a team waved me ov
 
 They went quiet. One of them started to answer, stopped, and looked back at the screen. Twenty minutes later they came back, not with more features, but with a sharper version of the problem they were actually solving. The demo had not changed much. The team had.
 
-That moment is why I do this. I was a judge and a mentor that weekend, and the part that stayed with me was not the scoring. It was watching a few honest questions turn a clever build into a real one. Helping people get better at building is the work I want to do full time, and I have learned what it takes by doing it at three different scales.
+That moment is why I do this. I was a judge and a mentor that weekend, and the part that stayed with me was not the scoring. It was watching a few honest questions turn a clever build into a real one. I have done this work at three different scales, and each one taught me something the last could not.
 
 Here are three reasons I love community building.
 
@@ -46,7 +46,7 @@ The numbers:
 
 But the numbers only capture part of it. The real bet was about *who* we let in. Most campus hackathons draw from a single school. We opened the doors to everyone: business and engineering students, startup founders and local business owners, seasoned developers and first-time vibe coders, all in one room. An MBA with a fintech idea sat down next to an engineer who could build it in hours. That pairing does not happen by accident. Someone has to convene it.
 
-By the close, the room emptied with the particular energy of people who shipped something real next to strangers who had become collaborators. **I love being the person who opens that door**, because the room is where everything else becomes possible.
+By the close, the room emptied with the particular energy of people who shipped something real next to strangers who had become collaborators. **The room is where everything else becomes possible**, and someone has to open the door.
 
 ## Reason 2: Making builders better once they are in the room
 
@@ -61,7 +61,7 @@ The mentoring conversations followed a pattern. A team would show me a technical
 
 These were not rhetorical. The teams that paused, rethought, and came back with sharper framing were the ones that outperformed. I saw builds that doubled down on technical sophistication alone, and they blew me away, but none of them made it to the top. **The work that wins is the work that solves a real problem and is deployed responsibly.** Pure cleverness never carried a team across the line.
 
-The reason this is my favorite part is simple. A good question, asked at the right moment, multiplies what a builder can do for the rest of the night and long after the event ends. That multiplier is what I want to spend my time on.
+A good question, asked at the right moment, multiplies what a builder can do for the rest of the night and long after the event ends. That multiplier is what I want to spend my time on.
 
 ## Reason 3: Building the scaffolding so it lasts
 
@@ -74,6 +74,6 @@ The 300-person event did not run on enthusiasm. Our co-organizing team grew to 2
 
 Scaffolding is also what you build between events. I co-organize campus AI community events across New York: a Claude Builder Club kickoff, a Claude Builder hackathon, a GDG Build-with-AI hackathon, an AI for Greater Good NYC event, a Claude for Product Management workshop, a Building the Future of Finance with Claude talk. And I teach in public, writing technical deep-dives on agent infrastructure, file-based memory for coding agents, RAG, and reading the Claude Code source, so the lessons outlive the room they were learned in.
 
-My own path is the proof that this scaffolding compounds: from organizing club-level events, to city-scale hackathons, to judging a global competition backed by some of the most significant companies in AI. The connective thread was not credentials. It was showing up and doing the operational work nobody sees. I am a campus builder who became an organizer who became a judge, and the through-line was always the infrastructure: the operational system, the writing, the relationships that outlast any one weekend. **Communities that last are built, not gathered.** I want to build the infrastructure and tooling that lets standout builders and the people who lead them go further, past any single event, and any single organizer.
+My own trajectory is a small proof that this scaffolding compounds: from organizing club-level events, to city-scale hackathons, to judging a global competition backed by some of the most significant companies in AI. The connective thread was not credentials. It was showing up and doing the operational work nobody sees. I am a campus builder who became an organizer who became a judge, and the through-line was always the infrastructure: the operational system, the writing, the relationships that outlast any one weekend. **Communities that last are built, not gathered.** I want to build the infrastructure and tooling that lets standout builders and the people who lead them go further, past any single event, and any single organizer.
 
-That is the work I am after now. The student leaders and developers who fill these rooms are already shaping how the next generation builds with AI. I would rather be the one handing them the questions, the tooling, and the open door than just watching it happen.
+The questions, the tooling, and the open door are what a community keeps after the room clears. The student leaders and developers who fill these rooms are already shaping how the next generation builds with AI, and that is what I want to keep building for.
