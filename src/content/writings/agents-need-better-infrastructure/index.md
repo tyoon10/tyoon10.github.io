@@ -54,7 +54,7 @@ Consider three workflows I run regularly. Each one stresses infrastructure in a 
 Agents don't just make *more* calls than chatbots. They make *different kinds* of calls (bursty, sequential, iterative, unpredictable) often within the same task. Infrastructure designed for steady-state chatbot traffic can't handle this.
 
 ![A single agent task](./agent-loop-trace.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">An illustrative agent run: one task ('read the repo and summarize it') generates 4 model turns and 3 tool calls. Each blue card is an LLM inference call. Each orange-green pair is a tool round-trip. A chatbot would be one blue card.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">A real agent run: one task ('list the files, read the README, count its words, and summarize') generates 3 model turns and 3 tool calls. Each blue card is an LLM inference call. Each orange-green pair is a tool round-trip. A chatbot would be one blue card.</p>
 
 This is exactly what NVIDIA's [Dynamo 1.0](https://github.com/ai-dynamo/dynamo) targets: an orchestration layer that routes requests to GPUs with cached context and autoscales based on latency SLAs. More on that below.
 
@@ -74,7 +74,7 @@ Classification, extraction, routing? Those run on a 12-billion-parameter model w
 The entire routing stack can live under one API. [Mistral Small 4](https://build.nvidia.com/mistralai/mistral-small-4-119b-2603), a 119B sparse model with first-class agentic tool-calling, handles classification and the fast tier. [Mistral Large 3](https://build.nvidia.com/mistralai/mistral-large-3-675b-instruct-2512) (675B MoE) handles complex reasoning. Both served through NVIDIA's API catalog at `integrate.api.nvidia.com`. One key, one endpoint pattern, two tiers of intelligence.
 
 ![Hybrid routing in practice](./hybrid-routing-decisions.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Hybrid routing, illustrated: a classifier model scores each task's complexity (x-axis), then routes below the threshold to Mistral Small 4 (fast tier) and above to Mistral Large 3 (frontier tier). Simple tasks cluster left: fast and cheap. Complex tasks go right: slower but higher quality. Both tiers run through the same NVIDIA API.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Hybrid routing across 14 real tasks: a classifier model scores each task's complexity (x-axis), then routes below the threshold to Mistral Small 4 (fast tier) and above to Mistral Large 3 (frontier tier). 10 of the 14 tasks (71%) stayed on the fast tier at an average 2.2 seconds; the 4 complex ones averaged 19 seconds on the frontier tier. Both tiers run through the same NVIDIA API.</p>
 
 NVIDIA's [AI-Q](https://developer.nvidia.com/blog/how-to-build-deep-agents-for-enterprise-search-with-nvidia-ai-q-and-langchain/) enterprise research blueprint runs Nemotron locally and GPT-5.2 via API in the same pipeline. [OpenShell](https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/)'s Privacy Router automates this routing based on data sensitivity policy, not developer preference. **The hybrid model isn't a compromise. It's the reference architecture from the company building the GPUs.** And when you're ready to self-host, the same models run on NIM containers with the same API: swap the URL, keep the code.
 
@@ -128,18 +128,18 @@ Here's what a single run looks like:
 |--------|-------|
 | Model | Mistral Small 4 (119B) via NVIDIA API |
 | Turns | 5 autonomous turns |
-| Tool calls | 24 total (date range, source listing, 9 feed fetches, 12 article extractions, digest save) |
-| Input tokens | 79,449 |
-| Output tokens | 4,664 |
-| Total latency | 67 seconds |
-| Bottleneck | Turn 4: 47 seconds. The model synthesizes 79K tokens of article data into a ranked digest |
+| Tool calls | 19 total (date range, source listing, 9 feed fetches, 7 article extractions, digest save) |
+| Input tokens | 62,653 |
+| Output tokens | 3,051 |
+| Total latency | 35 seconds |
+| Bottleneck | Turn 4: 23 seconds. The model synthesizes 60K+ tokens of article data into a ranked digest |
 
-The bottleneck is exactly what you'd expect from the inference patterns described above. Turns 1-3 are fast tool-calling bursts: short prompts, quick responses, parallel fan-out across feeds. Turn 4 is a massive sequential generation: the model processes the entire accumulated context and produces a 6,000-character digest in one pass. **This is the turn where Dynamo's disaggregated serving matters:** separating the prompt processing (79K tokens of prefill) from the token generation (4.6K tokens of decode) so each can scale independently.
+The bottleneck is exactly what you'd expect from the inference patterns described above. Turns 1-3 are tool-calling bursts, and most of their time is I/O: fetching nine feeds and seven articles. Turn 4 is a massive sequential generation: the model processes the entire accumulated context and produces a 4,700-character digest in one pass. **This is the turn where Dynamo's disaggregated serving matters:** separating the prompt processing (60K+ tokens of prefill) from the token generation (3K tokens of decode) so each can scale independently.
 
 ![Per-turn latency breakdown of the news aggregator agent](./news-trace-analysis.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Per-turn latency breakdown of the news aggregator agent. Turn 4 (where the model synthesizes 12 articles into a structured digest) consumes 71% of total execution time. This is pure model inference, not I/O. Infrastructure choices at the serving layer (quantization format, batch scheduling, disaggregated prefill/decode) determine whether this turn takes 47 seconds or 20.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Per-turn latency breakdown of the news aggregator agent. Turn 4 (where the model synthesizes 7 articles into a structured digest) consumes 65% of total execution time. This is pure model inference, not I/O; the tool-heavy turns above it are I/O. Infrastructure choices at the serving layer (quantization format, batch scheduling, disaggregated prefill/decode) determine whether this turn takes 23 seconds or 10.</p>
 
-Quantization matters here more than anywhere. [NVFP4](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/), NVIDIA's 4-bit floating point format, delivers higher throughput than FP8 with accuracy within 1% of the FP8 baseline on most benchmarks, per NVIDIA's own numbers. For Turn 4's 47 seconds of pure model inference, the difference between FP8 and NVFP4 throughput is the difference between a minute-long workflow and a sub-30-second one.
+Quantization matters here more than anywhere. [NVFP4](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/), NVIDIA's 4-bit floating point format, delivers higher throughput than FP8 with accuracy within 1% of the FP8 baseline on most benchmarks, per NVIDIA's own numbers. For Turn 4's 23 seconds of pure model inference, the difference between FP8 and NVFP4 throughput is the difference between a 35-second workflow and a sub-20-second one.
 
 The real learning wasn't the latency numbers. It was the integration friction. NVIDIA's endpoint rejects message fields that OpenAI's SDK includes by default (`audio`, `refusal`, `annotations`). The default `mistral-nemotron` model returns `finish_reason: "tool_calls"` with an empty tool call list, silently breaking the agent loop. Fixing these required reading error messages, testing model variants, and stripping unsupported fields from the message history.
 
