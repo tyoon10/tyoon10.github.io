@@ -37,9 +37,16 @@ None of this was a marketing plan. It was everything I had already been doing, f
 
 Pick the one true sentence and lead with it. I once argued that context engineering, not prompt engineering, is what separates AI-native product managers from everyone else. That reframe traveled further than any feature list I have written. Keep one governed corpus of positioning, proof points, and voice. That way the story cannot drift. Mine is literally a [constitution file](https://github.com/tyoon10/optimind). My own agents read it before they write. And test messages the way you test code.
 
-So what does surviving the check unlock? This is where the flywheel spins. It spins on top of the translation layer, not next to it. A claim that holds up stops being marketing and starts being carried. The people who verified it come back. They bring people who trust them.
+So what does surviving the check unlock? A flywheel. It spins on top of the translation layer, not next to it. And I did not design it. I watched it run.
 
-Trust is the only currency that compounds with a technical audience. A survived check is what starts it turning. Get the translation layer right. The flywheel turns on its own. The New York developer community those rooms fed grew from zero to 1,300+. Eight months after that folding table, the [capstone hackathon I ran](https://www.linkedin.com/posts/taewan-yoon_claudepartner-ugcPost-7453550848439209984-rI9J/) was a joint Columbia and NYU event. Nobody in the room asked me what Anthropic was. Nothing grows like that on hype. It grows on claims that keep checking out.
+![Diagram of a flywheel of four community stages mounted on a foundation labeled The Translation Layer](./flywheel-translation-layer.png)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The community is the flywheel. It only spins because the claims underneath survive the check.</p>
+
+The developer community around Claude Code is that flywheel in motion. A builder gets something working. It survives the check. So they share it instead of selling it. New builders arrive on that trust. They find the next use case. The knowledge compounds. The community compounds with it.
+
+Trust is the only currency that compounds with a technical audience. A survived check is what starts it turning. Get the translation layer right. The flywheel turns on its own.
+
+Here is the part I only understood in hindsight. The tabling, the workshops, the hackathons, the 1,300+ developers: I thought I was building a community. I was doing product marketing the whole time. I just did not have a name for it. Eight months after that folding table, the [capstone hackathon I ran](https://www.linkedin.com/posts/taewan-yoon_claudepartner-ugcPost-7453550848439209984-rI9J/) was a joint Columbia and NYU event. Nobody asked me what Anthropic was. Nothing grows like that on hype. It grows on claims that keep checking out, carried by the people who checked them.
 
 The instinct is older than Claude. At CONCAT, the AI fintech I co-founded and sold, we had to convince first-time buyers to care about insurance. The positioning that finally worked treated a policy like an investment portfolio. Six years of that taught me where I am most useful. It is at the translation layer, the seam where a capability becomes someone's decision. The work is closing that gap in sentences that survive the check. It does not matter who is doing the checking, one skeptical CTO or a keynote hall.
 
