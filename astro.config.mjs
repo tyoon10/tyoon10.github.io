@@ -7,7 +7,10 @@ export default defineConfig({
   site: 'https://twyoon.com',
   // Keep unlisted, direct-link-only writings out of the public sitemap.
   integrations: [sitemap({
-    filter: (page) => !page.includes('/writings/why-i-love-community-building'),
+    filter: (page) => ![
+      '/writings/why-i-love-community-building',
+      '/writings/exactly-what-the-team-needs',
+    ].some((slug) => page.includes(slug)),
   })],
 
   // Preserve legacy Hugo URLs (indexed + externally linked) by redirecting
