@@ -9,7 +9,7 @@ export default defineConfig({
   integrations: [sitemap({
     filter: (page) => ![
       '/writings/why-i-love-community-building',
-      '/writings/exactly-what-the-team-needs',
+      '/writings/translation-layer',
     ].some((slug) => page.includes(slug)),
   })],
 
