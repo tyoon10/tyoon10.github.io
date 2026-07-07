@@ -1,7 +1,7 @@
 ---
 title: "Let the Flywheel Spin on Top of the Translation Layer"
 date: 2026-05-14
-description: "How 6+ years of building, shipping, and 40+ AI rooms came together to reveal the truth about marketing in AI"
+description: "How 6+ years of building, shipping, and 40+ AI rooms came together to uncover a truth about earning trust in AI"
 featured: false
 unlisted: false
 coverImage: "./cover-hero.jpeg"
@@ -36,7 +36,7 @@ A room of [product managers who wanted to build with AI instead of around it](/w
 ![Four people huddled around a laptop, watching a build run at a Claude developer session](./developer-session.jpg)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">In this room, you do not present a claim. You run it.</p>
 
-## The hardest marketing problem
+## The marketing challenge ins and outs
 
 That is where the lesson landed. **The hardest marketing problem in AI is not getting attention. It is being believed by people who can check your work.** And everyone worth reaching can check it. The form changes from room to room. The principle never does.
 
