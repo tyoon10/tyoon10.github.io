@@ -3,7 +3,7 @@ title: "claude-ensemble: Achieving Frontier-Level Performance with Claude Code"
 date: 2026-06-28
 description: "A Claude Code kit for the most challenging tasks. Runs a Sonnet-5 panel with a high-effort Opus judge and a code-grounded verify-loop, entirely on a Claude subscription (no API key). Backed by blind, length-controlled A/B evals."
 featured: true
-coverImage: "./cost-performance.svg"
+coverImage: "./cover.png"
 tags:
   - "Claude Code"
   - "Agent Orchestration"
