@@ -1,6 +1,6 @@
 ---
 title: "Let the Flywheel Spin on Top of the Translation Layer"
-date: 2026-05-20
+date: 2026-05-14
 description: "How 6+ years of building, shipping, and 40+ AI rooms came together to reveal the truth about marketing in AI"
 featured: false
 unlisted: false
