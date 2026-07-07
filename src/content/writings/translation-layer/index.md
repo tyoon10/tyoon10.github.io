@@ -18,7 +18,7 @@ links:
 
 ## "The Cloud"
 
-Last September I set up a folding table and a laptop on Columbia's campus. I had just joined the first global cohort of Anthropic's Claude Ambassadors. The assignment for week one was simple: get people to stop. One in three students on campus had never heard of Anthropic. One asked me, in complete seriousness, whether "the Cloud" was a new ChatGPT model. (if I had brought up the word 'Anthropic', pretty sure they would have walked away)
+Last September I set up a folding table and a laptop on Columbia's campus. I had just joined the first global cohort of Anthropic's Claude Ambassadors. The assignment for week one was simple: get people to stop. 90% of students on campus had never heard of Anthropic. One asked me, in complete seriousness, whether "the Cloud" was a new ChatGPT model. (if I had brought up the word 'Anthropic', pretty sure they would have walked away)
 
 ![A Claude-branded table laid out with Claude Code pins, stickers, and swag before an event](./claude-tabling.jpeg)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Swag buys attention. Nothing buys belief.</p>
