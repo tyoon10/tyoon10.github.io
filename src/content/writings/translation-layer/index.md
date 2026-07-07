@@ -1,19 +1,20 @@
 ---
-title: "Let the flywheel spin on top of the translation layer"
-date: 2026-07-01
-description: "What 6+ years of building, shipping, and 40+ AI rooms taught me about the hardest marketing problem in AI: being believed by people who can check your work."
+title: "Let the Flywheel Spin on Top of the Translation Layer"
+date: 2026-05-20
+description: "What 6+ years of building, shipping, and 40+ AI rooms taught me about the hardest marketing problem in AI"
 featured: false
-unlisted: true
+unlisted: false
+coverImage: "./claude-tabling.jpeg"
 tags:
-  - "Product Marketing"
-  - "Positioning"
-  - "AI"
   - "Developer Marketing"
+  - "Community"
+  - "Product Marketing"
+links:
+  - name: "Claude Hackathon Recap"
+    url: "https://www.linkedin.com/posts/taewan-yoon_claudepartner-ugcPost-7453550848439209984-rI9J/"
+    icon: "linkedin"
 ---
 
-
-![A Claude-branded table laid out with Claude Code pins, stickers, and swag before an event](./claude-tabling.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Swag buys attention. Nothing buys belief.</p>
 
 Last September I set up a folding table and a laptop on Columbia's campus. I had just joined the first global cohort of Anthropic's Claude Ambassadors. The assignment for week one was simple: get people to stop. One in three students on campus had never heard of Anthropic. One asked me, in complete seriousness, whether "the Cloud" was a new ChatGPT model. (if I had brought up the word 'Anthropic', pretty sure they would have walked away)
 
