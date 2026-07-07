@@ -28,6 +28,9 @@ A room of [product managers who wanted to build with AI instead of around it](/w
 * The executives never touched a laptop. Their questions were the same test in a different dialect: who carries the liability, what happens to their talent, where the competitive advantage goes. They were checking my story against the businesses they run. That is the one system they know cold. 
 * The product managers checked it against the one thing a PM fully trusts: their own workflow.
 
+![Four people huddled around a laptop, watching a build run at a Claude developer session](./developer-session.jpg)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">In this room, you do not present a claim. You run it.</p>
+
 ### The hardest marketing problem
 
 That is where the lesson landed. **The hardest marketing problem in AI is not getting attention. It is being believed by people who can check your work.** And everyone worth reaching can check it. The form changes from room to room. The principle never does.
@@ -55,10 +58,16 @@ The developer community around Claude Code is that flywheel in motion. A builder
 
 Trust is the only currency that compounds with a technical audience. A survived check is what starts it turning. Get the translation layer right. The flywheel turns on its own.
 
+![A packed lecture hall of students on laptops at the Claude community event](./community-kickoff.jpg)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">An empty room turned into a full house after six months of earning every seat.</p>
+
 ### A rear view mirror
 
 Here is the part I only understood in hindsight. The tabling, the workshops, the hackathons, the 1,300+ developers: I thought I was building a community. I was doing product marketing the whole time. I just did not have a name for it. Eight months after that folding table, the [capstone hackathon I ran](https://www.linkedin.com/posts/taewan-yoon_claudepartner-ugcPost-7453550848439209984-rI9J/) was a joint Columbia and NYU event. Nobody asked me what Anthropic was. Nothing grows like that on hype. It grows on claims that keep checking out, carried by the people who checked them.
 
 The instinct is older than Claude. At CONCAT, the AI fintech I co-founded and sold, we had to convince first-time buyers to care about insurance. The positioning that finally worked treated a policy like an investment portfolio. Six years of that taught me where I am most useful. It is at the translation layer, the seam where a capability becomes someone's decision. The work is closing that gap in sentences that survive the check. It does not matter who is doing the checking, one skeptical CTO or a keynote hall.
+
+![Moderating a fireside chat with a global bank CTO on stage in a glass-walled hall](./fireside-cto.jpg)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Moderating a global bank's CTO. Same check, a different dialect.</p>
 
 At the frontier, models are getting more capable and less legible at the same time. That means the translation layer is about to matter more than any feature list. Someone has to stand at that seam and keep the story true and clear at once.
