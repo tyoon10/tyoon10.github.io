@@ -1,7 +1,7 @@
 ---
 title: "claude-ensemble: Achieving Frontier-Level Performance with Claude Code"
 date: 2026-06-28
-description: "A Claude Code kit for most challenging tasks. Runs Opus panel and a verifying judge entirely on a Claude subscription (no API key). Backed by blind, length-controlled A/B evals."
+description: "A Claude Code kit for the most challenging tasks. Runs a Sonnet-5 panel with a high-effort Opus judge and a code-grounded verify-loop, entirely on a Claude subscription (no API key). Backed by blind, length-controlled A/B evals."
 featured: true
 coverImage: "./cost-performance.svg"
 tags:
@@ -49,9 +49,9 @@ While it is not for quick or simple work, the kit routes easy tasks to a single 
 It is built on Claude Code [Dynamic Workflows](https://code.claude.com/docs/en/workflows) and sub-agents, so the control flow is a local script that owns the orchestration, not a model improvising it:
 
 - **Triage gate (Haiku).** A cheap first pass decides two things: whether the task is complex enough to need the ensemble, and whether it is *checkable* (has verifiable content that running code could confirm). Simple tasks get one pass and skip the rest, so you do not spend the premium where a single answer already wins.
-- **Panel (Opus, best-of-N).** For hard tasks, several Opus sub-agents answer the same task independently, in parallel. These are independent attempts, not assigned roles; the evals below show designed diversity does not help.
-- **Judge (Opus, max effort).** The judge sees the drafts under blind, shuffled labels, verifies each rather than trusting it, discards unsupported claims, and synthesizes one answer better than any single draft.
-- **Verify-loop.** A harsh verifier runs code to find confirmed defects, a reviser fixes exactly those, and it repeats until the answer is clean or three rounds pass. This is the part a single pass structurally cannot do.
+- **Panel (Sonnet 5, best-of-N).** For hard tasks, several Sonnet-5 sub-agents answer the same task independently, in parallel. A Sonnet-5 panel matches an Opus panel on correctness at a fraction of the cost, so it is the default, and the gate escalates only the hardest checkable tasks to an Opus panel. These are independent attempts, not assigned roles, and the evals below show designed diversity does not help.
+- **Judge (Opus, max effort).** The judge sees the drafts under blind, shuffled labels, verifies each rather than trusting it, discards unsupported claims, and synthesizes one answer better than any single draft. The judge is where the kit spends its strongest model, because that is where correctness is made.
+- **Verify-loop (Opus).** A harsh verifier runs code to find confirmed defects, a reviser fixes exactly those, and it repeats until the answer is clean or three rounds pass. This is the part a single pass structurally cannot do. Its value is on long-form checkable reasoning, such as designs, proofs, and quantitative analysis. On self-contained tasks like writing one function or an exact numeric answer, a single strong pass is already correct, so the gate keeps those on the cheap path.
 
 The kit selects models by tier alias (`opus`, `sonnet`, `haiku`), so it tracks and adopts latest versions of Claude model family with no edit.
 
@@ -72,21 +72,23 @@ Under those controls, the numbers hold up:
 
 | Measure | Result |
 |---|---|
-| Panel vs a single matched-effort Opus pass (blind pairwise) | ≈ 60% win-rate |
-| Same comparison, independent non-Claude grader | ≈ 62% win-rate (agrees) |
-| Verify-loop on checkable tasks | roughly halves real defects |
+| Panel vs a single matched-effort pass, raw blind pairwise | ≈ 60% win-rate |
+| The same comparison, independent non-Claude grader | ≈ 62% win-rate (agrees) |
+| The same comparison, length-controlled | mostly ties (the raw edge is largely length) |
+| Sonnet-5 panel vs Opus panel, correctness | a tie, at roughly 0.4x the cost |
 | Judge effort, raised on its own (the single biggest knob) | +2.4 rubric points |
-| Draft diversity vs measured lift | uncorrelated (r = −0.11) |
+| Verify-loop on checkable reasoning | roughly halves real defects |
+| Draft diversity vs measured lift | uncorrelated (r = -0.11) |
 | Panel breadth | saturates by about five drafts |
 
-The strongest signal of trust is the agreement: two graders from different model families land within two points of each other (60% and 62%), so the win-rate is not a single-family artifact. Length control narrows the panel's raw edge, and the gains from the two real levers, **a high-effort verifying judge and the code-grounded verify-loop,** survive it.
+Two model families agreeing within two points (60% and 62%) shows the raw win-rate is not a single-family artifact. But length control is the honest read: most of the panel's raw edge is length, and it collapses to ties. What survives are the two real levers, **a high-effort verifying judge and the code-grounded verify-loop.** That is why the kit runs a cheap Sonnet-5 panel for coverage and spends its strongest model where correctness is actually made.
 
-The gain comes from independent attempts giving the judge enough material to check, correct, and combine into an answer stronger than any single draft.
+The gain is not the panel size. It is that independent attempts give the judge enough material to check, correct, and combine into an answer stronger than any single draft, and that the verify-loop then runs code to fix what a single pass leaves behind.
 
 ![Cost versus quality of the design choices](./cost-performance.svg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each design at its real cost and quality. The panel tier is the quality jump; the verify-loop is the top; a Sonnet panel does not beat a single pass, so the kit skips it.</p>
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each design at its real cost and correctness (length-controlled). The panel tier is a lateral move, so the kit runs a cheap Sonnet-5 panel and escalates only the hardest checkable tasks to an Opus panel. The verify-loop is the lever.</p>
 
-The trade is **cost** for running multiple Opus at high effort. A complex run is several Opus calls plus the verify-loop, so it is Opus-heavy; max effort is called for the most difficult challenges, and the triage gate keeps easy work off it. The [full methodology trail](https://github.com/tyoon10/claude-ensemble/tree/main/eval), including every reversal, is in the repo.
+The trade is **cost**: a complex run adds a Sonnet-5 panel, a high-effort Opus judge, and the verify-loop, so it spends real Opus usage on the judge and verifier where correctness is made. Max effort is called for the most difficult challenges, and the triage gate keeps easy work off it, so you pay the premium only where it helps. The [full methodology trail](https://github.com/tyoon10/claude-ensemble/tree/main/eval), including every reversal, is in the repo.
 
 ## Conclusion
 
