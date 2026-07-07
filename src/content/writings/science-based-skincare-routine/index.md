@@ -1,7 +1,7 @@
 ---
 title: "A Science-Based Skincare Routine"
-date: 2026-05-10
-description: "People keep asking what products I use. The answer is boring; the principles behind them aren't. A pairing of my daily routine with the dermatology and photobiology research that justifies each step."
+date: 2026-04-23
+description: "People keep asking what products I use. The answer is boring. The principles behind them aren't. A pairing of my daily routine with the dermatology and photobiology research that justifies each step."
 featured: false
 coverImage: "./featured.png"
 tags:
@@ -15,7 +15,7 @@ tags:
 
 One of the common questions I receive has nothing to do with AI. People ask me, *what skincare products do you use?*
 
-It feels good when people see me embody K-beauty standards. I usually try to laugh it off. But when the question gets asked more than twice, I know it's no longer just a compliment; they're asking for real solutions to their own problem.
+It feels good when people see me embody K-beauty standards. I usually try to laugh it off. But when the question gets asked more than twice, I know it's no longer just a compliment. They're asking for real solutions to their own problem.
 
 The honest answer is that the products matter much less than the principles. Most of what works is upstream of the brand on the bottle: water temperature, pH, timing, what you eat, when you see the sun. This is a written response to the recurring question, so I can send a link instead of repeating myself.
 
@@ -34,7 +34,7 @@ I don't remember anyone teaching me how to wash my face properly, and I assume m
 The four rules I follow:
 
 - **Mildly acidic (약산성) cleanser**: pH close to 5.5
-- **Lukewarm water (미온수)**: roughly the midpoint of the faucet
+- **Lukewarm water (미온수)**: the midpoint of the faucet
 - **Half a dose of foam in the morning** (water alone is not enough; a full dose is too much)
 - **Pat dry with a towel, never rub**
 
@@ -42,7 +42,7 @@ The four rules I follow:
 
 Healthy skin sits at a surface pH of roughly **4.7**, maintained by sebum, sweat, and the activity of filaggrin-derived amino acids. This **acid mantle** keeps barrier enzymes active, suppresses opportunistic bacteria, and stabilizes the intercellular lipid lamellae.
 
-Conventional soaps land at pH 9 to 10. A single wash with high-pH soap measurably raises skin pH for hours, increases transepidermal water loss (TEWL), and impairs the lipid-processing enzymes (β-glucocerebrosidase, acid sphingomyelinase) that keep the stratum corneum intact.<sup>[1](#ref-1),[2](#ref-2)</sup>
+Conventional soaps land at pH 9 to 10. A single wash with high-pH soap measurably raises skin pH for hours. It also increases transepidermal water loss (TEWL) and impairs the lipid-processing enzymes (β-glucocerebrosidase, acid sphingomyelinase) that keep the stratum corneum intact.<sup>[1](#ref-1),[2](#ref-2)</sup>
 
 > **Key point:** Choose a *mildly acidic* (약산성) cleanser. "Squeaky clean" is the sound of your acid mantle being stripped.
 
@@ -50,7 +50,7 @@ Conventional soaps land at pH 9 to 10. A single wash with high-pH soap measurabl
 
 You'll hear that you should wash with hot water to "open the pores," then rinse with cold water to "close them." **Pores have no muscles.** They don't open or close in response to temperature.
 
-What hot water *does* do is solubilize the stratum corneum's intercellular lipids: the same ceramides and cholesterol esters you're trying to preserve. Cold water doesn't undo that damage; it just adds vasoconstriction and irritation on top.
+What hot water *does* do is solubilize the stratum corneum's intercellular lipids: the same ceramides and cholesterol esters you're trying to preserve. Cold water doesn't undo that damage. It just adds vasoconstriction and irritation on top.
 
 Use lukewarm water from start to finish.
 
@@ -86,7 +86,7 @@ I shorten that window to 10 seconds because the math gets worse the longer you w
 
 ### Why ceramides, not just water
 
-A moisturizer that's only humectant (glycerin, hyaluronic acid) pulls water into the stratum corneum but doesn't fix the leak. **Ceramides** are 30 to 40% of the intercellular lipid matrix that holds the skin barrier together; the Atobarrier line is formulated around ceramide NP and a cholesterol/fatty-acid blend that mimics the natural lipid ratio.
+A moisturizer that's only humectant (glycerin, hyaluronic acid) pulls water into the stratum corneum but doesn't fix the leak. **Ceramides** are 30 to 40% of the intercellular lipid matrix that holds the skin barrier together. The Atobarrier line is formulated around ceramide NP and a cholesterol/fatty-acid blend that mimics the natural lipid ratio.
 
 Topical ceramide-containing moisturizers have been shown in randomized trials to restore barrier function and reduce TEWL in damaged or atopic-prone skin: performance closer to a barrier *repair* product than a basic emollient.<sup>[4](#ref-4),[5](#ref-5)</sup>
 
@@ -108,13 +108,13 @@ This is the step nobody asks about, but it's the one I'd give up last.
 
 The intrinsically photosensitive retinal ganglion cells (ipRGCs) in your eyes use the pigment **melanopsin**, which is maximally sensitive to short-wavelength light around 480 nm. Bright morning light signals "this is daytime" to the suprachiasmatic nucleus, advances melatonin offset, anchors core body temperature rhythm, and raises evening melatonin onset. In other words, you sleep better that night because you got light *this* morning.
 
-You don't need to stare at the sun. Ambient sky brightness at sunrise (**~10,000+ lux** in open sky vs. ~500 lux indoors) is the active ingredient.<sup>[6](#ref-6),[7](#ref-7)</sup>
+You don't need to stare at the sun. Ambient sky brightness at sunrise (**10,000+ lux** in open sky vs. 500 lux indoors) is the active ingredient.<sup>[6](#ref-6),[7](#ref-7)</sup>
 
 ### The photobiomodulation half, and why low angle matters
 
-When the sun is low on the horizon, sunlight travels through a **much longer path** of atmosphere. UVB (the burning, vitamin-D-synthesizing wavelength, ~290 to 315 nm) is largely scattered and absorbed out before reaching you; longer wavelengths, visible red and near-infrared (~600 to 1100 nm), pass through.
+When the sun is low on the horizon, sunlight travels through a **much longer path** of atmosphere. UVB (the burning, vitamin-D-synthesizing wavelength, ~290 to 315 nm) is largely scattered and absorbed out before reaching you. Longer wavelengths, visible red and near-infrared (~600 to 1100 nm), pass through.
 
-That's the same wavelength band as the **red light therapy panels** used in dermatology clinics. The proposed mechanism is **photobiomodulation**: red/NIR photons are absorbed by mitochondrial cytochrome c oxidase, dissociating inhibitory nitric oxide, transiently increasing ATP production, and triggering mild reactive-oxygen-species signaling that upregulates collagen synthesis and downregulates inflammation.
+That's the same wavelength band as the **red light therapy panels** used in dermatology clinics. The proposed mechanism is **photobiomodulation**. Red/NIR photons are absorbed by mitochondrial cytochrome c oxidase. That dissociates inhibitory nitric oxide and transiently raises ATP production. It also triggers mild reactive-oxygen-species signaling, which upregulates collagen synthesis and downregulates inflammation.
 
 Randomized trials of red/NIR exposure have shown improvements in **collagen density, fine lines, and skin roughness** at doses well within what sunrise-window exposure provides.<sup>[8](#ref-8),[9](#ref-9),[10](#ref-10)</sup>
 
@@ -133,7 +133,7 @@ Product: **자작나무 수분 선크림** (a Korean SPF 50+ formula).
 
 ### Why "cloudy" is not a free pass
 
-Cloud cover blocks visible light far more than it blocks UVA. On a moderately overcast day, **up to 80% of UVA still reaches the ground**.<sup>[11](#ref-11)</sup> UVA penetrates deeper into the dermis than UVB, drives photoaging via reactive oxygen species, and you don't feel it the way you feel UVB burning; there's no sensory feedback to tell you it's working on you.
+Cloud cover blocks visible light far more than it blocks UVA. On a moderately overcast day, **up to 80% of UVA still reaches the ground**.<sup>[11](#ref-11)</sup> UVA penetrates deeper into the dermis than UVB and drives photoaging via reactive oxygen species. You don't feel it the way you feel UVB burning. There's no sensory feedback to tell you it's working on you.
 
 If you can see your shadow at all, you're getting UV.
 
@@ -171,15 +171,15 @@ This isn't arbitrary. Each item is there for a reason.
 | **Pumpkin seeds** | **Zinc** + unsaturated fat | Cofactor for wound healing, MMP regulation; **fat vehicle for lycopene** |
 | **Apple** | Polyphenols, vitamin C, fiber | Antioxidant + cofactor for collagen hydroxylation |
 
-The most striking single result here is **dietary lycopene**: in a controlled trial, 10 to 12 weeks of tomato paste intake reduced UV-induced erythema by roughly **40%** compared to control.<sup>[13](#ref-13),[14](#ref-14),[15](#ref-15)</sup> That's not topical; that's *eaten* photoprotection, working from the inside.
+The most striking result here is **dietary lycopene**: in a controlled trial, 10 to 12 weeks of tomato paste intake reduced UV-induced erythema by roughly **40%** compared to control.<sup>[13](#ref-13),[14](#ref-14),[15](#ref-15)</sup> That's not topical. That's *eaten* photoprotection, working from the inside.
 
 ### Why the tomatoes and the nuts have to share a plate
 
-Lycopene is **lipophilic**; it's a 40-carbon hydrocarbon carotenoid with zero hydroxyl groups, which makes it one of the least water-soluble micronutrients in the human diet. To get out of the tomato matrix and into your bloodstream, it has to partition into mixed micelles in the small intestine, which only assemble in the presence of **dietary fat and bile acids**. Eat tomatoes alone, on an empty fat-free stomach, and most of the lycopene passes straight through you.
+Lycopene is **lipophilic**. It's a 40-carbon hydrocarbon carotenoid with zero hydroxyl groups, which makes it one of the least water-soluble micronutrients in the human diet. To get out of the tomato matrix and into your bloodstream, it has to partition into mixed micelles in the small intestine. Those micelles only assemble in the presence of **dietary fat and bile acids**. Eat tomatoes alone, on an empty fat-free stomach, and most of the lycopene passes straight through you.
 
-How much fat changes the answer. Controlled feeding studies have shown that adding **as little as ~5 to 10 g of fat** to a tomato/carotenoid meal increases plasma carotenoid response severalfold versus a fat-free meal, and that the effect is bigger for the more lipophilic carotenoids like lycopene and β-carotene than for less hydrophobic ones like lutein.<sup>[16](#ref-16),[17](#ref-17)</sup>
+How much fat changes the answer. Controlled feeding studies show it directly. Adding **as little as 5 to 10 g of fat** to a tomato/carotenoid meal increases plasma carotenoid response severalfold versus a fat-free meal. The effect is bigger for the more lipophilic carotenoids like lycopene and β-carotene than for less hydrophobic ones like lutein.<sup>[16](#ref-16),[17](#ref-17)</sup>
 
-That's why the nuts aren't a side dish in this breakfast. A small handful of almonds, walnuts, and pumpkin seeds delivers roughly **10 to 15 g of unsaturated fat** alongside the tomatoes: enough to fully solubilize the lycopene into micelles and unlock the photoprotection trial endpoint above. The eggs do double duty here too: the yolk contributes another ~5 g of fat plus phospholipids that further enhance micellar incorporation.
+That's why the nuts aren't a side dish in this breakfast. A small handful of almonds, walnuts, and pumpkin seeds delivers **10 to 15 g of unsaturated fat** alongside the tomatoes: enough to fully solubilize the lycopene into micelles and unlock the photoprotection trial endpoint above. The eggs do double duty here too: the yolk contributes another 5 g of fat plus phospholipids that further enhance micellar incorporation.
 
 > **Key point:** Tomatoes without fat are a partial dose. The almonds, walnuts, pumpkin seeds, and egg yolk are the **delivery vehicle** that makes the lycopene bioavailable.
 
@@ -194,7 +194,7 @@ A short, deliberately negative list, because the absence of bad inputs matters a
 - **No actives stacking.** No retinol, no acids, no vitamin C serums, no exfoliants. The barrier-first approach makes most of these unnecessary, and at my age the upside is small relative to the irritation cost.
 - **No physical exfoliation.** Scrubs, brushes, and grainy cleansers all damage the stratum corneum faster than skin can rebuild it.
 - **No fragrance-heavy products.** Fragrance is the single most common contact-allergen class in dermatology referrals.
-- **No "pore-minimizing" anything.** Pores are not muscles; they are not closable.
+- **No "pore-minimizing" anything.** Pores are not muscles. They are not closable.
 
 ---
 
