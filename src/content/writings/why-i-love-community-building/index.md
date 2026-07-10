@@ -1,7 +1,7 @@
 ---
 title: "Three Reasons I Love Community Building"
 date: 2026-06-30
-description: "What a real AI community is made of beneath the events, the perspective I bring to building one, and why it is the only work I cannot picture trading away."
+description: "What a real AI community is made of beneath the events, and the perspective I bring to building each one."
 featured: false
 unlisted: true
 coverImage: "./iterate-judge.webp"
@@ -21,9 +21,12 @@ links:
 ---
 
 
-It was past midnight at a hackathon in Manhattan when a team waved me over to show me their demo. I watched it run and asked the question I ask most: *"What user problem does this solve? Does this add value to how users currently get the job done?"*
+It was past midnight at a hackathon in Manhattan when a team waved me over to show me their demo. I watched it run. Demo looks great. Hmm, okay. And then I asked the question I ask most: *"What user problem does this solve? Does this add value to how users currently get the job done?"*
 
-They looked at each other, started to answer, stopped. The next morning they came back with a sharper vision of the problem, not more features. The demo had not changed, but **the team had.**
+They looked at each other, started to answer, but soon stopped. *"We'll come back."* The next morning they came back with a sharp vision of the problem, not more features. The demo had not changed, but **the team had.**
+
+![A hackathon team pausing to rethink their approach, one member with arms crossed looking at a laptop](./team-rethink.jpg)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Can one question transform a team overnight? It is rare, but does happen.</p>
 
 That moment is the whole job, and it barely involves hackathons. It happens in office hours, in a workshop full of product managers, in the replies to something I wrote. I have had an unusually good seat for it: I joined the first global cohort of Anthropic's Claude Ambassadors last year, when Claude Code was still a developer-only tool and one in three students on campus had not heard of Anthropic. Since then I have run 40+ sessions for audiences that spanned the whole range, from undergrads writing their first prompt to CTOs shipping to production.
 
