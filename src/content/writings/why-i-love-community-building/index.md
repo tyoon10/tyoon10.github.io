@@ -32,7 +32,7 @@ That moment is the whole job, and it barely involves hackathons. It happens in o
 
 A community is what makes that moment keep happening after everyone goes home. Strip away the events and it comes down to three things: a door people can walk through, a way they get better once they are inside, and the rails and relationships that keep it alive when you leave. Here is why I love building each one.
 
-## Reason 1: A door people can walk through
+## At the door
 
 **I love being the front door.** On Valentine's Day I packed a [Columbia board room](/writings/iterate-columbia-hackathon-2026-recap/) with 300 strangers across NYC who came to build for 12 hours: 60+ teams, 8 sponsors. Most campus hackathons draw from a single school; we opened ours to business and engineering students, founders, and first-time builders in the same room.
 
@@ -44,7 +44,7 @@ But the door is not only a hackathon. It is a room of [Directors and C-suite lea
 ![A workshop teaching product managers to build with AI](./pm-workshop.webp)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">A workshop turning product managers into people who build with AI, not around it; more <a href="https://twyoon.com/writings/ai-superpower-for-pm">here</a>.</p>
 
-## Reason 2: A way they get better once inside
+## Inside the room
 
 Getting people in is the start; then they have to get better, and that is a multiplier I can work on directly. At [Mistral's worldwide hackathon](/writings/mistral-worldwide-hackathon-2026-recap/) I judged and mentored across a 36-hour sprint that ran in seven cities at once. The questions I pushed on moved more teams than any code I could have written for them: the problem, and the responsibility (*"How do you ensure safety, for privacy, public good, and inclusion?"*). The teams that paused and came back sharper won; the ones that only stacked on technical sophistication did not.
 
@@ -60,7 +60,7 @@ At the Claude Builder Hackathon I ran this spring, a team called 'Pulse' was bor
 
 Mentoring one team at a time does not scale, so I also teach in public. I write deep-dives that reach past any single room, on [why agents need better infrastructure than better models](/writings/agents-need-better-infrastructure/), [what memory should look like for a coding agent](/writings/files-are-the-memory/), and [what held across thirteen months of Claude Code's source](/writings/tracing-the-minds-behind-claude-code/), and I build the tools I wish builders had, like [claude-ensemble](https://github.com/tyoon10/claude-ensemble). A question, an essay, or a tool: each one keeps working in someone else's hands after I am gone.
 
-## Reason 3: The rails and relationships that outlast the room
+## After the close
 
 A great weekend is not a lasting community. The 300-person event ran on a **20-person team where every person owned a lane:** sponsor onboarding and API-key distribution, registration, judging, catering windows. Clarity of ownership was the actual product.
 
