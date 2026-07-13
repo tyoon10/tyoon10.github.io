@@ -2,7 +2,7 @@
 title: "Let the Flywheel Spin on Top of the Translation Layer"
 date: 2026-05-14
 description: "How 6+ years of building, shipping, and 40+ AI rooms came together to uncover a truth about earning trust in AI"
-featured: false
+featured: true
 unlisted: false
 coverImage: "./cover-hero.jpeg"
 tags:

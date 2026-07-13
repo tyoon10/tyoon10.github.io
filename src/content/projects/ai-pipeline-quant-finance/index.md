@@ -1,7 +1,7 @@
 ---
-title: "AI Pipeline for Quantitative Finance Research"
+title: "[MathWorks Finance Conference] RAG Pipeline for Quantitative Investment Research"
 date: 2025-09-30
-description: "Built a LightRAG pipeline that transforms 4,000+ academic papers into a queryable graph vector database, surfacing contrarian investment strategies with 2.4x more comprehensive responses than naive RAG."
+description: "Built a LightRAG pipeline that combines a knowledge graph with vector embeddings to make 4,000+ academic papers queryable, surfacing contrarian investment strategies with 2.4x more comprehensive responses than naive RAG. Presented at MathWorks."
 featured: true
 coverImage: "./cover.png"
 tags:
