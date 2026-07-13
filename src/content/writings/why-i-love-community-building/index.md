@@ -46,7 +46,7 @@ But the door is not only a hackathon. It is a room of [Directors and C-suite lea
 
 ## Inside the room
 
-Getting people in is the start; then they have to get better, and that is a multiplier I can work on directly. At [Mistral's worldwide hackathon](/writings/mistral-worldwide-hackathon-2026-recap/) I judged and mentored across a 36-hour sprint that ran in seven cities at once. The questions I pushed on moved more teams than any code I could have written for them: the problem, and the responsibility (*"How do you ensure safety, for privacy, public good, and inclusion?"*). The teams that paused and came back sharper won; the ones that only stacked on technical sophistication did not.
+Getting people through the door is the start. Once they are in the room, they have to get better, and that is a multiplier I can work on directly. At [Mistral's worldwide hackathon](/writings/mistral-worldwide-hackathon-2026-recap/) I judged and mentored across a 36-hour sprint that ran in seven cities at once. The questions I pushed on moved more teams than any code I could have written for them: the problem, and the responsibility (*"How do you ensure safety, for privacy, public good, and inclusion?"*). The teams that paused and came back sharper won; the ones that only stacked on technical sophistication did not.
 
 ![A mentoring circle at the Mistral hackathon, judges and builders huddled over a project](./mentor.jpg)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Mentors, judges and builders huddled over various challenges; full recap <a href="https://twyoon.com/writings/mistral-worldwide-hackathon-2026-recap">here</a>.</p>
@@ -62,7 +62,7 @@ Mentoring one team at a time does not scale, so I also teach in public. I write 
 
 ## After the close
 
-A great weekend is not a lasting community. The 300-person event ran on a **20-person team where every person owned a lane:** sponsor onboarding and API-key distribution, registration, judging, catering windows. Clarity of ownership was the actual product.
+A great weekend is not a lasting community. What you build after the close is. The 300-person event ran on a **20-person team where every person owned a lane:** sponsor onboarding and API-key distribution, registration, judging, catering windows. Clarity of ownership was the actual product.
 
 ![Builders gathering over lunch at the Columbia hackathon](./iterate-hackathon-lunch.webp)
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Lunch for 300 builders. Delivering a day like this takes a whole team, and that shared effort is what brings a community together.</p>
