@@ -1,0 +1,376 @@
+---
+const stages = [
+  {
+    stage: 1,
+    phases: [
+      {
+        id: 0,
+        action: "Frame",
+        title: "Product, autonomy & success",
+        summary: "Define the workflow, value thesis, human boundaries, and evidence that will guide the system.",
+        topics: ["Workflow design", "Economics", "Human control", "Risk", "Eval charter"],
+      },
+      {
+        id: 1,
+        action: "Ground",
+        title: "Foundations, models & APIs",
+        summary: "Build practical literacy in language models, software systems, and reliable model interfaces.",
+        topics: ["LLMs", "Software systems", "HTTP", "Structured output", "Model selection"],
+      },
+    ],
+  },
+  {
+    stage: 2,
+    phases: [
+      {
+        id: 2,
+        action: "Measure",
+        title: "Agent eval engineering",
+        summary: "Turn product expectations into repeatable tasks, trials, graders, and measurable outcomes.",
+        topics: ["Task suites", "Trials", "Graders", "Outcome metrics", "Regressions"],
+      },
+      {
+        id: 3,
+        action: "Ground",
+        title: "Context, retrieval & memory",
+        summary: "Engineer what the agent knows, what it recalls, and how its information stays attributable and fresh.",
+        topics: ["Instructions", "RAG", "Provenance", "Freshness", "Memory lifecycle"],
+      },
+    ],
+  },
+  {
+    stage: 3,
+    phases: [
+      {
+        id: 4,
+        action: "Act",
+        title: "Tools & environments",
+        summary: "Give the agent typed, observable ways to act across browsers, code, data, and business systems.",
+        topics: ["Contracts", "Validation", "Side effects", "Browser", "Code & data"],
+      },
+      {
+        id: 5,
+        action: "Connect",
+        title: "MCP & interoperability",
+        summary: "Standardize discovery, authorization, and versioned contracts across tools and services.",
+        topics: ["MCP", "A2A", "Discovery", "Authorization", "Conformance"],
+      },
+    ],
+  },
+  {
+    stage: 4,
+    phases: [
+      {
+        id: 6,
+        action: "Orchestrate",
+        title: "Architecture & durable execution",
+        summary: "Design workflows and agent loops that preserve state, recover from failure, and finish long-running work.",
+        topics: ["Workflows", "Agent loops", "Planning", "Checkpoints", "Recovery"],
+      },
+      {
+        id: 7,
+        action: "Secure",
+        title: "Identity, security & safety",
+        summary: "Bind actions to identity, authority boundaries, and clear controls for safe operation.",
+        topics: ["Delegation", "Least privilege", "Injection", "Sandboxing", "Red teaming"],
+      },
+    ],
+  },
+  {
+    stage: 5,
+    phases: [
+      {
+        id: 8,
+        action: "Operate",
+        title: "Production evidence & operations",
+        summary: "Observe real behavior, resolve incidents, and continuously improve the quality of the system.",
+        topics: ["Monitoring", "Traces", "A/B tests", "Feedback", "SLOs"],
+      },
+      {
+        id: 9,
+        action: "Improve",
+        title: "Platform & optimization",
+        summary: "Scale reliable patterns while balancing latency, cost, throughput, and model quality.",
+        topics: ["Gateways", "Workers", "CI/CD", "Routing", "Quality-cost trade-offs"],
+      },
+    ],
+  },
+  {
+    stage: 6,
+    phases: [
+      {
+        id: 10,
+        action: "Govern",
+        title: "Human systems & governance",
+        summary: "Align the system with human trust, organizational accountability, and external obligations.",
+        topics: ["Trust", "Usability", "Human studies", "Impact", "Compliance"],
+      },
+      {
+        id: 11,
+        action: "Extend",
+        title: "Advanced systems",
+        summary: "Synthesize the curriculum in a complete production system with advanced interfaces and behavior.",
+        topics: ["Multi-agent", "Multimodal", "Computer use", "Long horizon", "Production system"],
+      },
+    ],
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="A twelve-phase curriculum for learning agentic AI systems." />
+    <title>Agentic AI Curriculum</title>
+  </head>
+  <body>
+    <main aria-label="Agentic AI curriculum">
+      {stages.map((group) => (
+        <section class="stage-group" aria-labelledby={`stage-${group.stage}`}>
+          <h2 id={`stage-${group.stage}`}>Stage {group.stage}</h2>
+          <div class="stage-phases">
+            {group.phases.map((phase) => (
+              <article class="phase-card">
+                <span class="phase-number" aria-hidden="true">{phase.id}</span>
+                <div class="phase-main">
+                  <span class="phase-meta">Phase {phase.id} / {phase.action}</span>
+                  <h3>{phase.title}</h3>
+                  <p>{phase.summary}</p>
+                </div>
+                <aside class="phase-focus" aria-label={`Focus areas for ${phase.title}`}>
+                  <span class="focus-label">Focus areas</span>
+                  <div class="topics">
+                    {phase.topics.map((topic) => <span>{topic}</span>)}
+                  </div>
+                </aside>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(html) {
+    background: #f7f7f4;
+    color: #121310;
+  }
+
+  :global(body) {
+    margin: 0;
+    background: #f7f7f4;
+    color: #121310;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+  }
+
+  main {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: clamp(32px, 6vw, 80px) clamp(16px, 5vw, 64px);
+  }
+
+  .stage-group {
+    position: relative;
+    padding: 24px 0 64px;
+    border-top: 1px solid #121310;
+  }
+
+  .stage-group:not(:last-child)::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    height: 64px;
+    background: #d6d7d1;
+    content: "";
+  }
+
+  .stage-group:not(:last-child)::before {
+    position: absolute;
+    z-index: 1;
+    bottom: 7px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid #70716b;
+    border-bottom: 1px solid #70716b;
+    content: "";
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  h2 {
+    margin: 0 0 38px;
+    color: #2457ff;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .stage-phases {
+    display: grid;
+    gap: 54px;
+  }
+
+  .phase-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(250px, 0.75fr);
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+    min-height: 190px;
+    padding: 40px clamp(24px, 4vw, 48px) 32px;
+    border: 1px solid #d6d7d1;
+    background: rgba(255, 255, 255, 0.78);
+  }
+
+  .phase-card:not(:last-child)::after {
+    position: absolute;
+    bottom: -54px;
+    left: 50%;
+    width: 1px;
+    height: 54px;
+    background: #d6d7d1;
+    content: "";
+  }
+
+  .phase-card:not(:last-child)::before {
+    position: absolute;
+    z-index: 1;
+    bottom: -47px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid #70716b;
+    border-bottom: 1px solid #70716b;
+    content: "";
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .phase-number {
+    position: absolute;
+    top: -19px;
+    left: 50%;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 1px solid #2457ff;
+    border-radius: 50%;
+    background: #2457ff;
+    color: #fff;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 11px;
+    transform: translateX(-50%);
+  }
+
+  .phase-main {
+    min-width: 0;
+  }
+
+  .phase-meta,
+  .focus-label {
+    color: #70716b;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 13px 0 0;
+    font-size: clamp(25px, 3.5vw, 42px);
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
+  p {
+    max-width: 560px;
+    margin: 18px 0 0;
+    color: #70716b;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .phase-focus {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding-left: 32px;
+    border-left: 1px solid #d6d7d1;
+  }
+
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .topics span {
+    padding: 7px 11px;
+    border: 1px solid #d6d7d1;
+    border-radius: 999px;
+    background: rgba(36, 87, 255, 0.06);
+    font-size: 11px;
+  }
+
+  @media (max-width: 720px) {
+    main {
+      padding-top: 42px;
+      padding-bottom: 42px;
+    }
+
+    .stage-group {
+      padding-top: 20px;
+      padding-bottom: 54px;
+    }
+
+    .stage-group:not(:last-child)::after {
+      height: 54px;
+    }
+
+    .stage-phases {
+      gap: 48px;
+    }
+
+    .phase-card {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      min-height: 0;
+      padding: 36px 20px 24px;
+    }
+
+    .phase-card:not(:last-child)::after {
+      bottom: -48px;
+      height: 48px;
+    }
+
+    .phase-card:not(:last-child)::before {
+      bottom: -41px;
+    }
+
+    h3 {
+      font-size: 30px;
+    }
+
+    .phase-focus {
+      padding-top: 22px;
+      padding-left: 0;
+      border-top: 1px solid #d6d7d1;
+      border-left: 0;
+    }
+  }
+</style>
