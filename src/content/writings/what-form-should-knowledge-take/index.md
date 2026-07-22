@@ -1,7 +1,7 @@
 ---
 title: "What Form Should Knowledge Take?"
 date: 2026-07-21
-description: "How the AI frontier is answering the question finance left open. My last essay argued that in finance the real asset is the reasoning behind decisions, not the documents that record it. This one takes the next step: the frontier has settled on what that reasoning should look like as a system, and retrieval turns out to be the layer that serves it, not the thing that makes it."
+description: "The AI frontier has settled on what curated knowledge should look like as a system, and retrieval turns out to serve it, not make it."
 coverImage: "./featured.png"
 featured: true
 tags:
@@ -24,6 +24,8 @@ My last essay argued that finance spent two decades standardizing its *data* and
 I left a question open. A few readers asked it back to me: fine, but what is that asset supposed to look like in a system? Once you decide to keep the *why*, where does it actually live?
 
 I didn't have a clean answer then. I do now. It didn't come from finance. It came from watching the teams building the most advanced AI systems in the world land on the same answer, without coordinating.
+
+It also came from building. I've spent something like fifty hours assembling my own agentic OS around the Hermes Agent and Obsidian, and a lot has changed along the way. The parts that stuck were never the clever prompts. They were the files: notes, instructions, and decisions I could read, edit, and hand to an agent. Watching my own setup converge on the same shape as the frontier's is part of why I trust the pattern.
 
 ## The frontier externalized its memory
 
