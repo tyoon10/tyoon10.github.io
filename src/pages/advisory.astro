@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Unlisted page: reachable only via direct URL.
+// - noindex/nofollow via BaseLayout prop
+// - excluded from sitemap in astro.config.mjs
+// - intentionally not linked from any navigation, footer, or page
+---
+
+<BaseLayout
+  title="Expert Consultations"
+  description="Terms and coverage areas for paid expert-network consultations with Taewan Yoon."
+  noindex={true}
+>
+  <section class="advisory">
+    <header class="advisory-header">
+      <p class="advisory-eyebrow">Expert Network Intake</p>
+      <h1>Expert Consultations</h1>
+      <p class="advisory-lede">
+        I take a limited number of paid consultations through established expert
+        networks. This page exists so associates can qualify a project in one
+        pass — if the scope, topics, and terms below fit, send the project
+        outline and screening questions and I'll respond within 24 hours.
+      </p>
+    </header>
+
+    <div class="advisory-section">
+      <h2>Background</h2>
+      <p>
+        Product and AI operator across finance and technology: co-founder and
+        head of product at an AI fintech startup (7 years, exited), product
+        manager at Coupang (NYSE: CPNG) on finance platform and engineering,
+        senior product manager intern at Amazon Devices &amp; Services, and MBA/MS
+        (AI &amp; machine learning) dual degree at Columbia. CFA charterholder.
+        Active in the agentic AI ecosystem as a builder, community organizer,
+        and workshop lead.
+      </p>
+    </div>
+
+    <div class="advisory-section">
+      <h2>Coverage areas</h2>
+      <ul>
+        <li>Agentic AI and autonomous agent products: market landscape, user personas, use cases, adoption drivers, competitive dynamics</li>
+        <li>AI-native application ecosystem: tooling, orchestration, evaluation, buyer behavior</li>
+        <li>Applied AI in finance: RAG pipelines, LLM workflows in financial services, fintech product strategy</li>
+        <li>Product management practice: 0→1 product building, platform products, e-commerce and fintech operations</li>
+        <li>Korea and US cross-market technology perspective</li>
+      </ul>
+    </div>
+
+    <div class="advisory-section">
+      <h2>Engagement terms</h2>
+      <ul>
+        <li><strong>Format:</strong> 30–60 minute audio or video consultations only. No written deliverables, surveys, slides, or follow-up memos.</li>
+        <li><strong>Rate:</strong> USD 500 per hour, one-hour minimum, pro-rated in 15-minute increments thereafter.</li>
+        <li><strong>Screening:</strong> Brief written screening questions are fine; send them with the project outline.</li>
+        <li><strong>Scheduling:</strong> US Eastern Time. Availability is limited and confirmed per project.</li>
+      </ul>
+    </div>
+
+    <div class="advisory-section">
+      <h2>Compliance boundaries (read before proposing)</h2>
+      <p>
+        I follow standard expert-network compliance terms, and two boundaries
+        are non-negotiable:
+      </p>
+      <ul>
+        <li>I do not discuss the internal operations, metrics, strategy, roadmap, or any non-public information of companies I am or have recently been affiliated with — including under anonymization.</li>
+        <li>I do not share confidential or proprietary information of any current or former employer, client, or partner, and I won't speculate in ways designed to approximate it.</li>
+      </ul>
+      <p>
+        Projects framed around a specific company's confidential performance
+        will be declined. General industry-level discussions are welcome.
+      </p>
+    </div>
+
+    <div class="advisory-section">
+      <h2>Contact</h2>
+      <p>
+        Reply in the LinkedIn thread that brought you here, or message me at
+        <a href="https://www.linkedin.com/in/taewan-yoon/" target="_blank" rel="noopener">linkedin.com/in/taewan-yoon</a>.
+        Include: end-client type (no name needed), topic outline, expected
+        duration, and your compliance framework.
+      </p>
+    </div>
+
+    <p class="advisory-footnote">
+      This page is shared by direct link for consultation intake and is not part
+      of the site's public navigation.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .advisory {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 64px;
+  }
+
+  .advisory-eyebrow {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .advisory-header h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .advisory-lede {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .advisory-section {
+    margin-top: 36px;
+  }
+
+  .advisory-section h2 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+
+  .advisory-section p,
+  .advisory-section li {
+    line-height: 1.7;
+  }
+
+  .advisory-section ul {
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .advisory-footnote {
+    margin-top: 48px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+</style>

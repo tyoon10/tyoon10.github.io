@@ -5,10 +5,11 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://twyoon.com',
-  // Keep unlisted, direct-link-only writings out of the public sitemap.
+  // Keep unlisted, direct-link-only pages out of the public sitemap.
   integrations: [sitemap({
     filter: (page) => ![
       '/writings/why-i-love-community-building',
+      '/advisory',
     ].some((slug) => page.includes(slug)),
   })],
 
