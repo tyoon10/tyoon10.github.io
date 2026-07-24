@@ -1,7 +1,7 @@
 ---
 title: "What Form Should Knowledge Take?"
 date: 2026-07-21
-description: "The AI frontier has settled on what curated knowledge should look like as a system, and retrieval turns out to serve it, not make it."
+description: "The evidence from AI frontier settling on what curated knowledge should look like as a system. And a new place for RAG and retrieval turns out to serve it."
 coverImage: "./featured.png"
 featured: true
 tags:
@@ -25,7 +25,7 @@ I left a question open. A few readers asked it back to me: fine, but what is tha
 
 I didn't have a clean answer then. I do now. It didn't come from finance. It came from watching the teams building the most advanced AI systems in the world land on the same answer, without coordinating.
 
-It also came from building. I've spent something like fifty hours assembling my own agentic OS around the Hermes Agent and Obsidian, and a lot has changed along the way. The parts that stuck were never the clever prompts. They were the files: notes, instructions, and decisions I could read, edit, and hand to an agent. Watching my own setup converge on the same shape as the frontier's is part of why I trust the pattern.
+It also came from building. I've spent ~50 hours assembling my own agentic OS around the Hermes Agent and Obsidian, and a lot has changed along the way. The parts that stuck were never the clever prompts. They were the files: notes, instructions, and decisions I could read, edit, and hand to an agent. Watching my own setup converge on the same shape as the frontier's is part of why I trust the pattern.
 
 ## The frontier externalized its memory
 
@@ -89,3 +89,7 @@ Which brings me back to how the first essay ended, and the line I keep returning
 ## The next golden source
 
 Finance got golden sources for its data because regulation forced the issue, and the industry is better for it. Knowledge never got the same treatment. No authoritative tier, no supersession, no provenance, no owner. The frontier has now shown what that maintained layer looks like, and that it holds up at scale. The moat was never the file format or the retrieval engine. It's the quality, the history, and the trust of the reasoning a firm decides to keep.
+
+---
+
+*This is the follow-up to [How I Think About Knowledge in Finance](/writings/knowledge-for-finance), where I argued the reasoning behind decisions is the real moat. Start there if you're new to the argument.*

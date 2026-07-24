@@ -11,6 +11,9 @@ tags:
   - "Data Governance"
   - "Agentic AI"
 links:
+  - name: "What Form Should Knowledge Take?"
+    url: "/writings/what-form-should-knowledge-take"
+    icon: "book-open"
   - name: "What Senior Business Leaders Actually Ask About AI"
     url: "/writings/what-senior-business-leaders-ask-about-ai"
     icon: "book-open"
@@ -129,3 +132,7 @@ I began my career between evidence and decision. I now build systems that connec
 <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Today, knowledge answers questions. Next, it provides the instructions, permissions, and audit records that govern an agent.</p>
 
 A strong model is not enough. Agents also need reliable internal knowledge. That knowledge must be current. It must carry provenance and permissions. Finance can now build these systems. And I think it is the most interesting thing in the industry.
+
+---
+
+*I left one question open here: once you decide to keep the reasoning, what form should it take? I answer it in the follow-up, [What Form Should Knowledge Take?](/writings/what-form-should-knowledge-take)*
