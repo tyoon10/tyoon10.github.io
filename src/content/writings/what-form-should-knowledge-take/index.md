@@ -37,14 +37,17 @@ None of these teams set out to build a knowledge base. Each was solving a smalle
 
 One caution, because "memory" has gotten slippery. Four different things are converging, and they are not the same. There are *instructions* (how we work), *skills* (how to do one specific thing), *project memory* (what happened and what's next), and *curated knowledge* (the decisions worth keeping). Instructions and skills are largely settled now. Project memory is getting there. Curated knowledge, the part finance cares about, is the least settled and the most valuable. That should feel familiar. It is the same inversion from the first essay, where the highest-value tier was the one nobody captured.
 
+![Four forms of durable memory progress from instructions and skills to project memory and curated knowledge](./memory-landscape.webp)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Instructions and skills are largely settled; curated knowledge remains the least-settled and highest-value layer.</p>
+
 ## From files to a knowledge supply chain
 
 The question isn't files versus databases. Think of it as a supply chain with five steps. Most firms only run two of them.
 
 **Capture** what happened: decisions, rationale, corrections, the answers that turned out right. **Compile** that raw exhaust into something reusable. Not the transcript, but the decision, the reason, the evidence, when it applies, and what it replaces. **Package** it in a form that fits, whether that's an instruction file, a skill, a Markdown bundle, or a semantic model. **Serve** it under real constraints. Then **learn**: push what worked back into the base so the next task starts ahead.
 
-![The five-stage knowledge loop: capture, compile, package, serve, learn, with the last step feeding back into the first](./knowledge-loop.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Most firms run capture and serve. The value is in the steps between, and in the loop that feeds what worked back to the start.</p>
+![The five-stage knowledge loop: capture, compile, package, serve, learn, with the last step feeding back into the first](./knowledge-loop.webp)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Capture, compile, package, serve, and learn—closed by human approval so the next task starts ahead.</p>
 
 Manus is the cleanest example I've seen of that whole loop running end to end, which is part of why I've watched it closely as a Manus Fellow. It treats the filesystem as, in its engineers' words, "[the ultimate context](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus)," a memory the agent reads and writes as it goes. Its Projects hold instructions and reference files across sessions, so work starts warm instead of cold. It adopted the open Agent Skills standard instead of building a closed one. And it added a step most systems skip. After a task, the agent can spot a reusable decision and *propose* an update to the project's instructions or files. The change only lands after a person approves it.
 
@@ -56,19 +59,22 @@ If knowledge is going to be an asset, it needs a form that outlives the tool tha
 
 Finance already made this move for data. Platforms like [Fusion](https://fusion.jpmorgan.com) took custody, accounting, and vendor feeds and folded them into one common model so the data could travel. OKF proposes the same thing for knowledge: the common model, not the warehouse. There's an early sign it's more than a spec. LangChain's [OpenWiki](https://www.langchain.com/blog/openwiki-0-2-adds-okf-support), an unrelated tool, adopted OKF within weeks. A knowledge bundle can already outlive any one vendor's product. Tools, owners, and jurisdictions change faster than anyone would like. Knowledge you can pick up and move isn't a nice-to-have. It's risk management.
 
+![A portable knowledge bundle moves between systems while tools, owners, and jurisdictions change](./portable-knowledge.webp)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">A versioned knowledge bundle can outlive the tool, owner, or jurisdiction around it.</p>
+
 ## RAG is not dead. It has a smaller job.
 
 The quick objection is that this kills retrieval. If the knowledge is curated into files, who needs RAG? The production evidence says otherwise.
 
 What's dying is *naive* RAG: embed every chunk of every document into a vector store and pray that similarity search finds the truth. What's replacing it is hybrid retrieval: full-text and vector search, metadata filters, reranking, graphs, SQL, and APIs, all running over knowledge that was curated *first*. Cerebras is blunt about the order of operations for [its own knowledge base](https://www.cerebras.ai/blog/how-we-built-our-knowledge-base): distill before you embed. The file is the real artifact. The index is just a way in. You keep both. You stop asking the index to invent knowledge at query time.
 
-![Naive RAG embeds everything and hopes; the curate-first path distills before it serves](./distill-before-embed.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The shift is in the order of operations: distill knowledge first, then index it.</p>
+![Naive RAG embeds everything while the curate-first path distills structured knowledge before retrieval](./distill-before-index.webp)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Distill the decision, evidence, scope, and supersession first; let retrieval find it afterward.</p>
 
 So the honest answer to "is RAG dead?" is no. It got demoted. Retrieval used to be the whole knowledge system. Now it's one service, and curated knowledge sits at the center.
 
-![Curated knowledge at the center, with full-text, vector, rerank, graph, SQL and API retrieval as access paths around it](./rag-demoted.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Retrieval becomes one way in among several. The curated artifact sits at the center.</p>
+![Full-text, vector, reranking, graph, SQL, and API access paths point inward to curated knowledge](./retrieval-constellation.webp)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Full-text, vector, reranking, graph, SQL, and API access paths all point inward to the curated artifact.</p>
 
 ## Enterprise scale still needs a curated layer
 
@@ -85,6 +91,9 @@ Translate the layer, not the file format. The knowledge worth curating in a firm
 The raw material stays where it belongs. The agreements, the market data, the positions live in systems built to hold them, reached through search, SQL, and permission-aware APIs. The knowledge layer doesn't replace any of that. It keeps what those facts *meant* to the firm at the time, in a form a person can review and an agent can act on.
 
 Which brings me back to how the first essay ended, and the line I keep returning to. The deliverable was never retrieval. It's a defensible action that a specific, accountable person, or now a specific agent, can stand behind.
+
+![Systems of record feed a governed reasoning layer that supports controlled access and defensible action](./finance-golden-source.webp)
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Facts stay in systems of record; governed reasoning becomes the layer that supports a defensible action.</p>
 
 ## The next golden source
 
