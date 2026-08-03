@@ -323,6 +323,38 @@
  ],
  "takehome": [
   {
+   "kind": "command",
+   "id": "T1",
+   "minute": 0,
+   "title": "Check your own machine, aimed at your own folder. Fix nothing that comes back red until you understand it.",
+   "who": "",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root \"<MY FOLDER>\""
+  },
+  {
+   "kind": "command",
+   "id": "T2",
+   "minute": 0,
+   "title": "Metadata-only scan of your own folder. It does not open a single document.",
+   "who": "",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\""
+  },
+  {
+   "kind": "command",
+   "id": "T3",
+   "minute": 0,
+   "title": "The dry run on your own folder. Read all of it. Sleep on it. Do not apply on day one.",
+   "who": "",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"<MY FOLDER>\" -RunId <RUN_ID>"
+  },
+  {
+   "kind": "command",
+   "id": "T4",
+   "minute": 0,
+   "title": "Metadata-only scan with every path segment replaced before anything reaches a model. Use this one, not T2, on any folder holding client names.",
+   "who": "",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\" -Tokenise"
+  },
+  {
    "kind": "prompt",
    "id": "T-1",
    "minute": 0,
