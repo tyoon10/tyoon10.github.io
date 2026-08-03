@@ -20,9 +20,12 @@ const LAST_UPDATED = '3 August 2026';
 const PACKAGE = {
   name: 'workshop-package.zip',
   size: '4 MB',
-  // Direct download. Verified 2026-08-03: 4,258,540 bytes, permissions
-  // {role: reader, type: anyone} - no Google sign-in needed.
-  url: 'https://drive.google.com/uc?export=download&id=1j-jzMrue1IMHmD-N67FL4hCoF8AOZOdD',
+  // Direct download. Verified 2026-08-03: 4,262,174 bytes, sha256 bc777280cbe423a2,
+  // permissions {role: reader, type: anyone} - no Google sign-in needed.
+  //
+  // NB: a delete-and-reupload in Drive mints a NEW file id and silently breaks this
+  // link. Re-verify the id here whenever the package is replaced.
+  url: 'https://drive.google.com/uc?export=download&id=1Zn4XAoPsq6bBqmbvbQ3cD1ShdDwyliKn',
   folderUrl: 'https://drive.google.com/drive/folders/1l8o1zGz3hIMGGXIqq_mZTlIEQOzxaPdR?usp=sharing',
   extractTo: 'C:\\Users\\Public',
   verify:
