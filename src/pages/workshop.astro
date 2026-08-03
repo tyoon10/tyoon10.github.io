@@ -1,0 +1,362 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/workshop-steps.json';
+
+// Unlisted page: reachable only via direct URL / QR code.
+// - noindex/nofollow via BaseLayout prop
+// - excluded from sitemap in astro.config.mjs
+// - intentionally not linked from any navigation, footer, or page
+//
+// Content is generated from folderhealth/commands.txt and PROMPTS.md and lives
+// in src/data/workshop-steps.json. Regenerate that file rather than editing
+// prose here, so the page cannot drift from the pack the room is running.
+//
+// Deliberately excluded: the "what a correct response looks like" notes and the
+// failure tables from PROMPTS.md, and the R-* recovery prompts. Those are the
+// instructor answer key and must not reach a participant machine.
+
+const LAST_UPDATED = '3 August 2026';
+
+const PACKAGE = {
+  name: 'workshop-package.zip',
+  size: '4 MB',
+  // Direct download. Verified 2026-08-03: 4,258,540 bytes, permissions
+  // {role: reader, type: anyone} - no Google sign-in needed.
+  url: 'https://drive.google.com/uc?export=download&id=1j-jzMrue1IMHmD-N67FL4hCoF8AOZOdD',
+  folderUrl: 'https://drive.google.com/drive/folders/1l8o1zGz3hIMGGXIqq_mZTlIEQOzxaPdR?usp=sharing',
+  extractTo: 'C:\\Users\\Public',
+  verify:
+    'powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root "C:\\Users\\Public\\DealRoom"',
+};
+
+const { steps, takehome } = data;
+
+const fmtMinute = (m: number) => (m >= 999 ? 'any time' : `min ${m}`);
+---
+
+<BaseLayout
+  title="Files Under Management — Session Sheet"
+  description="Setup, commands and prompts for workshop participants."
+  noindex={true}
+>
+  <section class="ws">
+    <header class="ws-header">
+      <p class="ws-eyebrow">Participant Session Sheet</p>
+      <h1>Files Under Management</h1>
+      <p class="ws-lede">
+        Everything you type today, in the order you type it. Two kinds of step:
+        one goes in <strong>PowerShell</strong>, one goes in <strong>Claude</strong>.
+        Each has a copy button — don't retype them.
+      </p>
+      <p class="ws-stamp">Last updated {LAST_UPDATED}</p>
+    </header>
+
+    <!-- ── Setup ─────────────────────────────────────────────────────────── -->
+    <div class="ws-section">
+      <h2>Before we start — 3 steps, about 5 minutes</h2>
+      <p class="ws-sectionnote">No administrator rights needed.</p>
+
+      <ol class="ws-setup">
+        <li>
+          <h3>Download the package</h3>
+          {PACKAGE.url ? (
+            <>
+              <a class="ws-btn" href={PACKAGE.url}>
+                Download {PACKAGE.name} — {PACKAGE.size}
+              </a>
+              <p class="ws-after">
+                No Google sign-in needed. Every other workshop file lives in the
+                <a href={PACKAGE.folderUrl} target="_blank" rel="noopener"> materials folder</a>.
+              </p>
+            </>
+          ) : (
+            <p class="ws-pending">
+              Download link appears here before the session. ({PACKAGE.name}, {PACKAGE.size})
+            </p>
+          )}
+        </li>
+
+        <li>
+          <h3>Extract it to exactly this location</h3>
+          <div class="ws-copyrow">
+            <code>{PACKAGE.extractTo}</code>
+            <button class="ws-copy" data-copy={PACKAGE.extractTo} type="button">Copy</button>
+          </div>
+          <p class="ws-warn">
+            <strong>Do not accept the default.</strong> Right-click the zip →
+            <em>Extract All…</em> → replace the suggested folder with the path above.
+            Windows suggests your Downloads folder, and some paths inside this package
+            are long enough that extracting there exceeds the Windows 260-character
+            limit — it fails part way through and leaves you an incomplete copy with
+            no obvious error.
+          </p>
+          <p class="ws-after">You should end up with two new folders: <code>folderhealth</code> and <code>DealRoom</code>.</p>
+        </li>
+
+        <li>
+          <h3>Check it worked</h3>
+          <p class="ws-after">Press Start, type <em>PowerShell</em>, press Enter, then run:</p>
+          <div class="ws-copyrow">
+            <code>{PACKAGE.verify}</code>
+            <button class="ws-copy" data-copy={PACKAGE.verify} type="button">Copy</button>
+          </div>
+          <p class="ws-after">
+            You want the last line to read <strong>RESULT: READY</strong>. <code>WARN</code> rows
+            are expected. If it says the demo folder was not found, the extract went to the
+            wrong place — delete both folders and redo step 2.
+          </p>
+        </li>
+      </ol>
+
+      <div class="ws-callout">
+        <p class="ws-calloutmain">On the day, open Claude at <code>C:\Users\Public\DealRoom</code></p>
+        <p class="ws-calloutwhy">
+          The messy folder itself — the same thing you would do with a folder of your
+          own. Later in the session we move to <code>C:\Users\Public\folderhealth</code>,
+          and the reason we move is one of the things the session is about.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── Timeline ──────────────────────────────────────────────────────── -->
+    <div class="ws-section">
+      <h2>The session, in order</h2>
+      <p class="ws-sectionnote">
+        {steps.length} steps. Blue is PowerShell, purple is Claude. We will call each
+        one out <strong>by its label</strong> — &ldquo;line 3&rdquo;, &ldquo;P-13&rdquo;
+        — as we reach it. You don't need to run ahead.
+      </p>
+      <p class="ws-sectionnote ws-quiet">
+        The minute markers are indicative, not a schedule. Rooms move at their own
+        pace; the labels are what stay fixed.
+      </p>
+
+      {steps.map((s) => (
+        <div class:list={['ws-step', `is-${s.kind}`]} id={s.id}>
+          <div class="ws-stephead">
+            <span class="ws-min">{fmtMinute(s.minute)}</span>
+            <span class:list={['ws-kind', `kind-${s.kind}`]}>
+              {s.kind === 'command' ? 'PowerShell' : 'Claude'}
+            </span>
+            <span class="ws-ref">
+              {s.kind === 'command' ? `line ${s.id.replace('cmd-', '')}` : s.id}
+            </span>
+          </div>
+
+          <h3>{s.title}</h3>
+          {s.who && <p class="ws-who">{s.who}</p>}
+
+          <pre class="ws-body">{s.body}</pre>
+          <button class="ws-copy ws-copywide" data-copy={s.body} type="button">
+            {s.kind === 'command' ? 'Copy command' : 'Copy prompt'}
+          </button>
+        </div>
+      ))}
+    </div>
+
+    <!-- ── Take-home ─────────────────────────────────────────────────────── -->
+    <div class="ws-section">
+      <h2>Taking it home</h2>
+      <p class="ws-sectionnote">
+        The same tools run on your own folders afterwards — any Windows machine, no
+        install, no network, no admin rights. The first steps only read and measure;
+        they change nothing. Do not apply anything on day one.
+      </p>
+      <div class="ws-callout" style="margin-bottom:24px">
+        <p class="ws-calloutmain">There is a <code>take-home</code> folder in the package</p>
+        <p class="ws-calloutwhy">
+          <code>starter-CLAUDE.md</code> is a fuller constitution than the one we write
+          together, with the reasoning attached to each rule and an honest section on
+          what a file like this cannot do. Start from it rather than from a blank page.
+        </p>
+      </div>
+
+      {takehome.map((s) => (
+        <div class="ws-step is-takehome" id={s.id}>
+          <div class="ws-stephead">
+            <span class="ws-kind kind-takehome">Take-home</span>
+            <span class="ws-ref">{s.id}</span>
+          </div>
+          <h3>{s.title}</h3>
+          <pre class="ws-body">{s.body}</pre>
+          <button class="ws-copy ws-copywide" data-copy={s.body} type="button">Copy</button>
+        </div>
+      ))}
+    </div>
+
+    <p class="ws-footnote">
+      Shared by direct link for workshop participants. Not part of the site's public
+      navigation.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  // Copy-to-clipboard with a fallback for browsers that block the async Clipboard
+  // API. A silently dead copy button costs the room minutes, so a failure is
+  // surfaced on the button and the text is selected for a manual Ctrl+C.
+  document.querySelectorAll<HTMLButtonElement>('.ws-copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy ?? '';
+      const original = btn.textContent;
+
+      const legacyCopy = () => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch { ok = false; }
+        document.body.removeChild(ta);
+        return ok;
+      };
+
+      let copied = false;
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          copied = true;
+        } catch { copied = legacyCopy(); }
+      } else {
+        copied = legacyCopy();
+      }
+
+      btn.textContent = copied ? 'Copied' : 'Press Ctrl+C';
+      btn.classList.add(copied ? 'is-copied' : 'is-failed');
+
+      if (!copied) {
+        const pre = btn.previousElementSibling;
+        if (pre) {
+          const range = document.createRange();
+          range.selectNodeContents(pre);
+          const sel = window.getSelection();
+          sel?.removeAllRanges();
+          sel?.addRange(range);
+        }
+      }
+
+      window.setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('is-copied', 'is-failed');
+      }, 2000);
+    });
+  });
+</script>
+
+<style>
+  .ws { max-width: 780px; margin: 0 auto; padding: 48px 0 64px; }
+
+  .ws-eyebrow {
+    font-family: 'Fira Code', monospace; font-size: 0.8rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+  }
+  .ws-header h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem; margin-bottom: 12px; }
+  .ws-lede { color: var(--text-muted); line-height: 1.7; }
+  .ws-stamp { margin-top: 12px; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--text-muted); }
+
+  .ws-section { margin-top: 52px; }
+  .ws-section h2 { font-size: 1.25rem; margin-bottom: 8px; }
+  .ws-sectionnote { color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+  .ws-quiet { font-size: 0.9rem; margin-top: -14px; }
+
+  /* Setup */
+  .ws-setup { list-style: none; counter-reset: s; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 20px; }
+  .ws-setup > li {
+    counter-increment: s; position: relative; padding: 22px 24px 22px 60px;
+    background: var(--bg-surface); border: 1px solid var(--border-color);
+    border-radius: 14px; box-shadow: var(--card-shadow);
+  }
+  .ws-setup > li::before {
+    content: counter(s); position: absolute; left: 22px; top: 22px;
+    width: 26px; height: 26px; border-radius: 50%; background: var(--text-main); color: #fff;
+    font-family: 'Fira Code', monospace; font-size: 0.82rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ws-setup h3 { font-size: 1.02rem; margin: 0 0 12px; }
+
+  .ws-warn {
+    background: rgba(217, 119, 6, 0.07); border-left: 2px solid #d97706;
+    padding: 12px 14px; border-radius: 0 8px 8px 0; line-height: 1.65;
+    font-size: 0.92rem; margin-top: 12px;
+  }
+  .ws-after { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin-top: 12px; }
+  .ws-who { color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin: 0 0 12px; }
+
+  /* Steps */
+  .ws-step {
+    background: var(--bg-surface); border: 1px solid var(--border-color);
+    border-left: 3px solid var(--border-color);
+    border-radius: 12px; padding: 20px 22px; margin-bottom: 14px; box-shadow: var(--card-shadow);
+  }
+  .ws-step.is-command   { border-left-color: #0284c7; }
+  .ws-step.is-prompt    { border-left-color: #9333ea; }
+  .ws-step.is-takehome  { border-left-color: #0f766e; }
+  .ws-step h3 { font-size: 1.02rem; margin: 0 0 6px; }
+
+  .ws-stephead { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .ws-min {
+    font-family: 'Fira Code', monospace; font-size: 0.72rem;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ws-kind { font-size: 0.7rem; font-family: 'Fira Code', monospace; padding: 3px 8px; border-radius: 6px; }
+  .kind-command  { background: var(--badge-bg-host); color: var(--badge-text-host); }
+  .kind-prompt   { background: var(--badge-bg-org);  color: var(--badge-text-org); }
+  .kind-takehome { background: var(--badge-bg-key);  color: var(--badge-text-key); }
+  .ws-ref { margin-left: auto; font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-muted); }
+
+  .ws-body {
+    background: var(--bg-surface-solid); border: 1px solid var(--border-color);
+    border-radius: 10px; padding: 14px 16px; font-family: 'Fira Code', monospace;
+    font-size: 0.8rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+    overflow-x: auto; margin: 0;
+  }
+
+  /* Buttons */
+  .ws-btn {
+    display: inline-block; background: var(--text-main); color: #fff; text-decoration: none;
+    font-size: 0.9rem; font-weight: 500; padding: 10px 18px; border-radius: 10px;
+    transition: var(--physic-transition);
+  }
+  .ws-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .ws-copyrow { display: flex; align-items: stretch; gap: 8px; margin-bottom: 4px; }
+  .ws-copyrow code {
+    flex: 1 1 auto; background: var(--bg-surface-solid); border: 1px solid var(--border-color);
+    border-radius: 10px; padding: 11px 14px; font-family: 'Fira Code', monospace;
+    font-size: 0.82rem; overflow-x: auto; white-space: nowrap;
+  }
+  .ws-copy {
+    flex: 0 0 auto; background: var(--bg-surface-solid); border: 1px solid var(--border-color);
+    border-radius: 10px; padding: 0 16px; font-family: 'Inter', sans-serif; font-size: 0.85rem;
+    color: var(--text-main); cursor: pointer; transition: var(--physic-transition);
+  }
+  .ws-copy:hover { background: var(--bg-surface-hover); }
+  .ws-copy.is-copied { background: var(--badge-bg-key); color: var(--badge-text-key); border-color: transparent; }
+  .ws-copy.is-failed { background: rgba(217,119,6,0.1); color: #b45309; border-color: transparent; }
+  .ws-copywide { width: 100%; padding: 10px 16px; margin-top: 10px; }
+
+  .ws-pending {
+    background: rgba(217,119,6,0.08); border: 1px dashed rgba(217,119,6,0.4);
+    color: #b45309; border-radius: 10px; padding: 12px 16px; font-size: 0.9rem;
+  }
+  .ws-callout {
+    background: var(--bg-surface-solid); border: 1px solid var(--border-color);
+    border-radius: 12px; padding: 16px 18px;
+  }
+  .ws-calloutmain { font-weight: 600; margin-bottom: 6px; line-height: 1.6; }
+  .ws-calloutwhy { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin: 0; }
+
+  .ws-footnote { margin-top: 56px; font-size: 0.82rem; color: var(--text-muted); }
+
+  @media (max-width: 640px) {
+    .ws-header h1 { font-size: 1.6rem; }
+    .ws-setup > li { padding: 18px 16px 18px 52px; }
+    .ws-step { padding: 16px 14px; }
+    .ws-copyrow { flex-direction: column; }
+    .ws-copy { padding: 10px 16px; }
+    .ws-ref { margin-left: 0; }
+  }
+</style>

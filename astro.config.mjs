@@ -10,6 +10,7 @@ export default defineConfig({
     filter: (page) => ![
       '/writings/why-i-love-community-building',
       '/advisory',
+      '/workshop',
     ].some((slug) => page.includes(slug)),
   })],
 

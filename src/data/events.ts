@@ -17,6 +17,16 @@ export interface SiteEvent {
 
 export const events: SiteEvent[] = [
   {
+    title: 'CBS Executive Education in AI',
+    role: 'Workshop',
+    roleStyle: 'host',
+    date: '2026-08-05',
+    location: 'Columbia Business School',
+    links: [
+      { name: 'Course Page', url: 'https://twyoon.com/workshop', icon: 'book-open' },
+    ],
+  },
+  {
     title: 'AI Startup Challenge — Final Competition Day',
     role: 'Organizer / Host',
     roleStyle: 'organizer',
