@@ -158,6 +158,20 @@ const label = (s: any) =>
         </div>
         {/* section numbering continues from the setup block, which is 01 */}
 
+        {sec.resources && sec.resources.length > 0 && (
+          <div class="ws-res">
+            {sec.resources.map((r: any) => (
+              <a class="ws-reslink" href={r.url} target="_blank" rel="noopener">
+                <span class="ws-restag">Reference</span>
+                <span class="ws-resbody">
+                  <span class="ws-reslabel">{r.label}</span>
+                  <span class="ws-resnote">{r.note}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        )}
+
         <div class="ws-steps">
           {sec.steps.map((s: any) => (
             <details class:list={['ws-step', `is-${s.kind}`]} id={s.id}>
@@ -330,6 +344,25 @@ const label = (s: any) =>
     font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--text-muted);
     font-variant-numeric: tabular-nums;
   }
+
+  /* Reference material — deliberately not styled like a step, because it is not
+     something to run. Dashed edge and no left accent bar. */
+  .ws-res { margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .ws-reslink {
+    display: flex; align-items: baseline; gap: 12px; padding: 12px 15px;
+    background: var(--bg-surface-solid); border: 1px dashed var(--rule-firm, #c3c2b7);
+    border-radius: 10px; text-decoration: none; color: var(--text-main);
+    transition: var(--physic-transition);
+  }
+  .ws-reslink:hover { background: var(--bg-surface-hover); border-style: solid; }
+  .ws-restag {
+    font-family: 'Fira Code', monospace; font-size: 0.66rem; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--text-muted); flex: 0 0 auto; padding-top: 2px;
+  }
+  .ws-resbody { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .ws-reslabel { font-size: 0.94rem; font-weight: 600; }
+  .ws-reslabel::after { content: ' \2192'; color: var(--text-muted); font-weight: 400; }
+  .ws-resnote { font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; }
 
   /* Steps */
   .ws-steps { display: flex; flex-direction: column; gap: 8px; }
