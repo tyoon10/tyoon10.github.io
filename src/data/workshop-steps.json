@@ -154,6 +154,14 @@
   },
   {
    "kind": "prompt",
+   "id": "P-13b",
+   "minute": 58,
+   "title": "Turn the plan into something you can actually read",
+   "who": "the navigator, once plan.csv exists.",
+   "body": "Read plan.csv and summary.json from this run's folder, and write a single\nself-contained file called plan.html next to them.\n\nThis is a review document. I have to decide whether to sign this plan, and I\nshould not have to read sixty rows of CSV to do it.\n\nInclude, in this order:\n\n1. One summary line: how many operations, broken down by type, and how many\n   rows will be refused by protect.txt before anything moves.\n2. Anything that needs a person: every row where requires_human is TRUE, and\n   every row where confidence is low. Put these first and make them visually\n   distinct from the rest.\n3. The full list of operations grouped by type, each showing the source, the\n   destination, and the reason in plain language.\n4. What is not in the plan: how many files match protect.txt, and a line saying\n   that quarantine is a move rather than a deletion.\n\nMake it interactive. Let me filter by operation type, and show or hide the rows\nthat need a person. Use inline CSS and inline JavaScript only - no external\nfiles and no network requests, so it opens straight from the file system.\n\nEvery number must come from plan.csv or summary.json. Do not calculate the\nconsent token and do not put it anywhere in this document."
+  },
+  {
+   "kind": "prompt",
    "id": "P-14",
    "minute": 65,
    "title": "Read one row aloud",
