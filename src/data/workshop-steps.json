@@ -86,7 +86,7 @@
    "resources": [
     {
      "label": "Explore the context window",
-     "note": "An interactive demo of what the assistant is holding in mind at any moment, and where a CLAUDE.md sits inside it.",
+     "note": "Where a CLAUDE.md sits in what the model can see.",
      "url": "https://code.claude.com/docs/en/context-window"
     }
    ],
