@@ -31,7 +31,11 @@ const PACKAGE = {
 const { sections, takehome } = data;
 const stepCount = sections.reduce((n: number, s: any) => n + s.steps.length, 0);
 
-const label = (s: any) => (s.kind === 'command' ? `line ${s.id.replace('cmd-', '')}` : s.id);
+// The chip carries the word as well as the colour. Blue/orange measures ΔE 24.7 under
+// simulated colour blindness where the previous blue/purple measured 7.8 - but the word
+// is what makes the distinction safe, not the hue.
+const label = (s: any) =>
+  s.kind === 'command' ? `PowerShell · line ${s.id.replace('cmd-', '')}` : `Claude · ${s.id}`;
 ---
 
 <BaseLayout
@@ -44,23 +48,33 @@ const label = (s: any) => (s.kind === 'command' ? `line ${s.id.replace('cmd-', '
       <p class="ws-eyebrow">Participant Session Sheet</p>
       <h1>Files Under Management</h1>
       <p class="ws-lede">
-        Everything you type today, in order. <b>Blue</b> goes into PowerShell,
-        <b>purple</b> goes into Claude. Click any step to open it.
+        Everything you type today, in order. Each step says where it goes —
+        <b>PowerShell</b> or <b>Claude</b>. Click any step to open it.
       </p>
       <p class="ws-stamp">Last updated {LAST_UPDATED}</p>
     </header>
 
     <!-- ── Setup ─────────────────────────────────────────────────────────── -->
-    <section class="ws-block" id="setup-guide">
-      <h2 class="ws-h2">Before you arrive</h2>
-      <p class="ws-blurb">Three steps, about five minutes. No administrator rights needed.</p>
+    <section class="ws-block" id="setup">
+      <div class="ws-blockhead">
+        <span class="ws-blocknum">01</span>
+        <div>
+          <h2 class="ws-h2">Getting set up</h2>
+          <p class="ws-blurb">
+            We do this together now. Four steps, about ten minutes, no administrator
+            rights needed. Stay with the room rather than running ahead — if something
+            fails it is easier to fix while everyone is on the same step.
+          </p>
+        </div>
+      </div>
 
       <ol class="ws-setup">
         <li>
           <h3>Download the package</h3>
           <a class="ws-btn" href={PACKAGE.url}>Download {PACKAGE.name} — {PACKAGE.size}</a>
           <p class="ws-fine">
-            No Google sign-in needed. Everything else lives in the
+            No Google sign-in needed. If the download is slow, say so — there are USB
+            sticks in the room. Everything else lives in the
             <a href={PACKAGE.folderUrl} target="_blank" rel="noopener">materials folder</a>.
           </p>
         </li>
@@ -77,6 +91,7 @@ const label = (s: any) => (s.kind === 'command' ? `line ${s.id.replace('cmd-', '
             enough that extracting into Downloads exceeds the Windows limit and fails
             part way through, with no obvious error.
           </p>
+          <p class="ws-fine">You should end up with three folders and one file.</p>
         </li>
 
         <li>
@@ -86,26 +101,43 @@ const label = (s: any) => (s.kind === 'command' ? `line ${s.id.replace('cmd-', '
             <button class="ws-copy" data-copy={PACKAGE.verify} type="button">Copy</button>
           </div>
           <p class="ws-fine">
-            The last line should read <b>RESULT: READY</b>. <code>WARN</code> rows are expected.
+            Press Start, type <em>PowerShell</em>, press Enter, then paste that in. The
+            last line should read <b>RESULT: READY</b>. <code>WARN</code> rows are
+            expected. If it says the folder was not found, the extract went somewhere
+            else — say so rather than retrying.
+          </p>
+        </li>
+
+        <li>
+          <h3>Open Claude on the documents</h3>
+          <div class="ws-copyrow">
+            <code>C:\Users\Public\DealRoom</code>
+            <button class="ws-copy" data-copy="C:\Users\Public\DealRoom" type="button">Copy</button>
+          </div>
+          <p class="ws-fine">
+            The documents themselves — not the tools folder. We move to the tools folder
+            partway through, and the reason we move is one of the things this session is
+            about.
           </p>
         </li>
       </ol>
-
-      <div class="ws-note">
-        <p><b>On the day, open Claude at <code>C:\Users\Public\DealRoom</code></b></p>
-        <p>The documents themselves. We move to the tools folder partway through, and
-        the reason we move is one of the things the session is about.</p>
-      </div>
     </section>
 
     <!-- ── Index ─────────────────────────────────────────────────────────── -->
     <nav class="ws-index" aria-label="Session sections">
-      <p class="ws-indexhead">The session &middot; {sections.length} parts, {stepCount} steps</p>
+      <p class="ws-indexhead">The session &middot; {sections.length + 1} parts, {stepCount} steps</p>
       <ol>
+        <li>
+          <a href="#setup">
+            <span class="ws-idxnum">01</span>
+            <span class="ws-idxname">Getting set up</span>
+            <span class="ws-idxcount">4</span>
+          </a>
+        </li>
         {sections.map((sec: any, i: number) => (
           <li>
             <a href={`#${sec.id}`}>
-              <span class="ws-idxnum">{String(i + 1).padStart(2, '0')}</span>
+              <span class="ws-idxnum">{String(i + 2).padStart(2, '0')}</span>
               <span class="ws-idxname">{sec.name}</span>
               <span class="ws-idxcount">{sec.steps.length}</span>
             </a>
@@ -118,12 +150,13 @@ const label = (s: any) => (s.kind === 'command' ? `line ${s.id.replace('cmd-', '
     {sections.map((sec: any, i: number) => (
       <section class="ws-block" id={sec.id}>
         <div class="ws-blockhead">
-          <span class="ws-blocknum">{String(i + 1).padStart(2, '0')}</span>
+          <span class="ws-blocknum">{String(i + 2).padStart(2, '0')}</span>
           <div>
             <h2 class="ws-h2">{sec.name}</h2>
             <p class="ws-blurb">{sec.blurb}</p>
           </div>
         </div>
+        {/* section numbering continues from the setup block, which is 01 */}
 
         <div class="ws-steps">
           {sec.steps.map((s: any) => (
@@ -306,8 +339,8 @@ const label = (s: any) => (s.kind === 'command' ? `line ${s.id.replace('cmd-', '
     border-left: 3px solid var(--border-color); border-radius: 10px;
     overflow: hidden; transition: var(--physic-transition); scroll-margin-top: 24px;
   }
-  .ws-step.is-command { border-left-color: #0284c7; }
-  .ws-step.is-prompt  { border-left-color: #9333ea; }
+  .ws-step.is-command { border-left-color: #2a78d6; }
+  .ws-step.is-prompt  { border-left-color: #eb6834; }
   .ws-step[open] { box-shadow: var(--card-shadow); }
 
   .ws-step summary {
@@ -322,8 +355,8 @@ const label = (s: any) => (s.kind === 'command' ? `line ${s.id.replace('cmd-', '
     font-family: 'Fira Code', monospace; font-size: 0.68rem; padding: 3px 7px;
     border-radius: 5px; flex: 0 0 auto; white-space: nowrap;
   }
-  .tag-command { background: var(--badge-bg-host); color: var(--badge-text-host); }
-  .tag-prompt  { background: var(--badge-bg-org);  color: var(--badge-text-org); }
+  .tag-command { background: rgba(42, 120, 214, 0.10); color: #1a5296; }
+  .tag-prompt  { background: rgba(235, 104, 52, 0.13); color: #a8401a; }
 
   .ws-title { font-size: 0.97rem; font-weight: 600; flex: 0 0 auto; }
   .ws-what { font-size: 0.87rem; color: var(--text-muted); flex: 1 1 240px; line-height: 1.45; }
