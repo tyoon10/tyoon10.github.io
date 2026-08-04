@@ -1,332 +1,464 @@
 {
- "steps": [
+ "sections": [
   {
-   "kind": "command",
-   "id": "cmd-1",
-   "minute": 0,
-   "title": "check that this machine can run the exercise at all. Run this first, always.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1"
+   "id": "setup",
+   "name": "Before we start",
+   "blurb": "Two checks on the machine.",
+   "steps": [
+    {
+     "kind": "command",
+     "id": "cmd-1",
+     "minute": 0,
+     "title": "Environment check",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1",
+     "blurb": "Confirms this machine can run the exercise.",
+     "block": "setup"
+    },
+    {
+     "kind": "command",
+     "id": "cmd-2",
+     "minute": 0,
+     "title": "Environment check, on the folder",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root \"C:\\Users\\Public\\DealRoom\"",
+     "blurb": "The same probes, aimed at the documents.",
+     "block": "setup"
+    }
+   ]
   },
   {
-   "kind": "command",
-   "id": "cmd-2",
-   "minute": 0,
-   "title": "the same check, aimed at the folder you are about to scan.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root \"C:\\Users\\Public\\DealRoom\""
+   "id": "askonce",
+   "name": "Ask once",
+   "blurb": "The same question, twice, with no rules in place.",
+   "steps": [
+    {
+     "kind": "prompt",
+     "id": "P-01",
+     "minute": 6,
+     "title": "Ask the question",
+     "body": "Here are 30 documents from a family office deal room.\n\nCategorise every document, then total by category. Give me a table with the category\nname, the number of documents in it, and the total dollar value where a document has\none. Add a short note on anything you were unsure about.",
+     "blurb": "A plain question about the documents, in a fresh chat.",
+     "block": "askonce"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-02",
+     "minute": 7,
+     "title": "Ask it again, separately",
+     "body": "Here are 30 documents from a family office deal room.\n\nCategorise every document, then total by category. Give me a table with the category\nname, the number of documents in it, and the total dollar value where a document has\none. Add a short note on anything you were unsure about.",
+     "blurb": "The identical question in a second window.",
+     "block": "askonce"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-03",
+     "minute": 10,
+     "title": "Compare the two answers",
+     "body": "Below are two answers to the identical question, asked of the identical 30 documents,\nfive minutes apart.\n\nANSWER A:\n<paste the whole of window 1's table and note>\n\nANSWER B:\n<paste the whole of window 2's table and note>\n\nDo three things and nothing else:\n1. List every category name that appears in one answer and not the other.\n2. List every document that the two answers put in different categories.\n3. Give me the two totals for the largest category, side by side, and the difference.\n\nNo commentary. No recommendation on which is better. Just the three lists.",
+     "blurb": "Puts both replies side by side.",
+     "block": "askonce"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-04",
+     "minute": 11,
+     "title": "If the two agree",
+     "body": "Same 30 documents. This time: which of these documents commit the family office to\npaying money after 2026, how much in total, and to whom? Show your working per\ndocument.",
+     "blurb": "A sharper question for when they come back the same.",
+     "block": "askonce"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-05",
+     "minute": 12,
+     "title": "Why they differ",
+     "body": "Same 30 documents, same task, reworded: sort every one of these into the smallest set\nof buckets that would let a family office CFO see where the money went, then total each\nbucket.",
+     "blurb": "Answers the objection that this is only randomness.",
+     "block": "askonce"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "P-01",
-   "minute": 6,
-   "title": "The steelman question, window 1",
-   "who": "the driver — the person who has never used a terminal.",
-   "body": "Here are 30 documents from a family office deal room.\n\nCategorise every document, then total by category. Give me a table with the category\nname, the number of documents in it, and the total dollar value where a document has\none. Add a short note on anything you were unsure about."
+   "id": "rules",
+   "name": "Writing the rules",
+   "blurb": "We decide what the assistant may and may not do.",
+   "steps": [
+    {
+     "kind": "prompt",
+     "id": "C-1",
+     "minute": 12,
+     "title": "Look around the folder",
+     "body": "Look through this folder and tell me what is in it.\n\nI want a plain summary I could read to a colleague:\n- roughly how many files, and what kinds\n- what the folder structure looks like\n- anything that looks duplicated, misfiled, or out of place\n- anything that looks like it should not be sitting in a shared folder\n\nDo not move, rename, copy or delete anything. Do not go above this folder.",
+     "blurb": "An unconstrained first pass, before any rules exist.",
+     "block": "rules"
+    },
+    {
+     "kind": "prompt",
+     "id": "C-2",
+     "minute": 24,
+     "title": "Write the rules down",
+     "body": "We are going to write down the rules for how you work in this folder.\n\nCreate a file called CLAUDE.md containing the principles below, written as clear\ninstructions to you. Keep each one short, and add one line under each saying why\nit exists.\n\n<paste the room's principles here, one per line>\n\nDo not add rules we did not agree on, and do not write any other file.",
+     "blurb": "Turns the room's principles into a CLAUDE.md file.",
+     "block": "rules"
+    },
+    {
+     "kind": "prompt",
+     "id": "C-3",
+     "minute": 26,
+     "title": "Test that they hold",
+     "body": "Write a summary of your findings to a file called notes.txt in this folder.",
+     "blurb": "Asks for something the new rules forbid.",
+     "block": "rules"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "P-02",
-   "minute": 7,
-   "title": "The steelman question, window 2 — identical",
-   "who": "the same driver, second window.",
-   "body": "Here are 30 documents from a family office deal room.\n\nCategorise every document, then total by category. Give me a table with the category\nname, the number of documents in it, and the total dollar value where a document has\none. Add a short note on anything you were unsure about."
+   "id": "mandate",
+   "name": "The mandate",
+   "blurb": "Six decisions about the cleanup policy.",
+   "steps": [
+    {
+     "kind": "prompt",
+     "id": "P-06",
+     "minute": 20,
+     "title": "Read the mandate back",
+     "body": "Read C:\\Users\\Public\\folderhealth\\config.md and\nC:\\Users\\Public\\folderhealth\\protect.txt.\n\nDo not edit either file.\n\nTell me, in six short bullets, what my six rulings will actually do to a scan of\nC:\\Users\\Public\\DealRoom — one bullet per ruling, each naming the specific consequence.\nThen tell me which single ruling I am most likely to regret and why, in one sentence.\n\nIf any ruling is blank or ambiguous, say which one and stop.",
+     "blurb": "Confirms what was ruled on the six decisions.",
+     "block": "mandate"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "P-03",
-   "minute": 10,
-   "title": "The comparison",
-   "who": "the navigator, in a third window. Paste both tables in.",
-   "body": "Below are two answers to the identical question, asked of the identical 30 documents,\nfive minutes apart.\n\nANSWER A:\n<paste the whole of window 1's table and note>\n\nANSWER B:\n<paste the whole of window 2's table and note>\n\nDo three things and nothing else:\n1. List every category name that appears in one answer and not the other.\n2. List every document that the two answers put in different categories.\n3. Give me the two totals for the largest category, side by side, and the difference.\n\nNo commentary. No recommendation on which is better. Just the three lists."
+   "id": "scan",
+   "name": "Measuring the folder",
+   "blurb": "Names, sizes, dates and fingerprints. No document is opened.",
+   "steps": [
+    {
+     "kind": "command",
+     "id": "cmd-3",
+     "minute": 31,
+     "title": "Scan",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\"",
+     "blurb": "Records names, sizes, dates and fingerprints. Opens no document.",
+     "block": "scan"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-07",
+     "minute": 31,
+     "title": "Read the result",
+     "body": "Run this command exactly as written. Do not modify it, do not add parameters, do not\nwrite a script, do not run anything else first.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\"\n\nWhen it finishes, tell me only: the run id, the file count, SkippedCount and\nUnreadableCount. Nothing else.",
+     "blurb": "What the scan found, in the assistant's words.",
+     "block": "scan"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-08",
+     "minute": 34,
+     "title": "Read the summary file",
+     "body": "Open C:\\Users\\Public\\DealRoom\\_folderhealth\\summary.json.\n\nDo not open inventory.json.\n\nWalk me through it in exactly this order, and stop:\n\n1. root_display, tier, scan_content, and the three lines of notes_for_the_reader.\n2. totals: files, directories, bytes_human, hashed, zero_byte_files, protected_files,\n   uncategorised_files.\n3. SkippedCount and UnreadableCount, as two separate numbers.\n4. The five findings with the highest severity. For each, give me the finding_id and\n   then the evidence string quoted word for word. Do not paraphrase an evidence string\n   and do not improve it.\n5. One sentence: which of those five would still be true if every filename in this\n   folder were replaced with a random number.\n\nDo not recommend anything. Every finding is a measurement, not a judgement.",
+     "blurb": "Walks through the scan's own output.",
+     "block": "scan"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "P-04",
-   "minute": 11,
-   "title": "Fallback if the two answers agree",
-   "who": "the driver, in both windows again.",
-   "body": "Same 30 documents. This time: which of these documents commit the family office to\npaying money after 2026, how much in total, and to whom? Show your working per\ndocument."
+   "id": "content",
+   "name": "Reading inside the documents",
+   "blurb": "Deliberately crossing a line, and saying so.",
+   "steps": [
+    {
+     "kind": "command",
+     "id": "cmd-4",
+     "minute": 43,
+     "title": "Scan, reading inside",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -ScanContent",
+     "blurb": "The same scan, except it opens documents and reads text.",
+     "block": "content"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-10",
+     "minute": 43,
+     "title": "Cross the line",
+     "body": "Run this command exactly as written. It reads the contents of documents, which the last\nscan did not. Say the words \"Tier 2, content reading, synthetic corpus only\" back to me\nbefore you run it.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -ScanContent\n\nWhen it finishes, tell me the new run id and confirm that scan_content is true in the\nnew summary.json.",
+     "blurb": "Names the boundary out loud while crossing it.",
+     "block": "content"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-11",
+     "minute": 45,
+     "title": "The forged twin",
+     "body": "Open the newest summary.json for C:\\Users\\Public\\DealRoom.\n\nFind the near-duplicate cluster covering the two invoices. Give me:\n- both rel_paths\n- both size_bytes\n- the evidence string, quoted word for word\n- the single amount the two documents disagree about\n\nDo not open either document yourself. Do not open inventory.json. If the answer is not\nin summary.json, say \"the scan did not measure that\" and stop.",
+     "blurb": "Two invoices under one number.",
+     "block": "content"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-12",
+     "minute": 47,
+     "title": "The misfiled passport",
+     "body": "From the same summary.json, list every entry in sensitive_names.\n\nFor the highest-severity one, give me:\n- rel_path and parent_rel\n- matched_terms\n- exposure and exposure_reason, quoted\n- sibling_file_count and sibling_category_count\n- the evidence string, quoted word for word\n\nThen answer one question in one sentence: was the scan asked to look for this?",
+     "blurb": "An identity document where it should not be.",
+     "block": "content"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "C-1",
-   "minute": 12,
-   "title": "Look around the folder",
-   "who": "the driver. No rules are in place yet - this is the honest starting state.",
-   "body": "Look through this folder and tell me what is in it.\n\nI want a plain summary I could read to a colleague:\n- roughly how many files, and what kinds\n- what the folder structure looks like\n- anything that looks duplicated, misfiled, or out of place\n- anything that looks like it should not be sitting in a shared folder\n\nDo not move, rename, copy or delete anything. Do not go above this folder."
+   "id": "plan",
+   "name": "The plan",
+   "blurb": "What the assistant proposes, and how we review it.",
+   "steps": [
+    {
+     "kind": "prompt",
+     "id": "P-13",
+     "minute": 58,
+     "title": "Write the plan",
+     "body": "You are proposing a plan. You are not going to touch a single file.\n\nRead these three files and nothing else:\n  C:\\Users\\Public\\DealRoom\\_folderhealth\\summary.json\n  C:\\Users\\Public\\folderhealth\\config.md\n  C:\\Users\\Public\\folderhealth\\protect.txt\n\nDo NOT open C:\\Users\\Public\\DealRoom\\_folderhealth\\inventory.json. It is large, it is\nlocal-only by design, and you do not need it.\nDo NOT open any document in the deal room.\n\nThen write exactly one file, and no other file:\n  C:\\Users\\Public\\DealRoom\\_folderhealth\\runs\\<RUN_ID>\\plan.csv\n\nwhere <RUN_ID> is the single line in\nC:\\Users\\Public\\DealRoom\\_folderhealth\\latest.txt.\n\nThe first line of plan.csv, verbatim, with nothing before it:\n\"row_id\",\"run_id\",\"op\",\"source\",\"destination\",\"reason\",\"source_hash\",\"source_size_bytes\",\"cluster_id\",\"keeper\",\"confidence\",\"finding_ref\",\"category\",\"requires_human\"\n\nRules for the rows:\n- op is one of: quarantine, move, rename. There is no delete op. If you believe a file\n  should be deleted, propose quarantine and say so in reason.\n- source, destination and keeper are paths relative to C:\\Users\\Public\\DealRoom. No\n  drive letters. No leading .\\ and no trailing backslash.\n- source_hash and source_size_bytes are copied exactly from summary.json. If you do not\n  have a hash for a file, do not write a row for it.\n- For quarantine, write the destination as _QUARANTINE\\<RUN_ID>\\<source>. The applier\n  recomputes it and ignores yours; write it anyway so the row reads.\n- move must change the parent directory. rename must keep the same parent directory.\n- reason is one plain sentence, under 200 characters, no newlines, that a partner could\n  read aloud without translation.\n- confidence is high, medium or low. Where the finding carries keeper_confidence, copy it.\n- requires_human is TRUE or FALSE, uppercase, carried through from the finding.\n- finding_ref is the finding_id from summary.json that motivated the row.\n- Order: every quarantine row first, then every move, then every rename; within each\n  group sort by source, A-Z, case-insensitive. row_id runs PLAN-0001 upward with no gaps.\n- Quote every field with double quotes, including empty ones. CRLF line endings. UTF-8.\n- Do not write a row whose source matches a rule in protect.txt. The applier drops those\n  regardless of what you propose — I want to see whether you dropped them first.\n- Do not write a row for anything listed in unreadable_items. Those files have no hash\n  and cannot be verified at move time.\n\nApply the mandate as written, including where you think it is wrong. config.md is the\npolicy. If a rule in it produces a keeper you would not have chosen, follow the rule and\nsay so in the reason column. Do not quietly correct the mandate.\n\nWhat you must not do:\n- Do not move, copy, rename, create or delete anything.\n- Do not create, edit or fix any .ps1 file.\n- Do not run Apply-Plan.ps1.\n- Do not compute, guess or suggest a consent token.\n- Do not invent a path, a hash, a size or a finding. Every row traces to summary.json.\n\nWhen you are finished, output only: the total number of rows, the count by op, and the\nthree rows you are least confident about. Do not print the whole file.",
+     "blurb": "Every proposed operation, with its reason and fingerprint.",
+     "block": "plan"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-13b",
+     "minute": 58,
+     "title": "Visualise the plan",
+     "body": "Create an HTML file that helps me visualise what this implementation plan\nactually is.\n\nRead plan.csv and summary.json from this run's folder and write plan.html next\nto them. Include whatever is needed to give me maximum context for deciding\nwhether to sign it - you can see what is in the data better than I can. Show me\nwhat needs my judgement before you show me what is routine.\n\nMake it interactive so I can move around it rather than scroll.\n\nInline CSS and JavaScript only, no network requests, so it opens straight from\nthe file system. Every figure must come from plan.csv or summary.json. Do not\ncalculate the consent token and do not put it anywhere in the document.",
+     "blurb": "Turns the plan into a document you can review at a glance.",
+     "block": "plan"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-14",
+     "minute": 65,
+     "title": "Read one row",
+     "body": "From the plan.csv you just wrote, give me the single row with requires_human TRUE and\nthe lowest confidence.\n\nPrint it as: op, source, destination, keeper, confidence, finding_ref, and then the\nreason sentence.\n\nThen, in one sentence, tell me what happens to that file if I approve this plan without\nreading it.",
+     "blurb": "A single proposed operation, explained in plain language.",
+     "block": "plan"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-16",
+     "minute": 68,
+     "title": "Add a never-touch rule",
+     "body": "I have just added one line to C:\\Users\\Public\\folderhealth\\protect.txt. I edited it\nmyself; you did not.\n\nWithout changing plan.csv, tell me exactly how many rows in it will now be silently\ndropped by the applier, and list their sources.\n\nThen tell me what would have happened if that rule had lived in a prompt instead of in\na file the applier re-reads.",
+     "blurb": "Extends the protect list and shows what it removes.",
+     "block": "plan"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-15",
+     "minute": 999,
+     "title": "Audit the plan",
+     "body": "Before I approve this plan, audit it against itself.\n\nRead summary.json and the plan.csv you wrote.\n\nList every plan row where any of these is true:\n- the finding it came from has a non-empty contest field\n- the finding's keeper_confidence is low\n- requires_human is TRUE\n- the file being quarantined has a name_flag of label:SIGNED and the keeper does not\n\nFor each, give me one line: source, keeper, and the contest text quoted word for word.\n\nThen tell me how many rows that is, out of how many, and finish with this sentence\ncompleted: \"If you approve this plan without reading it, you will quarantine ___.\"",
+     "blurb": "Asks the assistant to check its own work against the rules.",
+     "block": "plan"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "P-05",
-   "minute": 12,
-   "title": "The temperature-zero rebuttal, live",
-   "who": "you, on the projector, at the heckler's desk if you",
-   "body": "Same 30 documents, same task, reworded: sort every one of these into the smallest set\nof buckets that would let a family office CFO see where the money went, then total each\nbucket."
+   "id": "apply",
+   "name": "Approving and applying",
+   "blurb": "The point where a person signs.",
+   "steps": [
+    {
+     "kind": "command",
+     "id": "cmd-5",
+     "minute": 71,
+     "title": "Dry run",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>",
+     "blurb": "Validates the plan and prints the arithmetic. Moves nothing.",
+     "block": "apply"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-17",
+     "minute": 71,
+     "title": "Read the dry run",
+     "body": "Run this command exactly as written. It does not move anything.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>\n\nThen tell me only two things, as two separate numbered facts:\n1. The run id.\n2. The number of operations in the plan.\n\nDo not assemble those two facts into anything. Do not tell me what to type next. Do not\ncompute a token.",
+     "blurb": "What the validation output is telling you.",
+     "block": "apply"
+    },
+    {
+     "kind": "command",
+     "id": "cmd-6",
+     "minute": 73,
+     "title": "Apply",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID> -Apply -ConsentToken \"<TOKEN>\"",
+     "blurb": "Carries out the plan, after a token you type yourself.",
+     "block": "apply"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-18",
+     "minute": 999,
+     "title": "Sign it",
+     "body": "The token I have assembled is: <TOKEN>\n\nRun this command exactly as written, substituting my token character for character.\nDo not correct it. Do not check it. Do not change the number. If it is wrong I want it\nrejected.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID> -Apply -ConsentToken \"<TOKEN>\"\n\nWhen it finishes, print the RESULT line from the receipt, word for word, and nothing\nelse.",
+     "blurb": "The moment responsibility transfers to a person.",
+     "block": "apply"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "P-06",
-   "minute": 20,
-   "title": "Read my rulings back to me",
-   "who": "the navigator, after both partners have initialled.",
-   "body": "Read C:\\Users\\Public\\folderhealth\\config.md and\nC:\\Users\\Public\\folderhealth\\protect.txt.\n\nDo not edit either file.\n\nTell me, in six short bullets, what my six rulings will actually do to a scan of\nC:\\Users\\Public\\DealRoom — one bullet per ruling, each naming the specific consequence.\nThen tell me which single ruling I am most likely to regret and why, in one sentence.\n\nIf any ruling is blank or ambiguous, say which one and stop."
+   "id": "undo",
+   "name": "Putting it back",
+   "blurb": "Reversing the whole run.",
+   "steps": [
+    {
+     "kind": "command",
+     "id": "cmd-7",
+     "minute": 76,
+     "title": "Undo, rehearsed",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Undo-Run.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>",
+     "blurb": "Says exactly what it would put back. Puts nothing back.",
+     "block": "undo"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-19",
+     "minute": 76,
+     "title": "Put it back",
+     "body": "Run this command exactly as written.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Undo-Run.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>\n\nThen print the RESULT line from receipt-undo.txt word for word, and tell me whether\n_QUARANTINE\\<RUN_ID> still exists.",
+     "blurb": "The request nobody plans for.",
+     "block": "undo"
+    },
+    {
+     "kind": "command",
+     "id": "cmd-8",
+     "minute": 77,
+     "title": "Undo",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Undo-Run.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID> -Apply",
+     "blurb": "Returns every file, with its dates and attributes.",
+     "block": "undo"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-20",
+     "minute": 78,
+     "title": "What the defaults did",
+     "body": "Read receipt.txt and undo.csv for <RUN_ID>.\n\nFind every operation where the file that was quarantined has label:SIGNED in its\nname_flags in summary.json, and the file that was kept does not.\n\nFor each, print: what was quarantined, what was kept, and the reason sentence from\nplan.csv, quoted.\n\nOne sentence to finish: which of those two documents would a court have wanted?",
+     "blurb": "Which file the mandate's defaults set aside.",
+     "block": "undo"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-21",
+     "minute": 82,
+     "title": "Change a setting, run again",
+     "body": "I have made exactly one change to C:\\Users\\Public\\folderhealth\\config.md. I made it\nmyself; you did not touch the file.\n\nRead config.md again.\n\nBefore I re-scan, predict: which numbers in summary.json will change, which will not,\nand which findings will appear or disappear. Be specific — name fields, not themes.\n\nThen tell me whether the next scan is still comparable to the last one, and why or why\nnot.",
+     "blurb": "Shows that the mandate is the variable.",
+     "block": "undo"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "C-2",
-   "minute": 24,
-   "title": "Write the constitution from the room's principles",
-   "who": "the instructor, on the projector. Once, not twenty times.",
-   "body": "We are going to write down the rules for how you work in this folder.\n\nCreate a file called CLAUDE.md containing the principles below, written as clear\ninstructions to you. Keep each one short, and add one line under each saying why\nit exists.\n\n<paste the room's principles here, one per line>\n\nDo not add rules we did not agree on, and do not write any other file."
+   "id": "report",
+   "name": "The report",
+   "blurb": "The document that comes out of it.",
+   "steps": [
+    {
+     "kind": "prompt",
+     "id": "P-22",
+     "minute": 89,
+     "title": "Render the report",
+     "body": "Look in C:\\Users\\Public\\folderhealth\\commands.txt and use the line that produces the\nreport, exactly as written there, for\nRoot \"C:\\Users\\Public\\DealRoom\" and RunId <RUN_ID>.\n\nDo not compose a command. If no line in commands.txt produces a report, tell me the\nreport is written by the scan and give me the full path to report.html instead.\n\nThen give me the full path to report.html and stop.",
+     "blurb": "Fills the frozen template from the measurements.",
+     "block": "report"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-23",
+     "minute": 94,
+     "title": "Audit the report",
+     "body": "Read C:\\Users\\Public\\folderhealth\\templates\\report.contract.md and the report.html you\njust opened, and summary.json.\n\nTake the five lead findings in the report. For each one, name the evidence string or the\ntotals field it came from.\n\nThen list every sentence in those five findings that you cannot trace to summary.json.\n\nIf the list is empty, say \"every sentence traces\" and stop. Do not rewrite the report.",
+     "blurb": "Traces each claim back to the number it came from.",
+     "block": "report"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "C-3",
-   "minute": 26,
-   "title": "Test that it holds",
-   "who": "the instructor, on the projector, immediately after C-2.",
-   "body": "Write a summary of your findings to a file called notes.txt in this folder."
+   "id": "again",
+   "name": "Running it again",
+   "blurb": "What changed since last time.",
+   "steps": [
+    {
+     "kind": "command",
+     "id": "cmd-9",
+     "minute": 99,
+     "title": "Second scan",
+     "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\"",
+     "blurb": "The same scan again, for comparison.",
+     "block": "again"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-24",
+     "minute": 99,
+     "title": "What changed",
+     "body": "I have just dropped one new file into C:\\Users\\Public\\DealRoom.\n\nRun the scan line from commands.txt again for that root, exactly as written.\n\nThen, from the new summary.json, read me the delta block:\n- compared_to_run_id and config_unchanged\n- files_added, files_removed, files_modified, files_moved\n- every entry in delta.added\n- for delta.moved, how many carry attributed_to_run, and which run id\n\nFinish with one sentence: how many of these changes were made by a person, and how many\nby this tool?",
+     "blurb": "This run against the last one.",
+     "block": "again"
+    }
+   ]
   },
   {
-   "kind": "command",
-   "id": "cmd-3",
-   "minute": 31,
-   "title": "scan the folder. Reads names, sizes, dates, attributes and hashes. Opens no document.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\""
+   "id": "automate",
+   "name": "Automating it",
+   "blurb": "What can run unattended, and what cannot.",
+   "steps": [
+    {
+     "kind": "command",
+     "id": "cmd-10",
+     "minute": 103,
+     "title": "Weekly schedule",
+     "body": "schtasks /Create /TN \"FolderHealth Weekly Scan\" /TR \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root C:\\Users\\Public\\DealRoom\" /SC WEEKLY /D MON /ST 08:00",
+     "blurb": "A Monday-morning scan. Contains no apply step.",
+     "block": "automate"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-25",
+     "minute": 103,
+     "title": "The weekly task",
+     "body": "Show me the schtasks line from C:\\Users\\Public\\folderhealth\\commands.txt. Do not compose\none and do not run it yet.\n\nThen tell me three things about it:\n1. Why it uses the full path to powershell.exe.\n2. Why it creates a user-scope task and not a system task.\n3. Which switch is deliberately absent, and what would happen if it were there.",
+     "blurb": "What automation covers, and what it cannot.",
+     "block": "automate"
+    },
+    {
+     "kind": "command",
+     "id": "cmd-11",
+     "minute": 999,
+     "title": "Remove the schedule",
+     "body": "schtasks /Delete /TN \"FolderHealth Weekly Scan\" /F",
+     "blurb": "Deletes the weekly task.",
+     "block": "automate"
+    }
+   ]
   },
   {
-   "kind": "prompt",
-   "id": "P-07",
-   "minute": 31,
-   "title": "Run the scan",
-   "who": "the driver.",
-   "body": "Run this command exactly as written. Do not modify it, do not add parameters, do not\nwrite a script, do not run anything else first.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\"\n\nWhen it finishes, tell me only: the run id, the file count, SkippedCount and\nUnreadableCount. Nothing else."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-08",
-   "minute": 34,
-   "title": "Read summary.json aloud",
-   "who": "the navigator. Meanwhile the driver opens the same file in Notepad so",
-   "body": "Open C:\\Users\\Public\\DealRoom\\_folderhealth\\summary.json.\n\nDo not open inventory.json.\n\nWalk me through it in exactly this order, and stop:\n\n1. root_display, tier, scan_content, and the three lines of notes_for_the_reader.\n2. totals: files, directories, bytes_human, hashed, zero_byte_files, protected_files,\n   uncategorised_files.\n3. SkippedCount and UnreadableCount, as two separate numbers.\n4. The five findings with the highest severity. For each, give me the finding_id and\n   then the evidence string quoted word for word. Do not paraphrase an evidence string\n   and do not improve it.\n5. One sentence: which of those five would still be true if every filename in this\n   folder were replaced with a random number.\n\nDo not recommend anything. Every finding is a measurement, not a judgement."
-  },
-  {
-   "kind": "command",
-   "id": "cmd-4",
-   "minute": 43,
-   "title": "TIER 2. The same scan, except that it opens documents and reads the text inside them. Synthetic corpus only.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -ScanContent"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-10",
-   "minute": 43,
-   "title": "Cross the line, deliberately",
-   "who": "the driver, after you have said the line.",
-   "body": "Run this command exactly as written. It reads the contents of documents, which the last\nscan did not. Say the words \"Tier 2, content reading, synthetic corpus only\" back to me\nbefore you run it.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -ScanContent\n\nWhen it finishes, tell me the new run id and confirm that scan_content is true in the\nnew summary.json."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-11",
-   "minute": 45,
-   "title": "The forged twin",
-   "who": "the navigator.",
-   "body": "Open the newest summary.json for C:\\Users\\Public\\DealRoom.\n\nFind the near-duplicate cluster covering the two invoices. Give me:\n- both rel_paths\n- both size_bytes\n- the evidence string, quoted word for word\n- the single amount the two documents disagree about\n\nDo not open either document yourself. Do not open inventory.json. If the answer is not\nin summary.json, say \"the scan did not measure that\" and stop."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-12",
-   "minute": 47,
-   "title": "The misfiled passport",
-   "who": "the navigator.",
-   "body": "From the same summary.json, list every entry in sensitive_names.\n\nFor the highest-severity one, give me:\n- rel_path and parent_rel\n- matched_terms\n- exposure and exposure_reason, quoted\n- sibling_file_count and sibling_category_count\n- the evidence string, quoted word for word\n\nThen answer one question in one sentence: was the scan asked to look for this?"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-13",
-   "minute": 58,
-   "title": "THE PLAN PROMPT",
-   "who": "the driver. Paste it whole.",
-   "body": "You are proposing a plan. You are not going to touch a single file.\n\nRead these three files and nothing else:\n  C:\\Users\\Public\\DealRoom\\_folderhealth\\summary.json\n  C:\\Users\\Public\\folderhealth\\config.md\n  C:\\Users\\Public\\folderhealth\\protect.txt\n\nDo NOT open C:\\Users\\Public\\DealRoom\\_folderhealth\\inventory.json. It is large, it is\nlocal-only by design, and you do not need it.\nDo NOT open any document in the deal room.\n\nThen write exactly one file, and no other file:\n  C:\\Users\\Public\\DealRoom\\_folderhealth\\runs\\<RUN_ID>\\plan.csv\n\nwhere <RUN_ID> is the single line in\nC:\\Users\\Public\\DealRoom\\_folderhealth\\latest.txt.\n\nThe first line of plan.csv, verbatim, with nothing before it:\n\"row_id\",\"run_id\",\"op\",\"source\",\"destination\",\"reason\",\"source_hash\",\"source_size_bytes\",\"cluster_id\",\"keeper\",\"confidence\",\"finding_ref\",\"category\",\"requires_human\"\n\nRules for the rows:\n- op is one of: quarantine, move, rename. There is no delete op. If you believe a file\n  should be deleted, propose quarantine and say so in reason.\n- source, destination and keeper are paths relative to C:\\Users\\Public\\DealRoom. No\n  drive letters. No leading .\\ and no trailing backslash.\n- source_hash and source_size_bytes are copied exactly from summary.json. If you do not\n  have a hash for a file, do not write a row for it.\n- For quarantine, write the destination as _QUARANTINE\\<RUN_ID>\\<source>. The applier\n  recomputes it and ignores yours; write it anyway so the row reads.\n- move must change the parent directory. rename must keep the same parent directory.\n- reason is one plain sentence, under 200 characters, no newlines, that a partner could\n  read aloud without translation.\n- confidence is high, medium or low. Where the finding carries keeper_confidence, copy it.\n- requires_human is TRUE or FALSE, uppercase, carried through from the finding.\n- finding_ref is the finding_id from summary.json that motivated the row.\n- Order: every quarantine row first, then every move, then every rename; within each\n  group sort by source, A-Z, case-insensitive. row_id runs PLAN-0001 upward with no gaps.\n- Quote every field with double quotes, including empty ones. CRLF line endings. UTF-8.\n- Do not write a row whose source matches a rule in protect.txt. The applier drops those\n  regardless of what you propose — I want to see whether you dropped them first.\n- Do not write a row for anything listed in unreadable_items. Those files have no hash\n  and cannot be verified at move time.\n\nApply the mandate as written, including where you think it is wrong. config.md is the\npolicy. If a rule in it produces a keeper you would not have chosen, follow the rule and\nsay so in the reason column. Do not quietly correct the mandate.\n\nWhat you must not do:\n- Do not move, copy, rename, create or delete anything.\n- Do not create, edit or fix any .ps1 file.\n- Do not run Apply-Plan.ps1.\n- Do not compute, guess or suggest a consent token.\n- Do not invent a path, a hash, a size or a finding. Every row traces to summary.json.\n\nWhen you are finished, output only: the total number of rows, the count by op, and the\nthree rows you are least confident about. Do not print the whole file."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-13b",
-   "minute": 58,
-   "title": "Turn the plan into something you can actually read",
-   "who": "the navigator, once plan.csv exists.",
-   "body": "Read plan.csv and summary.json from this run's folder, and write a single\nself-contained file called plan.html next to them.\n\nThis is a review document. I have to decide whether to sign this plan, and I\nshould not have to read sixty rows of CSV to do it.\n\nInclude, in this order:\n\n1. One summary line: how many operations, broken down by type, and how many\n   rows will be refused by protect.txt before anything moves.\n2. Anything that needs a person: every row where requires_human is TRUE, and\n   every row where confidence is low. Put these first and make them visually\n   distinct from the rest.\n3. The full list of operations grouped by type, each showing the source, the\n   destination, and the reason in plain language.\n4. What is not in the plan: how many files match protect.txt, and a line saying\n   that quarantine is a move rather than a deletion.\n\nMake it interactive. Let me filter by operation type, and show or hide the rows\nthat need a person. Use inline CSS and inline JavaScript only - no external\nfiles and no network requests, so it opens straight from the file system.\n\nEvery number must come from plan.csv or summary.json. Do not calculate the\nconsent token and do not put it anywhere in this document."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-14",
-   "minute": 65,
-   "title": "Read one row aloud",
-   "who": "the navigator. Read the answer to the room.",
-   "body": "From the plan.csv you just wrote, give me the single row with requires_human TRUE and\nthe lowest confidence.\n\nPrint it as: op, source, destination, keeper, confidence, finding_ref, and then the\nreason sentence.\n\nThen, in one sentence, tell me what happens to that file if I approve this plan without\nreading it."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-16",
-   "minute": 68,
-   "title": "Stretch: add a never-touch rule",
-   "who": "the navigator, after adding one line to",
-   "body": "I have just added one line to C:\\Users\\Public\\folderhealth\\protect.txt. I edited it\nmyself; you did not.\n\nWithout changing plan.csv, tell me exactly how many rows in it will now be silently\ndropped by the applier, and list their sources.\n\nThen tell me what would have happened if that rule had lived in a prompt instead of in\na file the applier re-reads."
-  },
-  {
-   "kind": "command",
-   "id": "cmd-5",
-   "minute": 71,
-   "title": "the dry run. Validates the plan, applies every refusal, prints the arithmetic, and moves nothing.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-17",
-   "minute": 71,
-   "title": "The dry run",
-   "who": "the driver.",
-   "body": "Run this command exactly as written. It does not move anything.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>\n\nThen tell me only two things, as two separate numbered facts:\n1. The run id.\n2. The number of operations in the plan.\n\nDo not assemble those two facts into anything. Do not tell me what to type next. Do not\ncompute a token."
-  },
-  {
-   "kind": "command",
-   "id": "cmd-6",
-   "minute": 73,
-   "title": "apply the plan. Only a human types the token. Nothing is deleted; files move to quarantine.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID> -Apply -ConsentToken \"<TOKEN>\""
-  },
-  {
-   "kind": "command",
-   "id": "cmd-7",
-   "minute": 76,
-   "title": "the undo, rehearsed. Says exactly what it would put back, and puts nothing back.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Undo-Run.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-19",
-   "minute": 76,
-   "title": "The stakeholder panic",
-   "who": "the driver, immediately, while the reorg is still on screen.",
-   "body": "Run this command exactly as written.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Undo-Run.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID>\n\nThen print the RESULT line from receipt-undo.txt word for word, and tell me whether\n_QUARANTINE\\<RUN_ID> still exists."
-  },
-  {
-   "kind": "command",
-   "id": "cmd-8",
-   "minute": 77,
-   "title": "the undo, for real. Puts every file back where it was, with its dates and attributes.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Undo-Run.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID> -Apply"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-20",
-   "minute": 78,
-   "title": "The trap, undone in front of the room",
-   "who": "you, on the projector, using a pair's run that approved blind.",
-   "body": "Read receipt.txt and undo.csv for <RUN_ID>.\n\nFind every operation where the file that was quarantined has label:SIGNED in its\nname_flags in summary.json, and the file that was kept does not.\n\nFor each, print: what was quarantined, what was kept, and the reason sentence from\nplan.csv, quoted.\n\nOne sentence to finish: which of those two documents would a court have wanted?"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-21",
-   "minute": 82,
-   "title": "The configurability round-trip",
-   "who": "the navigator, after the pair makes **one** edit from the rehearsed",
-   "body": "I have made exactly one change to C:\\Users\\Public\\folderhealth\\config.md. I made it\nmyself; you did not touch the file.\n\nRead config.md again.\n\nBefore I re-scan, predict: which numbers in summary.json will change, which will not,\nand which findings will appear or disappear. Be specific — name fields, not themes.\n\nThen tell me whether the next scan is still comparable to the last one, and why or why\nnot."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-22",
-   "minute": 89,
-   "title": "Render and open",
-   "who": "the driver.",
-   "body": "Look in C:\\Users\\Public\\folderhealth\\commands.txt and use the line that produces the\nreport, exactly as written there, for\nRoot \"C:\\Users\\Public\\DealRoom\" and RunId <RUN_ID>.\n\nDo not compose a command. If no line in commands.txt produces a report, tell me the\nreport is written by the scan and give me the full path to report.html instead.\n\nThen give me the full path to report.html and stop."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-23",
-   "minute": 94,
-   "title": "Audit the report against its own contract",
-   "who": "the navigator. This is the one that impresses the compliance half.",
-   "body": "Read C:\\Users\\Public\\folderhealth\\templates\\report.contract.md and the report.html you\njust opened, and summary.json.\n\nTake the five lead findings in the report. For each one, name the evidence string or the\ntotals field it came from.\n\nThen list every sentence in those five findings that you cannot trace to summary.json.\n\nIf the list is empty, say \"every sentence traces\" and stop. Do not rewrite the report."
-  },
-  {
-   "kind": "command",
-   "id": "cmd-9",
-   "minute": 99,
-   "title": "run two. The same scan as line 3, run again after one new file has been dropped into the folder by hand.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"C:\\Users\\Public\\DealRoom\""
-  },
-  {
-   "kind": "prompt",
-   "id": "P-24",
-   "minute": 99,
-   "title": "The delta",
-   "who": "the driver, after physically dragging one new file into",
-   "body": "I have just dropped one new file into C:\\Users\\Public\\DealRoom.\n\nRun the scan line from commands.txt again for that root, exactly as written.\n\nThen, from the new summary.json, read me the delta block:\n- compared_to_run_id and config_unchanged\n- files_added, files_removed, files_modified, files_moved\n- every entry in delta.added\n- for delta.moved, how many carry attributed_to_run, and which run id\n\nFinish with one sentence: how many of these changes were made by a person, and how many\nby this tool?"
-  },
-  {
-   "kind": "command",
-   "id": "cmd-10",
-   "minute": 103,
-   "title": "the weekly run. Scans and reports every Monday at 08:00. It contains no -Apply, on purpose.",
-   "who": "",
-   "body": "schtasks /Create /TN \"FolderHealth Weekly Scan\" /TR \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root C:\\Users\\Public\\DealRoom\" /SC WEEKLY /D MON /ST 08:00"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-25",
-   "minute": 103,
-   "title": "The weekly task",
-   "who": "the navigator. **Projector only if the burners are locked down** —",
-   "body": "Show me the schtasks line from C:\\Users\\Public\\folderhealth\\commands.txt. Do not compose\none and do not run it yet.\n\nThen tell me three things about it:\n1. Why it uses the full path to powershell.exe.\n2. Why it creates a user-scope task and not a system task.\n3. Which switch is deliberately absent, and what would happen if it were there."
-  },
-  {
-   "kind": "prompt",
-   "id": "P-26",
-   "minute": 107,
-   "title": "Ask Once versus editions 1 and 2",
-   "who": "you, on the projector. Put the two minute-10 chat answers on screen",
-   "body": "Below are two answers to the same question about the same documents, produced five\nminutes apart in two chat windows.\n\nANSWER A:\n<paste from minute 10>\n\nANSWER B:\n<paste from minute 10>\n\nAnd here are two editions of a report produced by the same specification over the same\nfolder, ninety minutes apart:\n\nEDITION 1 totals: <paste the totals block from run 1's summary.json>\nEDITION 2 totals: <paste the totals block from run 2's summary.json>\n\nOne question, answered in under 120 words: for each pair, what can I say changed, and\nwhat can I only guess changed?"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-27",
-   "minute": 110,
-   "title": "THE ONE-MEMO REVEAL",
-   "who": "you, on the projector, against a fresh untouched copy of the messy",
-   "body": "Here is the mandate. One page. It was ruled on by two people in this room at minute\nsixteen and it is initialled at the bottom.\n\n<paste the full text of the ruled config.md>\n\nPut C:\\Users\\Public\\DealRoom-Fresh under that mandate.\n\nUse only the lines in C:\\Users\\Public\\folderhealth\\commands.txt, exactly as written,\nsubstituting only the root path:\n\n1. Scan it.\n2. Read me the four headline numbers: files, duplicate clusters, sensitive-name hits,\n   and SkippedCount plus UnreadableCount.\n3. Write plan.csv, following the plan rules in CLAUDE.md, applying that mandate as\n   written including where you disagree with it.\n4. Run the dry run and tell me the run id and the operation count as two separate facts.\n\nThen stop. Do not apply. Do not compute a token. I will type it."
-  },
-  {
-   "kind": "command",
-   "id": "cmd-11",
-   "minute": 999,
-   "title": "remove that weekly task again.",
-   "who": "",
-   "body": "schtasks /Delete /TN \"FolderHealth Weekly Scan\" /F"
-  },
-  {
-   "kind": "prompt",
-   "id": "P-15",
-   "minute": 999,
-   "title": "The audit prompt — the one that springs the trap",
-   "who": "",
-   "body": "Before I approve this plan, audit it against itself.\n\nRead summary.json and the plan.csv you wrote.\n\nList every plan row where any of these is true:\n- the finding it came from has a non-empty contest field\n- the finding's keeper_confidence is low\n- requires_human is TRUE\n- the file being quarantined has a name_flag of label:SIGNED and the keeper does not\n\nFor each, give me one line: source, keeper, and the contest text quoted word for word.\n\nThen tell me how many rows that is, out of how many, and finish with this sentence\ncompleted: \"If you approve this plan without reading it, you will quarantine ___.\""
-  },
-  {
-   "kind": "prompt",
-   "id": "P-18",
-   "minute": 999,
-   "title": "Apply, with the typed token",
-   "who": "",
-   "body": "The token I have assembled is: <TOKEN>\n\nRun this command exactly as written, substituting my token character for character.\nDo not correct it. Do not check it. Do not change the number. If it is wrong I want it\nrejected.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"C:\\Users\\Public\\DealRoom\" -RunId <RUN_ID> -Apply -ConsentToken \"<TOKEN>\"\n\nWhen it finishes, print the RESULT line from the receipt, word for word, and nothing\nelse."
+   "id": "verdict",
+   "name": "The verdict",
+   "blurb": "Where we started against where we ended.",
+   "steps": [
+    {
+     "kind": "prompt",
+     "id": "P-26",
+     "minute": 107,
+     "title": "Against the first answer",
+     "body": "Below are two answers to the same question about the same documents, produced five\nminutes apart in two chat windows.\n\nANSWER A:\n<paste from minute 10>\n\nANSWER B:\n<paste from minute 10>\n\nAnd here are two editions of a report produced by the same specification over the same\nfolder, ninety minutes apart:\n\nEDITION 1 totals: <paste the totals block from run 1's summary.json>\nEDITION 2 totals: <paste the totals block from run 2's summary.json>\n\nOne question, answered in under 120 words: for each pair, what can I say changed, and\nwhat can I only guess changed?",
+     "blurb": "The chat reply from minute six, revisited.",
+     "block": "verdict"
+    },
+    {
+     "kind": "prompt",
+     "id": "P-27",
+     "minute": 110,
+     "title": "The closing demonstration",
+     "body": "Here is the mandate. One page. It was ruled on by two people in this room at minute\nsixteen and it is initialled at the bottom.\n\n<paste the full text of the ruled config.md>\n\nPut C:\\Users\\Public\\DealRoom-Fresh under that mandate.\n\nUse only the lines in C:\\Users\\Public\\folderhealth\\commands.txt, exactly as written,\nsubstituting only the root path:\n\n1. Scan it.\n2. Read me the four headline numbers: files, duplicate clusters, sensitive-name hits,\n   and SkippedCount plus UnreadableCount.\n3. Write plan.csv, following the plan rules in CLAUDE.md, applying that mandate as\n   written including where you disagree with it.\n4. Run the dry run and tell me the run id and the operation count as two separate facts.\n\nThen stop. Do not apply. Do not compute a token. I will type it.",
+     "blurb": "One memo, and what it rests on.",
+     "block": "verdict"
+    }
+   ]
   }
  ],
  "takehome": [
@@ -334,97 +466,109 @@
    "kind": "command",
    "id": "T1",
    "minute": 0,
-   "title": "Check your own machine, aimed at your own folder. Fix nothing that comes back red until you understand it.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root \"<MY FOLDER>\""
+   "title": "Check your own machine",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root \"<MY FOLDER>\"",
+   "blurb": "Probes, aimed at a folder of your own.",
+   "block": ""
   },
   {
    "kind": "command",
    "id": "T2",
    "minute": 0,
-   "title": "Metadata-only scan of your own folder. It does not open a single document.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\""
+   "title": "Scan your own folder",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\"",
+   "blurb": "Metadata only. Opens no document.",
+   "block": ""
   },
   {
    "kind": "command",
    "id": "T3",
    "minute": 0,
-   "title": "The dry run on your own folder. Read all of it. Sleep on it. Do not apply on day one.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"<MY FOLDER>\" -RunId <RUN_ID>"
+   "title": "Dry run on your own folder",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Apply-Plan.ps1 -Root \"<MY FOLDER>\" -RunId <RUN_ID>",
+   "blurb": "Validates a plan without moving anything.",
+   "block": ""
   },
   {
    "kind": "command",
    "id": "T4",
    "minute": 0,
-   "title": "Metadata-only scan with every path segment replaced before anything reaches a model. Use this one, not T2, on any folder holding client names.",
-   "who": "",
-   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\" -Tokenise"
+   "title": "Scan with names replaced",
+   "body": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\" -Tokenise",
+   "blurb": "Every path segment is replaced before anything reaches a model.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-1",
    "minute": 0,
    "title": "Preflight",
-   "who": "",
-   "body": "Run this command exactly as written and show me the result table unchanged.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1\n\nDo not fix anything that comes back red. Tell me what is red and what it stops me doing."
+   "body": "Run this command exactly as written and show me the result table unchanged.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1\n\nDo not fix anything that comes back red. Tell me what is red and what it stops me doing.",
+   "blurb": "Reading the probe output on your own machine.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-2",
    "minute": 0,
-   "title": "The run card, before any path is typed",
-   "who": "",
-   "body": "I am about to point a folder scanner at a folder on my work machine. Before I type the\npath, ask me these six questions one at a time, and wait for my answer to each:\n\n1. Whose data is in this folder, and who owns it?\n2. Is this folder synced to a cloud service?\n3. Am I permitted to read every file in it?\n4. Is anything in it under legal hold or a litigation notice?\n5. Am I running metadata-only, or am I about to read document contents?\n6. Who at my firm would need to know I did this?\n\nThen write my six answers back to me as a six-line block I can paste into an email.\n\nDo not scan anything."
+   "title": "Before you type a path",
+   "body": "I am about to point a folder scanner at a folder on my work machine. Before I type the\npath, ask me these six questions one at a time, and wait for my answer to each:\n\n1. Whose data is in this folder, and who owns it?\n2. Is this folder synced to a cloud service?\n3. Am I permitted to read every file in it?\n4. Is anything in it under legal hold or a litigation notice?\n5. Am I running metadata-only, or am I about to read document contents?\n6. Who at my firm would need to know I did this?\n\nThen write my six answers back to me as a six-line block I can paste into an email.\n\nDo not scan anything.",
+   "blurb": "Classifying a folder before connecting anything to it.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-3",
    "minute": 0,
-   "title": "Metadata-only scan of your own folder",
-   "who": "",
-   "body": "Run this command exactly as written, substituting only my folder path. It reads names,\nsizes, dates, attributes and hashes. It does not open a single document.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\"\n\nTell me: run id, files, SkippedCount, UnreadableCount. Nothing else."
+   "title": "Scan your folder",
+   "body": "Run this command exactly as written, substituting only my folder path. It reads names,\nsizes, dates, attributes and hashes. It does not open a single document.\n\npowershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\Scan-FolderHealth.ps1 -Root \"<MY FOLDER>\"\n\nTell me: run id, files, SkippedCount, UnreadableCount. Nothing else.",
+   "blurb": "Measuring without opening anything.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-4",
    "minute": 0,
-   "title": "Read your own summary aloud",
-   "who": "",
-   "body": "Open the summary.json for my latest run. Do not open inventory.json.\n\nGive me the five highest-severity findings, quoting each evidence string word for word,\nand then the skipped and unreadable tables with their consequence strings.\n\nNo recommendations. I will decide what any of it means."
+   "title": "Read your own summary",
+   "body": "Open the summary.json for my latest run. Do not open inventory.json.\n\nGive me the five highest-severity findings, quoting each evidence string word for word,\nand then the skipped and unreadable tables with their consequence strings.\n\nNo recommendations. I will decide what any of it means.",
+   "blurb": "Your folder's findings, in plain language.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-5",
    "minute": 0,
-   "title": "Your first hour of protect.txt",
-   "who": "",
-   "body": "Read my summary.json.\n\nPropose ten lines for protect.txt for a folder like this one: things that must never be\nmoved by any automated process. One rule per line, with a one-line justification each.\n\nRules are substring, glob or directory-prefix matches against paths relative to my root.\nThere is no negation syntax — a rule can only ever protect more, never less.\n\nWrite nothing to disk. I will type the file myself."
+   "title": "Your first protect list",
+   "body": "Read my summary.json.\n\nPropose ten lines for protect.txt for a folder like this one: things that must never be\nmoved by any automated process. One rule per line, with a one-line justification each.\n\nRules are substring, glob or directory-prefix matches against paths relative to my root.\nThere is no negation syntax — a rule can only ever protect more, never less.\n\nWrite nothing to disk. I will type the file myself.",
+   "blurb": "Deciding what must never be touched.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-6",
    "minute": 0,
    "title": "Plan, and do not apply",
-   "who": "",
-   "body": "Read my summary.json, my config.md and my protect.txt. Do not open inventory.json.\n\nWrite plan.csv into my latest run folder, following the plan rules in CLAUDE.md exactly.\n\nThen run the dry run from commands.txt and tell me the run id and the operation count as\ntwo separate facts.\n\nThen stop. Do not apply. Do not compute a token."
+   "body": "Read my summary.json, my config.md and my protect.txt. Do not open inventory.json.\n\nWrite plan.csv into my latest run folder, following the plan rules in CLAUDE.md exactly.\n\nThen run the dry run from commands.txt and tell me the run id and the operation count as\ntwo separate facts.\n\nThen stop. Do not apply. Do not compute a token.",
+   "blurb": "A proposal to sleep on.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-7",
    "minute": 0,
    "title": "The weekly run",
-   "who": "",
-   "body": "Show me the schtasks line from commands.txt, and confirm two things before I run it:\nthat it contains an absolute path to powershell.exe, and that it does NOT contain\n-Apply.\n\nIf -Apply is present, do not run it and tell me."
+   "body": "Show me the schtasks line from commands.txt, and confirm two things before I run it:\nthat it contains an absolute path to powershell.exe, and that it does NOT contain\n-Apply.\n\nIf -Apply is present, do not run it and tell me.",
+   "blurb": "Setting it to measure on a schedule.",
+   "block": ""
   },
   {
    "kind": "prompt",
    "id": "T-8",
    "minute": 0,
-   "title": "The sentence for your compliance officer",
-   "who": "",
-   "body": "Read my config.md, my protect.txt and the receipt.txt from my last run.\n\nWrite me one paragraph, under 120 words, that I can send to my compliance officer. It\nmust state:\n- what was read and what was not read\n- what moved, where it moved to, and that nothing was deleted\n- how it is reversed\n- what evidence exists afterwards and where it is\n\nNo adjectives. No reassurance. Facts only, all of them traceable to those three files."
+   "title": "For your compliance officer",
+   "body": "Read my config.md, my protect.txt and the receipt.txt from my last run.\n\nWrite me one paragraph, under 120 words, that I can send to my compliance officer. It\nmust state:\n- what was read and what was not read\n- what moved, where it moved to, and that nothing was deleted\n- how it is reversed\n- what evidence exists afterwards and where it is\n\nNo adjectives. No reassurance. Facts only, all of them traceable to those three files.",
+   "blurb": "The sentence that explains this to someone who was not here.",
+   "block": ""
   }
  ]
 }
