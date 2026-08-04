@@ -51,6 +51,11 @@ const label = (s: any) =>
         Everything you type today, in order. Each step says where it goes —
         <b>PowerShell</b> or <b>Claude</b>. Click any step to open it.
       </p>
+      <p class="ws-lede ws-free">
+        <b>These are a starting point, not a script.</b> The PowerShell lines need to be
+        copied exactly, because they move real files. Everything you say to Claude is
+        yours — ask it anything, in your own words, and go wherever the folder takes you.
+      </p>
       <p class="ws-stamp">Last updated {LAST_UPDATED}</p>
     </header>
 
@@ -307,6 +312,10 @@ const label = (s: any) =>
   .ws-head h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem; margin: 0 0 12px; }
   .ws-lede { color: var(--text-muted); line-height: 1.7; max-width: 62ch; margin: 0; }
   .ws-lede b { color: var(--text-main); font-weight: 600; }
+  .ws-free {
+    margin-top: 14px; padding: 13px 16px; background: var(--bg-surface-solid);
+    border: 1px solid var(--border-color); border-radius: 10px; font-size: 0.94rem;
+  }
   .ws-stamp {
     margin-top: 12px; font-family: 'Fira Code', monospace;
     font-size: 0.72rem; color: var(--text-muted);
