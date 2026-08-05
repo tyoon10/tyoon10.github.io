@@ -1,5 +1,5 @@
 ---
-title: "Documentation Doesn't Buy Accuracy. It Buys Invariance."
+title: "I Deleted Half My Agent's Instructions. Nothing Broke Until the Filesystem Did."
 date: 2026-08-04
 description: "729 blind trials on CLAUDE.md and skill files. The same document scored 87% and 13% depending on nothing but the filesystem underneath it."
 featured: true
