@@ -16,16 +16,17 @@ const LAST_UPDATED = '3 August 2026';
 const PACKAGE = {
   name: 'workshop-package.zip',
   size: '4 MB',
-  // Direct download. Verified 2026-08-04 by fetching it unauthenticated:
-  // 4,230,277 bytes, application/zip, sha256 8d93b001b99d8d20...
+  // Direct download. Verified 2026-08-04 by fetching it unauthenticated and opening
+  // the archive: 4,230,277 bytes, sha256 8d93b001b99d8d20..., 541 entries, zip
+  // integrity OK, and the nine content gates all pass.
   //
   // NB: a delete-and-reupload in Drive mints a NEW file id and silently breaks this
   // link. Re-verify the id here whenever the package is replaced.
   //
-  // No folder link. The shared Drive folder also holds instructor-only material -
-  // the answer key, the run of show, the delivery console - so participants get the
-  // one file they need and no route to the rest.
-  url: 'https://drive.google.com/uc?export=download&id=1n87yGlt_FaDj1q26qUDqmh05ldIFwCYW',
+  // No folder link, deliberately. The shared folder also held instructor-only
+  // material - the answer key, the run of show, the delivery console - so
+  // participants get the one file they need and no route to the rest.
+  url: 'https://drive.google.com/uc?export=download&id=1-Balvf8ir3OtkvnjafqHystJaawkwiq4',
   extractTo: 'C:\\Users\\Public',
   verify:
     'powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root "C:\\Users\\Public\\DealRoom"',
