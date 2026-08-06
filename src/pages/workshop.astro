@@ -32,6 +32,16 @@ const PACKAGE = {
     'powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\folderhealth\\preflight.ps1 -Root "C:\\Users\\Public\\DealRoom"',
 };
 
+// Day 3 dataset, surfaced here because this is the page participants already have
+// open. Deliberately marked as Day 3 and styled as an aside - during the opening
+// block anything that looks like today's setup costs minutes.
+// Verified 2026-08-04: HTTP 200, 12,239,585 bytes, UTF-8 CSV, 10,000 rows, 20 columns.
+const DAY3 = {
+  name: 'prosper_loans.csv',
+  size: '11.7 MB · 10,000 rows · 20 columns',
+  url: 'https://www.dropbox.com/scl/fi/cmirflrapvbnu5m0rc4tt/prosper_loans.csv?rlkey=irmrl3hzon8yith6wz1ggbb18&st=408hbu7x&dl=0',
+};
+
 const { sections, takehome } = data;
 const stepCount = sections.reduce((n: number, s: any) => n + s.steps.length, 0);
 
@@ -48,6 +58,15 @@ const label = (s: any) =>
   noindex={true}
 >
   <section class="ws">
+    <a class="ws-day3" href={DAY3.url} target="_blank" rel="noopener">
+      <span class="ws-day3tag">Day 3</span>
+      <span class="ws-day3body">
+        <span class="ws-day3name">{DAY3.name}</span>
+        <span class="ws-day3meta">{DAY3.size} — you don't need this today</span>
+      </span>
+      <span class="ws-day3go">Download &rarr;</span>
+    </a>
+
     <header class="ws-head">
       <p class="ws-eyebrow">Participant Session Sheet</p>
       <h1>Files Under Management</h1>
@@ -238,6 +257,21 @@ const label = (s: any) =>
         ))}
       </div>
     </section>
+
+    <div class="ws-sendoff">
+      <p class="ws-sendoffbig">Good luck today — and enjoy it.</p>
+      <p>
+        Nobody in this room is expected to know PowerShell, and nothing you can type
+        will break anything: the whole point of what we're building is that it doesn't
+        delete, and it undoes. So poke at it. Ask the daft question. Ask it twice.
+      </p>
+      <p>
+        The best moments today will come from someone trying something nobody planned
+        for — so if you find something odd in the folder, or get an answer that
+        surprises you, <b>say it out loud</b>. That's the session working.
+      </p>
+      <p class="ws-sendoffsign">Have fun. See you in there. 🎉</p>
+    </div>
 
     <p class="ws-foot">
       Shared by direct link for workshop participants. Not part of the site's public
@@ -473,6 +507,39 @@ const label = (s: any) =>
   .ws-copy.is-copied { background: var(--badge-bg-key); color: var(--badge-text-key); border-color: transparent; }
   .ws-copy.is-failed { background: rgba(217,119,6,0.1); color: #b45309; border-color: transparent; }
   .ws-copywide { width: 100%; padding: 9px 15px; margin-top: 9px; }
+
+  /* Day 3 aside — deliberately quiet. It must not compete with today's first step. */
+  .ws-day3 {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 11px 16px; margin-bottom: 28px;
+    background: var(--bg-surface); border: 1px dashed var(--border-color);
+    border-radius: 10px; text-decoration: none; color: var(--text-main);
+    transition: var(--physic-transition);
+  }
+  .ws-day3:hover { background: var(--bg-surface-hover); border-style: solid; }
+  .ws-day3tag {
+    font-family: 'Fira Code', monospace; font-size: 0.68rem; letter-spacing: 0.09em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 5px;
+    background: var(--badge-bg-key); color: var(--badge-text-key); flex: 0 0 auto;
+  }
+  .ws-day3body { display: flex; flex-direction: column; gap: 1px; flex: 1 1 auto; min-width: 0; }
+  .ws-day3name { font-size: 0.92rem; font-weight: 600; }
+  .ws-day3meta { font-size: 0.8rem; color: var(--text-muted); }
+  .ws-day3go { font-size: 0.85rem; color: var(--text-highlight); flex: 0 0 auto; }
+
+  /* Send-off */
+  .ws-sendoff {
+    margin-top: 56px; padding: 26px 28px; border-radius: 14px;
+    background: var(--gradient-card-b); border: 1px solid var(--border-color);
+    display: flex; flex-direction: column; gap: 11px;
+  }
+  .ws-sendoff p { margin: 0; line-height: 1.65; max-width: 60ch; color: #1e293b; }
+  .ws-sendoffbig {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.28rem; font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .ws-sendoff b { font-weight: 650; }
+  .ws-sendoffsign { font-size: 1rem; font-weight: 600; padding-top: 2px; }
 
   .ws-foot { margin-top: 52px; font-size: 0.8rem; color: var(--text-muted); }
 
