@@ -19,13 +19,16 @@ links:
     icon: "book-open"
 ---
 
-*9 min read. 729 blind trials across 13 experiments, every one an isolated agent
-with no conversation history and no knowledge it was being tested.*
+*9 min read. 729 blind trials across [13
+experiments](https://claude.ai/code/artifact/02d5e076-aa83-4480-bf00-32d67748dcd0),
+every one an isolated agent with no conversation history and no knowledge it was
+being tested.*
 
 ---
 
-In July, Boris Cherny sat down at Y Combinator's Startup School. He built Claude
-Code. He said something that stuck with me:
+In July, Boris Cherny [sat down at Y Combinator's Startup
+School](https://www.ycombinator.com/library/UN-boris-cherny-building-claude-code).
+He built Claude Code. He said something that stuck with me:
 
 > "Every model is very different. So something that you did for one model maybe
 > three months ago, it just might not translate at all to the next model."
@@ -38,9 +41,10 @@ I had a reason to take that personally. In April I read two Claude Code source
 trees side by side, v0.2.8 against v2.1.88. That is 211 files against 1,902, 13
 months apart. I wrote up what the delta said about how the team thinks
 ([Tracing the Minds Behind Claude
-Code](/writings/tracing-the-minds-behind-claude-code/)). That
-piece was archaeology: infer what people believe from what they refuse to change.
-This one tests one of those beliefs against my own files.
+Code](/writings/tracing-the-minds-behind-claude-code/)).
+
+That piece was archaeology: infer what people believe from what they refuse to
+change. This one tests one of those beliefs against my own files.
 
 I run a personal operations workspace. It holds a Columbia MBA's worth of meeting
 notes, club logistics, coursework and immigration paperwork. A CLAUDE.md and 10
@@ -58,11 +62,13 @@ My workspace comes with free labels. 299 meeting notes, already filed by hand in
 25 folders. The folder a note sits in *is* the answer a human gave.
 
 The skill under test routes a meeting to its folder using a table of title
-keywords. I built three versions. **v0** is the table as it shipped for months:
-668 tokens, 7 course folders it never mentions, a wrong path, 3 rows made
-unreachable by row order. **v1** is the same table repaired, 47% larger. **v2** is
-a lean rewrite with no table at all, 52% smaller. Four lines: file it where it
-belongs, judge from content, use only paths that exist.
+keywords. I built three versions.
+
+**v0** is the table as it shipped for months: 668 tokens, 7 course folders it
+never mentions, a wrong path, 3 rows made unreachable by row order. **v1** is the
+same table repaired, 47% larger. **v2** is a lean rewrite with no table at all,
+52% smaller. Four lines: file it where it belongs, judge from content, use only
+paths that exist.
 
 23 meetings per arm. Each one ran as an isolated agent seeing a single meeting and
 a single version, with no conversation history and no knowledge it was a test.
@@ -88,10 +94,7 @@ the real skill does. It globs the folder before filing. **The model wasn't using
 the table. It was reading the filesystem.**
 
 ![Two panels compare routing accuracy with a complete directory tree and with no tree. With the tree, v0, v1, and v2 score 91, 91, and 87 percent; without it, they separate to 57, 87, and 13 percent.](./01-environment-mask.webp)
-
-*Figure 1. A healthy directory tree can make stale, repaired, and lean
-instructions look equally capable. Remove it and the underlying dependency
-appears.*
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Figure 1. A healthy directory tree can make stale, repaired, and lean instructions look equally capable. Remove it and the underlying dependency appears.</p>
 
 Same experiment, listing removed: 57% / 87% / **13%**. The lean version collapsed.
 It couldn't even produce valid paths, because it had never been told what the paths
@@ -110,9 +113,7 @@ the old table never named, so document and environment are out of date together.
 | absent | 57% | **87%** | 13% |
 
 ![A line chart plots accuracy across complete, stale, and absent environments. The complete document stays near 90 percent, while the stale document falls to 57 percent and the lean document falls to 13 percent.](./02-invariance-curve.webp)
-
-*Figure 2. The complete document holds performance flat as the environment
-degrades. Stale and lean documents do not.*
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Figure 2. The complete document holds performance flat as the environment degrades. Stale and lean documents do not.</p>
 
 **The complete version is flat in every environment.** That reframes what the extra
 tokens are for. They don't buy a better number on a good day. On a good day all
@@ -126,9 +127,10 @@ the listing they'd been shown. All six were in the complete-document arm, and
 precisely its job.
 
 There's a nastier detail in that middle row. When the document is *also* stale it
-scores 61%. That's barely better than having no environment at all. Being partially
-up to date is close to worthless. The model trusts the list and stops looking.
-That's the state every list decays into.
+scores 61%. That's barely better than having no environment at all.
+
+Being partially up to date is close to worthless. The model trusts the list and
+stops looking. That's the state every list decays into.
 
 ## The prediction I made, then tested
 
@@ -140,30 +142,34 @@ Full template: **23/23**. Lean template: **0/23**. Not one.
 
 Fair caveat. The lean template says "match the conventions used elsewhere in this
 workspace," and my harness forbade reading the workspace. So this measures lean
-*plus a withheld environment*. That's the point. A bet on the environment doesn't
-degrade when it loses. It goes to zero.
+*plus a withheld environment*.
+
+That's the point. A bet on the environment doesn't degrade when it loses. It goes
+to zero.
 
 ## Pass four: I'd been treating CLAUDE.md as one file
 
-It isn't. Claude Code loads several, on different schedules. An **ancestor**
-CLAUDE.md loads at launch, and every session beneath it pays. A **subdirectory**
-one loads *on demand*, only when Claude actually reads files there. `@path` imports
-load eagerly, so an import costs exactly what inlining costs. `.claude/rules/` with
-a `paths:` glob loads on demand too.
+It isn't. Claude Code loads several, on different schedules.
+
+An **ancestor** CLAUDE.md loads at launch, and every session beneath it pays. A
+**subdirectory** one loads *on demand*, only when Claude actually reads files
+there. `@path` imports load eagerly, so an import costs exactly what inlining
+costs. `.claude/rules/` with a `paths:` glob loads on demand too.
 
 ![Four horizontal flows show a root CLAUDE file and an import entering session context at launch, a path-scoped rule entering on a path match, and a child CLAUDE file entering after a file read.](./03-loading-schedule.webp)
-
-*Figure 3. Instruction placement changes when context is paid. Root files and
-imports are eager. Rules and child files load only when their scope is touched.*
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Figure 3. Instruction placement changes when context is paid. Root files and imports are eager. Rules and child files load only when their scope is touched.</p>
 
 This is the same shape I found in their source in April. Claude Code splits its
 *own* system prompt at a marker called `SYSTEM_PROMPT_DYNAMIC_BOUNDARY`. Everything
 before it is cached globally across every user. Everything after is
-session-specific. It also stopped inlining 40+ tool schemas in favour of a search
-tool that fetches them on demand. The team that deleted 80% of the prompt had
-already spent years engineering *where the rest of it loads*. Context is not a
-storage problem. It's an economics problem. The question was never how much you
-wrote. It's who pays for it.
+session-specific.
+
+It also stopped inlining 40+ tool schemas in favor of a search tool that fetches
+them on demand. The team that deleted 80% of the prompt had already spent years
+engineering *where the rest of it loads*.
+
+Context is not a storage problem. It's an economics problem. The question was
+never how much you wrote. It's who pays for it.
 
 So *where* a fact lives is a separate decision from whether it should exist, with
 its own failure modes. Three arrangements of identical facts:
@@ -171,15 +177,16 @@ its own failure modes. Three arrangements of identical facts:
 | | capability | scope leak | ctx tokens |
 |---|---|---|---|
 | everything at root | 21/21 | **6/6 leaked** | 345 |
-| **stratified** | **21/21** | **0/6** | **221 (−36%)** |
+| **stratified** | **21/21** | **0/6** | **221 (-36%)** |
 | misplaced (inverted) | 18/21 | 6/6 | 256 |
 
 Stratification is free on capability. But the column that stopped me was the middle
 one.
 
 **Everything-at-root leaked, 6 times out of 6.** A session working on club
-logistics answered the immigration approval rate and named my tax preparer. That's
-not a correctness failure. The flat arrangement scored 100%. It's a *scope*
+logistics answered the immigration approval rate and named my tax preparer.
+
+That's not a correctness failure. The flat arrangement scored 100%. It's a *scope*
 failure. Every session gets facts it has no business holding. In a workspace
 carrying immigration status and tax detail, that's a better argument for
 restructuring than tokens will ever be.
@@ -199,10 +206,7 @@ sub-project files to answer."* None fabricated.
 > recoverably.
 
 ![Root placement broadcasts a narrow fact to six sessions and is marked 345 tokens with six of six scope leaks. Stratified placement sends the fact to one relevant session and is marked 221 tokens with zero of six leaks; a root query visibly encounters a not-loaded state.](./04-placement-tradeoff.webp)
-
-*Figure 4. Root placement spends tokens and leaks scope in every session.
-Stratification confines the fact and turns a miss into a visible, recoverable
-event.*
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Figure 4. Root placement spends tokens and leaks scope in every session. Stratification confines the fact and turns a miss into a visible, recoverable event.</p>
 
 A loud failure gets fixed inside the same session. The agent reads a file in that
 directory, the child CLAUDE.md loads, the answer arrives. A silent wrong answer
@@ -236,9 +240,11 @@ Their sharpest practical instruction:
 
 Without having read that sentence, I had built an experiment on it. On a healthy
 repo it is exactly right. 91, 91, 87. Three documents, one of them missing 7 whole
-categories, indistinguishable. The condition is the other two rows of that table.
-The lean version loses **74 points** when the file system stops answering, and
-stale is barely better than absent.
+categories, indistinguishable.
+
+The condition is the other two rows of that table. The lean version loses **74
+points** when the file system stops answering, and stale is barely better than
+absent.
 
 Three more places we line up, and one I'd push on.
 
@@ -284,9 +290,7 @@ anywhere? `.claude/rules/` with a `paths:` glob, which is demand-loaded. Genuine
 cross-cutting? Root.
 
 ![A decision flow starts with a candidate instruction, asks whether a reliable source supplies it, routes yes to removal with verification, and routes no through scope to a child file, path rule, or root file.](./05-cut-keep-place.webp)
-
-*Figure 5. Delete only when a reliable source supplies the fact on every path.
-Otherwise keep it at the narrowest scope that still loads when needed.*
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Figure 5. Delete only when a reliable source supplies the fact on every path. Otherwise keep it at the narrowest scope that still loads when needed.</p>
 
 **Add a judgment clause to anything checkable.** *"Where the instruction and the
 actual content disagree, use your judgment."* Against a corrupted table it moved
@@ -298,9 +302,11 @@ from.
 the root CLAUDE.md: missing routes, a wrong path, unreachable rows, a partial
 enumeration covering 4 of 25 directories, and a dangling pointer to a directory
 that doesn't exist. *None* came from the 624 trials I ran against those same files.
-They came from reading them. `/doctor` will tell you what actually loaded. Nothing
-tells you whether what loaded is true, so I wrote that reading down as a script
-(`audit_agent_docs.py`). It found more than the entire experiment programme.
+They came from reading them.
+
+`/doctor` will tell you what actually loaded. Nothing tells you whether what
+loaded is true, so I wrote that reading down as a script (`audit_agent_docs.py`).
+It found more than the entire experiment program.
 
 ## Limits
 
@@ -326,6 +332,4 @@ delete doesn't vanish. It moves, into the environment or into a file one level
 down. It's only gone for as long as whatever now holds it keeps holding it up.
 
 ![Lines removed from a root instruction file move right into the environment, a tool result, and a child file. Each new holder then points into the agent session, while the root retains only cross-cutting instructions.](./06-responsibility-transfer.webp)
-
-*Figure 6. Deleting an instruction does not erase its responsibility. It transfers
-it to an environment, tool result, or lower-level file that must remain available.*
+<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Figure 6. Deleting an instruction does not erase its responsibility. It transfers it to an environment, tool result, or lower-level file that must remain available.</p>
