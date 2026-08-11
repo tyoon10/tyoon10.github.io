@@ -3,7 +3,7 @@ title: "How I Think About Knowledge in Finance"
 date: 2026-06-21
 description: "Finance spent two decades improving its data systems. It did far less to preserve the reasoning behind decisions. AI has lowered the cost of finding that reasoning. This essay explains how financial firms can manage it."
 coverImage: "./featured.png"
-featured: true
+featured: false
 tags:
   - "Knowledge Management"
   - "Financial Data"

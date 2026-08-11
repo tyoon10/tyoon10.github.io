@@ -3,7 +3,7 @@ title: "What Form Should Knowledge Take?"
 date: 2026-07-21
 description: "The evidence from AI frontier settling on what curated knowledge should look like as a system. And a new place for RAG and retrieval turns out to serve it."
 coverImage: "./featured.png"
-featured: true
+featured: false
 tags:
   - "Knowledge Management"
   - "Enterprise AI"
