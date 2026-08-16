@@ -253,43 +253,64 @@ h3, .h3 {
 .band-wash .section__label::before { background: var(--accent); }
 
 /* --------------------------------------------------------------------------
-   LEAD ENTRY — the visual counterweight to the compact list.
-   The first item in a section gets its cover image; everything after it stays
-   as a hairline row. That contrast is what creates progression.
+   FEATURED ROW — Monocle's multi-column grid, split by vertical hairlines.
+   No card fills, no boxes: the rules do the separating, exactly as the print
+   grid does. Images are deliberately small — this is a showcase, not a hero,
+   and the page already spends its big picture on the backdrop.
    -------------------------------------------------------------------------- */
-.lead {
+.featured {
   display: grid;
-  grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
-  gap: 34px;
-  align-items: start;
-  padding-bottom: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 46px;
 }
-.lead__media { margin: 0; overflow: hidden; border-radius: var(--r-surface); background: var(--sunk); }
-.lead__media img {
+.featured__item {
+  display: grid;
+  gap: 13px;
+  align-content: start;
+  padding: 28px 30px 32px;
+  border-left: 1px solid var(--rule);
+}
+.featured__item:first-child { border-left: 0; padding-left: 0; }
+.featured__item:last-child { padding-right: 0; }
+
+.featured__media {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--r-surface);
+  background: var(--wash);
+}
+.featured__media img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   aspect-ratio: 16 / 10;
+  max-height: 200px;         /* the cap, not the width — keeps 2-up and 3-up rows level */
   object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.lead__body { display: grid; gap: 12px; align-content: start; }
-.lead__title {
-  font: 400 clamp(24px, 2.9vw, 32px)/1.16 var(--serif);
-  letter-spacing: -0.018em;
+.featured__item:hover .featured__media img { transform: scale(1.035); }
+
+.featured__meta { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.featured__title {
+  font: 400 21px/1.24 var(--serif);
+  letter-spacing: -0.012em;
   color: var(--ink);
   text-decoration: none;
 }
-.lead__title:hover { color: var(--accent); }
-.lead__deck { font: 400 16px/1.55 var(--serif); color: var(--ink-muted); max-width: 56ch; }
+.featured__item:hover .featured__title { color: var(--accent); }
+.featured__deck { font: 400 14.5px/1.5 var(--serif); color: var(--ink-muted); }
 
-/* Hero lead — full width, image above the words. The cover-story move. */
-.lead--hero { grid-template-columns: 1fr; gap: 24px; padding-bottom: 0; }
-.lead--hero .lead__media img { aspect-ratio: 21 / 9; }
-.lead--hero .lead__title { font-size: clamp(26px, 3.4vw, 38px); }
-
-@media (max-width: 760px) {
-  .lead { grid-template-columns: 1fr; gap: 20px; }
-  .lead--hero .lead__media img { aspect-ratio: 16 / 10; }
+@media (max-width: 820px) {
+  .featured { grid-template-columns: 1fr; }
+  .featured__item {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    padding: 24px 0 26px;
+  }
+  .featured__item:first-child { border-top: 0; padding-top: 22px; }
+  .featured__media { max-width: 100%; }
 }
 
 /* --------------------------------------------------------------------------
@@ -297,14 +318,15 @@ h3, .h3 {
    -------------------------------------------------------------------------- */
 .index { border-bottom: 1px solid var(--rule); }
 
-/* Metadata rail left, content right. Without the rail the rows huddled into
-   the left third of a 1120px measure and the page lost its balance. */
+/* Three columns: metadata rail, thumbnail, text. "No cards" was never "no
+   pictures" — Monocle carries a photo on its list items too. Without the
+   thumbnails the page ran ~5000px with only three images on it. */
 .index__item {
   border-top: 1px solid var(--rule);
   padding: 26px 0;
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-  gap: 10px 36px;
+  grid-template-columns: 128px 200px minmax(0, 1fr);
+  gap: 10px 34px;
   align-items: start;
 }
 .index__meta {
@@ -315,20 +337,57 @@ h3, .h3 {
   align-items: flex-start;
   gap: 9px;
 }
-.index__item .index__title,
-.index__item .index__deck { grid-column: 2; }
+.index__media {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--r-surface);
+  background: var(--wash);
+}
+.index__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.index__item:hover .index__media img { transform: scale(1.035); }
 
-@media (max-width: 820px) {
-  .index__item { grid-template-columns: 1fr; gap: 9px; }
+.index__item .index__title,
+.index__item .index__deck { grid-column: 3; }
+
+/* entries with no cover let the text take the picture's column */
+.index__item--nomedia { grid-template-columns: 128px minmax(0, 1fr); }
+.index__item--nomedia .index__title,
+.index__item--nomedia .index__deck { grid-column: 2; }
+
+@media (max-width: 900px) {
+  .index__item,
+  .index__item--nomedia { grid-template-columns: 160px minmax(0, 1fr); gap: 12px 24px; }
   .index__meta {
+    grid-column: 1 / -1;
     grid-row: auto;
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
   }
+  .index__media { grid-column: 1; grid-row: 2 / span 2; }
   .index__item .index__title,
-  .index__item .index__deck { grid-column: 1; }
+  .index__item .index__deck { grid-column: 2; }
+  .index__item--nomedia .index__title,
+  .index__item--nomedia .index__deck { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .index__item,
+  .index__item--nomedia { grid-template-columns: 1fr; gap: 10px; }
+  .index__media { grid-column: 1; grid-row: auto; }
+  .index__item .index__title,
+  .index__item .index__deck,
+  .index__item--nomedia .index__title,
+  .index__item--nomedia .index__deck { grid-column: 1; }
 }
 
 /* the lead block keeps metadata inline above the headline */
@@ -659,17 +718,17 @@ h3, .h3 {
    -------------------------------------------------------------------------- */
 .event {
   border-top: 1px solid var(--rule);
-  padding: 20px 0;
+  padding: 22px 0;
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px 28px;
+  grid-template-columns: 128px minmax(0, 1fr) auto;
+  gap: 8px 34px;
   align-items: start;
 }
 .event:last-of-type { border-bottom: 1px solid var(--rule); }
-.event__title { font: 400 18px/1.3 var(--serif); letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.event__rail { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; }
+.event__title { font: 400 19px/1.3 var(--serif); letter-spacing: -0.01em; color: var(--ink); text-decoration: none; display: block; }
 .event__title:hover { color: var(--accent); }
-.event__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 7px; }
-.event__where { font: 400 13px/1.4 var(--sans); color: var(--ink-muted); }
+.event__where { font: 400 13px/1.4 var(--sans); color: var(--ink-muted); display: block; margin-top: 6px; }
 .event__actions { display: flex; gap: 16px; flex-wrap: wrap; justify-self: end; }
 .event__actions a {
   font: 400 13px/1.4 var(--sans);
@@ -678,8 +737,9 @@ h3, .h3 {
   text-underline-offset: 3px;
   white-space: nowrap;
 }
-@media (max-width: 720px) {
-  .event { grid-template-columns: 1fr; }
+@media (max-width: 820px) {
+  .event { grid-template-columns: 1fr; gap: 10px; }
+  .event__rail { flex-direction: row; align-items: center; flex-wrap: wrap; }
   .event__actions { justify-self: start; }
 }
 
@@ -726,7 +786,17 @@ h3, .h3 {
 /* --------------------------------------------------------------------------
    CONTACT
    -------------------------------------------------------------------------- */
-.contact__actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 30px; }
+.contact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 28px 56px;
+  align-items: end;
+}
+.contact__grid h2 { font-size: clamp(30px, 4.2vw, 44px); }
+.contact__actions { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+@media (max-width: 820px) {
+  .contact__grid { grid-template-columns: 1fr; gap: 26px; align-items: start; }
+}
 .contact__email {
   background: none; border: 0; padding: 0; cursor: pointer;
   font: 500 15px/1 var(--sans); color: var(--accent);

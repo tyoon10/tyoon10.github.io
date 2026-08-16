@@ -15,33 +15,22 @@ const byDateDesc = (a: { data: { date: Date } }, b: { data: { date: Date } }) =>
   b.data.date.valueOf() - a.data.date.valueOf();
 
 const sortedWritings = allWritings.filter(w => !w.data.unlisted).sort(byDateDesc);
-const homeWritings = [
-  ...sortedWritings.filter(w => w.data.featured),
-  ...sortedWritings.filter(w => !w.data.featured),
-].slice(0, 4);
-
 const sortedProjects = allProjects.sort(byDateDesc);
-const homeProjects = [
-  ...sortedProjects.filter(p => p.data.featured),
-  ...sortedProjects.filter(p => !p.data.featured),
-].slice(0, 4);
 
 // Events — newest first; show latest 3, collapse the rest
 const sortedEvents = events.slice().sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
 const visibleEvents = sortedEvents.slice(0, 3);
 const hiddenEvents = sortedEvents.slice(3);
 
-// The cover story: newest featured writing that actually has an image.
-const heroLead = homeWritings.find(w => w.data.coverImage) ?? homeWritings[0];
+// Each section opens with a featured row — a multi-column showcase split by
+// vertical rules — then continues as compact hairline rows.
+const featuredWritings = sortedWritings.filter(w => w.data.featured).slice(0, 3);
+const featuredWritingIds = new Set(featuredWritings.map(w => w.id));
+const writingList = sortedWritings.filter(w => !featuredWritingIds.has(w.id)).slice(0, 3);
 
-// Each section leads with one illustrated entry, then goes compact. The
-// contrast between the two is what gives the page its rhythm.
-const writingsRest = homeWritings.filter(w => w.id !== heroLead?.id);
-const writingLead = writingsRest.find(w => w.data.coverImage) ?? writingsRest[0];
-const writingList = writingsRest.filter(w => w.id !== writingLead?.id);
-
-const projectLead = homeProjects.find(p => p.data.coverImage) ?? homeProjects[0];
-const projectList = homeProjects.filter(p => p.id !== projectLead?.id);
+const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 3);
+const featuredProjectIds = new Set(featuredProjects.map(p => p.id));
+const projectList = sortedProjects.filter(p => !featuredProjectIds.has(p.id)).slice(0, 3);
 
 // ISO dates, dot-separated — 2026·08·04
 const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
@@ -73,30 +62,6 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
     </div>
   </section>
 
-  <!-- COVER STORY -->
-  {heroLead && (
-    <section class="section">
-      <div class="wrap">
-        <span class="section__label">Latest</span>
-        <div class="lead lead--hero">
-          {heroLead.data.coverImage && (
-            <figure class="lead__media">
-              <Image src={heroLead.data.coverImage} alt={heroLead.data.title} widths={[720, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" />
-            </figure>
-          )}
-          <div class="lead__body">
-            <span class="index__meta">
-              <span class="tag">{heroLead.data.tags[0] || 'AI Strategy'}</span>
-              <span class="date">{iso(heroLead.data.date)}</span>
-            </span>
-            <a href={`/writings/${heroLead.id}`} class="lead__title">{heroLead.data.title}</a>
-            <span class="lead__deck">{heroLead.data.description}</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
   <!-- ABOUT -->
   <section id="about" class="section">
     <div class="wrap">
@@ -125,30 +90,35 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
     <div class="wrap">
       <span class="section__label">Projects</span>
 
-      {projectLead && (
-        <div class="lead">
-          {projectLead.data.coverImage && (
-            <figure class="lead__media">
-              <Image src={projectLead.data.coverImage} alt={projectLead.data.title} widths={[400, 640, 900]} sizes="(max-width: 760px) 100vw, 440px" />
-            </figure>
-          )}
-          <div class="lead__body">
-            <span class="index__meta">
-              {projectLead.data.featured && <span class="tag tag--accent">Featured</span>}
-              <span class="tag">{projectLead.data.tags[0] || 'Project'}</span>
-              <span class="date">{iso(projectLead.data.date)}</span>
-            </span>
-            <a href={`/projects/${projectLead.id}`} class="lead__title">{projectLead.data.title}</a>
-            <span class="lead__deck">{projectLead.data.description}</span>
-          </div>
+      {featuredProjects.length > 0 && (
+        <div class="featured">
+          {featuredProjects.map(p => (
+            <div class="featured__item">
+              {p.data.coverImage && (
+                <figure class="featured__media">
+                  <Image src={p.data.coverImage} alt={p.data.title} widths={[300, 600, 900]} sizes="300px" />
+                </figure>
+              )}
+              <span class="featured__meta">
+                <span class="tag tag--accent">Featured</span>
+                <span class="date">{iso(p.data.date)}</span>
+              </span>
+              <a href={`/projects/${p.id}`} class="featured__title">{p.data.title}</a>
+              <span class="featured__deck">{p.data.description}</span>
+            </div>
+          ))}
         </div>
       )}
 
       <div class="index">
         {projectList.map(p => (
-          <div class="index__item">
+          <div class:list={["index__item", { "index__item--nomedia": !p.data.coverImage }]}>
+            {p.data.coverImage && (
+              <figure class="index__media">
+                <Image src={p.data.coverImage} alt={p.data.title} widths={[200, 400, 600]} sizes="200px" />
+              </figure>
+            )}
             <span class="index__meta">
-              {p.data.featured && <span class="tag tag--accent">Featured</span>}
               <span class="tag">{p.data.tags[0] || 'Project'}</span>
               <span class="date">{iso(p.data.date)}</span>
             </span>
@@ -166,30 +136,35 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
     <div class="wrap">
       <span class="section__label">Writings &amp; Insights</span>
 
-      {writingLead && (
-        <div class="lead">
-          {writingLead.data.coverImage && (
-            <figure class="lead__media">
-              <Image src={writingLead.data.coverImage} alt={writingLead.data.title} widths={[400, 640, 900]} sizes="(max-width: 760px) 100vw, 440px" />
-            </figure>
-          )}
-          <div class="lead__body">
-            <span class="index__meta">
-              {writingLead.data.featured && <span class="tag tag--accent">Featured</span>}
-              <span class="tag">{writingLead.data.tags[0] || 'AI Strategy'}</span>
-              <span class="date">{iso(writingLead.data.date)}</span>
-            </span>
-            <a href={`/writings/${writingLead.id}`} class="lead__title">{writingLead.data.title}</a>
-            <span class="lead__deck">{writingLead.data.description}</span>
-          </div>
+      {featuredWritings.length > 0 && (
+        <div class="featured">
+          {featuredWritings.map(w => (
+            <div class="featured__item">
+              {w.data.coverImage && (
+                <figure class="featured__media">
+                  <Image src={w.data.coverImage} alt={w.data.title} widths={[300, 600, 900]} sizes="300px" />
+                </figure>
+              )}
+              <span class="featured__meta">
+                <span class="tag tag--accent">Featured</span>
+                <span class="date">{iso(w.data.date)}</span>
+              </span>
+              <a href={`/writings/${w.id}`} class="featured__title">{w.data.title}</a>
+              <span class="featured__deck">{w.data.description}</span>
+            </div>
+          ))}
         </div>
       )}
 
       <div class="index">
         {writingList.map(w => (
-          <div class="index__item">
+          <div class:list={["index__item", { "index__item--nomedia": !w.data.coverImage }]}>
+            {w.data.coverImage && (
+              <figure class="index__media">
+                <Image src={w.data.coverImage} alt={w.data.title} widths={[200, 400, 600]} sizes="200px" />
+              </figure>
+            )}
             <span class="index__meta">
-              {w.data.featured && <span class="tag tag--accent">Featured</span>}
               <span class="tag">{w.data.tags[0] || 'AI Strategy'}</span>
               <span class="date">{iso(w.data.date)}</span>
             </span>
@@ -209,13 +184,13 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
 
       {visibleEvents.map(ev => (
         <div class="event">
+          <span class="event__rail">
+            <span class="tag">{ev.role}</span>
+            <span class="date">{isoStr(ev.date)}</span>
+          </span>
           <div>
             <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="event__title">{ev.title}</a>
-            <span class="event__meta">
-              <span class="tag">{ev.role}</span>
-              <span class="date">{isoStr(ev.date)}</span>
-              <span class="event__where">{ev.location}</span>
-            </span>
+            <span class="event__where">{ev.location}</span>
           </div>
           <div class="event__actions">
             {ev.links.map(l => (
@@ -229,13 +204,13 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
         <div id="more-events" hidden>
           {hiddenEvents.map(ev => (
             <div class="event">
+              <span class="event__rail">
+                <span class="tag">{ev.role}</span>
+                <span class="date">{isoStr(ev.date)}</span>
+              </span>
               <div>
                 <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="event__title">{ev.title}</a>
-                <span class="event__meta">
-                  <span class="tag">{ev.role}</span>
-                  <span class="date">{isoStr(ev.date)}</span>
-                  <span class="event__where">{ev.location}</span>
-                </span>
+                <span class="event__where">{ev.location}</span>
               </div>
               <div class="event__actions">
                 {ev.links.map(l => (
@@ -259,14 +234,18 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
   <section id="contact" class="band-wash">
     <div class="wrap">
       <span class="section__label">Contact</span>
-      <h2>Let's connect, build, and inspire.</h2>
-      <p class="deck" style="margin-top: 16px;">
-        Always learning, always building agentic systems and frameworks. If you're doing the same, I'd love to connect.
-      </p>
-      <div class="contact__actions">
-        <button class="contact__email" id="email-btn"><span id="email-btn-text">contact@twyoon.com</span></button>
-        <a href="https://linkedin.com/in/taewan-yoon" target="_blank" rel="noopener" class="link">LinkedIn</a>
-        <a href="https://github.com/tyoon10" target="_blank" rel="noopener" class="link">GitHub</a>
+      <div class="contact__grid">
+        <div>
+          <h2>Let's connect, build, and inspire.</h2>
+          <p class="deck" style="margin-top: 18px;">
+            Always learning, always building agentic systems and frameworks. If you're doing the same, I'd love to connect.
+          </p>
+        </div>
+        <div class="contact__actions">
+          <button class="contact__email" id="email-btn"><span id="email-btn-text">contact@twyoon.com</span></button>
+          <a href="https://linkedin.com/in/taewan-yoon" target="_blank" rel="noopener" class="link">LinkedIn</a>
+          <a href="https://github.com/tyoon10" target="_blank" rel="noopener" class="link">GitHub</a>
+        </div>
       </div>
     </div>
   </section>

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const allWritings = await getCollection('writings');
@@ -21,7 +22,12 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
 
       <div class="index">
         {sortedWritings.map(writing => (
-          <div class="index__item">
+          <div class:list={["index__item", { "index__item--nomedia": !writing.data.coverImage }]}>
+            {writing.data.coverImage && (
+              <figure class="index__media">
+                <Image src={writing.data.coverImage} alt={writing.data.title} widths={[200, 400, 600]} sizes="200px" />
+              </figure>
+            )}
             <span class="index__meta">
               {writing.data.featured && <span class="tag tag--accent">Featured</span>}
               <span class="tag">{writing.data.tags[0] || 'AI Strategy'}</span>
