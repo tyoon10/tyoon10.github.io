@@ -1,15 +1,23 @@
 ---
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import '../styles/design-system.css';
 
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
+  /** Nav overlays a full-bleed dark hero and inverts on scroll. Homepage only —
+   *  the system allows one cinematic moment per page. */
+  heroOverlay?: boolean;
 }
 
-const { title, description = "Taewan Yoon's Personal Portfolio and Writing Space.", noindex = false } = Astro.props;
+const {
+  title,
+  description = "Taewan Yoon's Personal Portfolio and Writing Space.",
+  noindex = false,
+  heroOverlay = false,
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -40,24 +48,27 @@ const { title, description = "Taewan Yoon's Personal Portfolio and Writing Space
       gtag('config', 'G-H62WJ8E3J9');
     </script>
 
-    <!-- Google Fonts -->
+    <!--
+      Fonts. Newsreader is a variable serif (200–800 + optical sizing) and
+      carries both the whisper-weight display and the broadsheet body, so the
+      two serif choices resolve to one family. Inter is UI chrome only.
+      JetBrains Mono owns labels, dates and code.
+
+      Retired at the parchment cutover: Plus Jakarta Sans, Fira Code, and the
+      full Font Awesome stylesheet — arrows are text glyphs now.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
-    
-    <!-- FontAwesome for Premium Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <!-- Widescreen Centered Container -->
-    <div class="container">
-      <Navigation />
-      
-      <main>
-        <slot />
-      </main>
-      
-      <Footer />
-    </div>
+    <Navigation overlay={heroOverlay} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

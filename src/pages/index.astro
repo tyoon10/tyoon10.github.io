@@ -3,267 +3,224 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LogoTray from '../components/LogoTray.astro';
+import heroImage from '../assets/hero-fireside.jpg';
 import { events } from '../data/events';
 
-// Fetch projects and writings dynamically from Astro Content Collections
 const allProjects = await getCollection('projects');
 const allWritings = await getCollection('writings');
 
-// Sort writings by date descending (drop unlisted, direct-link-only pages)
-const sortedWritings = allWritings
-  .filter(w => !w.data.unlisted)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+// Featured entries lead the list — position is the only "featured" signal the
+// system allows, alongside a single accent-outlined pill.
+const byDateDesc = (a: { data: { date: Date } }, b: { data: { date: Date } }) =>
+  b.data.date.valueOf() - a.data.date.valueOf();
 
-// Filter featured posts (pinned on top) and latest posts (grid below)
-const featuredWritings = sortedWritings.filter(w => w.data.featured).slice(0, 2);
-const featuredIds = new Set(featuredWritings.map(w => w.id));
-const latestWritings = sortedWritings.filter(w => !featuredIds.has(w.id)).slice(0, 2);
+const sortedWritings = allWritings.filter(w => !w.data.unlisted).sort(byDateDesc);
+const homeWritings = [
+  ...sortedWritings.filter(w => w.data.featured),
+  ...sortedWritings.filter(w => !w.data.featured),
+].slice(0, 4);
 
-// Filter projects — featured pinned on top, latest in 2-column grid (mirrors writings)
-const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 2);
-const featuredProjectIds = new Set(featuredProjects.map(p => p.id));
-const latestProjects = sortedProjects.filter(p => !featuredProjectIds.has(p.id)).slice(0, 2);
+const sortedProjects = allProjects.sort(byDateDesc);
+const homeProjects = [
+  ...sortedProjects.filter(p => p.data.featured),
+  ...sortedProjects.filter(p => !p.data.featured),
+].slice(0, 4);
 
 // Events — newest first; show latest 3, collapse the rest
 const sortedEvents = events.slice().sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
 const visibleEvents = sortedEvents.slice(0, 3);
 const hiddenEvents = sortedEvents.slice(3);
-const fmtEventDate = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-const roleStyles: Record<string, { pill: string; marker: string }> = {
-  organizer: { pill: 'status-organizer', marker: '#9333ea' },
-  keynote: { pill: 'status-keynote', marker: '#0d9488' },
-  host: { pill: 'status-host', marker: '#0ea5e9' },
-  neutral: { pill: 'status-neutral', marker: '#64748b' },
-};
-const iconClass = (icon: string) => ({
-  linkedin: 'fab fa-linkedin',
-  github: 'fab fa-github',
-  globe: 'fas fa-globe',
-  'book-open': 'fas fa-book-open',
-  comments: 'fas fa-comments',
-  video: 'fas fa-video',
-  code: 'fas fa-code',
-}[icon] || 'fas fa-link');
+
+// The cover story: newest featured writing that actually has an image.
+const heroLead = homeWritings.find(w => w.data.coverImage) ?? homeWritings[0];
+
+// Each section leads with one illustrated entry, then goes compact. The
+// contrast between the two is what gives the page its rhythm.
+const writingsRest = homeWritings.filter(w => w.id !== heroLead?.id);
+const writingLead = writingsRest.find(w => w.data.coverImage) ?? writingsRest[0];
+const writingList = writingsRest.filter(w => w.id !== writingLead?.id);
+
+const projectLead = homeProjects.find(p => p.data.coverImage) ?? homeProjects[0];
+const projectList = homeProjects.filter(p => p.id !== projectLead?.id);
+
+// ISO dates, dot-separated — 2026·08·04
+const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
+const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
 ---
 
-<BaseLayout title="Systems Thinking for Applied AI" description="Personal portfolio of Taewan Yoon — leading AI ecosystems, PM, and strategic enterprise AI deployment.">
-  
-  <!-- MINIMALIST HERO TITLE SECTION -->
-  <section class="hero-section">
-    <div class="hero-drift-spot"></div>
-    <div class="hero-content">
-      <h1 class="hero-headline">
-        <span>Systems Thinking</span> for Applied AI<br />and <span>Agent-native Workflow</span> Design
-      </h1>
-      <p class="hero-lead">
-        I bridge the gap between model breakthroughs and institutional deployment. I translate what the best models can do into strategies that institutions can actually deploy, and I'm always working to understand both sides more deeply.
+<BaseLayout title="Systems Thinking for Applied AI" description="Personal portfolio of Taewan Yoon — leading AI ecosystems, PM, and strategic enterprise AI deployment." heroOverlay={true}>
+
+  <!-- CINEMATIC HERO — the page's one full-bleed photographic moment -->
+  <section class="hero-cine">
+    <Image
+      src={heroImage}
+      alt="A fireside panel on stage before a packed auditorium at Columbia Business School"
+      class="hero-cine__img"
+      widths={[1280, 1920, 2560]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-cine__inner wrap">
+      <h1 class="hero-cine__title">Systems thinking<br />for applied AI</h1>
+      <p class="hero-cine__deck">
+        A curious human exploring how frontier models translate into systems institutions can actually deploy. Always learning, experimenting, and occasionally sharing agent-native workflow designs.
       </p>
-      <div class="hero-actions">
-        <a href="#projects" class="action-anchor">Explore Projects <i class="fas fa-arrow-right"></i></a>
-        <a href="/writings" class="action-anchor">Read My Writing <i class="fas fa-arrow-right"></i></a>
+      <div class="hero-cine__actions">
+        <a href="/projects" class="btn btn--ondark">Explore projects <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/writings" class="btn btn--ghost-ondark">Read my writing</a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT ME SECTION -->
-  <section id="about" class="section-spacing">
-    <h2 class="section-heading">About Me</h2>
-    <div class="profile-bento">
-      <div class="profile-bio-card">
-        <div class="profile-header" style="margin-bottom: 20px;">
-          <div class="profile-info" style="display: flex; align-items: center; gap: 12px;">
-            <h2 style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;">Taewan Yoon, CFA</h2>
-            <a href="https://www.linkedin.com/in/taewan-yoon/" target="_blank" rel="noopener" class="profile-social profile-social--linkedin" title="LinkedIn" aria-label="Taewan Yoon on LinkedIn">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://github.com/tyoon10" target="_blank" rel="noopener" class="profile-social profile-social--github" title="GitHub" aria-label="Taewan Yoon on GitHub">
-              <i class="fab fa-github"></i>
-            </a>
+  <!-- COVER STORY -->
+  {heroLead && (
+    <section class="section">
+      <div class="wrap">
+        <span class="section__label">Latest</span>
+        <div class="lead lead--hero">
+          {heroLead.data.coverImage && (
+            <figure class="lead__media">
+              <Image src={heroLead.data.coverImage} alt={heroLead.data.title} widths={[720, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" />
+            </figure>
+          )}
+          <div class="lead__body">
+            <span class="index__meta">
+              <span class="tag">{heroLead.data.tags[0] || 'AI Strategy'}</span>
+              <span class="date">{iso(heroLead.data.date)}</span>
+            </span>
+            <a href={`/writings/${heroLead.id}`} class="lead__title">{heroLead.data.title}</a>
+            <span class="lead__deck">{heroLead.data.description}</span>
           </div>
         </div>
-
-        <div class="profile-body-text">
-          <p>
-            Columbia MBA/MS. Built and scaled Claude's NYC builder ecosystem from 0 to 1,000+ members. Led the AI Club through 4x growth to 900+ paid members, and co-organized the flagship AI Startup Challenge. Founded BRAIN, a cross-school startup network tackling the hardest business challenges with frontier AI.
-          </p>
-          <p>
-            AI strategist, product manager, and startup community builder. Shipped agentic workflows as Manus AI Fellow, and co-founded AI-native fintech startup (acquired by a major insurance firm). Mentor at CFA Society New York.
-          </p>
-        </div>
-
-        <!-- DIRECT BRAND LOGOS ROW -->
-        <LogoTray />
       </div>
+    </section>
+  )}
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="wrap">
+      <span class="section__label">About</span>
+      <h2 class="profile__name">
+        Taewan Yoon, CFA
+        <span class="profile__social">
+          <a href="https://www.linkedin.com/in/taewan-yoon/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/tyoon10" target="_blank" rel="noopener">GitHub</a>
+        </span>
+      </h2>
+      <div class="profile__body">
+        <p>
+          Columbia MBA/MS. Built and scaled Claude's NYC builder ecosystem from 0 to 1,000+ members. Led the AI Club through 4x growth to 900+ paid members, and co-organized the flagship AI Startup Challenge. Founded BRAIN, a cross-school startup network tackling the hardest business challenges with frontier AI.
+        </p>
+        <p>
+          AI strategist, product manager, and startup community builder. Shipped agentic workflows as Manus AI Fellow, and co-founded AI-native fintech startup (acquired by a major insurance firm). Mentor at CFA Society New York.
+        </p>
+      </div>
+      <div style="margin-top: 40px;"><LogoTray /></div>
     </div>
   </section>
 
-  <!-- PROJECTS SECTION: BENTO PINNED LAYOUT -->
-  <section id="projects" class="section-spacing">
-    <h2 class="section-heading">Projects</h2>
-    
-    <div class="writings-showcase-container">
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="wrap">
+      <span class="section__label">Projects</span>
 
-      <!-- 1) Featured Projects: Pinned Widescreen Cards (stacked) -->
-      {featuredProjects.map(fp => (
-        <div class="pinned-article-card featured-outline">
-          <div class="pinned-article-visual">
-            {fp.data.coverImage ? (
-              <Image src={fp.data.coverImage} alt={fp.data.title} width={400} height={260} style="width: 100%; height: 100%; object-fit: cover;" />
-            ) : (
-              <i class="fas fa-layer-group"></i>
-            )}
-          </div>
-          <div class="pinned-article-content">
-            <div class="article-card-meta">
-              <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
-              <span class="category-chip">{fp.data.tags[0] || 'Project'}</span>
-              <span>{fp.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
-            </div>
-            <a href={`/projects/${fp.id}`} class="card-stretch-link"><h3 class="article-card-title">{fp.data.title}</h3></a>
-            <p class="article-card-excerpt">{fp.data.description}</p>
-            {fp.data.links && fp.data.links.length > 0 && (
-              <div class="pinned-card-links">
-                {fp.data.links.map(l => (
-                  <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null} class="arrow-link-action">
-                    {l.icon === 'linkedin' && <i class="fab fa-linkedin"></i>}
-                    {l.icon === 'github' && <i class="fab fa-github"></i>}
-                    {l.icon === 'globe' && <i class="fas fa-globe"></i>}
-                    {l.icon === 'book-open' && <i class="fas fa-book-open"></i>}
-                    {l.icon === 'comments' && <i class="fas fa-comments"></i>}
-                    {l.icon === 'video' && <i class="fas fa-video"></i>}
-                    {l.name}
-                  </a>
-                ))}
-              </div>
-            )}
+      {projectLead && (
+        <div class="lead">
+          {projectLead.data.coverImage && (
+            <figure class="lead__media">
+              <Image src={projectLead.data.coverImage} alt={projectLead.data.title} widths={[400, 640, 900]} sizes="(max-width: 760px) 100vw, 440px" />
+            </figure>
+          )}
+          <div class="lead__body">
+            <span class="index__meta">
+              {projectLead.data.featured && <span class="tag tag--accent">Featured</span>}
+              <span class="tag">{projectLead.data.tags[0] || 'Project'}</span>
+              <span class="date">{iso(projectLead.data.date)}</span>
+            </span>
+            <a href={`/projects/${projectLead.id}`} class="lead__title">{projectLead.data.title}</a>
+            <span class="lead__deck">{projectLead.data.description}</span>
           </div>
         </div>
-      ))}
+      )}
 
-      <!-- 2) Latest Projects: 2-Column Grid -->
-      <div class="latest-articles-grid">
-        {latestProjects.map((p, index) => (
-          <a href={`/projects/${p.id}`} class="article-grid-card">
-            <div class={`grid-card-visual ${!p.data.coverImage ? (index % 2 === 0 ? 'header-gradient-b' : 'header-gradient-c') : ''}`}>
-              {p.data.coverImage ? (
-                <Image src={p.data.coverImage} alt={p.data.title} width={400} height={200} style="width: 100%; height: 100%; object-fit: cover;" />
-              ) : (
-                <i class={index % 2 === 0 ? 'fas fa-layer-group' : 'fas fa-chart-line'}></i>
-              )}
-            </div>
-            <div class="grid-card-body">
-              <div>
-                <div class="article-card-meta">
-                  <span class="category-chip">{p.data.tags[0] || 'Project'}</span>
-                </div>
-                <h3 class="article-card-title">{p.data.title}</h3>
-                <p class="article-card-excerpt">{p.data.description}</p>
-              </div>
-              <div class="grid-card-footer">
-                <span>{p.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
-              </div>
-            </div>
-          </a>
+      <div class="index">
+        {projectList.map(p => (
+          <div class="index__item">
+            <span class="index__meta">
+              {p.data.featured && <span class="tag tag--accent">Featured</span>}
+              <span class="tag">{p.data.tags[0] || 'Project'}</span>
+              <span class="date">{iso(p.data.date)}</span>
+            </span>
+            <a href={`/projects/${p.id}`} class="index__title">{p.data.title}</a>
+            <span class="index__deck">{p.data.description}</span>
+          </div>
         ))}
       </div>
-
-    </div>
-
-    <!-- See All Projects Link -->
-    <div class="more-writings-row" style="margin-top: 28px;">
-      <a href="/projects" class="action-anchor">See all projects <i class="fas fa-arrow-right"></i></a>
+      <a href="/projects" class="more-link">All projects <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
-  <!-- WRITINGS SHOWCASE: PINNED / LATEST / MORE -->
-  <section id="posts" class="section-spacing">
-    <h2 class="section-heading">Writings & Insights</h2>
-    
-    <div class="writings-showcase-container">
-      
-      <!-- 1) Featured Articles: Pinned Widescreen Cards (stacked) -->
-      {featuredWritings.map(fw => (
-        <a href={`/writings/${fw.id}`} class="pinned-article-card featured-outline">
-          <div class="pinned-article-visual">
-            {fw.data.coverImage ? (
-              <Image src={fw.data.coverImage} alt={fw.data.title} width={400} height={260} style="width: 100%; height: 100%; object-fit: cover;" />
-            ) : (
-              <i class="fas fa-cubes"></i>
-            )}
-          </div>
-          <div class="pinned-article-content">
-            <div class="article-card-meta">
-              <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
-              <span class="category-chip">{fw.data.tags[0] || 'AI Strategy'}</span>
-              <span>{fw.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-            </div>
-            <h3 class="article-card-title">{fw.data.title}</h3>
-            <p class="article-card-excerpt">
-              {fw.data.description}
-            </p>
-          </div>
-        </a>
-      ))}
+  <!-- WRITINGS -->
+  <section id="posts" class="section">
+    <div class="wrap">
+      <span class="section__label">Writings &amp; Insights</span>
 
-      <!-- 2) Latest Articles: Refined 2-Column Grid Below Pinned Card -->
-      <div class="latest-articles-grid">
-        {latestWritings.map((writing, index) => (
-          <a href={`/writings/${writing.id}`} class="article-grid-card">
-            <div class={`grid-card-visual ${!writing.data.coverImage ? (index % 2 === 0 ? 'header-gradient-b' : 'header-gradient-c') : ''}`}>
-              {writing.data.coverImage ? (
-                <Image src={writing.data.coverImage} alt={writing.data.title} width={400} height={200} style="width: 100%; height: 100%; object-fit: cover;" />
-              ) : (
-                <i class={index % 2 === 0 ? 'fas fa-terminal' : 'fas fa-seedling'}></i>
-              )}
-            </div>
-            <div class="grid-card-body">
-              <div>
-                <div class="article-card-meta">
-                  <span class="category-chip">{writing.data.tags[0] || 'AI Strategy'}</span>
-                </div>
-                <h3 class="article-card-title">{writing.data.title}</h3>
-                <p class="article-card-excerpt">{writing.data.description}</p>
-              </div>
-              <div class="grid-card-footer">
-                <span>{writing.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-              </div>
-            </div>
-          </a>
+      {writingLead && (
+        <div class="lead">
+          {writingLead.data.coverImage && (
+            <figure class="lead__media">
+              <Image src={writingLead.data.coverImage} alt={writingLead.data.title} widths={[400, 640, 900]} sizes="(max-width: 760px) 100vw, 440px" />
+            </figure>
+          )}
+          <div class="lead__body">
+            <span class="index__meta">
+              {writingLead.data.featured && <span class="tag tag--accent">Featured</span>}
+              <span class="tag">{writingLead.data.tags[0] || 'AI Strategy'}</span>
+              <span class="date">{iso(writingLead.data.date)}</span>
+            </span>
+            <a href={`/writings/${writingLead.id}`} class="lead__title">{writingLead.data.title}</a>
+            <span class="lead__deck">{writingLead.data.description}</span>
+          </div>
+        </div>
+      )}
+
+      <div class="index">
+        {writingList.map(w => (
+          <div class="index__item">
+            <span class="index__meta">
+              {w.data.featured && <span class="tag tag--accent">Featured</span>}
+              <span class="tag">{w.data.tags[0] || 'AI Strategy'}</span>
+              <span class="date">{iso(w.data.date)}</span>
+            </span>
+            <a href={`/writings/${w.id}`} class="index__title">{w.data.title}</a>
+            <span class="index__deck">{w.data.description}</span>
+          </div>
         ))}
       </div>
-
-      <!-- 3) Minimal 'More' Link Action -->
-      <div class="more-writings-row">
-        <a href="/writings" class="action-anchor">See all articles <i class="fas fa-arrow-right"></i></a>
-      </div>
-
+      <a href="/writings" class="more-link">All writing <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
-  <!-- EVENTS TIMELINE -->
-  <section id="events" class="section-spacing">
-    <h2 class="section-heading">Events</h2>
-    
-    <div class="ecosystem-timeline">
+  <!-- EVENTS -->
+  <section id="events" class="section">
+    <div class="wrap">
+      <span class="section__label">Events</span>
+
       {visibleEvents.map(ev => (
-        <div class="timeline-row">
-          <div class="timeline-marker" style={`border-color: ${roleStyles[ev.roleStyle].marker};`}></div>
-          <div class="timeline-card">
-            <div class="timeline-details">
-              <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="timeline-title-link">
-                <h3 class="timeline-title">{ev.title}</h3>
-              </a>
-              <div class="timeline-meta-row">
-                <span class={`status-pill ${roleStyles[ev.roleStyle].pill}`}>{ev.role}</span>
-                <span class="meta-info"><span class="meta-date">{fmtEventDate(ev.date)}</span><span class="meta-sep">•</span><span class="meta-loc">{ev.location}</span></span>
-              </div>
-            </div>
-            <div class="timeline-actions">
-              {ev.links.map(l => (
-                <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null} class="timeline-action-btn"><i class={iconClass(l.icon)}></i> {l.name}</a>
-              ))}
-            </div>
+        <div class="event">
+          <div>
+            <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="event__title">{ev.title}</a>
+            <span class="event__meta">
+              <span class="tag">{ev.role}</span>
+              <span class="date">{isoStr(ev.date)}</span>
+              <span class="event__where">{ev.location}</span>
+            </span>
+          </div>
+          <div class="event__actions">
+            {ev.links.map(l => (
+              <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
+            ))}
           </div>
         </div>
       ))}
@@ -271,57 +228,49 @@ const iconClass = (icon: string) => ({
       {hiddenEvents.length > 0 && (
         <div id="more-events" hidden>
           {hiddenEvents.map(ev => (
-            <div class="timeline-row">
-              <div class="timeline-marker" style={`border-color: ${roleStyles[ev.roleStyle].marker};`}></div>
-              <div class="timeline-card">
-                <div class="timeline-details">
-                  <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="timeline-title-link">
-                    <h3 class="timeline-title">{ev.title}</h3>
-                  </a>
-                  <div class="timeline-meta-row">
-                    <span class={`status-pill ${roleStyles[ev.roleStyle].pill}`}>{ev.role}</span>
-                    <span class="meta-info"><span class="meta-date">{fmtEventDate(ev.date)}</span><span class="meta-sep">•</span><span class="meta-loc">{ev.location}</span></span>
-                  </div>
-                </div>
-                <div class="timeline-actions">
-                  {ev.links.map(l => (
-                    <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null} class="timeline-action-btn"><i class={iconClass(l.icon)}></i> {l.name}</a>
-                  ))}
-                </div>
+            <div class="event">
+              <div>
+                <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="event__title">{ev.title}</a>
+                <span class="event__meta">
+                  <span class="tag">{ev.role}</span>
+                  <span class="date">{isoStr(ev.date)}</span>
+                  <span class="event__where">{ev.location}</span>
+                </span>
+              </div>
+              <div class="event__actions">
+                {ev.links.map(l => (
+                  <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
+                ))}
               </div>
             </div>
           ))}
         </div>
       )}
-    </div>
 
-    {hiddenEvents.length > 0 && (
-      <div class="more-writings-row" style="margin-top: 28px;">
-        <button type="button" id="toggle-events" class="action-anchor" aria-expanded="false" aria-controls="more-events" style="background: none; border: none; cursor: pointer; font: inherit;">
-          Show {hiddenEvents.length} more events <i class="fas fa-chevron-down"></i>
+      {hiddenEvents.length > 0 && (
+        <button type="button" id="toggle-events" class="more-link" aria-expanded="false" aria-controls="more-events" style="background: none; border: none; cursor: pointer; padding: 0;">
+          Show {hiddenEvents.length} more events <span class="arrow" aria-hidden="true">&darr;</span>
         </button>
-      </div>
-    )}
+      )}
+    </div>
   </section>
 
-  <!-- CONVERSION BOX (GTM LEAD CAPTURE) -->
-  <section id="contact" class="section-spacing">
-    <div class="gtm-contact-card">
-      <h2 class="contact-title">Let's Connect, Build, and Inspire</h2>
-      <p class="contact-subtitle">
+  <!-- CONTACT — the page's one change of ground, to close it -->
+  <section id="contact" class="band-wash">
+    <div class="wrap">
+      <span class="section__label">Contact</span>
+      <h2>Let's connect, build, and inspire.</h2>
+      <p class="deck" style="margin-top: 16px;">
         Always learning, always building agentic systems and frameworks. If you're doing the same, I'd love to connect.
       </p>
-      <div class="contact-buttons-row">
-        <button class="email-copy-btn" id="email-btn">
-          <i class="far fa-envelope"></i> <span id="email-btn-text">contact@twyoon.com</span>
-        </button>
-        <a href="https://linkedin.com/in/taewan-yoon" target="_blank" class="social-anchor-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://github.com/tyoon10" target="_blank" class="social-anchor-btn" title="GitHub"><i class="fab fa-github"></i></a>
+      <div class="contact__actions">
+        <button class="contact__email" id="email-btn"><span id="email-btn-text">contact@twyoon.com</span></button>
+        <a href="https://linkedin.com/in/taewan-yoon" target="_blank" rel="noopener" class="link">LinkedIn</a>
+        <a href="https://github.com/tyoon10" target="_blank" rel="noopener" class="link">GitHub</a>
       </div>
     </div>
   </section>
 
-  <!-- Clipboard Copy + Events Toggle Logic -->
   <script is:inline>
     const emailBtn = document.getElementById('email-btn');
     const textSpan = document.getElementById('email-btn-text');
@@ -330,10 +279,8 @@ const iconClass = (icon: string) => ({
       emailBtn.addEventListener('click', () => {
         const email = 'contact@twyoon.com';
         navigator.clipboard.writeText(email).then(() => {
-          textSpan.innerHTML = '<i class="fas fa-check" style="color: #38bdf8;"></i> Copied Email!';
-          setTimeout(() => {
-            textSpan.textContent = email;
-          }, 1800);
+          textSpan.textContent = 'Copied';
+          setTimeout(() => { textSpan.textContent = email; }, 1800);
         }).catch(err => {
           console.error('Could not copy email: ', err);
         });
@@ -349,12 +296,11 @@ const iconClass = (icon: string) => ({
         const expanded = moreEvents.hidden === false;
         moreEvents.hidden = expanded;
         toggleBtn.setAttribute('aria-expanded', String(!expanded));
-        const count = moreEvents.querySelectorAll('.timeline-row').length;
+        const count = moreEvents.querySelectorAll('.event').length;
         toggleBtn.innerHTML = expanded
-          ? `Show ${count} more events <i class="fas fa-chevron-down"></i>`
-          : `Show fewer events <i class="fas fa-chevron-up"></i>`;
+          ? `Show ${count} more events <span class="arrow" aria-hidden="true">&darr;</span>`
+          : `Show fewer events <span class="arrow" aria-hidden="true">&uarr;</span>`;
       });
     }
   </script>
-
 </BaseLayout>

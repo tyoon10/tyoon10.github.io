@@ -1,13 +1,40 @@
 ---
+interface Props { overlay?: boolean }
+const { overlay = false } = Astro.props;
 ---
-<header class="glass-header">
-  <div class="nav-inner">
-    <a href="/" class="logo">twyoon</a>
-    <nav class="nav-links">
+<header class:list={["nav", { "nav--overlay": overlay }]} data-overlay={overlay ? "true" : null}>
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">twyoon</a>
+    <nav class="nav__links">
       <a href="/#about">About</a>
-      <a href="/#projects">Projects</a>
+      <a href="/projects">Projects</a>
       <a href="/writings">Writings</a>
       <a href="/#contact">Contact</a>
     </nav>
   </div>
 </header>
+
+{overlay && (
+  <script is:inline>
+    // Land the nav onto parchment once the cinematic hero has scrolled past.
+    // The nav is emitted before <main>, so this must wait for the hero to
+    // exist — running at parse time finds nothing and silently no-ops.
+    (() => {
+      const init = () => {
+        const nav = document.querySelector('.nav--overlay');
+        const hero = document.querySelector('.hero-cine');
+        if (!nav || !hero) return;
+        const io = new IntersectionObserver(
+          ([e]) => nav.classList.toggle('is-landed', !e.isIntersecting),
+          { rootMargin: '-72px 0px 0px 0px', threshold: 0 }
+        );
+        io.observe(hero);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+)}
