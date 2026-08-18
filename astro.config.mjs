@@ -1,17 +1,38 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Collect slugs of writings marked `unlisted: true` in their front matter.
+// Reading the files here keeps the sitemap in step with the flag automatically,
+// so adding an unlisted post never means remembering to edit this config.
+function unlistedWritingSlugs() {
+  const base = new URL('./src/content/writings/', import.meta.url);
+  const dir = fs.existsSync(base) ? fs.readdirSync(base, { withFileTypes: true }) : [];
+  return dir
+    .filter((e) => e.isDirectory())
+    .filter((e) => {
+      const file = path.join(base.pathname, e.name, 'index.md');
+      if (!fs.existsSync(file)) return false;
+      const front = fs.readFileSync(file, 'utf8').split(/^---$/m)[1] ?? '';
+      return /^\s*unlisted:\s*true\s*$/m.test(front);
+    })
+    .map((e) => `/writings/${e.name}`);
+}
+
+// Pages that are reachable by direct link but deliberately kept out of search.
+const excludedFromSitemap = [
+  ...unlistedWritingSlugs(),
+  '/advisory',
+  '/workshop',
+];
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://twyoon.com',
-  // Keep unlisted, direct-link-only pages out of the public sitemap.
   integrations: [sitemap({
-    filter: (page) => ![
-      '/writings/why-i-love-community-building',
-      '/advisory',
-      '/workshop',
-    ].some((slug) => page.includes(slug)),
+    filter: (page) => !excludedFromSitemap.some((slug) => page.includes(slug)),
   })],
 
   // Preserve legacy Hugo URLs (indexed + externally linked) by redirecting
