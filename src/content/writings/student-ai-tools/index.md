@@ -31,50 +31,300 @@ So claim the live ones today, while they are still live.
 
 ## Every offer at a glance
 
-Jump straight to any tool. Prices and terms are in each entry.
+Filter by category, search by name, or narrow to the free ones. Each card links to the full entry with terms and sources.
 
-**[The five I use every day](#the-five-i-actually-use-every-day)**
+<style>
+.offergrid{--gap:14px;margin:32px 0 40px}
+.offergrid__controls{display:none;flex-wrap:wrap;gap:10px;align-items:center;
+  padding:14px;border:1px solid var(--rule);border-radius:var(--r-action);
+  background:var(--sunk);margin-bottom:var(--gap)}
+.offergrid--live .offergrid__controls{display:flex}
+.offergrid__search{flex:1 1 200px;min-width:0;font:inherit;font-size:14px;
+  padding:8px 12px;border:1px solid var(--rule);border-radius:var(--r-action);
+  background:var(--canvas);color:var(--ink)}
+.offergrid__search:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.offergrid__chips{display:flex;flex-wrap:wrap;gap:6px}
+.offergrid__chip{font:inherit;font-size:12px;line-height:1;padding:7px 12px;cursor:pointer;
+  border:1px solid var(--rule);border-radius:var(--r-pill);
+  background:var(--canvas);color:var(--ink-muted)}
+.offergrid__chip:hover{border-color:var(--accent);color:var(--accent)}
+.offergrid__chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.offergrid__toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;
+  color:var(--ink-muted);cursor:pointer;white-space:nowrap}
+.offergrid__count{width:100%;margin:0;font-size:12px;color:var(--ink-quiet)}
+.offergrid__list{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap);
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.offercard{margin:0}
+.offercard a{display:flex;flex-direction:column;gap:8px;height:100%;padding:16px;
+  text-decoration:none;color:inherit;background:var(--surface);
+  border:1px solid var(--rule);border-radius:var(--r-action)}
+.offercard a:hover{border-color:var(--accent);background:var(--accent-wash)}
+.offercard a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.offercard__top{display:flex;align-items:center;gap:10px}
+.offercard__logo{width:32px;height:32px;object-fit:contain;flex:none;border-radius:4px}
+.offercard__mono{width:32px;height:32px;flex:none;border-radius:4px;display:grid;
+  place-items:center;background:var(--accent);color:#fff;font-weight:600;font-size:14px}
+.offercard__name{font-weight:600;font-size:15px;line-height:1.2}
+.offercard__offer{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.02em;
+  padding:4px 8px;border-radius:var(--r-pill);background:var(--accent-wash);color:var(--accent)}
+.offercard--free .offercard__offer{background:var(--accent);color:#fff}
+.offercard__desc{font-size:13px;line-height:1.45;color:var(--ink-muted);margin:0}
+.offercard__cat{margin-top:auto;font-size:11px;color:var(--ink-quiet)}
+.offergrid__empty{display:none;padding:20px;text-align:center;color:var(--ink-muted);
+  border:1px dashed var(--rule);border-radius:var(--r-action);font-size:14px}
+.offergrid--empty .offergrid__empty{display:block}
+.offergrid--empty .offergrid__list{display:none}
+@media (max-width:520px){.offergrid__list{grid-template-columns:1fr}}
+</style>
 
-| Tool | Offer | What it is for |
-|---|---|---|
-| [Notion](#1-notion-free) | Free | Notes and knowledge |
-| [Figma](#2-figma-free-for-1-year) | Free for 1 year | Design |
-| [Granola](#3-granola-free-for-12-months) | Free for 12 months | Meeting notes |
-| [GitHub Student Developer Pack](#4-github-student-developer-pack-free) | Free | Developer tools |
-| [Zed](#5-zed-free-for-1-year) | Free for 1 year | AI code editor |
+<div class="offergrid" data-offergrid>
+  <div class="offergrid__controls">
+    <input id="offer-search" class="offergrid__search" type="search" data-search placeholder="Search tools, offers, categories..." aria-label="Search offers">
+    <div class="offergrid__chips" role="group" aria-label="Filter by category">
+      <button type="button" class="offergrid__chip" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="offergrid__chip" data-filter="coding" aria-pressed="false">Coding and dev</button>
+      <button type="button" class="offergrid__chip" data-filter="writing" aria-pressed="false">Writing and research</button>
+      <button type="button" class="offergrid__chip" data-filter="notes" aria-pressed="false">Notes and meetings</button>
+      <button type="button" class="offergrid__chip" data-filter="design" aria-pressed="false">Design and media</button>
+      <button type="button" class="offergrid__chip" data-filter="productivity" aria-pressed="false">Productivity</button>
+    </div>
+    <label class="offergrid__toggle"><input type="checkbox" data-free> Free only</label>
+    <p class="offergrid__count" data-count aria-live="polite"></p>
+  </div>
+  <ul class="offergrid__list">
+    <li class="offercard offercard--free" data-group="notes" data-free="true" data-search="notion free the single best note and knowledge tool for grad school. notes and knowledge">
+      <a href="#1-notion-free">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/notion.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Notion</span></span>
+        <span class="offercard__offer">Free</span>
+        <span class="offercard__desc">The single best note and knowledge tool for grad school.</span>
+        <span class="offercard__cat">Notes and knowledge</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="design" data-free="true" data-search="figma free for 1 year full professional plan for verified higher-ed students. design">
+      <a href="#2-figma-free-for-1-year">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/figma.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Figma</span></span>
+        <span class="offercard__offer">Free for 1 year</span>
+        <span class="offercard__desc">Full Professional plan for verified higher-ed students.</span>
+        <span class="offercard__cat">Design</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="notes" data-free="true" data-search="granola free for 12 months ai notepad for meetings and lectures. meeting notes">
+      <a href="#3-granola-free-for-12-months">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/granola.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Granola</span></span>
+        <span class="offercard__offer">Free for 12 months</span>
+        <span class="offercard__desc">AI notepad for meetings and lectures.</span>
+        <span class="offercard__cat">Meeting notes</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="github student developer pack free the gold-standard student bundle. developer tools">
+      <a href="#4-github-student-developer-pack-free">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/github.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">GitHub Student Developer Pack</span></span>
+        <span class="offercard__offer">Free</span>
+        <span class="offercard__desc">The gold-standard student bundle.</span>
+        <span class="offercard__cat">Developer tools</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="zed free for 1 year ai-native editor, and the most credible remaining free route to a premium ai ide now that cursor's student discount has... ai code editor">
+      <a href="#5-zed-free-for-1-year">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/zed.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Zed</span></span>
+        <span class="offercard__offer">Free for 1 year</span>
+        <span class="offercard__desc">AI-native editor, and the most credible remaining free route to a premium AI IDE now that Cursor's student discount has...</span>
+        <span class="offercard__cat">AI code editor</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="writing" data-free="false" data-search="perplexity $10/month, 50% off the best ai search tool for academic work. ai search">
+      <a href="#perplexity-10month-50-off">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/perplexity.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Perplexity</span></span>
+        <span class="offercard__offer">$10/month, 50% off</span>
+        <span class="offercard__desc">The best AI search tool for academic work.</span>
+        <span class="offercard__cat">AI search</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="design" data-free="false" data-search="adobe creative cloud ~71% off first year the full app suite plus firefly generative ai in photoshop, illustrator and premiere. design and creative">
+      <a href="#adobe-creative-cloud-71-off-first-year">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/adobe.ico" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Adobe Creative Cloud</span></span>
+        <span class="offercard__offer">~71% off first year</span>
+        <span class="offercard__desc">The full app suite plus Firefly generative AI in Photoshop, Illustrator and Premiere.</span>
+        <span class="offercard__cat">Design and creative</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="coding" data-free="false" data-search="openai codex $100 in codex credits 100 usd of chatgpt credits earmarked for codex. ai coding">
+      <a href="#openai-codex-100-in-codex-credits">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/openai-codex.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">OpenAI Codex</span></span>
+        <span class="offercard__offer">$100 in Codex credits</span>
+        <span class="offercard__desc">100 USD of ChatGPT credits earmarked for Codex.</span>
+        <span class="offercard__cat">AI coding</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="productivity" data-free="false" data-search="microsoft 365 personal $4.99/month, 50% off half price on the full office suite with copilot built into word, excel, powerpoint, onenote and outlook, plus 1 tb of... productivity suite">
+      <a href="#microsoft-365-personal-499month-50-off">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/microsoft-365.ico" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Microsoft 365 Personal</span></span>
+        <span class="offercard__offer">$4.99/month, 50% off</span>
+        <span class="offercard__desc">Half price on the full Office suite with Copilot built into Word, Excel, PowerPoint, OneNote and Outlook, plus 1 TB of...</span>
+        <span class="offercard__cat">Productivity suite</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="writing" data-free="false" data-search="grammarly 50% off, seasonal writing assistant. writing">
+      <a href="#grammarly-50-off-seasonal">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/grammarly.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Grammarly</span></span>
+        <span class="offercard__offer">50% off, seasonal</span>
+        <span class="offercard__desc">Writing assistant.</span>
+        <span class="offercard__cat">Writing</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="writing" data-free="false" data-search="otter.ai 20% off pro transcription for lectures, interviews and group meetings. transcription">
+      <a href="#otterai-20-off-pro">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/otter.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Otter.ai</span></span>
+        <span class="offercard__offer">20% off Pro</span>
+        <span class="offercard__desc">Transcription for lectures, interviews and group meetings.</span>
+        <span class="offercard__cat">Transcription</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="writing" data-free="false" data-search="quillbot up to 25% off paraphrasing and grammar tool with heavy student usage. writing">
+      <a href="#quillbot-up-to-25-off">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/quillbot.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">QuillBot</span></span>
+        <span class="offercard__offer">Up to 25% off</span>
+        <span class="offercard__desc">Paraphrasing and grammar tool with heavy student usage.</span>
+        <span class="offercard__cat">Writing</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="design" data-free="true" data-search="beautiful.ai free pro for 12 months ai slide-deck builder that does the layout work for you. presentations">
+      <a href="#beautifulai-free-pro-for-12-months">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/beautiful-ai.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Beautiful.ai</span></span>
+        <span class="offercard__offer">Free Pro for 12 months</span>
+        <span class="offercard__desc">AI slide-deck builder that does the layout work for you.</span>
+        <span class="offercard__cat">Presentations</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="notes" data-free="false" data-search="obsidian 40% off sync and publish the app itself is free and always has been. notes and knowledge">
+      <a href="#obsidian-40-off-sync-and-publish">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/obsidian.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Obsidian</span></span>
+        <span class="offercard__offer">40% off Sync and Publish</span>
+        <span class="offercard__desc">The app itself is free and always has been.</span>
+        <span class="offercard__cat">Notes and knowledge</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="design" data-free="false" data-search="loom up to 50% off, 75% for classroom use screen recording with ai summaries and transcripts. async video">
+      <a href="#loom-up-to-50-off-75-for-classroom-use">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/loom.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Loom</span></span>
+        <span class="offercard__offer">Up to 50% off, 75% for classroom use</span>
+        <span class="offercard__desc">Screen recording with AI summaries and transcripts.</span>
+        <span class="offercard__cat">Async video</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="coding" data-free="false" data-search="amp 50% off, $10/month sourcegraph's coding agent, half price for students and teachers with no document check. ai coding agent">
+      <a href="#amp-50-off-10month">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/amp.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Amp</span></span>
+        <span class="offercard__offer">50% off, $10/month</span>
+        <span class="offercard__desc">Sourcegraph's coding agent, half price for students and teachers with no document check.</span>
+        <span class="offercard__cat">AI coding agent</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="writing" data-free="false" data-search="consensus 40% off premium citation-grounded academic search. academic search">
+      <a href="#the-rest">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/consensus.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Consensus</span></span>
+        <span class="offercard__offer">40% off Premium</span>
+        <span class="offercard__desc">Citation-grounded academic search.</span>
+        <span class="offercard__cat">Academic search</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="design" data-free="true" data-search="framer free basic plan, worth $120/year design-to-web tool with a free student plan that includes monthly ai credits. design and web">
+      <a href="#the-rest">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/framer.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Framer</span></span>
+        <span class="offercard__offer">Free Basic plan, worth $120/year</span>
+        <span class="offercard__desc">Design-to-web tool with a free student plan that includes monthly AI credits.</span>
+        <span class="offercard__cat">Design and web</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="notes" data-free="false" data-search="reclaim.ai 50% off for 12 months ai calendar that defends time for tasks and habits against meeting creep. scheduling">
+      <a href="#the-rest">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/reclaim.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Reclaim.ai</span></span>
+        <span class="offercard__offer">50% off for 12 months</span>
+        <span class="offercard__desc">AI calendar that defends time for tasks and habits against meeting creep.</span>
+        <span class="offercard__cat">Scheduling</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="writing" data-free="false" data-search="speechify 25% off premium text to speech for getting through case studies and papers while doing something else. text to speech">
+      <a href="#the-rest">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/speechify.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Speechify</span></span>
+        <span class="offercard__offer">25% off Premium</span>
+        <span class="offercard__desc">Text to speech for getting through case studies and papers while doing something else.</span>
+        <span class="offercard__cat">Text to speech</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="coding" data-free="false" data-search="microsoft azure for students $100 credit, no card needed 100 usd of azure credit to use within 12 months, with no credit card required. cloud and infrastructure">
+      <a href="#cloud-credits">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/azure.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Microsoft Azure for Students</span></span>
+        <span class="offercard__offer">$100 credit, no card needed</span>
+        <span class="offercard__desc">100 USD of Azure credit to use within 12 months, with no credit card required.</span>
+        <span class="offercard__cat">Cloud and infrastructure</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="coding" data-free="false" data-search="google cloud for students 200 google skills credits 200 google skills credits for hands-on labs, skill badges and courses on google cloud skills boost. cloud and infrastructure">
+      <a href="#cloud-credits">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/google-cloud.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Google Cloud for Students</span></span>
+        <span class="offercard__offer">200 Google Skills credits</span>
+        <span class="offercard__desc">200 Google Skills credits for hands-on labs, skill badges and courses on Google Cloud Skills Boost.</span>
+        <span class="offercard__cat">Cloud and infrastructure</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="aws educate free self-paced labs free self-paced cloud training and hands-on labs covering s3, ec2, vpc, rds and cloud operations, with digital badges. cloud and infrastructure">
+      <a href="#cloud-credits">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/aws-educate.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">AWS Educate</span></span>
+        <span class="offercard__offer">Free self-paced labs</span>
+        <span class="offercard__desc">Free self-paced cloud training and hands-on labs covering S3, EC2, VPC, RDS and cloud operations, with digital badges.</span>
+        <span class="offercard__cat">Cloud and infrastructure</span>
+      </a>
+    </li>
+  </ul>
+  <p class="offergrid__empty">No offers match that. Clear the search or pick a different category.</p>
+</div>
+<script>
+(function () {
+  var root = document.querySelector('[data-offergrid]');
+  if (!root) return;
+  // Controls stay hidden until JS is running, so the no-JS view is the full
+  // grid rather than dead filters.
+  root.classList.add('offergrid--live');
 
-**[Worth knowing about](#worth-knowing-about)**
+  var cards = Array.prototype.slice.call(root.querySelectorAll('.offercard'));
+  var search = root.querySelector('[data-search]');
+  var chips = Array.prototype.slice.call(root.querySelectorAll('[data-filter]'));
+  var freeOnly = root.querySelector('[data-free]');
+  var count = root.querySelector('[data-count]');
+  var group = 'all';
 
-| Tool | Offer | What it is for |
-|---|---|---|
-| [Perplexity](#perplexity-10month-50-off) | $10/month, 50% off | AI search |
-| [Adobe Creative Cloud](#adobe-creative-cloud-71-off-first-year) | ~71% off first year | Design and creative |
-| [OpenAI Codex](#openai-codex-100-in-codex-credits) | $100 in Codex credits | AI coding |
-| [Microsoft 365 Personal](#microsoft-365-personal-499month-50-off) | $4.99/month, 50% off | Productivity suite |
-| [Grammarly](#grammarly-50-off-seasonal) | 50% off, seasonal | Writing |
-| [Otter.ai](#otterai-20-off-pro) | 20% off Pro | Transcription |
-| [QuillBot](#quillbot-up-to-25-off) | Up to 25% off | Writing |
-| [Beautiful.ai](#beautifulai-free-pro-for-12-months) | Free Pro for 12 months | Presentations |
-| [Obsidian](#obsidian-40-off-sync-and-publish) | 40% off Sync and Publish | Notes and knowledge |
-| [Loom](#loom-up-to-50-off-75-for-classroom-use) | Up to 50% off, 75% for classroom use | Async video |
-| [Amp](#amp-50-off-10month) | 50% off, $10/month | AI coding agent |
+  function apply() {
+    var q = (search.value || '').trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function (card) {
+      var okGroup = group === 'all' || card.dataset.group === group;
+      var okFree = !freeOnly.checked || card.dataset.free === 'true';
+      var okText = !q || card.dataset.search.indexOf(q) !== -1;
+      var visible = okGroup && okFree && okText;
+      card.hidden = !visible;
+      if (visible) shown++;
+    });
+    root.classList.toggle('offergrid--empty', shown === 0);
+    count.textContent = shown === cards.length
+      ? 'Showing all ' + cards.length + ' offers'
+      : 'Showing ' + shown + ' of ' + cards.length + ' offers';
+  }
 
-**[The rest](#the-rest)**
-
-| Tool | Offer | What it is for |
-|---|---|---|
-| [Consensus](#the-rest) | 40% off Premium | Academic search |
-| [Framer](#the-rest) | Free Basic plan, worth $120/year | Design and web |
-| [Reclaim.ai](#the-rest) | 50% off for 12 months | Scheduling |
-| [Speechify](#the-rest) | 25% off Premium | Text to speech |
-
-**[Cloud credits](#cloud-credits)**
-
-| Tool | Offer | What it is for |
-|---|---|---|
-| [Microsoft Azure for Students](#cloud-credits) | $100 credit, no card needed | Cloud and infrastructure |
-| [Google Cloud for Students](#cloud-credits) | 200 Google Skills credits | Cloud and infrastructure |
-| [AWS Educate](#cloud-credits) | Free self-paced labs | Cloud and infrastructure |
+  search.addEventListener('input', apply);
+  freeOnly.addEventListener('change', apply);
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      group = chip.dataset.filter;
+      chips.forEach(function (c) {
+        c.setAttribute('aria-pressed', String(c === chip));
+      });
+      apply();
+    });
+  });
+  apply();
+})();
+</script>
 
 **[Recently closed](#recently-closed):** Cursor, Google Gemini. Kept on the page so you know not to go looking.
 
