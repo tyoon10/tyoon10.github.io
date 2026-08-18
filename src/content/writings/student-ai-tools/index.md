@@ -34,49 +34,74 @@ So claim the live ones today, while they are still live.
 Filter by category, search by name, or narrow to the free ones. Each card links to the full entry with terms and sources.
 
 <style>
-.offergrid{--gap:14px;margin:32px 0 40px}
-.offergrid__controls{display:none;flex-wrap:wrap;gap:10px;align-items:center;
+/* The grid lives inside .markdown-body, whose prose rules would otherwise win.
+   Two conflicts matter:
+     .markdown-body img  (0,1,1) forces width/height:auto, display:block and
+       margin:32px auto, which blows every logo up to its intrinsic size and
+       shoves the card layout apart. Beaten here with .offergrid img.offercard__logo.
+     .markdown-body a    (0,1,1) underlines every link.
+   So each rule below is scoped under .offergrid to outrank prose styling. */
+.offergrid{
+  /* Break out of the 62ch prose column so cards get three across on desktop,
+     without escaping the page gutter on narrow screens. */
+  --breakout:clamp(0px,(100vw - 48px - var(--prose-width))/2,180px);
+  --gap:14px;
+  margin:32px calc(-1 * var(--breakout)) 40px;
+  font-family:var(--sans);letter-spacing:0}
+.offergrid .offergrid__controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;
   padding:14px;border:1px solid var(--rule);border-radius:var(--r-action);
-  background:var(--sunk);margin-bottom:var(--gap)}
-.offergrid--live .offergrid__controls{display:flex}
-.offergrid__search{flex:1 1 200px;min-width:0;font:inherit;font-size:14px;
-  padding:8px 12px;border:1px solid var(--rule);border-radius:var(--r-action);
+  background:var(--sunk);margin:0 0 var(--gap)}
+.offergrid .offergrid__search{flex:1 1 210px;min-width:0;font:inherit;font-size:14px;
+  padding:9px 12px;border:1px solid var(--rule);border-radius:var(--r-action);
   background:var(--canvas);color:var(--ink)}
-.offergrid__search:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.offergrid__chips{display:flex;flex-wrap:wrap;gap:6px}
-.offergrid__chip{font:inherit;font-size:12px;line-height:1;padding:7px 12px;cursor:pointer;
-  border:1px solid var(--rule);border-radius:var(--r-pill);
+.offergrid .offergrid__search:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.offergrid .offergrid__chips{display:flex;flex-wrap:wrap;gap:6px}
+.offergrid .offergrid__chip{font:inherit;font-size:12px;line-height:1;padding:8px 12px;
+  cursor:pointer;border:1px solid var(--rule);border-radius:var(--r-pill);
   background:var(--canvas);color:var(--ink-muted)}
-.offergrid__chip:hover{border-color:var(--accent);color:var(--accent)}
-.offergrid__chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-.offergrid__toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;
+.offergrid .offergrid__chip:hover{border-color:var(--accent);color:var(--accent)}
+.offergrid .offergrid__chip[aria-pressed="true"]{background:var(--accent);
+  border-color:var(--accent);color:#fff}
+.offergrid .offergrid__toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;
   color:var(--ink-muted);cursor:pointer;white-space:nowrap}
-.offergrid__count{width:100%;margin:0;font-size:12px;color:var(--ink-quiet)}
-.offergrid__list{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap);
-  grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
-.offercard{margin:0}
-.offercard a{display:flex;flex-direction:column;gap:8px;height:100%;padding:16px;
-  text-decoration:none;color:inherit;background:var(--surface);
+.offergrid .offergrid__count{width:100%;margin:0;font-size:12px;color:var(--ink-quiet)}
+.offergrid .offergrid__list{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap);
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.offergrid .offercard{margin:0;padding:0}
+.offergrid .offercard::marker{content:""}
+.offergrid .offercard a{display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  height:100%;padding:16px;text-decoration:none;color:inherit;background:var(--surface);
   border:1px solid var(--rule);border-radius:var(--r-action)}
-.offercard a:hover{border-color:var(--accent);background:var(--accent-wash)}
-.offercard a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.offercard__top{display:flex;align-items:center;gap:10px}
-.offercard__logo{width:32px;height:32px;object-fit:contain;flex:none;border-radius:4px}
-.offercard__mono{width:32px;height:32px;flex:none;border-radius:4px;display:grid;
+.offergrid .offercard a:hover{border-color:var(--accent);background:var(--accent-wash)}
+.offergrid .offercard a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.offergrid .offercard__top{display:flex;align-items:center;gap:10px;width:100%}
+/* Specificity 0,2,1 so it beats .markdown-body img (0,1,1). */
+.offergrid img.offercard__logo{width:32px;height:32px;min-width:32px;max-width:32px;
+  max-height:32px;margin:0;display:block;object-fit:contain;border-radius:4px;flex:none}
+.offergrid .offercard__mono{width:32px;height:32px;flex:none;border-radius:4px;display:grid;
   place-items:center;background:var(--accent);color:#fff;font-weight:600;font-size:14px}
-.offercard__name{font-weight:600;font-size:15px;line-height:1.2}
-.offercard__offer{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.02em;
-  padding:4px 8px;border-radius:var(--r-pill);background:var(--accent-wash);color:var(--accent)}
-.offercard--free .offercard__offer{background:var(--accent);color:#fff}
-.offercard__desc{font-size:13px;line-height:1.45;color:var(--ink-muted);margin:0}
-.offercard__cat{margin-top:auto;font-size:11px;color:var(--ink-quiet)}
-.offergrid__empty{display:none;padding:20px;text-align:center;color:var(--ink-muted);
-  border:1px dashed var(--rule);border-radius:var(--r-action);font-size:14px}
+.offergrid .offercard__name{font-weight:600;font-size:14px;line-height:1.25;
+  font-family:var(--sans)}
+.offergrid .offercard__offer{font-size:11px;font-weight:600;letter-spacing:.02em;
+  padding:4px 9px;border-radius:var(--r-pill);background:var(--accent-wash);color:var(--accent)}
+.offergrid .offercard--free .offercard__offer{background:var(--accent);color:#fff}
+.offergrid .offercard__desc{font-size:13px;line-height:1.45;color:var(--ink-muted);margin:0}
+.offergrid .offercard__cat{margin-top:auto;padding-top:4px;font-size:11px;color:var(--ink-quiet)}
+.offergrid .offergrid__empty{display:none;padding:20px;text-align:center;
+  color:var(--ink-muted);border:1px dashed var(--rule);border-radius:var(--r-action);
+  font-size:14px;margin:0}
 .offergrid--empty .offergrid__empty{display:block}
 .offergrid--empty .offergrid__list{display:none}
-@media (max-width:520px){.offergrid__list{grid-template-columns:1fr}}
+@media (max-width:560px){
+  .offergrid{margin-left:0;margin-right:0}
+  .offergrid .offergrid__list{grid-template-columns:1fr}
+}
 </style>
-
+<noscript><style>
+/* Without JS the controls cannot work, so hide them rather than showing dead
+   inputs. The full grid stays visible and every card is a plain link. */
+.offergrid .offergrid__controls{display:none}
+</style></noscript>
 <div class="offergrid" data-offergrid>
   <div class="offergrid__controls">
     <input id="offer-search" class="offergrid__search" type="search" data-search placeholder="Search tools, offers, categories..." aria-label="Search offers">
@@ -283,17 +308,12 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
 (function () {
   var root = document.querySelector('[data-offergrid]');
   if (!root) return;
-  // Controls stay hidden until JS is running, so the no-JS view is the full
-  // grid rather than dead filters.
-  root.classList.add('offergrid--live');
-
   var cards = Array.prototype.slice.call(root.querySelectorAll('.offercard'));
   var search = root.querySelector('[data-search]');
   var chips = Array.prototype.slice.call(root.querySelectorAll('[data-filter]'));
   var freeOnly = root.querySelector('[data-free]');
   var count = root.querySelector('[data-count]');
   var group = 'all';
-
   function apply() {
     var q = (search.value || '').trim().toLowerCase();
     var shown = 0;
@@ -310,7 +330,6 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
       ? 'Showing all ' + cards.length + ' offers'
       : 'Showing ' + shown + ' of ' + cards.length + ' offers';
   }
-
   search.addEventListener('input', apply);
   freeOnly.addEventListener('change', apply);
   chips.forEach(function (chip) {
