@@ -25,7 +25,7 @@ So claim the live ones today, while they are still live.
 
 > **Last refreshed:** 2026-08-18. Every entry below was checked against the vendor's own help-centre or pricing page, not a coupon site. The full research notes, including the tools I ruled out and why, live at [github.com/tyoon10/student-ai-tools](https://github.com/tyoon10/student-ai-tools).
 
-> **No affiliate links.** Nothing here pays me. Every link goes straight to the vendor.
+> **Disclosure.** One link on this page is a referral link, labelled where it appears with what you get and what I get. Every other link goes straight to the vendor and earns me nothing.
 
 ---
 
@@ -519,6 +519,9 @@ Transcription for lectures, interviews and group meetings. Individual Pro only, 
 | Length | Ongoing while discount eligibility is met. |
 | Eligibility | Verify at checkout, availability is not clearly global. |
 | Sign up | [help.otter.ai](https://help.otter.ai/hc/en-us/articles/4402467517847-Student-Teacher-discount-program-for-the-Pro-plan) |
+| Referral link | [otter.ai](https://otter.ai/referrals/SSHQGFP3) **You get 1 month of Otter Pro Lite free, 300 minutes per month. I get referral credit.** |
+
+*Disclosure: that referral link earns me credit. This is the referral programme, which is separate from the 20 percent student discount above. Otter states the referral cannot be combined with other referral promotions. Whether it stacks with the student discount is not documented either way, so if the student rate matters more to you, claim that first and skip this link. Every other link on this page earns me nothing.*
 
 ### QuillBot: **Up to 25% off**
 
