@@ -188,11 +188,11 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Design and creative</span>
       </a>
     </li>
-    <li class="offercard" data-group="coding" data-free="false" data-search="openai codex $100 in codex credits 100 usd of chatgpt credits earmarked for codex. ai coding ">
+    <li class="offercard" data-group="coding" data-free="false" data-search="openai codex $100 in codex credits 100 usd of credit for codex, openai's coding agent, spendable in the cli, the ide extensions or the web app. ai coding ">
       <a href="#openai-codex-100-in-codex-credits">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/openai-codex.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">OpenAI Codex</span></span>
         <span class="offercard__badges"><span class="offercard__offer">$100 in Codex credits</span></span>
-        <span class="offercard__desc">100 USD of ChatGPT credits earmarked for Codex.</span>
+        <span class="offercard__desc">100 USD of credit for Codex, OpenAI's coding agent, spendable in the CLI, the IDE extensions or the web app.</span>
         <span class="offercard__cat">AI coding</span>
       </a>
     </li>
@@ -204,11 +204,11 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Productivity suite</span>
       </a>
     </li>
-    <li class="offercard" data-group="writing" data-free="false" data-search="grammarly 50% off, seasonal writing assistant. writing ">
+    <li class="offercard" data-group="writing" data-free="false" data-search="grammarly 50% off, seasonal grammar, clarity and tone checking across everything you write, in the browser and on the desktop. writing ">
       <a href="#grammarly-50-off-seasonal">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/grammarly.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Grammarly</span></span>
         <span class="offercard__badges"><span class="offercard__offer">50% off, seasonal</span></span>
-        <span class="offercard__desc">Writing assistant.</span>
+        <span class="offercard__desc">Grammar, clarity and tone checking across everything you write, in the browser and on the desktop.</span>
         <span class="offercard__cat">Writing</span>
       </a>
     </li>
@@ -220,11 +220,11 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Transcription</span>
       </a>
     </li>
-    <li class="offercard" data-group="writing" data-free="false" data-search="quillbot up to 25% off paraphrasing and grammar tool with heavy student usage. writing ">
+    <li class="offercard" data-group="writing" data-free="false" data-search="quillbot up to 25% off rewrites sentences you have already written, which is the job grammarly is weakest at. writing ">
       <a href="#quillbot-up-to-25-off">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/quillbot.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">QuillBot</span></span>
         <span class="offercard__badges"><span class="offercard__offer">Up to 25% off</span></span>
-        <span class="offercard__desc">Paraphrasing and grammar tool with heavy student usage.</span>
+        <span class="offercard__desc">Rewrites sentences you have already written, which is the job Grammarly is weakest at.</span>
         <span class="offercard__cat">Writing</span>
       </a>
     </li>
@@ -236,11 +236,11 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Presentations</span>
       </a>
     </li>
-    <li class="offercard" data-group="notes" data-free="false" data-search="obsidian 40% off sync and publish the app itself is free and always has been. notes and knowledge ">
+    <li class="offercard" data-group="notes" data-free="false" data-search="obsidian 40% off sync and publish 40 percent off sync and publish, the two paid add-ons. notes and knowledge ">
       <a href="#obsidian-40-off-sync-and-publish">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/obsidian.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Obsidian</span></span>
         <span class="offercard__badges"><span class="offercard__offer">40% off Sync and Publish</span></span>
-        <span class="offercard__desc">The app itself is free and always has been.</span>
+        <span class="offercard__desc">40 percent off Sync and Publish, the two paid add-ons.</span>
         <span class="offercard__cat">Notes and knowledge</span>
       </a>
     </li>
@@ -252,11 +252,11 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Async video</span>
       </a>
     </li>
-    <li class="offercard" data-group="coding" data-free="false" data-search="amp 50% off, $10/month sourcegraph's coding agent, half price for students and teachers with no document check. ai coding agent ">
+    <li class="offercard" data-group="coding" data-free="false" data-search="amp 50% off, $10/month sourcegraph's coding agent at half price, and the only offer here that takes your word for it: no document upload, no... ai coding agent ">
       <a href="#amp-50-off-10month">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/amp.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Amp</span></span>
         <span class="offercard__badges"><span class="offercard__offer">50% off, $10/month</span></span>
-        <span class="offercard__desc">Sourcegraph's coding agent, half price for students and teachers with no document check.</span>
+        <span class="offercard__desc">Sourcegraph's coding agent at half price, and the only offer here that takes your word for it: no document upload, no...</span>
         <span class="offercard__cat">AI coding agent</span>
       </a>
     </li>
@@ -396,7 +396,7 @@ The single best note and knowledge tool for grad school. Free Plus plan for a on
 | Length | Continues while eligibility and school email status remain valid. |
 | Sign up | [notion.com](https://www.notion.com/help/notion-for-education) |
 
-*Note: Notion AI is NOT usefully included. As of 2026-08-18 there is no standalone AI add-on to buy. Free and Plus get trial-level AI only, and full AI (Agent, Meeting Notes, Enterprise Search) requires the Business tier at 20 USD per member per month. Custom Agents are metered separately.*
+*Note: Notion AI is not included. There is no standalone AI add-on to buy: Free and Plus get trial-level AI only, and the full set (Agent, Meeting Notes, Enterprise Search) needs Business at 20 USD per member per month.*
 
 *Note: Requires a single-member workspace.*
 
@@ -443,11 +443,7 @@ The gold-standard student bundle. Copilot, DigitalOcean credits, a Namecheap dom
 
 *Note: Add and verify your school-issued email under Settings then Emails before applying. This is the one-time blocker most students hit.*
 
-*Note: The temporary pause on new student sign-ups that GitHub documented in early 2026 is no longer present in the docs as of 2026-08-18.*
-
 *Note: Copilot access inside the Pack was restructured in March 2026 into a standalone plan called GitHub Copilot Student. It is still free for verified students. GitHub's changelog says the model lineup changed but does not itemise it, so treat any specific model list you read elsewhere as unverified.*
-
-*Note: The Pack gains and loses partners quietly. Two AI-relevant additions worth knowing about are Camber (research compute) and SlideCoach (AI presentation coaching, 2,000 credits for verified students).*
 
 ### 5. Wispr Flow: **3 months free, then 50% off**
 
@@ -509,9 +505,13 @@ The full app suite plus Firefly generative AI in Photoshop, Illustrator and Prem
 | Eligibility | Pricing shown is the US market. Other markets differ. |
 | Sign up | [adobe.com](https://www.adobe.com/creativecloud/buy/students/explore/ccforstudents.html) |
 
+*Note: The year-two price increase is the main trap. Diarise the renewal date.*
+
+*Note: Adobe blocks automated checks, so prices here were confirmed against the Adobe education store and secondary sources rather than a direct fetch. Verify the exact figure at checkout.*
+
 ### OpenAI Codex: **$100 in Codex credits**
 
-100 USD of ChatGPT credits earmarked for Codex. Worth being precise about what this is: it is not a ChatGPT Plus discount, and it is not API credit.
+100 USD of credit for Codex, OpenAI's coding agent, spendable in the CLI, the IDE extensions or the web app. Note the scope: the credits work only in Codex, so this is neither a ChatGPT Plus discount nor general API credit.
 
 | Field | Value |
 |---|---|
@@ -521,6 +521,12 @@ The full app suite plus Firefly generative AI in Photoshop, Illustrator and Prem
 | Length | Credits expire 12 months after the grant date. Unused credits are lost. |
 | Eligibility | Degree-granting universities in the US or Canada, and you must be residing in the US or Canada when you claim. One offer per student. |
 | Sign up | [developers.openai.com](https://developers.openai.com/community/students) |
+
+*Note: Requires an existing ChatGPT Free, Go, Plus or Pro account.*
+
+*Note: Announced 2026-03-21 with no published end date. Still live as of 2026-08-18.*
+
+*Note: This is the route to Codex CLI for students. There is no separate CLI offer. The credits are spent through whichever Codex surface you use, including the CLI and IDE extensions.*
 
 ### Microsoft 365 Personal: **$4.99/month, 50% off**
 
@@ -535,9 +541,13 @@ Half price on the full Office suite with Copilot built into Word, Excel, PowerPo
 | Eligibility | Enrolled full-time or part-time students at accredited universities and colleges. |
 | Sign up | [microsoft.com](https://www.microsoft.com/en-us/microsoft-365/college-student-pricing) |
 
+*Note: You add payment details before verification completes, so set a reminder rather than assuming the re-verification prompt will reach you.*
+
+*Note: This is the consumer Personal plan. It is separate from any Microsoft 365 Education licence your school may already give you, which is worth checking first.*
+
 ### Grammarly: **50% off, seasonal**
 
-Writing assistant. The discount runs as a seasonal SheerID campaign rather than a standing offer.
+Grammar, clarity and tone checking across everything you write, in the browser and on the desktop. The one to leave running in the background on long assignments. The discount is a seasonal campaign, so check it is live first.
 
 | Field | Value |
 |---|---|
@@ -546,6 +556,8 @@ Writing assistant. The discount runs as a seasonal SheerID campaign rather than 
 | Verification | SheerID. |
 | Length | Campaign-based and seasonal. Not always available. |
 | Sign up | [shop.sheerid.com](https://shop.sheerid.com/brands/grammarly/) |
+
+*Note: This is a campaign, not a standing offer. Check whether it is live before relying on it.*
 
 ### Otter.ai: **20% off Pro**
 
@@ -563,9 +575,11 @@ Transcription for lectures, interviews and group meetings. Individual Pro only, 
 
 *Disclosure: that referral link earns me credit. This is the referral programme, which is separate from the 20 percent student discount above. Otter states the referral cannot be combined with other referral promotions. Whether it stacks with the student discount is not documented either way, so if the student rate matters more to you, claim that first and skip this link. Every other link on this page earns me nothing.*
 
+*Note: Applies to the individual Pro plan only, not workspace or team plans.*
+
 ### QuillBot: **Up to 25% off**
 
-Paraphrasing and grammar tool with heavy student usage.
+Rewrites sentences you have already written, which is the job Grammarly is weakest at. Useful when a paragraph is technically correct and still does not read well.
 
 | Field | Value |
 |---|---|
@@ -574,6 +588,8 @@ Paraphrasing and grammar tool with heavy student usage.
 | Verification | Student Beans or UNiDAYS. |
 | Length | Campaign-based. |
 | Sign up | [quillbot.com](https://quillbot.com/upgrade/studentbeans) |
+
+*Note: The student discount does not stack with other promo codes at checkout.*
 
 ### Beautiful.ai: **Free Pro for 12 months**
 
@@ -588,9 +604,11 @@ AI slide-deck builder that does the layout work for you. A free year of Pro is a
 | Eligibility | Built around .edu addresses. International students without one are told to contact support about alternative verification. |
 | Sign up | [support.beautiful.ai](https://support.beautiful.ai/hc/en-us/articles/360030719052-Does-Beautiful-ai-offer-discounts-for-education-or-non-profits) |
 
+*Note: New student subscribers only. It does not apply to an existing paid account.*
+
 ### Obsidian: **40% off Sync and Publish**
 
-The app itself is free and always has been. This discounts the two paid add-ons, which is what you actually pay for once your vault outgrows one device. A good counterweight to Notion if you want local files you own.
+40 percent off Sync and Publish, the two paid add-ons. The app itself has always been free, so these are what you actually pay for once your vault outgrows one device. The counterweight to Notion if you want local files you own.
 
 | Field | Value |
 |---|---|
@@ -600,6 +618,8 @@ The app itself is free and always has been. This discounts the two paid add-ons,
 | Length | Ongoing while eligible. |
 | Eligibility | Students and faculty at educational organisations. Non-profit employees also qualify. |
 | Sign up | [obsidian.md](https://obsidian.md/help/discounts) |
+
+*Note: Only the paid add-ons are discounted. If you use Obsidian on one machine you are already paying nothing.*
 
 ### Loom: **Up to 50% off, 75% for classroom use**
 
@@ -614,9 +634,13 @@ Screen recording with AI summaries and transcripts. Genuinely useful for group p
 | Eligibility | Students, teachers and professors at accredited primary, secondary or tertiary institutions. Minimum age 16. |
 | Sign up | [support.atlassian.com](https://support.atlassian.com/loom/docs/loom-education-discount-verification/) |
 
+*Note: The legacy free education plan is gone and is not available to new applicants. This is a discount, not free access.*
+
+*Note: Loom is now an Atlassian product, so verification runs through Atlassian rather than loom.com.*
+
 ### Amp: **50% off, $10/month**
 
-Sourcegraph's coding agent, half price for students and teachers with no document check. Treat this as provisional. It was announced the same day this entry was written and has no track record yet.
+Sourcegraph's coding agent at half price, and the only offer here that takes your word for it: no document upload, no verification service. New enough that the terms could still move, so check them before you commit.
 
 | Field | Value |
 |---|---|
@@ -626,6 +650,12 @@ Sourcegraph's coding agent, half price for students and teachers with no documen
 | Length | Ongoing while enrolled. If you already subscribe, the discount applies at your next renewal with no retroactive refund. |
 | Eligibility | No geographic restriction stated. |
 | Sign up | [ampcode.com](https://ampcode.com/edu) |
+
+*Note: Applies to the Megawatt tier only, not Gigawatt or other plans.*
+
+*Note: Announced 2026-08-18, the same day it was first recorded here. Unproven. Re-check before relying on it.*
+
+*Note: Amp states it can change or discontinue the discount and its criteria at any time.*
 
 ### The rest
 
