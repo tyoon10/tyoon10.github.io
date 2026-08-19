@@ -260,6 +260,14 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">AI coding agent</span>
       </a>
     </li>
+    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so you talk instead of typing. voice dictation ">
+      <a href="#wispr-flow-3-months-free-then-50-off">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/wispr-flow.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Wispr Flow</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span></span>
+        <span class="offercard__desc">Voice dictation that types into any app, so you talk instead of typing.</span>
+        <span class="offercard__cat">Voice dictation</span>
+      </a>
+    </li>
     <li class="offercard" data-group="writing" data-free="false" data-search="consensus 40% off premium citation-grounded academic search. academic search ">
       <a href="#the-rest">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/consensus.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Consensus</span></span>
@@ -290,6 +298,14 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__badges"><span class="offercard__offer">25% off Premium</span></span>
         <span class="offercard__desc">Text to speech for getting through case studies and papers while doing something else.</span>
         <span class="offercard__cat">Text to speech</span>
+      </a>
+    </li>
+    <li class="offercard" data-group="writing" data-free="false" data-search="aqua voice 70% off pro and max another dictation tool, and the steepest percentage discount anywhere on this list. voice dictation ">
+      <a href="#the-rest">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/aqua-voice.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Aqua Voice</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">70% off Pro and Max</span></span>
+        <span class="offercard__desc">Another dictation tool, and the steepest percentage discount anywhere on this list.</span>
+        <span class="offercard__cat">Voice dictation</span>
       </a>
     </li>
     <li class="offercard" data-group="coding" data-free="false" data-search="microsoft azure for students $100 credit, no card needed 100 usd of azure credit to use within 12 months, with no credit card required. cloud and infrastructure ">
@@ -595,6 +611,19 @@ Sourcegraph's coding agent, half price for students and teachers with no documen
 | Eligibility | No geographic restriction stated. |
 | Sign up | [ampcode.com](https://ampcode.com/edu) |
 
+### Wispr Flow: **3 months free, then 50% off**
+
+Voice dictation that types into any app, so you talk instead of typing. Fills a gap the rest of this list does not cover: Otter transcribes meetings and Speechify reads to you, but neither turns your voice into text you are writing right now.
+
+| Field | Value |
+|---|---|
+| Original price | Flow Pro at 12 USD per user per month billed annually, or 15 USD billed monthly. |
+| Student price | **3 months free, then 6 USD per month billed annually. A 50 percent discount on Pro.** |
+| Verification | A .edu address activates the offer automatically. Without one, submit a student ID, enrolment confirmation, fee receipt or a screenshot of your student dashboard through the support form, reviewed in a few business days. |
+| Length | The 3-month trial is for new subscribers only, then the subscription auto-renews at the discounted rate. Cancel anytime. |
+| Eligibility | Not restricted in the published terms. |
+| Sign up | [wisprflow.ai](https://wisprflow.ai/students) |
+
 ### The rest
 
 | Tool | Offer | What it is |
@@ -603,6 +632,7 @@ Sourcegraph's coding agent, half price for students and teachers with no documen
 | [Framer](https://www.framer.com/education/) | **Free Basic plan, worth $120/year** | Design-to-web tool with a free student plan that includes monthly AI credits. The obvious use is hosting a portfolio or personal site without paying for a year. |
 | [Reclaim.ai](https://reclaim.ai/pricing/education-discount) | **50% off for 12 months** | AI calendar that defends time for tasks and habits against meeting creep. Low eligibility bar and a real discount, though you have to actually live in your calendar for it to pay off. |
 | [Speechify](https://www.myunidays.com/US/en-US/partners/speechify/view) | **25% off Premium** | Text to speech for getting through case studies and papers while doing something else. A modest discount, but the use case is a real one during heavy reading terms. |
+| [Aqua Voice](https://aquavoice.com/pricing) | **70% off Pro and Max** | Another dictation tool, and the steepest percentage discount anywhere on this list. Smaller and less proven than Wispr Flow, but the student price is low enough to be worth a look if you dictate a lot. |
 
 ### Cloud credits
 
