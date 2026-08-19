@@ -164,12 +164,12 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Developer tools</span>
       </a>
     </li>
-    <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="zed free for 1 year ai-native editor, and the most credible remaining free route to a premium ai ide now that cursor's student discount has... ai code editor ">
-      <a href="#5-zed-free-for-1-year">
-        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/zed.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Zed</span></span>
-        <span class="offercard__badges"><span class="offercard__offer">Free for 1 year</span></span>
-        <span class="offercard__desc">AI-native editor, and the most credible remaining free route to a premium AI IDE now that Cursor's student discount has...</span>
-        <span class="offercard__cat">AI code editor</span>
+    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so i talk instead of typing. voice dictation ">
+      <a href="#5-wispr-flow-3-months-free-then-50-off">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/wispr-flow.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Wispr Flow</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span></span>
+        <span class="offercard__desc">Voice dictation that types into any app, so I talk instead of typing.</span>
+        <span class="offercard__cat">Voice dictation</span>
       </a>
     </li>
     <li class="offercard" data-group="writing" data-free="false" data-search="perplexity $10/month, 50% off the best ai search tool for academic work. ai search ">
@@ -260,12 +260,12 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">AI coding agent</span>
       </a>
     </li>
-    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so you talk instead of typing. voice dictation ">
-      <a href="#wispr-flow-3-months-free-then-50-off">
-        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/wispr-flow.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Wispr Flow</span></span>
-        <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span></span>
-        <span class="offercard__desc">Voice dictation that types into any app, so you talk instead of typing.</span>
-        <span class="offercard__cat">Voice dictation</span>
+    <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="zed free for 1 year the most credible remaining free route to a premium ai editor now that cursor's student discount has closed. ai code editor ">
+      <a href="#the-rest">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/zed.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Zed</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">Free for 1 year</span></span>
+        <span class="offercard__desc">The most credible remaining free route to a premium AI editor now that Cursor's student discount has closed.</span>
+        <span class="offercard__cat">AI code editor</span>
       </a>
     </li>
     <li class="offercard" data-group="writing" data-free="false" data-search="consensus 40% off premium citation-grounded academic search. academic search ">
@@ -449,18 +449,22 @@ The gold-standard student bundle. Copilot, DigitalOcean credits, a Namecheap dom
 
 *Note: The Pack gains and loses partners quietly. Two AI-relevant additions worth knowing about are Camber (research compute) and SlideCoach (AI presentation coaching, 2,000 credits for verified students).*
 
-### 5. Zed: **Free for 1 year**
+### 5. Wispr Flow: **3 months free, then 50% off**
 
-AI-native editor, and the most credible remaining free route to a premium AI IDE now that Cursor's student discount has closed. Fast, lightweight, and the offer includes real model credits rather than a trial.
+Voice dictation that types into any app, so I talk instead of typing. It is the one on this list I reach for most without thinking about it, and it covers something nothing else here does: Otter transcribes meetings and Speechify reads to you, but neither turns your voice into the text you are writing right now.
 
 | Field | Value |
 |---|---|
-| Original price | Zed Pro paid plan. |
-| Student price | **Zed Pro free for one year.** |
-| Verification | Enrolled at an accredited university, at least 18 years old, a GitHub account older than 30 days, and a valid current university email. Enrolment is checked against JetBrains' open-source database of university domains. |
-| Length | 12 months. |
-| Eligibility | International students accepted. |
-| Sign up | [zed.dev](https://zed.dev/education) |
+| Original price | Flow Pro at 12 USD per user per month billed annually, or 15 USD billed monthly. |
+| Student price | **3 months free, then 6 USD per month billed annually. A 50 percent discount on Pro.** |
+| Verification | A .edu address activates the offer automatically. Without one, submit a student ID, enrolment confirmation, fee receipt or a screenshot of your student dashboard through the support form, reviewed in a few business days. |
+| Length | The 3-month trial is for new subscribers only, then the subscription auto-renews at the discounted rate. Cancel anytime. |
+| Eligibility | Not restricted in the published terms. |
+| Sign up | [wisprflow.ai](https://wisprflow.ai/students) |
+
+*Note: The 3-month free trial is for new subscribers only.*
+
+*Note: Teachers, researchers and non-profit staff get the same 50 percent rate through the same flow.*
 
 ---
 
@@ -611,23 +615,11 @@ Sourcegraph's coding agent, half price for students and teachers with no documen
 | Eligibility | No geographic restriction stated. |
 | Sign up | [ampcode.com](https://ampcode.com/edu) |
 
-### Wispr Flow: **3 months free, then 50% off**
-
-Voice dictation that types into any app, so you talk instead of typing. Fills a gap the rest of this list does not cover: Otter transcribes meetings and Speechify reads to you, but neither turns your voice into text you are writing right now.
-
-| Field | Value |
-|---|---|
-| Original price | Flow Pro at 12 USD per user per month billed annually, or 15 USD billed monthly. |
-| Student price | **3 months free, then 6 USD per month billed annually. A 50 percent discount on Pro.** |
-| Verification | A .edu address activates the offer automatically. Without one, submit a student ID, enrolment confirmation, fee receipt or a screenshot of your student dashboard through the support form, reviewed in a few business days. |
-| Length | The 3-month trial is for new subscribers only, then the subscription auto-renews at the discounted rate. Cancel anytime. |
-| Eligibility | Not restricted in the published terms. |
-| Sign up | [wisprflow.ai](https://wisprflow.ai/students) |
-
 ### The rest
 
 | Tool | Offer | What it is |
 |---|---|---|
+| [Zed](https://zed.dev/education) | **Free for 1 year** | The most credible remaining free route to a premium AI editor now that Cursor's student discount has closed. Fast, lightweight, and the offer includes real model credits rather than a trial. Worth claiming even if you do not switch to it full time, because a free year is a free year. |
 | [Consensus](https://help.consensus.app/en/articles/10064359-how-to-get-a-student-or-clinician-discount) | **40% off Premium** | Citation-grounded academic search. Strong fit for research-heavy programmes. |
 | [Framer](https://www.framer.com/education/) | **Free Basic plan, worth $120/year** | Design-to-web tool with a free student plan that includes monthly AI credits. The obvious use is hosting a portfolio or personal site without paying for a year. |
 | [Reclaim.ai](https://reclaim.ai/pricing/education-discount) | **50% off for 12 months** | AI calendar that defends time for tasks and habits against meeting creep. Low eligibility bar and a real discount, though you have to actually live in your calendar for it to pay off. |
