@@ -453,6 +453,13 @@ The gold-standard student bundle. Copilot, DigitalOcean credits, a Namecheap dom
 
 Voice dictation that types into any app, so I talk instead of typing. It is the one on this list I reach for most without thinking about it, and it covers something nothing else here does: Otter transcribes meetings and Speechify reads to you, but neither turns your voice into the text you are writing right now.
 
+**How to claim Wispr Flow**
+
+1. **[Open the partner link](https://ref.wisprflow.ai/taewan)** My partner link. It earns me 25 percent of your first year and gives you nothing extra, so skip to step 2 if you would rather it did not.
+2. **[Claim the student rate](https://wisprflow.ai/students)** Sign up with your .edu address and the offer activates automatically: 3 months free, then 6 USD a month billed annually.
+3. **No .edu address?** Submit a student ID, enrolment confirmation, fee receipt or a screenshot of your student dashboard through the support form. Reviewed in a few business days.
+
+
 | Field | Value |
 |---|---|
 | Original price | Flow Pro at 12 USD per user per month billed annually, or 15 USD billed monthly. |
@@ -461,9 +468,9 @@ Voice dictation that types into any app, so I talk instead of typing. It is the 
 | Length | The 3-month trial is for new subscribers only, then the subscription auto-renews at the discounted rate. Cancel anytime. |
 | Eligibility | Not restricted in the published terms. |
 | Sign up | [wisprflow.ai](https://wisprflow.ai/students) |
-| Referral link | [wisprflow.ai](https://wisprflow.ai/students?via=taewan) **You get exactly the same offer as the plain link above, 3 months free then 50 percent off. Nothing extra, and nothing less. I get referral credit.** |
+| Referral link | [ref.wisprflow.ai](https://ref.wisprflow.ai/taewan) **You get the same 3 months free then 50 percent off, claimed at step 2. The link itself adds nothing for you. I get referral credit.** |
 
-*Disclosure: that referral link earns me credit. Worth being blunt about the difference from the Otter link: that one gives you a free month you would not otherwise get, so clicking it is in your interest. This one gives you nothing you cannot get from the plain link beside it. It only tells Wispr Flow the visit came from here. Use either. Separately, Wispr Flow runs an in-app referral that is better for you than both: a friend's link gets you a 30-day Pro trial, or 90 days on a Student plan, and pays them a free month. If you know an existing user, ask them. Every other link on this page earns me nothing.*
+*Disclosure: that referral link earns me credit. Worth being blunt about the difference from the Otter link: that one gives you a free month you would not otherwise get, so clicking it is in your interest. This one gives you nothing you cannot get by going straight to wisprflow.ai/students. It routes through my partner link first, which is how I get credited. If you would rather not, skip step 1 and start at step 2; the offer is identical. Separately, Wispr Flow's in-app referral beats both for you: a friend's link gets you a 30-day Pro trial, or 90 days on a Student plan. Every other link on this page earns me nothing.*
 
 *Note: The 3-month free trial is for new subscribers only.*
 
