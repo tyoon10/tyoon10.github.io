@@ -456,15 +456,15 @@ Voice dictation that types into any app, so I talk instead of typing. It is the 
 **How to claim Wispr Flow**
 
 1. **[Open the partner link](https://ref.wisprflow.ai/taewan)** My partner link. It earns me 25 percent of your first year and gives you nothing extra, so skip to step 2 if you would rather it did not.
-2. **[Claim the student rate](https://wisprflow.ai/students)** Sign up with your .edu address and the offer activates automatically: 3 months free, then 6 USD a month billed annually.
-3. **No .edu address?** Submit a student ID, enrolment confirmation, fee receipt or a screenshot of your student dashboard through the support form. Reviewed in a few business days.
+2. **[Open a billing request](https://wisprflow.ai/support)** Choose request type Billing, then discount reason Student. There is no automatic .edu verification, so this step is required even with a school address. Wispr Flow support confirmed this directly on 2026-08-19.
+3. **Attach proof, as a single file** A student ID or enrolment letter. Only ONE attachment is allowed per submission, so combine multiple pages into a single PDF or image first or you will be asked to resubmit. The offer is 3 months free, then 6 USD a month billed annually.
 
 
 | Field | Value |
 |---|---|
 | Original price | Flow Pro at 12 USD per user per month billed annually, or 15 USD billed monthly. |
 | Student price | **3 months free, then 6 USD per month billed annually. A 50 percent discount on Pro.** |
-| Verification | A .edu address activates the offer automatically. Without one, submit a student ID, enrolment confirmation, fee receipt or a screenshot of your student dashboard through the support form, reviewed in a few business days. |
+| Verification | Proof of enrolment is ALWAYS required. Wispr Flow support confirmed on 2026-08-19 that there is no automatic .edu verification, despite the students page implying a .edu address activates the offer on its own. Submit through wisprflow.ai/support: request type Billing, discount reason Student, attached to a student ID or enrolment letter. |
 | Length | The 3-month trial is for new subscribers only, then the subscription auto-renews at the discounted rate. Cancel anytime. |
 | Eligibility | Not restricted in the published terms. |
 | Sign up | [wisprflow.ai](https://wisprflow.ai/students) |
@@ -473,6 +473,12 @@ Voice dictation that types into any app, so I talk instead of typing. It is the 
 *Disclosure: that referral link earns me credit. Worth being blunt about the difference from the Otter link: that one gives you a free month you would not otherwise get, so clicking it is in your interest. This one gives you nothing you cannot get by going straight to wisprflow.ai/students. It routes through my partner link first, which is how I get credited. If you would rather not, skip step 1 and start at step 2; the offer is identical. Separately, Wispr Flow's in-app referral beats both for you: a friend's link gets you a 30-day Pro trial, or 90 days on a Student plan. Every other link on this page earns me nothing.*
 
 *Note: The 3-month free trial is for new subscribers only.*
+
+*Note: The students page reads as though a .edu address activates the offer by itself. It does not. Support confirmed proof is always required. Budget for a review rather than expecting instant access.*
+
+*Note: Extended-trial promo codes do NOT stack with student pricing. Support confirmed two reasons: promos cannot combine with another active code, and student accounts run through a separate path where a signup promo code is not applied at all. If you are eligible for the student rate, take it rather than a trial code, since the reduced price continues past the point a trial would expire.*
+
+*Note: Teaching or working at an institution qualifies for the same 50 percent educator rate, claimed the same way with Education as the reason and a work email confirmation or employment document.*
 
 *Note: Teachers, researchers and non-profit staff get the same 50 percent rate through the same flow.*
 
