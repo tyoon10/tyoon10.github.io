@@ -431,6 +431,11 @@ AI notepad for meetings and lectures. Listens in the background without a bot jo
 
 ### 4. GitHub Student Developer Pack: **Free**
 
+![GitHub Education benefits application screen showing the school email verification step](./github-education-email-verification.png)
+
+*The verification step that blocks most applications. Add the school email first, under Settings then Emails.*
+
+
 The gold-standard student bundle. Copilot, DigitalOcean credits, a Namecheap domain, JetBrains and roughly 30 other developer tools, all unlocked once you verify.
 
 | Field | Value |
