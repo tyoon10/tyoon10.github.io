@@ -455,7 +455,7 @@ Voice dictation that types into any app, so I talk instead of typing. It is the 
 
 **How to claim Wispr Flow**
 
-1. **[Open the partner link](https://ref.wisprflow.ai/taewan)** My partner link. Earns me 25 percent of your first year, gives you nothing extra. Skip to step 2 if you prefer.
+1. **[Open the partner link](https://ref.wisprflow.ai/taewan)** My partner link. Same offer either way, it just credits this guide.
 2. **[Open a billing request](https://wisprflow.ai/support)** Request type Billing, reason Student. Required even with a .edu address: there is no automatic verification.
 3. **Attach proof, one file** Student ID or enrolment letter. Only one attachment per submission, so merge multiple pages first. Then 3 months free, 6 USD a month after.
 
@@ -468,9 +468,9 @@ Voice dictation that types into any app, so I talk instead of typing. It is the 
 | Length | The 3-month trial is for new subscribers only, then the subscription auto-renews at the discounted rate. Cancel anytime. |
 | Eligibility | Not restricted in the published terms. |
 | Sign up | [wisprflow.ai](https://wisprflow.ai/students) |
-| Referral link | [ref.wisprflow.ai](https://ref.wisprflow.ai/taewan) **You get the same offer as the plain link, nothing extra. I get referral credit.** |
+| Referral link | [ref.wisprflow.ai](https://ref.wisprflow.ai/taewan) **You get the same offer, at no extra cost. I get referral credit.** |
 
-*Disclosure: that referral link earns me credit. Skip step 1 if you would rather it did not. The offer is identical either way. Every other link on this page earns me nothing.*
+*Disclosure: that referral link earns me credit. Prefer not to? Start at step 2 instead. Every other link on this page earns me nothing.*
 
 *Note: New subscribers only.*
 
