@@ -25,7 +25,7 @@ So claim the live ones today, while they are still live.
 
 > **Last refreshed:** 2026-08-18. Every entry below was checked against the vendor's own help-centre or pricing page, not a coupon site. The full research notes, including the tools I ruled out and why, live at [github.com/tyoon10/student-ai-tools](https://github.com/tyoon10/student-ai-tools).
 
-> **Disclosure.** One link on this page is a referral link, labelled where it appears with what you get and what I get. Every other link goes straight to the vendor and earns me nothing.
+> **Disclosure.** 2 links on this page are referral links, labelled where they appear with what you get and what I get. Every other link goes straight to the vendor and earns me nothing.
 
 ---
 
@@ -164,10 +164,10 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Developer tools</span>
       </a>
     </li>
-    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so i talk instead of typing. voice dictation ">
+    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so i talk instead of typing. voice dictation +1 month pro lite free (referral)">
       <a href="#5-wispr-flow-3-months-free-then-50-off">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/wispr-flow.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Wispr Flow</span></span>
-        <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span><span class="offercard__bonus">+1 month Pro Lite free (referral)</span></span>
         <span class="offercard__desc">Voice dictation that types into any app, so I talk instead of typing.</span>
         <span class="offercard__cat">Voice dictation</span>
       </a>
@@ -461,6 +461,9 @@ Voice dictation that types into any app, so I talk instead of typing. It is the 
 | Length | The 3-month trial is for new subscribers only, then the subscription auto-renews at the discounted rate. Cancel anytime. |
 | Eligibility | Not restricted in the published terms. |
 | Sign up | [wisprflow.ai](https://wisprflow.ai/students) |
+| Referral link | [wisprflow.ai](https://wisprflow.ai/students?via=taewan) **You get exactly the same offer as the plain link above, 3 months free then 50 percent off. Nothing extra, and nothing less. I get referral credit.** |
+
+*Disclosure: that referral link earns me credit. Worth being blunt about the difference from the Otter link: that one gives you a free month you would not otherwise get, so clicking it is in your interest. This one gives you nothing you cannot get from the plain link beside it. It only tells Wispr Flow the visit came from here. Use either. Separately, Wispr Flow runs an in-app referral that is better for you than both: a friend's link gets you a 30-day Pro trial, or 90 days on a Student plan, and pays them a free month. If you know an existing user, ask them. Every other link on this page earns me nothing.*
 
 *Note: The 3-month free trial is for new subscribers only.*
 
