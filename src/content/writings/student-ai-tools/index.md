@@ -131,44 +131,44 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
     <p class="offergrid__count" data-count aria-live="polite"></p>
   </div>
   <ul class="offergrid__list">
-    <li class="offercard offercard--free" data-group="notes" data-free="true" data-search="notion free the single best note and knowledge tool for grad school. notes and knowledge ">
-      <a href="#1-notion-free">
-        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/notion.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Notion</span></span>
-        <span class="offercard__badges"><span class="offercard__offer">Free</span></span>
-        <span class="offercard__desc">The single best note and knowledge tool for grad school.</span>
-        <span class="offercard__cat">Notes and knowledge</span>
-      </a>
-    </li>
-    <li class="offercard offercard--free" data-group="design" data-free="true" data-search="figma free for 1 year full professional plan for verified higher-ed students. design ">
-      <a href="#2-figma-free-for-1-year">
-        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/figma.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Figma</span></span>
-        <span class="offercard__badges"><span class="offercard__offer">Free for 1 year</span></span>
-        <span class="offercard__desc">Full Professional plan for verified higher-ed students.</span>
-        <span class="offercard__cat">Design</span>
+    <li class="offercard offercard--free" data-group="productivity" data-free="true" data-search="google gemini free for 12 months google's general ai assistant, bundled with gmail, docs and a large storage bump. productivity suite ">
+      <a href="#1-google-gemini-free-for-12-months">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/gemini.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Google Gemini</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">Free for 12 months</span></span>
+        <span class="offercard__desc">Google's general AI assistant, bundled with Gmail, Docs and a large storage bump.</span>
+        <span class="offercard__cat">Productivity suite</span>
       </a>
     </li>
     <li class="offercard offercard--free" data-group="notes" data-free="true" data-search="granola free for 12 months ai notepad for meetings and lectures. meeting notes ">
-      <a href="#3-granola-free-for-12-months">
+      <a href="#2-granola-free-for-12-months">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/granola.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Granola</span></span>
         <span class="offercard__badges"><span class="offercard__offer">Free for 12 months</span></span>
         <span class="offercard__desc">AI notepad for meetings and lectures.</span>
         <span class="offercard__cat">Meeting notes</span>
       </a>
     </li>
-    <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="github student developer pack free the gold-standard student bundle. developer tools ">
-      <a href="#4-github-student-developer-pack-free">
-        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/github.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">GitHub Student Developer Pack</span></span>
+    <li class="offercard offercard--free" data-group="notes" data-free="true" data-search="notion free the single best note and knowledge tool for grad school. notes and knowledge ">
+      <a href="#3-notion-free">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/notion.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Notion</span></span>
         <span class="offercard__badges"><span class="offercard__offer">Free</span></span>
-        <span class="offercard__desc">The gold-standard student bundle.</span>
-        <span class="offercard__cat">Developer tools</span>
+        <span class="offercard__desc">The single best note and knowledge tool for grad school.</span>
+        <span class="offercard__cat">Notes and knowledge</span>
       </a>
     </li>
     <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so i talk instead of typing. voice dictation +1 month pro lite free (referral)">
-      <a href="#5-wispr-flow-3-months-free-then-50-off">
+      <a href="#4-wispr-flow-3-months-free-then-50-off">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/wispr-flow.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Wispr Flow</span></span>
         <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span><span class="offercard__bonus">+1 month Pro Lite free (referral)</span></span>
         <span class="offercard__desc">Voice dictation that types into any app, so I talk instead of typing.</span>
         <span class="offercard__cat">Voice dictation</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="github student developer pack free the gold-standard student bundle. developer tools ">
+      <a href="#5-github-student-developer-pack-free">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/github.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">GitHub Student Developer Pack</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">Free</span></span>
+        <span class="offercard__desc">The gold-standard student bundle.</span>
+        <span class="offercard__cat">Developer tools</span>
       </a>
     </li>
     <li class="offercard" data-group="writing" data-free="false" data-search="perplexity $10/month, 50% off the best ai search tool for academic work. ai search ">
@@ -203,12 +203,12 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Productivity suite</span>
       </a>
     </li>
-    <li class="offercard offercard--free" data-group="productivity" data-free="true" data-search="google gemini free for 12 months google's general ai assistant, bundled with gmail, docs and a large storage bump. productivity suite ">
-      <a href="#google-gemini-free-for-12-months">
-        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/gemini.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Google Gemini</span></span>
-        <span class="offercard__badges"><span class="offercard__offer">Free for 12 months</span></span>
-        <span class="offercard__desc">Google's general AI assistant, bundled with Gmail, Docs and a large storage bump.</span>
-        <span class="offercard__cat">Productivity suite</span>
+    <li class="offercard offercard--free" data-group="design" data-free="true" data-search="figma free for 1 year full professional plan for verified higher-ed students. design ">
+      <a href="#figma-free-for-1-year">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/figma.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Figma</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">Free for 1 year</span></span>
+        <span class="offercard__desc">Full Professional plan for verified higher-ed students.</span>
+        <span class="offercard__cat">Design</span>
       </a>
     </li>
     <li class="offercard" data-group="writing" data-free="false" data-search="grammarly 50% off, seasonal grammar, clarity and tone checking across everything you write, in the browser and on the desktop. writing ">
@@ -391,7 +391,41 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
 
 Tried, used extensively, kept. These are the ones I would tell a classmate to set up first.
 
-### 1. Notion: **Free**
+### 1. Google Gemini: **Free for 12 months**
+
+Google's general AI assistant, bundled with Gmail, Docs and a large storage bump. The free year that closed 2026-03-11 is back under a new offer code, and it splits sharply by region: US students get the full Pro tier, students elsewhere get a smaller Plus tier instead.
+
+| Field | Value |
+|---|---|
+| Original price | Google AI Pro at 19.99 USD per month in the US. Google AI Plus at roughly 4.99 USD per month equivalent elsewhere. |
+| Student price | **Free for 12 months, then auto-renews at the regular price unless cancelled. US students get Google AI Pro: 5 TB storage, 4x Gemini usage limits, Gemini Spark, Gemini in Gmail and Docs, Google Health Premium. Students in other eligible markets get Google AI Plus instead, a lower tier: 400 GB storage, 2x Gemini usage limits, Gemini Omni. A Google AI Pro plus YouTube Premium bundle is also available in select markets, at roughly 75 percent off.** |
+| Verification | SheerID, using a school email. A valid payment method must be on file at signup even though the first 12 months are free. |
+| Length | 12 months from signup, then automatic monthly billing at the regular rate unless cancelled. Redeem by 2026-12-31. Reverification through SheerID is required, usually annually, for up to 4 consecutive years; miss it and the trial converts to a paid subscription. |
+| Eligibility | US students get the Pro tier. Students in 140-plus other eligible markets get the smaller Plus tier instead, except in Bolivia, Albania, Canada, Macau, Hong Kong and Tunisia, where the standalone trial is not offered at all. |
+| Sign up | [blog.google](https://blog.google/innovation-and-ai/products/gemini-app/student-offer-google-ai/) |
+
+*Note: This is a new offer code, not the old page reopening. The offer this guide previously recorded as closed on 2026-03-11 is still closed; this is a separate relaunch, announced 2026-08-19.*
+
+*Note: Signing up while already on another Google One extended trial revokes that trial. Check what an existing Google One plan gives up before switching.*
+
+*Note: Upgrading from the trial to a paid plan before it ends makes you ineligible for future Google One trials.*
+
+### 2. Granola: **Free for 12 months**
+
+AI notepad for meetings and lectures. Listens in the background without a bot joining the call, then generates clean structured notes afterwards. I use it for internal team meetings.
+
+| Field | Value |
+|---|---|
+| Original price | Granola Business is a paid tier. |
+| Student price | **12 months of Granola Business free.** |
+| Verification | Student application flow on the Granola student page. |
+| Length | 12 months. |
+| Eligibility | Currently enrolled students at accredited universities in the US, UK and Canada. |
+| Sign up | [granola.ai](https://www.granola.ai/students) |
+
+*Note: The page labels this a LIMITED EDITION promotion, so it may be withdrawn without notice.*
+
+### 3. Notion: **Free**
 
 The single best note and knowledge tool for grad school. Free Plus plan for a one-member workspace if you have an eligible school email. I run Notion as an operating system for my Product Management coursework and side projects.
 
@@ -407,57 +441,7 @@ The single best note and knowledge tool for grad school. Free Plus plan for a on
 
 *Note: Requires a single-member workspace.*
 
-### 2. Figma: **Free for 1 year**
-
-Full Professional plan for verified higher-ed students. Slide alternatives, mockups, quick visuals, case-comp decks. Still the default design tool for product designers and PMs.
-
-| Field | Value |
-|---|---|
-| Original price | Figma Professional paid plan. |
-| Student price | **Free Professional plan access for verified higher-ed students.** |
-| Verification | School-issued email, then the education application page with "Higher Ed" selected as institution type. Figma verifies all applications through SheerID. |
-| Length | One year, then reapply. |
-| Sign up | [help.figma.com](https://help.figma.com/hc/en-us/articles/360041061214-Figma-for-Education) |
-
-*Note: Must reapply annually, it does not auto-renew as free.*
-
-### 3. Granola: **Free for 12 months**
-
-AI notepad for meetings and lectures. Listens in the background without a bot joining the call, then generates clean structured notes afterwards. I use it for internal team meetings.
-
-| Field | Value |
-|---|---|
-| Original price | Granola Business is a paid tier. |
-| Student price | **12 months of Granola Business free.** |
-| Verification | Student application flow on the Granola student page. |
-| Length | 12 months. |
-| Eligibility | Currently enrolled students at accredited universities in the US, UK and Canada. |
-| Sign up | [granola.ai](https://www.granola.ai/students) |
-
-*Note: The page labels this a LIMITED EDITION promotion, so it may be withdrawn without notice.*
-
-### 4. GitHub Student Developer Pack: **Free**
-
-![GitHub Education benefits application screen showing the school email verification step](./github-education-email-verification.png)
-
-*The verification step that blocks most applications. Add the school email first, under Settings then Emails.*
-
-
-The gold-standard student bundle. Copilot, DigitalOcean credits, a Namecheap domain, JetBrains and roughly 30 other developer tools, all unlocked once you verify.
-
-| Field | Value |
-|---|---|
-| Original price | Copilot paid plans. |
-| Student price | **Free Copilot access for verified GitHub Education students, plus the pack.** |
-| Verification | GitHub Education benefits application. |
-| Length | Re-evaluated by GitHub while student status remains valid. |
-| Sign up | [education.github.com](https://education.github.com/pack/) |
-
-*Note: Add and verify your school-issued email under Settings then Emails before applying. This is the one-time blocker most students hit.*
-
-*Note: Copilot access inside the Pack was restructured in March 2026 into a standalone plan called GitHub Copilot Student. It is still free for verified students. GitHub's changelog says the model lineup changed but does not itemise it, so treat any specific model list you read elsewhere as unverified.*
-
-### 5. Wispr Flow: **3 months free, then 50% off**
+### 4. Wispr Flow: **3 months free, then 50% off**
 
 Voice dictation that types into any app, so I talk instead of typing. It is the one on this list I reach for most without thinking about it, and it covers something nothing else here does: Otter transcribes meetings and Speechify reads to you, but neither turns your voice into the text you are writing right now.
 
@@ -485,6 +469,22 @@ Voice dictation that types into any app, so I talk instead of typing. It is the 
 *Note: Trial codes do not stack with the student rate. Take the student rate: 54 USD in year one against 72 USD on a 6-month trial, and it keeps the discount afterwards rather than reverting to full price.*
 
 *Note: Teaching or non-profit staff get the same 50 percent rate, claimed the same way with Education as the reason.*
+
+### 5. GitHub Student Developer Pack: **Free**
+
+The gold-standard student bundle. Copilot, DigitalOcean credits, a Namecheap domain, JetBrains and roughly 30 other developer tools, all unlocked once you verify.
+
+| Field | Value |
+|---|---|
+| Original price | Copilot paid plans. |
+| Student price | **Free Copilot access for verified GitHub Education students, plus the pack.** |
+| Verification | GitHub Education benefits application. |
+| Length | Re-evaluated by GitHub while student status remains valid. |
+| Sign up | [education.github.com](https://education.github.com/pack/) |
+
+*Note: Add and verify your school-issued email under Settings then Emails before applying. This is the one-time blocker most students hit.*
+
+*Note: Copilot access inside the Pack was restructured in March 2026 into a standalone plan called GitHub Copilot Student. It is still free for verified students. GitHub's changelog says the model lineup changed but does not itemise it, so treat any specific model list you read elsewhere as unverified.*
 
 ---
 
@@ -557,24 +557,19 @@ Half price on the full Office suite with Copilot built into Word, Excel, PowerPo
 
 *Note: This is the consumer Personal plan. It is separate from any Microsoft 365 Education licence your school may already give you, which is worth checking first.*
 
-### Google Gemini: **Free for 12 months**
+### Figma: **Free for 1 year**
 
-Google's general AI assistant, bundled with Gmail, Docs and a large storage bump. The free year that closed 2026-03-11 is back under a new offer code, and it splits sharply by region: US students get the full Pro tier, students elsewhere get a smaller Plus tier instead.
+Full Professional plan for verified higher-ed students. Slide alternatives, mockups, quick visuals, case-comp decks. Still the default design tool for product designers and PMs.
 
 | Field | Value |
 |---|---|
-| Original price | Google AI Pro at 19.99 USD per month in the US. Google AI Plus at roughly 4.99 USD per month equivalent elsewhere. |
-| Student price | **Free for 12 months, then auto-renews at the regular price unless cancelled. US students get Google AI Pro: 5 TB storage, 4x Gemini usage limits, Gemini Spark, Gemini in Gmail and Docs, Google Health Premium. Students in other eligible markets get Google AI Plus instead, a lower tier: 400 GB storage, 2x Gemini usage limits, Gemini Omni. A Google AI Pro plus YouTube Premium bundle is also available in select markets, at roughly 75 percent off.** |
-| Verification | SheerID, using a school email. A valid payment method must be on file at signup even though the first 12 months are free. |
-| Length | 12 months from signup, then automatic monthly billing at the regular rate unless cancelled. Redeem by 2026-12-31. Reverification through SheerID is required, usually annually, for up to 4 consecutive years; miss it and the trial converts to a paid subscription. |
-| Eligibility | US students get the Pro tier. Students in 140-plus other eligible markets get the smaller Plus tier instead, except in Bolivia, Albania, Canada, Macau, Hong Kong and Tunisia, where the standalone trial is not offered at all. |
-| Sign up | [blog.google](https://blog.google/innovation-and-ai/products/gemini-app/student-offer-google-ai/) |
+| Original price | Figma Professional paid plan. |
+| Student price | **Free Professional plan access for verified higher-ed students.** |
+| Verification | School-issued email, then the education application page with "Higher Ed" selected as institution type. Figma verifies all applications through SheerID. |
+| Length | One year, then reapply. |
+| Sign up | [help.figma.com](https://help.figma.com/hc/en-us/articles/360041061214-Figma-for-Education) |
 
-*Note: This is a new offer code, not the old page reopening. The offer this guide previously recorded as closed on 2026-03-11 is still closed; this is a separate relaunch, announced 2026-08-19.*
-
-*Note: Signing up while already on another Google One extended trial revokes that trial. Check what an existing Google One plan gives up before switching.*
-
-*Note: Upgrading from the trial to a paid plan before it ends makes you ineligible for future Google One trials.*
+*Note: Must reapply annually, it does not auto-renew as free.*
 
 ### Grammarly: **50% off, seasonal**
 
