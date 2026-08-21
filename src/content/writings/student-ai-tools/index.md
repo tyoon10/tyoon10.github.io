@@ -131,11 +131,11 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
     <p class="offergrid__count" data-count aria-live="polite"></p>
   </div>
   <ul class="offergrid__list">
-    <li class="offercard offercard--free" data-group="productivity" data-free="true" data-search="google gemini free for 12 months google's general ai assistant, bundled with gmail, docs and a large storage bump. productivity suite ">
+    <li class="offercard offercard--free" data-group="productivity" data-free="true" data-search="google gemini free for 12 months google's general ai assistant, bundled with gmail, docs and a storage bump. productivity suite ">
       <a href="#1-google-gemini-free-for-12-months">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/gemini.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Google Gemini</span></span>
         <span class="offercard__badges"><span class="offercard__offer">Free for 12 months</span></span>
-        <span class="offercard__desc">Google's general AI assistant, bundled with Gmail, Docs and a large storage bump.</span>
+        <span class="offercard__desc">Google's general AI assistant, bundled with Gmail, Docs and a storage bump.</span>
         <span class="offercard__cat">Productivity suite</span>
       </a>
     </li>
@@ -393,22 +393,24 @@ Tried, used extensively, kept. These are the ones I would tell a classmate to se
 
 ### 1. Google Gemini: **Free for 12 months**
 
-Google's general AI assistant, bundled with Gmail, Docs and a large storage bump. The free year that closed 2026-03-11 is back under a new offer code, and it splits sharply by region: US students get the full Pro tier, students elsewhere get a smaller Plus tier instead.
+Google's general AI assistant, bundled with Gmail, Docs and a storage bump. The free student year is back after closing 2026-03-11, and which tier you get depends on where you study.
 
 | Field | Value |
 |---|---|
-| Original price | Google AI Pro at 19.99 USD per month in the US. Google AI Plus at roughly 4.99 USD per month equivalent elsewhere. |
-| Student price | **Free for 12 months, then auto-renews at the regular price unless cancelled. US students get Google AI Pro: 5 TB storage, 4x Gemini usage limits, Gemini Spark, Gemini in Gmail and Docs, Google Health Premium. Students in other eligible markets get Google AI Plus instead, a lower tier: 400 GB storage, 2x Gemini usage limits, Gemini Omni. A Google AI Pro plus YouTube Premium bundle is also available in select markets, at roughly 75 percent off.** |
-| Verification | SheerID, using a school email. A valid payment method must be on file at signup even though the first 12 months are free. |
-| Length | 12 months from signup, then automatic monthly billing at the regular rate unless cancelled. Redeem by 2026-12-31. Reverification through SheerID is required, usually annually, for up to 4 consecutive years; miss it and the trial converts to a paid subscription. |
-| Eligibility | US students get the Pro tier. Students in 140-plus other eligible markets get the smaller Plus tier instead, except in Bolivia, Albania, Canada, Macau, Hong Kong and Tunisia, where the standalone trial is not offered at all. |
+| Original price | Google AI Pro at 19.99 USD per month (US). Google AI Plus at about 4.99 USD per month (elsewhere). |
+| Student price | **Free for 12 months, then auto-renews at the regular rate unless cancelled.** |
+| Verification | SheerID, using a school email. A payment method is required at signup even though the trial is free. |
+| Length | 12 months from signup. Redeem by 2026-12-31; reverify through SheerID annually, for up to 4 years. |
+| Eligibility | US: Google AI Pro, the higher tier. Other eligible markets: Google AI Plus, lower. |
 | Sign up | [blog.google](https://blog.google/innovation-and-ai/products/gemini-app/student-offer-google-ai/) |
 
-*Note: This is a new offer code, not the old page reopening. The offer this guide previously recorded as closed on 2026-03-11 is still closed; this is a separate relaunch, announced 2026-08-19.*
+*Note: Google AI Pro (US): 5 TB storage, 4x Gemini usage limits, Gemini Spark, Gemini in Gmail and Docs, Google Health Premium.*
 
-*Note: Signing up while already on another Google One extended trial revokes that trial. Check what an existing Google One plan gives up before switching.*
+*Note: Google AI Plus (140-plus other markets): 400 GB storage, 2x Gemini usage limits, Gemini Omni. Not offered at all in Bolivia, Albania, Canada, Macau, Hong Kong or Tunisia.*
 
-*Note: Upgrading from the trial to a paid plan before it ends makes you ineligible for future Google One trials.*
+*Note: This is a new offer code, not the old page reopening; the offer that closed 2026-03-11 is a separate, still-closed program.*
+
+*Note: Signing up while on another Google One trial revokes it, and upgrading to paid before the free period ends makes you ineligible for future Google One trials.*
 
 ### 2. Granola: **Free for 12 months**
 
