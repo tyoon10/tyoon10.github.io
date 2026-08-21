@@ -16,9 +16,8 @@ Summer is the best time of year to build, learn and try new tools. It is also th
 
 > **If you are a graduating student, move fast.** Most of these offers verify against your .edu email or active student status. The day you lose either, you lose the offer.
 
-There is a bigger pattern here. AI tools open free or deeply discounted student plans early to drive adoption, then quietly close the door once they have enough traction. This is not hypothetical. Since I started tracking these, two of the offers on this very list have gone:
+There is a bigger pattern here. AI tools open free or deeply discounted student plans early to drive adoption, then quietly close the door once they have enough traction. This is not hypothetical. Since I started tracking these, one of the offers on this very list has gone:
 
-- **Google Gemini** closed **2026-03-11**. The free year of Google AI Pro for students ended on 2026-03-11. The student page now reads "Our previous student offer ended on March 11, 2026 and is no longer available in your region."
 - **Cursor** closed **2026-06-25**. Cursor discontinued new sign-ups for the legacy student discount on 2026-06-25. It was a full year of Pro free and it was the strongest offer on this list, so its removal is the single biggest change since the last refresh.
 
 So claim the live ones today, while they are still live.
@@ -204,6 +203,14 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Productivity suite</span>
       </a>
     </li>
+    <li class="offercard offercard--free" data-group="productivity" data-free="true" data-search="google gemini free for 12 months google's general ai assistant, bundled with gmail, docs and a large storage bump. productivity suite ">
+      <a href="#google-gemini-free-for-12-months">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/gemini.svg" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Google Gemini</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">Free for 12 months</span></span>
+        <span class="offercard__desc">Google's general AI assistant, bundled with Gmail, Docs and a large storage bump.</span>
+        <span class="offercard__cat">Productivity suite</span>
+      </a>
+    </li>
     <li class="offercard" data-group="writing" data-free="false" data-search="grammarly 50% off, seasonal grammar, clarity and tone checking across everything you write, in the browser and on the desktop. writing ">
       <a href="#grammarly-50-off-seasonal">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/grammarly.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Grammarly</span></span>
@@ -376,7 +383,7 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
 })();
 </script>
 
-**[Recently closed](#recently-closed):** Cursor, Google Gemini. Kept on the page so you know not to go looking.
+**[Recently closed](#recently-closed):** Cursor. Kept on the page so you know not to go looking.
 
 ---
 
@@ -550,6 +557,25 @@ Half price on the full Office suite with Copilot built into Word, Excel, PowerPo
 
 *Note: This is the consumer Personal plan. It is separate from any Microsoft 365 Education licence your school may already give you, which is worth checking first.*
 
+### Google Gemini: **Free for 12 months**
+
+Google's general AI assistant, bundled with Gmail, Docs and a large storage bump. The free year that closed 2026-03-11 is back under a new offer code, and it splits sharply by region: US students get the full Pro tier, students elsewhere get a smaller Plus tier instead.
+
+| Field | Value |
+|---|---|
+| Original price | Google AI Pro at 19.99 USD per month in the US. Google AI Plus at roughly 4.99 USD per month equivalent elsewhere. |
+| Student price | **Free for 12 months, then auto-renews at the regular price unless cancelled. US students get Google AI Pro: 5 TB storage, 4x Gemini usage limits, Gemini Spark, Gemini in Gmail and Docs, Google Health Premium. Students in other eligible markets get Google AI Plus instead, a lower tier: 400 GB storage, 2x Gemini usage limits, Gemini Omni. A Google AI Pro plus YouTube Premium bundle is also available in select markets, at roughly 75 percent off.** |
+| Verification | SheerID, using a school email. A valid payment method must be on file at signup even though the first 12 months are free. |
+| Length | 12 months from signup, then automatic monthly billing at the regular rate unless cancelled. Redeem by 2026-12-31. Reverification through SheerID is required, usually annually, for up to 4 consecutive years; miss it and the trial converts to a paid subscription. |
+| Eligibility | US students get the Pro tier. Students in 140-plus other eligible markets get the smaller Plus tier instead, except in Bolivia, Albania, Canada, Macau, Hong Kong and Tunisia, where the standalone trial is not offered at all. |
+| Sign up | [blog.google](https://blog.google/innovation-and-ai/products/gemini-app/student-offer-google-ai/) |
+
+*Note: This is a new offer code, not the old page reopening. The offer this guide previously recorded as closed on 2026-03-11 is still closed; this is a separate relaunch, announced 2026-08-19.*
+
+*Note: Signing up while already on another Google One extended trial revokes that trial. Check what an existing Google One plan gives up before switching.*
+
+*Note: Upgrading from the trial to a paid plan before it ends makes you ineligible for future Google One trials.*
+
 ### Grammarly: **50% off, seasonal**
 
 Grammar, clarity and tone checking across everything you write, in the browser and on the desktop. The one to leave running in the background on long assignments. The discount is a seasonal campaign, so check it is live first.
@@ -695,9 +721,6 @@ I keep dead offers on the page instead of deleting them. Knowing an offer is gon
 - Replacement routes, per Cursor's own docs. Undergraduates can claim credits and discounts at on-campus and online events starting this autumn. Graduate students, researchers and educators can request credits through a form.
 - Existing subscribers: If you already redeemed it you keep your current rate until the plan expires, after which it reverts to the standard 20 USD per month Pro rate.
 
-**Google Gemini**, closed 2026-03-11. The free year of Google AI Pro for students ended on 2026-03-11. The student page now reads "Our previous student offer ended on March 11, 2026 and is no longer available in your region."
-
-
 **Tabnine**, closed 2025-04-01. Tabnine ended its free Basic plan in April 2025 and no longer offers a student plan. Recorded so the question stays answered.
 
 - The current pricing page shows no free tier, no trial and no student pricing.
@@ -719,7 +742,7 @@ I keep dead offers on the page instead of deleting them. Knowing an offer is gon
 
 **Gemini CLI.** No student offer, and none is needed. Signing in with any personal Google account gives 1,000 model requests per day and 60 per minute at no cost, with no trial expiry. A student would gain nothing from a discount here. Flash is the default on the free tier, so the 1,000 daily requests are not 1,000 Pro requests. Authenticating with an unpaid API key instead of a Google account is materially worse: 250 requests per day, 10 per minute, Flash only. Sign in with the account, not the key. Nothing to claim. Install it and sign in.
 
-**NotebookLM.** No student-specific offer. The core product is free to everyone with a Google account, and the free Gemini tier includes NotebookLM access. Higher-education students aged 18 and over can create personal class notebooks inside Google Classroom, grounded in materials their educator provides, but that is an institutional integration rather than a claimable discount. The paid tier rides on Google AI Pro, whose student offers have all expired. See the Google Gemini entry. Nothing to claim. Use it free, and check Google Classroom if your course uses it.
+**NotebookLM.** No student-specific offer. The core product is free to everyone with a Google account, and the free Gemini tier includes NotebookLM access. Higher-education students aged 18 and over can create personal class notebooks inside Google Classroom, grounded in materials their educator provides, but that is an institutional integration rather than a claimable discount. The paid tier rides on Google AI Pro, which now has a live student trial again. See the Google Gemini entry. Nothing to claim directly. Use it free, check Google Classroom if your course uses it, or see the Google Gemini entry for the Pro-tier route.
 
 **SciSpace, Julius AI, Humata.** Dropped. I could not confirm official student terms after more than three months, so they are off the list rather than on it with a question mark.
 
