@@ -21,7 +21,7 @@ links:
 Last September I set up a folding table and a laptop on Columbia's campus. I had just joined the first global cohort of Anthropic's Claude Ambassadors. The assignment for week one was simple: get people to stop. Most students on campus had never heard of Anthropic. One asked me, in complete seriousness, whether "the Cloud" was a new ChatGPT model. (if I had brought up the word 'Anthropic', pretty sure they would have walked away)
 
 ![A Claude-branded table laid out with Claude Code pins, stickers, and swag before an event](./claude-tabling.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Swag buys attention. Nothing buys belief.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Swag buys attention. Nothing buys belief.</p>
 
 I assumed my job was attention. It was not. On a campus in the middle of an AI boom, attention is free. The real problem showed up later, in smaller rooms with sharper audiences. It took me 40+ sessions to name it.
 
@@ -34,7 +34,7 @@ A room of [product managers who wanted to build with AI instead of around it](/w
 * The product managers checked it against the one thing a PM fully trusts: their own workflow.
 
 ![Four people huddled around a laptop, watching a build run at a Claude developer session](./developer-session.jpg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">In this room, you do not present a claim. You run it.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">In this room, you do not present a claim. You run it.</p>
 
 ## The marketing challenge ins and outs
 
@@ -57,14 +57,14 @@ I once argued that context engineering, not prompt engineering, is what separate
 So what does surviving the check unlock? A flywheel. It spins on top of the translation layer, not next to it. And I did not design it. I watched it run.
 
 ![Diagram of a flywheel of four community stages mounted on a foundation labeled The Translation Layer](./flywheel-translation-layer.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The community is the flywheel. It only spins because the claims underneath survive the check.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">The community is the flywheel. It only spins because the claims underneath survive the check.</p>
 
 The developer community around Claude Code is that flywheel in motion. A builder gets something working. It survives the check. So they share it instead of selling it. New builders arrive on that trust. They find the next use case. The knowledge compounds. The community compounds with it.
 
 Trust is the only currency that compounds with a technical audience. A survived check is what starts it turning. Get the translation layer right. The flywheel turns on its own.
 
 ![A packed lecture hall of students on laptops at the Claude community event](./community-kickoff.jpg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">An empty room turned into a full house after six months of earning every seat.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">An empty room turned into a full house after six months of earning every seat.</p>
 
 ## A rear view mirror
 
@@ -73,6 +73,6 @@ Here is the part I only understood in hindsight. The tabling, the workshops, the
 The instinct is older than Claude. At CONCAT, the AI fintech I co-founded and sold, we had to convince first-time buyers to care about insurance. The positioning that finally worked treated a policy like an investment portfolio. Six years of that taught me where I am most useful. It is at the translation layer, the seam where a capability becomes someone's decision. The work is closing that gap in sentences that survive the check. It does not matter who is doing the checking, one skeptical CTO or a keynote hall.
 
 ![Moderating a fireside chat with a global bank CTO on stage in a glass-walled hall](./fireside-cto.jpg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Moderating a global bank's CTO. Same check, a different dialect.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Moderating a global bank's CTO. Same check, a different dialect.</p>
 
 At the frontier, models are getting more capable and less legible at the same time. That means the translation layer is about to matter more than any feature list. Someone has to stand at that seam and keep the story true and clear at once.

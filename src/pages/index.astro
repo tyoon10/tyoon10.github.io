@@ -146,7 +146,8 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
                 </figure>
               )}
               <span class="featured__meta">
-                <span class="tag tag--accent">Featured</span>
+                <span class="tag tag--featured">Featured</span>
+                <span class="tag">{w.data.tags[0] || 'AI Strategy'}</span>
                 <span class="date">{iso(w.data.date)}</span>
               </span>
               <a href={`/writings/${w.id}`} class="featured__title">{w.data.title}</a>

@@ -26,7 +26,7 @@ At 9 AM on February 28th, Verci Flatiron in Manhattan was already buzzing. Lapto
 This was **Mistral AI's first-ever Worldwide Hackathon** (their largest hackathon to date) running simultaneously across **Paris, London, New York, San Francisco, Tokyo, Singapore, and Sydney**. Over 7,000 people applied. 1,000 were selected. And I was there as a judge.
 
 ![Hundreds of builders packed into the NYC venue](./albums/mistral-2026-arrival/3-venue-packed-crowd.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Hundreds of builders packed into the NYC venue for the opening kickoff.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Hundreds of builders packed into the NYC venue for the opening kickoff.</p>
 
 ## The Event at Scale
 
@@ -43,10 +43,10 @@ What made this event structurally different from any hackathon was the **simulta
 *"The breakfast you just had was 'France'...and every meal will represent each hosting city."* **The cultural details!** For two days, we served French croissants for breakfast, Japanese sushi for dinner, and so on. The real-time awareness that builders in Tokyo were wrapping up while NYC was just hitting its stride at midnight created a sense of scale that I had never experienced at a hackathon before. There was something electric about knowing that at any given moment during the 36-hour sprint, someone on the other side of the planet was hacking on the same models, under the same rules, toward the same deadline.
 
 ![Day 1 breakfast: French croissants](./albums/mistral-2026-arrival/meal/2-french-breakfast.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Day 1 breakfast: French croissants, pastries, and fruit; 'France' was the first meal.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Day 1 breakfast: French croissants, pastries, and fruit; 'France' was the first meal.</p>
 
 ![Day 1 dinner: Japanese sushi platters](./albums/mistral-2026-global/meal/7-tokyo-sushi-dinner.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Day 1 dinner: Japanese sushi platters at the Tokyo venue; every meal represented a host city.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Day 1 dinner: Japanese sushi platters at the Tokyo venue; every meal represented a host city.</p>
 
 NYC's venue was packed. Teams of one to four people, working through the night, building with Mistral's latest [Mistral 3 models](https://mistral.ai/news/mistral-3). The energy shifted across the 36 hours: from excited planning, to the quiet intensity of the overnight build, to the focused urgency of final demos.
 
@@ -66,7 +66,7 @@ NYC's venue was packed. Teams of one to four people, working through the night, 
 Spending two days embedded with Mistral and NVIDIA teams from developer relations and solution architecture gave me a perspective that most coverage of this company misses.
 
 ![The official Mistral Worldwide Hackathon t-shirt](./albums/mistral-2026-arrival/4-hackathon-tshirt-tour.jpg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The official Mistral Worldwide Hackathon t-shirt, concert-tour style, listing all seven host cities.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">The official Mistral Worldwide Hackathon t-shirt, concert-tour style, listing all seven host cities.</p>
 
 [Mistral's CEO Arthur Mensch has been explicit](https://www.bloomberg.com/news/articles/2026-02-18/mistral-ceo-says-ai-dominance-hinges-on-openness-not-geography) about their strategic bet: "The fight for AI supremacy is between open and closed systems, not geography." That philosophy shaped every aspect of this hackathon. Builders owned their stack from the first line of code: fully permissive, unrestricted commercial use. No API lock-in. No usage caps.
 
@@ -82,13 +82,13 @@ In conversations with the Mistral team, a consistent theme emerged. They were no
 For the builders in the room, this was not theoretical. They were running models on their own machines, modifying architectures, and shipping demos that would have required API billing and vendor approval under a closed-model paradigm. That difference shaped the kinds of projects that got built:
 
 ![Brickstral: an AI-powered LEGO builder](./albums/mistral-2026-building/projects/12-project-brickstral.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Brickstral: an AI-powered LEGO builder that generates 3D models from text prompts using Mistral Large.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Brickstral: an AI-powered LEGO builder that generates 3D models from text prompts using Mistral Large.</p>
 
 ![Dispatch Ops: an AI emergency dispatch system](./albums/mistral-2026-building/projects/13-project-dispatch-ops.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Dispatch Ops: an AI emergency dispatch system combining real-time map data with Mistral-powered triage.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Dispatch Ops: an AI emergency dispatch system combining real-time map data with Mistral-powered triage.</p>
 
 ![LACUNA: a cross-lingual divergence explorer](./albums/mistral-2026-building/projects/14-project-lacuna.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">LACUNA: a cross-lingual divergence explorer visualizing semantic topology across languages in 3D.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">LACUNA: a cross-lingual divergence explorer visualizing semantic topology across languages in 3D.</p>
 
 <div class="image-gallery-grid">
 
@@ -111,7 +111,7 @@ For the builders in the room, this was not theoretical. They were running models
 What I found most rewarding was the **dual role**. I was there to evaluate, but the extended format allowed me to engage teams across multiple build stages.
 
 ![Five minutes on the clock](./albums/mistral-2026-judging/judging/1-judging-session-timer.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Five minutes on the clock; a team presents their demo to the judging panel.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Five minutes on the clock; a team presents their demo to the judging panel.</p>
 
 The mentoring conversations followed a pattern: teams come up and show me technically impressive demos, and I would push them on the problem space:
 
@@ -122,7 +122,7 @@ The mentoring conversations followed a pattern: teams come up and show me techni
 These were not rhetorical questions. The teams that actively reflected on them (that paused, rethought their approach, and came back with sharper framing) were the ones that outperformed. There were solutions that doubled down on technical sophistication alone (and I was blown away), but none of them make it to the top.
 
 ![A mentoring session in progress](./albums/mistral-2026-judging/5-mentoring-circle.jpg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">A mentoring session in progress; judges and builders huddled together reviewing a project.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">A mentoring session in progress; judges and builders huddled together reviewing a project.</p>
 
 <div class="image-gallery-grid">
 
@@ -140,12 +140,12 @@ These were not rhetorical questions. The teams that actively reflected on them (
 A hackathon of this scale becomes a crossroads. The judging panel alone spanned across all seven cities. In the NYC room, I enjoyed the extended conversations with Mistral's solution engineers, listening to NVIDIA's technical marketing teams as they navigated the participants' proposal using [NVFP4 on NVIDIA Blackwell platform](https://developer.nvidia.com/blog/3-ways-nvfp4-accelerates-ai-training-and-inference/). We also had ML Researcher from [Tilde Research](https://tilderesearch.com/), a frontier research lab that allowed us to look under the hood of the Ministral models with the mechanistic interpretability that ensured they were safe and reliable.
 
 ![The NVIDIA team on-site at the NYC venue](./albums/mistral-2026-people/03-nvidia-team.jpg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The NVIDIA team on-site at the NYC venue, supporting builders with accelerated computing expertise.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">The NVIDIA team on-site at the NYC venue, supporting builders with accelerated computing expertise.</p>
 
 And then there was the scene across the event hall itself. People hovering their hands in the air wearing VR headsets to create games for the [Supercell](https://supercell.com/) track. Teams iteratively testing voice interactions using [ElevenLabs](https://elevenlabs.io/) technology. I occasionally lifted my eyes from the screen to the steady hum of spinning fans and the electric pulse of racing minds. In the entire space filled with cognitive energy, neurons sparked and ideas collided as collective effort met the raw power of accelerated silicon.
 
 ![Paris venue: a builder demos a VR game](./albums/mistral-2026-judging/7-paris-vr-demo-supercell.jpeg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Paris venue: a builder demos a VR game on Meta Horizon for the Supercell track while the crowd watches.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Paris venue: a builder demos a VR game on Meta Horizon for the Supercell track while the crowd watches.</p>
 
 <div class="image-gallery-grid">
 
@@ -189,7 +189,7 @@ First, the open-source AI community does not just live on GitHub, disconnected i
 Second, my own trajectory over the past month tells a story about what is possible when you show up and do the work. From organizing club-level events, to [city-scale hackathons](https://twyoon.com/post/iterate-columbia-hackathon-2026-recap/), to judging a global competition backed by some of the most significant companies in AI. The connective thread was not credentials or luck; it was [Iterate](https://hackiterate.com/), and the trust built through consistent execution.
 
 ![NYC local winners and judges on stage](./albums/mistral-2026-people/12-winners-group-photo.jpg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">NYC local winners and judges on stage after 36 hours of building.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">NYC local winners and judges on stage after 36 hours of building.</p>
 
 The global finals are on March 9th. NYC's local winners advance. I will be watching to see if the teams I mentored carry the momentum forward.
 

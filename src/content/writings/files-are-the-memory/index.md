@@ -55,7 +55,7 @@ The split is the abstraction line: *system* is the code and the patterns, *memor
 There are three surfaces: the Claude mobile app as the primary chat, three scheduled cloud [Routines](https://code.claude.com/docs/en/routines) (a Morning Brief, a Nightly Reflection, a Weekly Review), and a static PWA dashboard for structured logging. **There is no local machine and no 24/7 host.** Everything is Anthropic cloud plus GitHub.
 
 ![OptiMind architecture: phone, Anthropic cloud, GitHub, and a Cloudflare-hosted dashboard, with the optimind-journal repo as the memory layer](./optimind-architecture.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The files in optimind-journal are the memory. Every cloud session, Routines and chat alike, clones the repo fresh from GitHub. CLAUDE.md is sealed into the system prompt at session start; every other file can be re-read mid-session.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">The files in optimind-journal are the memory. Every cloud session, Routines and chat alike, clones the repo fresh from GitHub. CLAUDE.md is sealed into the system prompt at session start; every other file can be re-read mid-session.</p>
 
 ## Memory Is a Hard Problem
 
@@ -72,7 +72,7 @@ The problem has three sources.
 `git pull` refreshes the files. `Read` refreshes the context. Both are required; neither is sufficient alone.
 
 ![Three-stage refresh: origin/main to files on disk via git pull, files on disk to the model's context via a Read tool call](./three-stage-refresh-diagram.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">git pull moves truth onto disk; Read moves disk into the model's context.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">git pull moves truth onto disk; Read moves disk into the model's context.</p>
 
 That framing produces three concrete failure modes the architecture has to handle:
 
@@ -94,12 +94,12 @@ I worked the design out in conversation with Claude itself, asking how each piec
 ![A recreated six-turn conversation between me and Claude, working out how Claude Code's memory model actually behaves.](./conversation.png)
 
 </div>
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each of my questions exposed an assumption; each of Claude's answers became one of the load-bearing rules below.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Each of my questions exposed an assumption; each of Claude's answers became one of the load-bearing rules below.</p>
 
 Here's the rationale behind *classifying the input first* (the fourth exchange). Both naive policies fail: 'reading the full chart on every turn' makes a trivial logging turn needlessly slow and expensive, while 'reading nothing' leaves the agent guessing (and hallucinating). So I made the turn-start branch on intent. The LLM sorts each input into one of seven shapes, and the shape sets the read depth: trivial shapes stay **LIGHT** (today's log only), high-stakes ones go **HEAVY** (`git pull` plus the full chart).
 
 ![Turn-start decision tree: an input arrives, gets classified into one of seven shapes, then branches to a LIGHT read (today's log only) or a HEAVY read (git pull plus the full chart) before Claude responds and logs the turn.](./turn-start-decision-tree.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Classify the input shape first, then load. Light shapes stay cheap; heavy shapes pay for fidelity with a git pull and a full chart read.</p>
 
 ## Protocols and Mechanisms
 
@@ -118,7 +118,7 @@ The mechanism in turn rests on plasma-curve data measured across studies. Those 
 So the memory got split into three tiers, connector-linked:
 
 ![Three-tier knowledge architecture illustrated with caffeine: two protocol rules ("no caffeine after 2:30 PM" and "L-theanine 200mg per serving") both cite a single mechanism record (mech.nutrition.caffeine_pharmacology), which in turn nests two sources.](./protocol-mechanism-source.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Two protocols share one mechanism; one mechanism cites two sources. why_brief is the hot-path cache; mechanism_ref is the connector the nightly Reflection walks for sync.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Two protocols share one mechanism; one mechanism cites two sources. why_brief is the hot-path cache; mechanism_ref is the connector the nightly Reflection walks for sync.</p>
 
 The freshness work made the agent disciplined at reading. This work makes the chart disciplined about what it carries.
 

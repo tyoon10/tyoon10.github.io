@@ -44,7 +44,7 @@ While it is not for quick or simple work, the kit routes easy tasks to a single 
 [claude-ensemble](https://github.com/tyoon10/claude-ensemble) is a drop-in Claude Code kit. You type `/ensemble <your hard task>` and it runs entirely inside Claude Code on your Pro or Max plan. No API key, nothing metered separately.
 
 ![claude-ensemble architecture](./how-it-works.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The pipeline: a triage gate routes simple tasks to one pass and hard tasks to a panel, a verifying judge, and a code-grounded verify-loop.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">The pipeline: a triage gate routes simple tasks to one pass and hard tasks to a panel, a verifying judge, and a code-grounded verify-loop.</p>
 
 It is built on Claude Code [Dynamic Workflows](https://code.claude.com/docs/en/workflows) and sub-agents, so the control flow is a local script that owns the orchestration, not a model improvising it:
 
@@ -86,7 +86,7 @@ Two model families agreeing within two points (60% and 62%) shows the raw win-ra
 The gain is not the panel size. It is that independent attempts give the judge enough material to check, correct, and combine into an answer stronger than any single draft, and that the verify-loop then runs code to fix what a single pass leaves behind.
 
 ![Cost versus quality of the design choices](./cost-performance.svg)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Each design at its real cost and correctness (length-controlled). The panel tier is a lateral move, so the kit runs a cheap Sonnet-5 panel and escalates only the hardest checkable tasks to an Opus panel. The verify-loop is the lever.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Each design at its real cost and correctness (length-controlled). The panel tier is a lateral move, so the kit runs a cheap Sonnet-5 panel and escalates only the hardest checkable tasks to an Opus panel. The verify-loop is the lever.</p>
 
 The trade is **cost**: a complex run adds a Sonnet-5 panel, a high-effort Opus judge, and the verify-loop, so it spends real Opus usage on the judge and verifier where correctness is made. Max effort is called for the most difficult challenges, and the triage gate keeps easy work off it, so you pay the premium only where it helps. The [full methodology trail](https://github.com/tyoon10/claude-ensemble/tree/main/eval), including every reversal, is in the repo.
 

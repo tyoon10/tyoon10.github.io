@@ -29,7 +29,7 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
               </figure>
             )}
             <span class="index__meta">
-              {writing.data.featured && <span class="tag tag--accent">Featured</span>}
+              {writing.data.featured && <span class="tag tag--featured">Featured</span>}
               <span class="tag">{writing.data.tags[0] || 'AI Strategy'}</span>
               {writing.data.tags[1] && <span class="tag">{writing.data.tags[1]}</span>}
               <span class="date">{iso(writing.data.date)}</span>

@@ -5,8 +5,8 @@ Astro v5 personal portfolio and technical writings site, deployed via GitHub Pag
 - **Live:** https://twyoon.com
 - **Repo:** https://github.com/tyoon10/tyoon10.github.io (branch: `main`)
 - **Engine:** Astro v5 (Static Site Generator)
-- **Active Directory:** `/home/taewan/projects/code/twyoon` (WSL)
-- **Legacy Backup:** `/home/taewan/projects/code/twyoon-backup` (WSL)
+- **Active Directory:** `/home/taewan/workspace/initiatives/twyoon-com/repos/site` (WSL)
+- **Legacy Backup:** `/home/taewan/workspace/archive/twyoon-backup` (WSL)
 
 ---
 
@@ -76,13 +76,14 @@ Run `/voice-sync` to perform the after-edits review on demand.
 
 ---
 
-## 🎨 Visual Design System (Alabaster Light Default)
+## 🎨 Visual Design System (Parchment & Navy Default)
 
-The site is strictly locked into the **clean, high-contrast Alabaster Light theme** (no dark-mode toggle or system-bars are rendered):
-*   **Base Variables:** Background base `#fafafc`, base surface white `rgba(255,255,255,0.65)`, high-contrast text Slate-900 `#0f172a`, caption text Slate-500 `#64748b`.
-*   **Backdrop Overlay:** Subtly styled dot-matrix overlay (`radial-gradient` using border opacity) with active radial glow blooms in background.
+The active visual system is defined in `src/styles/design-system.css`, which is the source of truth for the site's tokens and visual primitives:
+*   **Canvas & surfaces:** Parchment canvas `#fefefc`, with `#fdfdfa` for surfaces, `#eef1f6` for full-bleed washes, and `#f6f6f3` for inset wells.
+*   **Ink & actions:** Near-black ink carries headings and body copy. Ink navy `#17324d` is reserved for actions and action-oriented interactive states, not decorative treatment.
+*   **Typography:** Newsreader is the variable serif for display and body typography. Inter is reserved for UI chrome, while JetBrains Mono serves metadata and code. These presets belong to `design-system.css`.
+*   **Elevation & shape:** The system uses zero shadows and exactly three role-bound radii: `2px` for surfaces, `6px` for actions, and `999px` for metadata pills.
 *   **Brand Affiliate Logos:** Rendered as physical images in `src/components/LogoTray.astro` loaded from `/media/logos/` with premium grayscale transition rules.
-*   **Typography Presets:** Custom line-heights and margins defined for long-form reading under the `.markdown-body` class inside `global.css`.
 
 ---
 
@@ -91,14 +92,14 @@ The site is strictly locked into the **clean, high-contrast Alabaster Light them
 *   Always use standard **relative Markdown syntax** to load local images from inside the entry folder:
     `![The Compaction Stages](./compaction-stages.png)`
 *   Follow up the image block with a captioned paragraph for visual anchors:
-    `<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Compaction stages caption...</p>`
+    `<p style="text-align: center; font-size: 0.82rem; color: var(--ink-muted); margin-top: -8px; margin-bottom: 24px;">Compaction stages caption...</p>`
 *   At compile time, Astro v5 automatically checks, compresses, and outputs optimized `.webp` copies of your images into server assets.
 
 ---
 
 ## 🛠️ CLI Development Commands
 
-Ensure you are inside the native `/home/taewan/projects/code/twyoon` directory and have NVM node environment sourced:
+Ensure you are inside the native `/home/taewan/workspace/initiatives/twyoon-com/repos/site` directory and have NVM node environment sourced:
 
 ```bash
 npm run dev        # Launch local dev server at http://localhost:4321
@@ -112,4 +113,4 @@ npx astro check    # Run schema checks and type validation
 ## 🧹 Housekeeping Guidelines
 
 *   The auxiliary script `scripts/migrate-content.cjs` is retained temporarily for workspace migration reference.
-*   Do not delete `/home/taewan/projects/code/twyoon-backup` as it acts as your absolute safety net backup of the original Hugo site.
+*   Do not delete `/home/taewan/workspace/archive/twyoon-backup` as it acts as your absolute safety net backup of the original Hugo site.

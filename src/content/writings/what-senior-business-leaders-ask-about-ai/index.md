@@ -47,7 +47,7 @@ Meanwhile, **74% of organizations** expect to be using AI agents at least modera
 
 ![Deloitte Figure 7: Extent of agentic AI usage, today versus in two years](./deloitte-agentic-usage.png)
 
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Agentic AI usage today vs. expected in two years. Source: <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2026/state-of-ai-2026.pdf" target="_blank" rel="noopener">Deloitte, State of AI in the Enterprise, 9th edition (2026)</a>, Figure 7.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Agentic AI usage today vs. expected in two years. Source: <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2026/state-of-ai-2026.pdf" target="_blank" rel="noopener">Deloitte, State of AI in the Enterprise, 9th edition (2026)</a>, Figure 7.</p>
 
 > **The real question isn't "can AI make mistakes?"** It's whether existing review processes catch mistakes regardless of who, or what, made them. If QA relies on the assumption that a human built the model slowly, that's a process gap, not an AI problem.
 
@@ -70,7 +70,7 @@ That said, the concern isn't irrational, and the executives in the room were rig
 
 ![Deloitte Figure 8: AI risks most concerning](./deloitte-ai-risks.png)
 
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">The AI risks executives cite most. Source: <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2026/state-of-ai-2026.pdf" target="_blank" rel="noopener">Deloitte, State of AI in the Enterprise, 9th edition (2026)</a>, Figure 8.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">The AI risks executives cite most. Source: <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2026/state-of-ai-2026.pdf" target="_blank" rel="noopener">Deloitte, State of AI in the Enterprise, 9th edition (2026)</a>, Figure 8.</p>
 
 > What I've observed from firms that move quickly on this: they reframe it from "is it safe?" to **"what data classification does this require, and what's the deployment model that matches our existing governance?"** That turns a philosophical debate into a procurement decision.
 
@@ -100,7 +100,7 @@ This was the question the room kept returning to, and rightly so. Not "can AI do
 
 ![How much executives trust AI agents to perform work, by task](./pwc-ai-agent-trust.png)
 
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Executive trust in AI agents, by task. Data: <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html" target="_blank" rel="noopener">PwC AI Agent Survey (2025)</a>; chart by the author.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Executive trust in AI agents, by task. Data: <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html" target="_blank" rel="noopener">PwC AI Agent Survey (2025)</a>; chart by the author.</p>
 
 The gap between capability and confidence is where most enterprises stall. Three approaches came up in the discussion, and the most sophisticated teams seem to use all of them:
 

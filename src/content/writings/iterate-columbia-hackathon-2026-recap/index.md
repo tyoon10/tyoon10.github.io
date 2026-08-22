@@ -83,7 +83,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 ![Wide shot of excited participants gathered in Board Room](./albums/hackathon-2026-kickoff/1-6.jpg)
 
 </div>
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Registration and excited builders huddle together as doors open for Geffen Hall's kickoff.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Registration and excited builders huddle together as doors open for Geffen Hall's kickoff.</p>
 
 **9:00 AM**: Opening remarks and sponsor introductions. Teams had already been forming online in the days prior, but many formed on the spot, strangers pairing up based on complementary skills. An MBA with a fintech idea sitting down next to an engineer who could build it in hours.
 
@@ -103,7 +103,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 ![Builders debugging together in lounge](./albums/hackathon-2026-hacking/IterateValentinesdayhackathon-046.jpg)
 
 </div>
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Focused silence as 300 builders dive into coding and system architectures.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Focused silence as 300 builders dive into coding and system architectures.</p>
 
 **9:30 AM**: Hacking begins. The room dropped into focused silence punctuated by bursts of discussion. Sponsor engineers circulated, helping teams integrate APIs and debug architecture decisions. The energy was concentrated: no panels, no keynotes, just building.
 
@@ -120,7 +120,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 ![Participants enjoying lunch together](./albums/hackathon-2026-lunch/3-4.png)
 
 </div>
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">250 Shake Shack burgers delivered to Geffen Hall to fuel the builders.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">250 Shake Shack burgers delivered to Geffen Hall to fuel the builders.</p>
 
 **12:30 to 5:00 PM**: The long build. This is where projects took shape. Teams that started with ambitious scopes narrowed to shippable demos. Teams that started simple discovered unexpected depth. Mentor rotations continued. All the breakout rooms were on fire.
 
@@ -138,7 +138,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 ![Volunteers smiling with ChaHalo deliveries](./albums/hackathon-2026-tea/IterateValentinesdayhackathon-052.jpg)
 
 </div>
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">ChaHalo milk teas arrive for the afternoon building push.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">ChaHalo milk teas arrive for the afternoon building push.</p>
 
 
 ### Pitch and Judging
@@ -159,7 +159,7 @@ On the food and beverage side, we partnered with **Shake Shack** to cater 250 bu
 ![Award winners on stage celebrating their projects](./albums/hackathon-2026-pitching/4-4.jpg)
 
 </div>
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Finalists pitch their AI projects directly to the judging panel in the Board Room.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Finalists pitch their AI projects directly to the judging panel in the Board Room.</p>
 
 **8:00 PM**: Prize announcements and closing. Twelve hours after doors opened, the room cleared out with the particular energy of people who shipped something real alongside strangers who became collaborators. Even after closing, many have stayed for another hour sharing their passion and building connections.
 

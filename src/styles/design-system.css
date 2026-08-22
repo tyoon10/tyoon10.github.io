@@ -7,8 +7,7 @@
    Character  Editorial journal on parchment. Near-monochrome, print-derived,
               authority through restraint. One accent, action only.
 
-   Not yet wired into the site — import this alongside/instead of global.css
-   when you're ready. See the "Wiring" note at the bottom.
+   Active site stylesheet. BaseLayout.astro imports this file directly.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -443,7 +442,16 @@ h3, .h3 {
   white-space: nowrap;
 }
 
-.tag--accent { color: var(--accent); border-color: var(--accent); }
+/* Featured is a curatorial claim, not a topic, so it reads as a solid stamp
+   against the outlined topic tags — the filled/outlined pair Ramp and
+   Adaptive ML use for active vs inactive pills. Deliberately ink rather than
+   accent: the accent is reserved for actions, and "featured" is not one. */
+.tag--featured {
+  background: var(--ink);
+  color: var(--canvas);
+  border-color: var(--ink);
+  letter-spacing: 0.07em;
+}
 
 .date {
   font: 400 11px/1 var(--mono);
@@ -813,51 +821,15 @@ h3, .h3 {
 .profile__social a { font: 400 14px/1 var(--sans); color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ==========================================================================
-   LEGACY TOKEN BRIDGE
-
-   59 image captions across 11 essay markdown files use var(--text-muted),
-   and workshop.astro references ten old tokens across 555 lines. Rather
-   than rewrite all of that, the old names are aliased to new values here.
-
-   These are deliberately temporary. Retire them by converting the markdown
-   captions to <figcaption> or .caption, and restyling workshop.astro.
-   ========================================================================== */
-:root {
-  --text-main:         var(--ink);
-  --text-muted:        var(--ink-muted);
-  --text-highlight:    var(--accent);
-  --bg-base:           var(--canvas);
-  --bg-surface:        var(--surface);
-  --bg-surface-solid:  var(--surface);
-  --bg-surface-hover:  var(--sunk);
-  --border-color:      var(--rule);
-  --border-glow:       var(--accent);
-  --card-shadow:       none;
-  --physic-transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  --gradient-card-a:   var(--sunk);
-  --gradient-card-b:   var(--wash);
-  --gradient-card-c:   var(--sunk);
-  --badge-bg-key:      var(--wash);
-  --badge-text-key:    var(--accent);
-  --badge-bg-org:      var(--wash);
-  --badge-text-org:    var(--accent);
-  --badge-bg-host:     var(--wash);
-  --badge-text-host:   var(--accent);
-}
-
-/* ==========================================================================
    WIRING NOTES
 
-   1. Import in BaseLayout.astro instead of global.css, or after it during a
-      staged migration. Remove the Google Fonts <link> for Plus Jakarta Sans
-      and Fira Code, and the Font Awesome stylesheet — arrows are text
-      glyphs now (→ and ›), so the icon font is no longer needed.
+   1. BaseLayout.astro imports this stylesheet directly. The migration from
+      the former stylesheet is complete. Keep the Google Fonts <link> in
+      BaseLayout.astro aligned with the @import above.
 
-   2. Delete from global.css when you cut over:
-        --gradient-accent, --gradient-glow, --gradient-card-a/b/c,
-        --card-shadow, --border-glow, all six --badge-* tokens,
-        body::before (dot matrix), .hero-drift-spot + @keyframes drift,
-        .section-heading::after (gradient underline)
+   2. The active system intentionally uses no gradients, shadows, or
+      decorative badge-color families. Component styles should use the
+      canonical surface, wash, ink, rule, accent, and shadow tokens above.
 
    3. ISO dates: format server-side in Astro rather than with CSS, e.g.
         const fmtISO = (d) => d.toISOString().slice(0,10).replace(/-/g,'·');

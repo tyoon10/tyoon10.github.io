@@ -36,12 +36,12 @@ I was a human retrieval system for someone else's high-stakes judgment. I now bu
 Banks standardized data. Golden sources, lineage, catalogs, master data. They did it because they were forced to: after the financial crisis, [BCBS 239](https://www.bis.org/publ/bcbs239.htm) made traceable, accurate, complete risk data a supervisory requirement, and as of the most recent assessment only a small minority of the world's roughly 31 systemically important banks were judged fully compliant. Platforms like [Fusion by J.P. Morgan](https://fusion.jpmorgan.com) are the visible result: take custody, accounting, and vendor data, [harmonize it into one common semantic model](https://siliconangle.com/2025/06/04/data-management-fusion-snowflake-snowflakesummit/), and deliver it into [Snowflake, Databricks, and notebooks](https://www.jpmorgan.com/about-us/corporate-news/2023/securities-services-fusion-data-mesh). The result was standardized data.
 
 ![J.P. Morgan's Fusion data ecosystem: sources normalized into one model and delivered to the client's stack](./fusion-jpm-ecosystem.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Fusion in one view: any source, normalized into a single model, delivered into the client's own stack. Adapted from <a href="https://fusion.jpmorgan.com" target="_blank" rel="noopener">J.P. Morgan's Fusion architecture</a>.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Fusion in one view: any source, normalized into a single model, delivered into the client's own stack. Adapted from <a href="https://fusion.jpmorgan.com" target="_blank" rel="noopener">J.P. Morgan's Fusion architecture</a>.</p>
 
 Knowledge received less investment. It remained in people’s heads, presentations, email, and shared drives. The main barrier was cost. A person had to read each document and decide what it meant. LLMs lowered the cost of first-pass extraction. They did not remove the cost of review, access control, or validation. Firms can now manage more of this material as an operating asset.
 
 ![Data rose for two decades; knowledge stayed flat until LLMs reduced the extraction cost](./data-vs-knowledge-curve.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Finance standardized its data over twenty years. Knowledge remained unmanaged until LLMs reduced the extraction cost.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Finance standardized its data over twenty years. Knowledge remained unmanaged until LLMs reduced the extraction cost.</p>
 
 ## I. Data: Three Tiers, and the Valuable One Is the One Nobody Captures
 
@@ -54,7 +54,7 @@ Not all knowledge is the same, and its value is inverted from the effort it take
 | **Tacit** | Judgment, pattern recognition, relationships | People's heads | Not captured by tools at all | Situational |
 
 ![The three tiers: value runs opposite to how well each is captured](./value-inversion.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Value runs opposite to capture. The embedded <em>why</em> is the highest-value tier and the least captured.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Value runs opposite to capture. The embedded <em>why</em> is the highest-value tier and the least captured.</p>
 
 The contract says *what* was agreed. The thread says *why*. The next person making a decision needs the *why*, and the *why* is exactly what no system holds. In the data room, the embedded layer was the gap I kept hitting. I could find every number. I could almost never find the reasoning that produced it.
 
@@ -63,7 +63,7 @@ Data-product practices also apply to knowledge. Each domain needs an owner. That
 The user is no longer always a person. An agent may retrieve the material through an API. The content therefore needs structure, clear provenance, and stable permissions. Those properties also help human users.
 
 ![Run knowledge like a data product](./knowledge-supply-chain.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Run knowledge like a data product (owned, measured, entitled) and design for the consumer that now matters most: an agent calling an API.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Run knowledge like a data product (owned, measured, entitled) and design for the consumer that now matters most: an agent calling an API.</p>
 
 ## II. Value: The Model Is the Commodity, the Knowledge Is the Moat
 
@@ -76,7 +76,7 @@ What stayed with me was his discipline of writing it down. For thirty-five years
 His definition of the machine, that day, was deflating: "a nerd that has read everything that's ever been written, remembers it, and can find it right away." It can read every credit agreement in a portfolio in minutes. What it cannot do is sit down with five CEOs and figure out which one is Steve Jobs. In private markets especially, the moat was never the documents. It was the **reasoning** almost no one bothered to write down.
 
 ![First-level vs. second-level](./first-vs-second-level.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">An LLM can read every agreement in minutes; that's first-level. The moat is the second-level judgment about what they mean.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">An LLM can read every agreement in minutes; that's first-level. The moat is the second-level judgment about what they mean.</p>
 
 Cheaper extraction does not make all knowledge equally valuable. A firm should assess a source by its effect on decisions. It should also account for leakage, staleness, and error.
 
@@ -87,7 +87,7 @@ Structure is expensive. Ontologies and knowledge graphs require ongoing maintena
 Generic knowledge management treats compliance as friction to route around. In finance it is the opposite. The constraints are essential. Three of them shape every real design decision.
 
 ![The trust stack](./trust-stack.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">In finance the constraints are the architecture. Each layer is essential. Each is anchored to a rule. The evaluation layer carries the most weight today.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">In finance the constraints are the architecture. Each layer is essential. Each is anchored to a rule. The evaluation layer carries the most weight today.</p>
 
 **Access is not uniform.** The same question must return different answers depending on who asks. This is not a product preference; it is the law. I first learned it by hand in that data room, and it is written into the [CFA Code I was tested on](https://www.cfainstitute.org/standards/professionals/code-ethics-standards): a charterholder cannot act on material nonpublic information, and firms must "enact a firewall to restrict the flow of proprietary information." Information barriers and [the Advisers Act's prohibition on misusing nonpublic information](https://www.law.cornell.edu/uscode/text/15/80b-4a) mean entitlements have to be enforced at query time and inherited from the source, never bolted on afterward. A knowledge system that can leak across a wall does not have a quality problem. It has an incident.
 
@@ -129,7 +129,7 @@ Here is what owning that data room taught me, and what I keep coming back to: th
 I began my career between evidence and decision. I now build systems that connect them. The scale has changed. Firms must make internal knowledge usable by people and agents. They must also preserve permissions and audit records.
 
 ![Instructions, permissions, and audit records](./control-plane.png)
-<p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; margin-bottom: 24px;">Today, knowledge answers questions. Next, it provides the instructions, permissions, and audit records that govern an agent.</p>
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Today, knowledge answers questions. Next, it provides the instructions, permissions, and audit records that govern an agent.</p>
 
 A strong model is not enough. Agents also need reliable internal knowledge. That knowledge must be current. It must carry provenance and permissions. Finance can now build these systems. And I think it is the most interesting thing in the industry.
 
