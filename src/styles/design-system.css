@@ -313,6 +313,223 @@ h3, .h3 {
 }
 
 /* --------------------------------------------------------------------------
+   PROJECT RAIL — a horizontal, snap-scrolled strip of compact cards.
+
+   The one place the system spends a border on a fill. A scroller has to say
+   "these are discrete things and there are more of them off-screen", and the
+   .featured device — bare columns split by vertical hairlines — stops reading
+   as a separator the moment the strip can move. So: 1px rule, the 2px surface
+   radius, still no shadow, and cards small enough that three and a half sit
+   inside the measure.
+
+   Full-bleed by construction. The track runs to both viewport edges and pads
+   itself back to the .wrap gutter, so card one lines up under the section
+   label while the last one runs off the right edge. That overhang is the
+   affordance: it says "scroll" before you touch anything.
+   -------------------------------------------------------------------------- */
+.rail {
+  /* The .wrap gutter, re-derived. .wrap is content-box (the system ships no
+     global border-box reset), so its content starts at (100% - measure)/2 and
+     collapses to the flat 32px padding below 1184px. Percentage, never vw —
+     vw counts the scrollbar and would push the page sideways. */
+  --rail-gutter: max(32px, calc((100% - var(--measure)) / 2));
+  --rail-gap: 24px;
+  --rail-card: clamp(252px, 24vw, 288px);
+}
+
+.rail__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+/* the label keeps its rule but gives up its trailing space — the track owns
+   the gap below this row now */
+.rail__head .section__label { margin-bottom: 0; }
+
+.rail__nav { display: flex; gap: 8px; flex: none; }
+
+/* .btn--ghost at icon size: the arrows are controls, so they take the action
+   radius rather than the pill the metadata tags own. */
+.rail__btn {
+  box-sizing: border-box;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--r-action);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.rail__btn:hover:not(:disabled) { background: var(--ink); color: var(--canvas); }
+.rail__btn:disabled { border-color: var(--rule); color: var(--ink-quiet); cursor: default; }
+.rail__btn svg { display: block; width: 15px; height: 15px; }
+
+/* --- the scroller ------------------------------------------------------- */
+.rail__track {
+  margin-top: 26px;
+  display: flex;
+  gap: var(--rail-gap);
+  padding-inline: var(--rail-gutter);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--rail-gutter);
+  scrollbar-width: none;        /* the progress rail below replaces it */
+  -webkit-overflow-scrolling: touch;
+}
+.rail__track::-webkit-scrollbar { display: none; }
+
+.rail__card {
+  box-sizing: border-box;
+  flex: 0 0 var(--rail-card);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 18px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-surface);
+  overflow: hidden;             /* clips the media's hover scale to the card */
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s;
+}
+.rail__card:hover { border-color: var(--ink); }
+
+.rail__media {
+  margin: 0;
+  background: var(--wash);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.rail__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rail__card:hover .rail__media img { transform: scale(1.04); }
+
+.rail__body {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding-inline: 15px;
+}
+.rail__meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+/* Clamped so a long headline can't drive every card in the row taller —
+   flex stretch makes the tallest card the row height. */
+.rail__title {
+  font: 400 17px/1.26 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s;
+}
+.rail__card:hover .rail__title { color: var(--accent); }
+
+.rail__deck {
+  font: 400 13.5px/1.5 var(--serif);
+  color: var(--ink-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- terminal tile ------------------------------------------------------ */
+/* The strip's own outbound link, and the reason it has something to scroll:
+   four projects at this card width already fit inside the measure, so without
+   a fifth tile the arrows would move the row by a sliver and mean nothing.
+   It carries the "All projects" job the section footer used to. */
+.rail__card--all {
+  background: var(--wash);
+  border-color: var(--wash);
+  padding-bottom: 0;
+}
+.rail__card--all:hover { border-color: var(--accent); }
+/* Pinned top and bottom rather than floated in the middle — the tile is as
+   tall as the tallest card, and centred copy leaves it looking unfinished. */
+.rail__all {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 22px 20px 24px;
+}
+.rail__all-head { display: grid; justify-items: start; gap: 10px; }
+.rail__all-count {
+  font: 400 11px/1 var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.rail__all-title {
+  font: 400 21px/1.2 var(--serif);
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+.rail__all-go {
+  font: 400 17px/1 var(--sans);
+  color: var(--accent);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rail__card--all:hover .rail__all-go { transform: translateX(4px); }
+
+/* --- position readout --------------------------------------------------- */
+/* A hairline scrollbar analog rather than the reference's dot row: the strip
+   scrolls continuously, and a dot per card would claim a pagination the rail
+   does not actually have. */
+.rail__foot { margin-top: 24px; }
+.rail__progress {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 2px;
+  background: var(--rule);
+  border-radius: var(--r-surface);
+  overflow: hidden;
+}
+.rail__thumb {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 100%;
+  background: var(--ink);
+  border-radius: inherit;
+}
+
+/* Nothing overflows — the controls would be lying, so they leave. */
+.rail--static .rail__nav,
+.rail--static .rail__foot { display: none; }
+
+@media (max-width: 720px) {
+  /* .wrap drops to 20px here (see RESPONSIVE) — the track has to follow it or
+     card one stops lining up with the label. */
+  .rail { --rail-gutter: 20px; --rail-gap: 14px; --rail-card: min(74vw, 288px); }
+  .rail__track { margin-top: 22px; }
+  .rail__foot { margin-top: 20px; }
+  .rail__progress { max-width: none; }
+}
+
+/* --------------------------------------------------------------------------
    INDEX LIST — hairline rules, no cards anywhere
    -------------------------------------------------------------------------- */
 .index { border-bottom: 1px solid var(--rule); }

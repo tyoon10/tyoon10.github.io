@@ -28,9 +28,13 @@ const featuredWritings = sortedWritings.filter(w => w.data.featured).slice(0, 3)
 const featuredWritingIds = new Set(featuredWritings.map(w => w.id));
 const writingList = sortedWritings.filter(w => !featuredWritingIds.has(w.id)).slice(0, 3);
 
-const featuredProjects = sortedProjects.filter(p => p.data.featured).slice(0, 3);
-const featuredProjectIds = new Set(featuredProjects.map(p => p.id));
-const projectList = sortedProjects.filter(p => !featuredProjectIds.has(p.id)).slice(0, 3);
+// Projects ride a side-scrolling rail instead of a featured row plus a list,
+// so they stay one continuous strip — featured first, everything else behind
+// it in date order.
+const railProjects = [
+  ...sortedProjects.filter(p => p.data.featured),
+  ...sortedProjects.filter(p => !p.data.featured),
+].slice(0, 9);
 
 // ISO dates, dot-separated — 2026·08·04
 const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
@@ -85,49 +89,66 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS — full-bleed side-scrolling rail. Manual only: the arrows and
+       the swipe move it, nothing moves it on its own. -->
   <section id="projects" class="section">
-    <div class="wrap">
-      <span class="section__label">Projects</span>
+    <div class="rail" id="projects-rail">
+      <div class="wrap">
+        <div class="rail__head">
+          <span class="section__label">Projects</span>
+          <div class="rail__nav">
+            <button type="button" class="rail__btn" data-rail-prev aria-controls="projects-track" aria-label="Scroll projects back">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M10.25 2.5 4.75 8l5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button type="button" class="rail__btn" data-rail-next aria-controls="projects-track" aria-label="Scroll projects forward">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M5.75 2.5 11.25 8l-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
 
-      {featuredProjects.length > 0 && (
-        <div class="featured">
-          {featuredProjects.map(p => (
-            <div class="featured__item">
-              {p.data.coverImage && (
-                <figure class="featured__media">
-                  <Image src={p.data.coverImage} alt={p.data.title} widths={[300, 600, 900]} sizes="300px" />
+      <div class="rail__track" id="projects-track" role="group" aria-label="Projects" tabindex="0">
+        {railProjects.map(p => (
+          <a href={`/projects/${p.id}`} class="rail__card">
+            {p.data.coverImage
+              ? (
+                <figure class="rail__media">
+                  <Image src={p.data.coverImage} alt="" widths={[288, 576, 864]} sizes="288px" />
                 </figure>
-              )}
-              <span class="featured__meta">
-                <span class="tag tag--accent">Featured</span>
+              )
+              : <span class="rail__media" aria-hidden="true"></span>}
+            <div class="rail__body">
+              <span class="rail__meta">
+                {p.data.featured && <span class="tag tag--featured">Featured</span>}
+                <span class="tag">{p.data.tags[0] || 'Project'}</span>
                 <span class="date">{iso(p.data.date)}</span>
               </span>
-              <a href={`/projects/${p.id}`} class="featured__title">{p.data.title}</a>
-              <span class="featured__deck">{p.data.description}</span>
+              <span class="rail__title">{p.data.title}</span>
+              <span class="rail__deck">{p.data.description}</span>
             </div>
-          ))}
-        </div>
-      )}
-
-      <div class="index">
-        {projectList.map(p => (
-          <div class:list={["index__item", { "index__item--nomedia": !p.data.coverImage }]}>
-            {p.data.coverImage && (
-              <figure class="index__media">
-                <Image src={p.data.coverImage} alt={p.data.title} widths={[200, 400, 600]} sizes="200px" />
-              </figure>
-            )}
-            <span class="index__meta">
-              <span class="tag">{p.data.tags[0] || 'Project'}</span>
-              <span class="date">{iso(p.data.date)}</span>
-            </span>
-            <a href={`/projects/${p.id}`} class="index__title">{p.data.title}</a>
-            <span class="index__deck">{p.data.description}</span>
-          </div>
+          </a>
         ))}
+
+        <a href="/projects" class="rail__card rail__card--all">
+          <span class="rail__all">
+            <span class="rail__all-head">
+              <span class="rail__all-count">{sortedProjects.length} case studies</span>
+              <span class="rail__all-title">All projects</span>
+            </span>
+            <span class="rail__all-go" aria-hidden="true">&rarr;</span>
+          </span>
+        </a>
       </div>
-      <a href="/projects" class="more-link">All projects <span class="arrow" aria-hidden="true">&rarr;</span></a>
+
+      <div class="wrap">
+        <div class="rail__foot">
+          <div class="rail__progress" aria-hidden="true"><span class="rail__thumb"></span></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -250,6 +271,63 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
       </div>
     </div>
   </section>
+
+  <!-- Project rail. Native scrolling does the moving; this only steps it by a
+       card, keeps the arrows honest about the ends, and draws the position. -->
+  <script is:inline>
+    (function () {
+      const rail = document.getElementById('projects-rail');
+      const track = document.getElementById('projects-track');
+      if (!rail || !track) return;
+
+      const prev = rail.querySelector('[data-rail-prev]');
+      const next = rail.querySelector('[data-rail-next]');
+      const thumb = rail.querySelector('.rail__thumb');
+      const smooth = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
+      // One card plus one gap, measured rather than assumed — the card width
+      // is a clamp() and the gap changes at the mobile breakpoint.
+      function step() {
+        const cards = track.children;
+        if (cards.length > 1) {
+          const d = cards[1].offsetLeft - cards[0].offsetLeft;
+          if (d > 0) return d;
+        }
+        return cards.length ? cards[0].getBoundingClientRect().width : track.clientWidth;
+      }
+
+      let queued = 0;
+      function sync() {
+        queued = 0;
+        const max = Math.max(0, track.scrollWidth - track.clientWidth);
+        const x = track.scrollLeft;
+
+        rail.classList.toggle('rail--static', max <= 1);
+        if (prev) prev.disabled = x <= 1;
+        if (next) next.disabled = x >= max - 1;
+
+        if (thumb) {
+          const visible = track.scrollWidth > 0
+            ? Math.min(1, track.clientWidth / track.scrollWidth)
+            : 1;
+          thumb.style.width = (visible * 100) + '%';
+          thumb.style.left = (max > 0 ? (x / max) * (1 - visible) * 100 : 0) + '%';
+        }
+      }
+      function queueSync() {
+        if (!queued) queued = requestAnimationFrame(sync);
+      }
+
+      track.addEventListener('scroll', queueSync, { passive: true });
+      window.addEventListener('resize', queueSync);
+      if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: smooth }));
+      if (next) next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: smooth }));
+
+      sync();
+      // Covers cover images that land after first paint and change scrollWidth.
+      window.addEventListener('load', queueSync);
+    })();
+  </script>
 
   <script is:inline>
     const emailBtn = document.getElementById('email-btn');
