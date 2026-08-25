@@ -91,8 +91,8 @@ The active visual system is defined in `src/styles/design-system.css`, which is 
 
 *   Always use standard **relative Markdown syntax** to load local images from inside the entry folder:
     `![The Compaction Stages](./compaction-stages.png)`
-*   Follow up the image block with a captioned paragraph for visual anchors:
-    `<p style="text-align: center; font-size: 0.82rem; color: var(--ink-muted); margin-top: -8px; margin-bottom: 24px;">Compaction stages caption...</p>`
+*   Follow up the image block with a captioned paragraph for visual anchors. `.caption` carries the type and colour from `design-system.css` — never hand-set `font-size` or `color` here:
+    `<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Compaction stages caption...</p>`
 *   At compile time, Astro v5 automatically checks, compresses, and outputs optimized `.webp` copies of your images into server assets.
 
 ---
