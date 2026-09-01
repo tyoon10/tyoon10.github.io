@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 340" role="img" aria-label="A real 66-line rollout from one codex exec run: seven exec tool calls (five shell commands and two web fetches), seven tool outputs, ten reasoning blocks, four assistant messages, and bookkeeping events. All 66 lines persist to a JSONL file on disk. Exactly one line, the final message, returns to the caller.">
+  <style>
+    .t{font-family:'Inter',-apple-system,sans-serif;font-size:13.5px;font-weight:600;fill:#1a1a1a}
+    .s{font-family:'JetBrains Mono',monospace;font-size:11px;fill:#5f6b76}
+    .m{font-family:'JetBrains Mono',monospace;font-size:12px;fill:#1a1a1a;font-weight:500}
+    .row{fill:#fdfdfa;stroke:#cfd6dd;stroke-width:1.2}
+    .hi{fill:#eef1f6;stroke:#17324d;stroke-width:1.5}
+    .fl{fill:none;stroke:#17324d;stroke-width:1.8}
+  </style>
+  <defs><marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#17324d"/></marker></defs>
+
+  <rect x="24" y="24" width="430" height="292" rx="8" fill="#f6f6f3" stroke="#cfd6dd" stroke-width="1.4"/>
+  <text class="s" x="40" y="50" style="letter-spacing:.12em">ONE REAL RUN, INSIDE THE HARNESS</text>
+
+  <rect class="row" x="44" y="64" width="390" height="26" rx="4"/><text class="s" x="56" y="81" fill="#1a1a1a">7 × exec: 5 shell commands, 2 web fetches</text>
+  <rect class="row" x="44" y="96" width="390" height="26" rx="4"/><text class="s" x="56" y="113" fill="#1a1a1a">7 × tool output</text>
+  <rect class="row" x="44" y="128" width="390" height="26" rx="4"/><text class="s" x="56" y="145" fill="#1a1a1a">10 × reasoning blocks</text>
+  <rect class="row" x="44" y="160" width="390" height="26" rx="4"/><text class="s" x="56" y="177" fill="#1a1a1a">4 × assistant messages (of 7 messages)</text>
+  <rect class="row" x="44" y="192" width="390" height="26" rx="4"/><text class="s" x="56" y="209" fill="#1a1a1a">35 × counters, lifecycle, session metadata</text>
+  <text class="t" x="239" y="248" text-anchor="middle">66 rollout lines · 1 turn</text>
+
+  <rect class="row" x="44" y="264" width="390" height="38" rx="5"/>
+  <text class="m" x="239" y="282" text-anchor="middle">~/.codex/sessions/…jsonl</text>
+  <text class="s" x="239" y="296" text-anchor="middle">all 66 persist on disk, readable by you</text>
+
+  <path class="fl" d="M454,173 L640,173" marker-end="url(#c)"/>
+  <text class="s" x="547" y="160" text-anchor="middle" fill="#17324d">the final message</text>
+  <text class="s" x="547" y="192" text-anchor="middle" fill="#17324d">1 of 66</text>
+
+  <rect class="hi" x="646" y="138" width="270" height="70" rx="7"/>
+  <text class="t" x="781" y="166" text-anchor="middle">the caller</text>
+  <text class="s" x="781" y="186" text-anchor="middle">never sees the other 65</text>
+
+  <text class="s" x="646" y="248">that gap is the context saving:</text>
+  <text class="s" x="646" y="266">the harness keeps the work,</text>
+  <text class="s" x="646" y="284">the caller gets the answer</text>
+</svg>

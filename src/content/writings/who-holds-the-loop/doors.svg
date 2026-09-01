@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 380" role="img" aria-label="One Codex agent core sits behind several front doors: the interactive TUI, codex exec as a one-shot process, the app-server daemon that the plugin drives, and a stdio MCP server. All doors run the same compiled core, call the same endpoint with one credential, and tag each session with its originator.">
+  <style>
+    .t{font-family:'Inter',-apple-system,sans-serif;font-size:13.5px;font-weight:600;fill:#1a1a1a}
+    .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;fill:#5f6b76}
+    .m{font-family:'JetBrains Mono',monospace;font-size:12px;fill:#1a1a1a;font-weight:500}
+    .box{fill:#fdfdfa;stroke:#cfd6dd;stroke-width:1.4}
+    .hi{fill:#eef1f6;stroke:#17324d;stroke-width:1.5}
+    .dash{fill:#fdfdfa;stroke:#8b98a5;stroke-width:1.4;stroke-dasharray:5 4}
+    .fl{fill:none;stroke:#5f6b76;stroke-width:1.6}
+  </style>
+  <defs><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#5f6b76"/></marker></defs>
+
+  <text class="s" x="30" y="34">you, at a terminal</text>
+  <rect class="box" x="30" y="44" width="190" height="56" rx="6"/>
+  <text class="m" x="125" y="68" text-anchor="middle">codex</text>
+  <text class="s" x="125" y="86" text-anchor="middle">interactive TUI</text>
+
+  <text class="s" x="355" y="34" fill="#17324d">Bash from Claude Code</text>
+  <rect class="hi" x="262" y="44" width="190" height="56" rx="6"/>
+  <text class="m" x="357" y="68" text-anchor="middle">codex exec</text>
+  <text class="s" x="357" y="86" text-anchor="middle">one-shot process</text>
+
+  <text class="s" x="589" y="34" fill="#17324d">codex-plugin-cc</text>
+  <rect class="hi" x="494" y="44" width="190" height="56" rx="6"/>
+  <text class="m" x="589" y="68" text-anchor="middle">app-server</text>
+  <text class="s" x="589" y="86" text-anchor="middle">daemon, JSON-RPC</text>
+
+  <text class="s" x="821" y="34">not configured here</text>
+  <rect class="dash" x="726" y="44" width="190" height="56" rx="6"/>
+  <text class="m" x="821" y="68" text-anchor="middle">mcp-server</text>
+  <text class="s" x="821" y="86" text-anchor="middle">stdio MCP</text>
+
+  <path class="fl" d="M125,100 L125,150"/><path class="fl" d="M357,100 L357,150"/>
+  <path class="fl" d="M589,100 L589,150"/><path class="fl" d="M821,100 L821,150"/>
+  <path class="fl" d="M125,150 L821,150"/>
+  <path class="fl" d="M473,150 L473,172" marker-end="url(#b)"/>
+
+  <rect class="box" x="163" y="178" width="620" height="76" rx="7"/>
+  <text class="t" x="473" y="206" text-anchor="middle">Codex agent core: the harness</text>
+  <text class="s" x="473" y="226" text-anchor="middle">assembles context · calls the model · executes tools · decides when done</text>
+  <text class="s" x="473" y="244" text-anchor="middle">one implementation, compiled into the binary</text>
+
+  <path class="fl" d="M330,254 L330,300" marker-end="url(#b)"/>
+  <rect class="box" x="180" y="306" width="300" height="52" rx="6"/>
+  <text class="m" x="330" y="328" text-anchor="middle">~/.codex/sessions/*.jsonl</text>
+  <text class="s" x="330" y="346" text-anchor="middle">same rollout format, tagged by originator</text>
+
+  <path class="fl" d="M620,254 L620,300" marker-end="url(#b)"/>
+  <rect class="hi" x="520" y="306" width="260" height="52" rx="6"/>
+  <text class="m" x="650" y="328" text-anchor="middle">backend-api/codex</text>
+  <text class="s" x="650" y="346" text-anchor="middle">one credential, one quota meter</text>
+</svg>

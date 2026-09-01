@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 300" role="img" aria-label="The agent loop: assemble context, call the model, execute tool calls, append results, repeat until done. The component that owns this loop is the harness, and it decides the model, the tools, and the trust boundary.">
+  <style>
+    .t{font-family:'Inter',-apple-system,sans-serif;font-size:14px;font-weight:600;fill:#1a1a1a}
+    .s{font-family:'JetBrains Mono',monospace;font-size:11px;fill:#5f6b76}
+    .m{font-family:'JetBrains Mono',monospace;font-size:12.5px;fill:#17324d;font-weight:500}
+    .box{fill:#fdfdfa;stroke:#cfd6dd;stroke-width:1.4}
+    .navy{fill:#eef1f6;stroke:#17324d;stroke-width:1.4}
+    .fl{fill:none;stroke:#5f6b76;stroke-width:1.6}
+    .fn{fill:none;stroke:#17324d;stroke-width:1.6}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#5f6b76"/></marker>
+    <marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#17324d"/></marker>
+  </defs>
+
+  <rect x="20" y="30" width="560" height="240" rx="8" fill="#f6f6f3" stroke="#cfd6dd" stroke-width="1.4"/>
+  <text class="s" x="36" y="56" style="letter-spacing:.12em">THE HARNESS OWNS THIS LOOP</text>
+
+  <rect class="box" x="50" y="80" width="150" height="52" rx="6"/>
+  <text class="t" x="125" y="102" text-anchor="middle">assemble</text>
+  <text class="s" x="125" y="120" text-anchor="middle">context + tools</text>
+
+  <rect class="navy" x="250" y="80" width="150" height="52" rx="6"/>
+  <text class="t" x="325" y="102" text-anchor="middle">call model</text>
+  <text class="s" x="325" y="120" text-anchor="middle">one HTTPS request</text>
+
+  <rect class="box" x="450" y="80" width="110" height="52" rx="6"/>
+  <text class="t" x="505" y="102" text-anchor="middle">run tools</text>
+  <text class="s" x="505" y="120" text-anchor="middle">shell, files</text>
+
+  <path class="fl" d="M200,106 L244,106" marker-end="url(#a)"/>
+  <path class="fl" d="M400,106 L444,106" marker-end="url(#a)"/>
+  <path class="fl" d="M505,132 L505,190 L125,190 L125,138" marker-end="url(#a)"/>
+  <text class="s" x="315" y="182" text-anchor="middle">append results, repeat until done</text>
+
+  <text class="s" x="36" y="242">the loop decides: which model, whose filesystem, when to stop</text>
+
+  <path class="fn" d="M580,106 L660,106" marker-end="url(#an)"/>
+  <rect class="navy" x="666" y="72" width="250" height="68" rx="6"/>
+  <text class="m" x="791" y="100" text-anchor="middle">chatgpt.com/backend-api</text>
+  <text class="s" x="791" y="120" text-anchor="middle">stateless, single-pass</text>
+
+  <text class="s" x="791" y="182" text-anchor="middle">the model call is the boring part;</text>
+  <text class="s" x="791" y="200" text-anchor="middle">the loop is manufactured</text>
+  <text class="s" x="791" y="218" text-anchor="middle">entirely by the harness</text>
+</svg>

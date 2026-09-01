@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 400" role="img" aria-label="The stop-time review gate: when Claude's turn tries to end, the plugin's Stop hook spawns a one-shot GPT reviewer that reads the repository state, not Claude's claims, and answers ALLOW or BLOCK. On BLOCK the harness holds the turn open and feeds the reason back to Claude, capped at eight consecutive blocks.">
+  <style>
+    .t{font-family:'Inter',-apple-system,sans-serif;font-size:13.5px;font-weight:600;fill:#1a1a1a}
+    .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;fill:#5f6b76}
+    .m{font-family:'JetBrains Mono',monospace;font-size:11.5px;fill:#1a1a1a;font-weight:500}
+    .box{fill:#fdfdfa;stroke:#cfd6dd;stroke-width:1.4}
+    .hi{fill:#eef1f6;stroke:#17324d;stroke-width:1.5}
+    .warn{fill:#fdf3ef;stroke:#9b3420;stroke-width:1.4}
+    .fl{fill:none;stroke:#5f6b76;stroke-width:1.6}
+    .fr{fill:none;stroke:#9b3420;stroke-width:1.6}
+    .fn{fill:none;stroke:#17324d;stroke-width:1.6}
+  </style>
+  <defs>
+    <marker id="e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#5f6b76"/></marker>
+    <marker id="er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#9b3420"/></marker>
+    <marker id="en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#17324d"/></marker>
+  </defs>
+
+  <rect x="24" y="24" width="420" height="352" rx="8" fill="#f6f6f3" stroke="#cfd6dd" stroke-width="1.4"/>
+  <text class="s" x="40" y="50" style="letter-spacing:.12em">CLAUDE CODE, THE HARNESS</text>
+
+  <rect class="box" x="52" y="66" width="180" height="52" rx="6"/>
+  <text class="t" x="142" y="88" text-anchor="middle">Claude</text>
+  <text class="s" x="142" y="106" text-anchor="middle">turn tries to end</text>
+
+  <path class="fl" d="M142,118 L142,152" marker-end="url(#e)"/>
+
+  <rect class="warn" x="52" y="158" width="180" height="52" rx="6"/>
+  <text class="t" x="142" y="180" text-anchor="middle">Stop hook</text>
+  <text class="s" x="142" y="198" text-anchor="middle">registered by the plugin</text>
+
+  <rect class="warn" x="52" y="272" width="360" height="56" rx="6"/>
+  <text class="m" x="232" y="296" text-anchor="middle">{"decision":"block","reason":…}</text>
+  <text class="s" x="232" y="314" text-anchor="middle">turn held open, reason fed back</text>
+
+  <path class="fr" d="M310,272 L310,92 L238,92" marker-end="url(#er)"/>
+  <text class="s" x="320" y="170" fill="#9b3420">Claude keeps</text>
+  <text class="s" x="320" y="186" fill="#9b3420">working</text>
+  <text class="s" x="232" y="354" text-anchor="middle" fill="#9b3420">harness cap: 8 consecutive blocks</text>
+
+  <path class="fl" d="M232,184 L536,184" marker-end="url(#e)"/>
+  <text class="s" x="384" y="162" text-anchor="middle">spawns reviewer</text>
+  <text class="s" x="384" y="176" text-anchor="middle">model: null → cascade</text>
+
+  <rect class="hi" x="542" y="158" width="200" height="56" rx="6"/>
+  <text class="t" x="642" y="180" text-anchor="middle">GPT reviewer</text>
+  <text class="s" x="642" y="198" text-anchor="middle">one shot, from outside</text>
+
+  <path class="fl" d="M642,214 L642,252" marker-end="url(#e)"/>
+  <text class="s" x="652" y="238">reads</text>
+  <rect class="box" x="542" y="258" width="200" height="50" rx="6"/>
+  <text class="m" x="642" y="279" text-anchor="middle">git diff · repo state</text>
+  <text class="s" x="642" y="296" text-anchor="middle">not Claude's claims</text>
+
+  <path class="fn" d="M742,172 L790,172 L790,120 L816,120" marker-end="url(#en)"/>
+  <text class="s" x="800" y="104" fill="#17324d">ALLOW</text>
+  <rect class="box" x="822" y="96" width="94" height="48" rx="6"/>
+  <text class="t" x="869" y="124" text-anchor="middle">turn ends</text>
+
+  <path class="fr" d="M742,200 L790,200 L790,300 L418,300" marker-end="url(#er)"/>
+  <text class="s" x="800" y="232" fill="#9b3420">BLOCK</text>
+</svg>

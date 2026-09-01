@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 400" role="img" aria-label="Model resolution cascade, first match wins: a model named on the call wins outright; otherwise a repo-level config applies but only in a trusted repository; otherwise the machine-level config; otherwise the server registry's top entry, today gpt-5.6-sol, which resolves at effort none even though the registry field reads low.">
+  <style>
+    .t{font-family:'Inter',-apple-system,sans-serif;font-size:13.5px;font-weight:600;fill:#1a1a1a}
+    .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;fill:#5f6b76}
+    .m{font-family:'JetBrains Mono',monospace;font-size:12px;fill:#17324d;font-weight:500}
+    .box{fill:#fdfdfa;stroke:#cfd6dd;stroke-width:1.4}
+    .hi{fill:#eef1f6;stroke:#17324d;stroke-width:1.4}
+    .warn{fill:#fdf3ef;stroke:#9b3420;stroke-width:1.4}
+    .fl{fill:none;stroke:#5f6b76;stroke-width:1.6}
+  </style>
+  <defs><marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#5f6b76"/></marker></defs>
+
+  <text class="s" x="150" y="34" style="letter-spacing:.12em">RESOLUTION ORDER, FIRST MATCH WINS</text>
+
+  <rect class="box" x="150" y="48" width="300" height="52" rx="6"/>
+  <text class="t" x="300" y="70" text-anchor="middle">Did the call name a model?</text>
+  <text class="s" x="300" y="88" text-anchor="middle">--model / -c model=</text>
+  <rect class="hi" x="600" y="50" width="310" height="48" rx="6"/>
+  <text class="m" x="755" y="71" text-anchor="middle">that slug wins</text>
+  <text class="s" x="755" y="87" text-anchor="middle">any string, no allow-list</text>
+
+  <rect class="box" x="150" y="140" width="300" height="52" rx="6"/>
+  <text class="t" x="300" y="162" text-anchor="middle">Repo config? (trusted only)</text>
+  <text class="s" x="300" y="180" text-anchor="middle">.codex/config.toml</text>
+  <rect class="warn" x="600" y="142" width="310" height="48" rx="6"/>
+  <text class="m" x="755" y="163" text-anchor="middle" fill="#9b3420">silently ignored if untrusted</text>
+  <text class="s" x="755" y="179" text-anchor="middle">and codex doctor never warns you</text>
+
+  <rect class="box" x="150" y="232" width="300" height="52" rx="6"/>
+  <text class="t" x="300" y="254" text-anchor="middle">Machine config?</text>
+  <text class="s" x="300" y="272" text-anchor="middle">~/.codex/config.toml</text>
+  <rect class="hi" x="600" y="234" width="310" height="48" rx="6"/>
+  <text class="m" x="755" y="255" text-anchor="middle">machine default</text>
+  <text class="s" x="755" y="271" text-anchor="middle">reaches every caller, verified</text>
+
+  <rect class="box" x="150" y="324" width="300" height="52" rx="6"/>
+  <text class="t" x="300" y="346" text-anchor="middle">Server registry</text>
+  <text class="s" x="300" y="364" text-anchor="middle">~/.codex/models_cache.json</text>
+  <rect class="hi" x="600" y="326" width="310" height="48" rx="6"/>
+  <text class="m" x="755" y="347" text-anchor="middle">gpt-5.6-sol @ none</text>
+  <text class="s" x="755" y="363" text-anchor="middle">registry field says low; exec resolves none</text>
+
+  <path class="fl" d="M450,74 L594,74" marker-end="url(#d)"/><text class="s" x="522" y="66" text-anchor="middle">yes</text>
+  <path class="fl" d="M300,100 L300,134" marker-end="url(#d)"/><text class="s" x="310" y="122">no</text>
+  <path class="fl" d="M450,166 L594,166" marker-end="url(#d)"/><text class="s" x="522" y="158" text-anchor="middle">yes</text>
+  <path class="fl" d="M300,192 L300,226" marker-end="url(#d)"/><text class="s" x="310" y="214">no</text>
+  <path class="fl" d="M450,258 L594,258" marker-end="url(#d)"/><text class="s" x="522" y="250" text-anchor="middle">yes</text>
+  <path class="fl" d="M300,284 L300,318" marker-end="url(#d)"/><text class="s" x="310" y="306">no</text>
+  <path class="fl" d="M450,350 L594,350" marker-end="url(#d)"/>
+</svg>
