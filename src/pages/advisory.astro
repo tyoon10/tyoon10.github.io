@@ -95,8 +95,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .advisory {
     max-width: 720px;
     margin: 0 auto;
-    padding: 48px 0 64px;
+    padding: 48px 32px 64px;
   }
+
+  @media (max-width: 720px) { .advisory { padding-inline: 20px; } }
 
   .advisory-eyebrow {
     font-family: 'Fira Code', monospace;
