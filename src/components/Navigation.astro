@@ -1,14 +1,16 @@
 ---
 interface Props { overlay?: boolean }
 const { overlay = false } = Astro.props;
+const path = Astro.url.pathname;
+const current = (prefix: string) => path === prefix || path.startsWith(prefix + '/') ? 'page' : undefined;
 ---
 <header class:list={["nav", { "nav--overlay": overlay }]} data-overlay={overlay ? "true" : null}>
   <div class="nav__inner">
     <a href="/" class="nav__logo">twyoon</a>
     <nav class="nav__links">
       <a href="/#about">About</a>
-      <a href="/projects">Projects</a>
-      <a href="/writings">Writings</a>
+      <a href="/projects" aria-current={current('/projects')}>Projects</a>
+      <a href="/writings" aria-current={current('/writings')}>Writings</a>
       <a href="/#contact">Contact</a>
     </nav>
   </div>
@@ -26,7 +28,7 @@ const { overlay = false } = Astro.props;
         if (!nav || !hero) return;
         const io = new IntersectionObserver(
           ([e]) => nav.classList.toggle('is-landed', !e.isIntersecting),
-          { rootMargin: '-72px 0px 0px 0px', threshold: 0 }
+          { rootMargin: `-${nav.offsetHeight}px 0px 0px 0px`, threshold: 0 }
         );
         io.observe(hero);
       };

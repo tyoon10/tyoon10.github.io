@@ -10,20 +10,20 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
 ---
 
 <BaseLayout title="Projects" description="Project case studies and strategic showcases by Taewan Yoon — product strategy, causal inference, and enterprise AI deployments.">
-  <section class="section" style="margin-top: 64px;">
+  <section class="section section--page">
     <div class="wrap">
       <span class="section__label">Projects</span>
-      <h2>Things I built, and what broke.</h2>
-      <p class="deck" style="margin: 16px 0 44px;">
+      <h1 class="h2">Things I built, and what broke.</h1>
+      <p class="deck deck--page">
         Product strategy case studies, interactive data science tools, and enterprise AI deployment showcases.
       </p>
 
       <div class="index">
         {sortedProjects.map(project => (
-          <div class:list={["index__item", { "index__item--nomedia": !project.data.coverImage }]}>
+          <a href={`/projects/${project.id}`} class:list={["index__item", { "index__item--nomedia": !project.data.coverImage }]}>
             {project.data.coverImage && (
               <figure class="index__media">
-                <Image src={project.data.coverImage} alt={project.data.title} widths={[200, 400, 600]} sizes="200px" />
+                <Image src={project.data.coverImage} alt="" widths={[200, 400, 700]} sizes="(max-width: 560px) calc(100vw - 40px), 200px" />
               </figure>
             )}
             <span class="index__meta">
@@ -32,9 +32,9 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
               {project.data.tags[1] && <span class="tag">{project.data.tags[1]}</span>}
               <span class="date">{iso(project.data.date)}</span>
             </span>
-            <a href={`/projects/${project.id}`} class="index__title">{project.data.title}</a>
+            <span class="index__title">{project.data.title}</span>
             <span class="index__deck">{project.data.description}</span>
-          </div>
+          </a>
         ))}
       </div>
 

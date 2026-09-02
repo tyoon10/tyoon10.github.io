@@ -6,7 +6,7 @@ featured: false
 coverImage: "./featured.png"
 tags:
   - "Agentic AI"
-  - "Inference Infrastructure"
+  - "AI Infrastructure"
   - "Open Source"
   - "NVIDIA"
   - "Mistral AI"

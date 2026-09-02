@@ -1,7 +1,8 @@
 ---
-title: "[MathWorks Finance Conference] RAG Pipeline for Quantitative Investment Research"
+title: "RAG Pipeline for Quantitative Investment Research"
 date: 2025-09-30
 description: "Built a LightRAG pipeline that combines a knowledge graph with vector embeddings to make 4,000+ academic papers queryable, surfacing contrarian investment strategies with 2.4x more comprehensive responses than naive RAG. Presented at MathWorks."
+venue: "MathWorks Finance Conference 2025"
 featured: true
 coverImage: "./cover.png"
 tags:
