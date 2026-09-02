@@ -125,4 +125,14 @@ Three moves, in the order I would redo them:
 
 The gate stays off by default, per repo, and that is the right default. Turn it on where a wrong diff actually costs you something.
 
+Here is what that split looks like on a real job. I asked Claude Code to orchestrate Sol and Luna through the plugin to implement a build and run its tests. Claude planned the split itself: Sol implements, Luna verifies each step against 23 checks.
+
+![Claude Code orchestrating Sol and Luna through the plugin](./claude-code-orchestrator.png)
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Claude Code as orchestrator. Luna records the baseline, Sol implements step by step, Luna verifies: 6, 12, 17, then 20 of 23 checks passing with no regressions. The session footer reads 42m 45s and 15.5k tokens.</p>
+
+**Every command Sol ran stayed out of that 15.5k.** On the Codex side, each step arrives as a scoped task. This one reads the spec, makes the cutover in a single file edit, runs the test plan with failure injection, and commits only the scoped changes.
+
+![Codex receiving a delegated implementation task](./codex-implementation.png)
+<p class="caption" style="text-align: center; margin-top: -8px; margin-bottom: 24px;">Codex for implementation and verification. The task arrives from Claude Code; the harness that runs it keeps the work on its own side of the boundary.</p>
+
 Next step for me: this site's repo gets the gate. The referee that blocked my broken `median()` can review the commit that publishes this post. A week of making claims meet their receipts taught me to trust exactly one kind of documentation: the kind with command output in it.
