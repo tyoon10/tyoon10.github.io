@@ -1,3 +1,5 @@
+import type { BrainSitting } from './brain/types.ts';
+
 export interface EventLink {
   name: string;
   url: string;
@@ -13,6 +15,9 @@ export interface SiteEvent {
   date: string; // ISO date, used for sorting + display
   location: string;
   links: EventLink[];
+  /** Optional. BRAIN docket only; ignored by the personal homepage. */
+  id?: string;
+  brain?: BrainSitting;
 }
 
 export const events: SiteEvent[] = [
@@ -32,6 +37,14 @@ export const events: SiteEvent[] = [
     roleStyle: 'organizer',
     date: '2026-04-24',
     location: 'Williamsburg, Brooklyn, NY',
+    id: 'ai-startup-challenge-2026',
+    brain: {
+      format: 'pitch competition',
+      chairRole: 'chair',
+      registerState: 'details',
+      organiserUrl: 'https://business.columbia.edu/ai-in-business/ai-startup-final-competition-day',
+      inferred: true,
+    },
     links: [
       { name: 'LinkedIn Post', url: 'https://www.linkedin.com/posts/if-you-had-one-shot-to-build-a-startup-with-ugcPost-7459606643496931328-CaZ4/', icon: 'linkedin' },
       { name: 'Event Page', url: 'https://business.columbia.edu/ai-in-business/ai-startup-final-competition-day', icon: 'globe' },
@@ -43,6 +56,14 @@ export const events: SiteEvent[] = [
     roleStyle: 'organizer',
     date: '2026-04-12',
     location: 'Geffen Hall, Columbia Business School',
+    id: 'claude-builder-hackathon-2026',
+    brain: {
+      format: 'hackathon',
+      chairRole: 'co-chair',
+      registerState: 'details',
+      organiserUrl: 'https://luma.com/wt6wmh29',
+      inferred: true,
+    },
     links: [
       { name: 'LinkedIn Post', url: 'https://www.linkedin.com/posts/taewan-yoon_claudepartner-ugcPost-7453550848439209984-rI9J/', icon: 'linkedin' },
       { name: 'Event Page', url: 'https://luma.com/wt6wmh29', icon: 'globe' },
@@ -65,6 +86,14 @@ export const events: SiteEvent[] = [
     roleStyle: 'neutral',
     date: '2026-03-08',
     location: 'Columbia Business School',
+    id: 'gdg-nyc-build-with-ai-2026',
+    brain: {
+      format: 'hackathon',
+      chairRole: 'docket',
+      registerState: 'details',
+      organiserUrl: 'https://gdg.community.dev/events/details/google-gdg-nyc-presents-ai-futures-fund-presents-nyc-build-w-ai-hackathon-google-cloud-labs-x-columbia-business-school-ii/',
+      inferred: true,
+    },
     links: [
       { name: 'Event Page', url: 'https://gdg.community.dev/events/details/google-gdg-nyc-presents-ai-futures-fund-presents-nyc-build-w-ai-hackathon-google-cloud-labs-x-columbia-business-school-ii/', icon: 'globe' },
     ],
@@ -75,6 +104,14 @@ export const events: SiteEvent[] = [
     roleStyle: 'neutral',
     date: '2026-02-28',
     location: 'Verci Flatiron, New York',
+    id: 'mistral-hackathon-nyc-2026',
+    brain: {
+      format: 'hackathon',
+      chairRole: 'docket',
+      registerState: 'details',
+      organiserUrl: 'https://luma.com/mistralhack-newyork?tk=W3R0u7',
+      inferred: true,
+    },
     links: [
       { name: 'Read Recap', url: '/writings/mistral-worldwide-hackathon-2026-recap/', icon: 'book-open' },
       { name: 'Event Page', url: 'https://luma.com/mistralhack-newyork?tk=W3R0u7', icon: 'globe' },
@@ -97,6 +134,14 @@ export const events: SiteEvent[] = [
     roleStyle: 'organizer',
     date: '2026-02-14',
     location: 'Columbia Business School',
+    id: 'iterate-columbia-hackathon-2026',
+    brain: {
+      format: 'hackathon',
+      chairRole: 'co-chair',
+      registerState: 'details',
+      organiserUrl: 'https://luma.com/dyzbn70z',
+      inferred: true,
+    },
     links: [
       { name: 'Read Recap', url: '/writings/iterate-columbia-hackathon-2026-recap/', icon: 'book-open' },
       { name: 'Event Page', url: 'https://luma.com/dyzbn70z', icon: 'globe' },

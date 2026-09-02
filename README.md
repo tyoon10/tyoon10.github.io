@@ -66,6 +66,30 @@ twyoon/
 
 ---
 
+## BRAIN NYC Roundtable — preview (not production)
+
+HERMES: drafting and preview are allowed. **Production publish is forbidden.** This does not replace the personal homepage. GitHub Pages still deploys the personal site from `main`; `/brain` is a noindex preview route.
+
+Brand kit v1.0 (2026-09-02, Direction 3) lives at `src/styles/brain/tokens.css` and `src/styles/brain/tokens.json`. That kit is the source of truth. Do not invent tokens, wordmarks, or chrome.
+
+```bash
+npm install
+npm run dev
+```
+
+Then open **http://localhost:4321/brain**. Nested preview routes: `/brain/offers`, `/brain/docket`, `/brain/programs`, `/brain/brief`.
+
+```bash
+npm run validate:brain   # tokens + five public data modules
+npm test                 # upcoming, lexicon, offer-book gate, outbound sittings
+npm run check            # astro / TypeScript
+npm run build
+```
+
+The personal homepage (`/`) is unchanged in meaning. Do not merge this preview as the live site.
+
+---
+
 ## 🛠️ Local Development & Scripts
 
 Prerequisites: **Node.js v18.14.1+** and **NPM** inside WSL.

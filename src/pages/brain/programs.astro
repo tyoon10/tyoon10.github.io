@@ -1,0 +1,53 @@
+---
+import BrainLayout from '../../layouts/BrainLayout.astro';
+import * as copy from '../../data/brain/copy.ts';
+import { programs } from '../../data/brain/programs.ts';
+
+const windowChip = (state: string) =>
+  state === 'closed' ? 'hold' : state === 'open' ? 'ship' : 'assemble';
+---
+
+<BrainLayout
+  title="Programs · BRAIN NYC"
+  description={copy.programsLede}
+>
+  <section class="page-lead">
+    <div class="brain-wrap">
+      <span class="brain-section__label">Programs</span>
+      <h1 class="h2">Campus programs</h1>
+      <p class="brain-deck">{copy.programsLede}</p>
+    </div>
+  </section>
+
+  <section class="brain-section brain-section--follow">
+    <div class="brain-wrap">
+      <div class="index">
+        {programs.map((program) => (
+          <article class="index__item">
+            <span class="index__rail">
+              <span class={`chip chip--${windowChip(program.applicationWindow.state)}`}>
+                {program.applicationWindow.state === 'held' ? copy.chipLabels.assemble : program.applicationWindow.state === 'closed' ? copy.chipLabels.hold : copy.chipLabels.ship}
+              </span>
+              {program.applicationWindow.asOf && (
+                <span class="date">{program.applicationWindow.asOf.replace(/-/g, '·')}</span>
+              )}
+            </span>
+            <div>
+              <span class="index__title">{program.name}</span>
+              <span class="index__meta">{program.surface}</span>
+              <span class="index__meta">{program.applicationWindow.note}</span>
+              {program.publicRecord && <span class="index__meta">{program.publicRecord}</span>}
+            </div>
+            <div class="index__action">
+              {program.officialUrl ? (
+                <a class="link" href={program.officialUrl} rel="noopener">On the record</a>
+              ) : (
+                <span class="caption">{copy.programsEmpty}</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BrainLayout>

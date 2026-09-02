@@ -1,0 +1,157 @@
+/* ==========================================================================
+   BRAIN NYC Roundtable — Brand kit v1.0
+   Locked 2026-09-02 · Direction 3 · preview-only (HERMES)
+
+   Source of truth for /brain. Do not invent tokens.
+   Light :root names map 1:1 to src/styles/design-system.css, plus --on-accent,
+   --gutter, chip tokens, and school data colours.
+   Dark via prefers-color-scheme and [data-theme="dark"].
+   ========================================================================== */
+
+:root {
+  /* ---- surfaces (1:1 with design-system.css light) -------------------- */
+  --canvas:       #fefefc;
+  --surface:      #fdfdfa;
+  --wash:         #eef1f6;
+  --sunk:         #f6f6f3;
+
+  /* ---- ink ------------------------------------------------------------ */
+  --ink:          #0a0a0a;
+  --ink-muted:    #6b6b6b;
+  --ink-quiet:    #98a7aa;
+
+  /* ---- rules ---------------------------------------------------------- */
+  --rule-strong:  #0a0a0a;
+  --rule:         #dcdcd8;
+
+  /* ---- accent: verb only. Never a hero band, card tint, or lockup. ---- */
+  --accent:       #17324d;
+  --accent-deep:  #0f2438;
+  --accent-wash:  #eef1f6;
+  --on-accent:    #ffffff;
+
+  /* ---- status chips --------------------------------------------------- */
+  --chip-ship-fg:      #1d4d33;
+  --chip-ship-bg:      #e8f0ea;
+  --chip-assemble-fg:  #4a4326;
+  --chip-assemble-bg:  #f2eede;
+  --chip-new-fg:       #17324d;
+  --chip-new-bg:       #eef1f6;
+  --chip-hold-fg:      #6d2b23;
+  --chip-hold-bg:      #f5e8e5;
+
+  /* ---- schools: data colour only (6–8px swatch or 2px left rule) ------ */
+  --school-columbia:      #2b62a8;
+  --school-nyu:           #57068c;
+  --school-cornell-tech:  #b31b1b;
+  --school-yale:          #00356b;
+
+  /* ---- radius: three role-bound values, no others --------------------- */
+  --r-surface:    2px;
+  --r-action:     6px;
+  --r-pill:       999px;
+
+  /* ---- elevation ------------------------------------------------------ */
+  --shadow: none;
+
+  /* ---- type ----------------------------------------------------------- */
+  --serif: 'Newsreader', ui-serif, Georgia, 'Times New Roman', serif;
+  --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --fs-display:   clamp(44px, 7vw, 88px);
+  --fs-h2:        clamp(26px, 3.4vw, 32px);
+  --fs-h3:        20px;
+  --fs-body:      16px;
+  --fs-prose:     18px;
+  --fs-caption:   13px;
+  --fs-label:     12px;
+
+  /* ---- layout --------------------------------------------------------- */
+  --measure:      1120px;
+  --prose-width:  580px;
+  --section:      104px;
+  --nav-h:        53px;
+  --gutter:       32px;
+}
+
+/* --------------------------------------------------------------------------
+   DARK — canvas #111417, accent #9dbdde, --on-accent #111417 on filled actions
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; }
+
+  :root {
+    --canvas:       #111417;
+    --surface:      #171a1e;
+    --wash:         #1a2130;
+    --sunk:         #14171b;
+    --ink:          #ecebe6;
+    --ink-muted:    #9aa1a8;
+    --ink-quiet:    #6b747c;
+    --rule-strong:  #ecebe6;
+    --rule:         #2a2f35;
+    --accent:       #9dbdde;
+    --accent-deep:  #c2d6ea;
+    --accent-wash:  #1a2130;
+    --on-accent:    #111417;
+    --chip-ship-fg:      #96c8ab;
+    --chip-ship-bg:      #1a2620;
+    --chip-assemble-fg:  #d4c68d;
+    --chip-assemble-bg:  #262316;
+    --chip-new-fg:       #9dbdde;
+    --chip-new-bg:       #1a2130;
+    --chip-hold-fg:      #e0a196;
+    --chip-hold-bg:      #2a1c19;
+  }
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas:       #111417;
+  --surface:      #171a1e;
+  --wash:         #1a2130;
+  --sunk:         #14171b;
+  --ink:          #ecebe6;
+  --ink-muted:    #9aa1a8;
+  --ink-quiet:    #6b747c;
+  --rule-strong:  #ecebe6;
+  --rule:         #2a2f35;
+  --accent:       #9dbdde;
+  --accent-deep:  #c2d6ea;
+  --accent-wash:  #1a2130;
+  --on-accent:    #111417;
+  --chip-ship-fg:      #96c8ab;
+  --chip-ship-bg:      #1a2620;
+  --chip-assemble-fg:  #d4c68d;
+  --chip-assemble-bg:  #262316;
+  --chip-new-fg:       #9dbdde;
+  --chip-new-bg:       #1a2130;
+  --chip-hold-fg:      #e0a196;
+  --chip-hold-bg:      #2a1c19;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --canvas:       #fefefc;
+  --surface:      #fdfdfa;
+  --wash:         #eef1f6;
+  --sunk:         #f6f6f3;
+  --ink:          #0a0a0a;
+  --ink-muted:    #6b6b6b;
+  --ink-quiet:    #98a7aa;
+  --rule-strong:  #0a0a0a;
+  --rule:         #dcdcd8;
+  --accent:       #17324d;
+  --accent-deep:  #0f2438;
+  --accent-wash:  #eef1f6;
+  --on-accent:    #ffffff;
+  --chip-ship-fg:      #1d4d33;
+  --chip-ship-bg:      #e8f0ea;
+  --chip-assemble-fg:  #4a4326;
+  --chip-assemble-bg:  #f2eede;
+  --chip-new-fg:       #17324d;
+  --chip-new-bg:       #eef1f6;
+  --chip-hold-fg:      #6d2b23;
+  --chip-hold-bg:      #f5e8e5;
+}

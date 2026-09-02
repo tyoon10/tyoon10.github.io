@@ -49,6 +49,7 @@ const excludedFromSitemap = [
   '/advisory',
   '/workshop',
   '/roadmap/agentic-ai',
+  '/brain',
 ];
 
 // https://astro.build/config
