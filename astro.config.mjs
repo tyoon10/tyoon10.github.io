@@ -3,6 +3,28 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import fs from 'node:fs';
 import path from 'node:path';
+import { visit } from 'unist-util-visit';
+
+function rehypeScrollTables() {
+  /** @param {import('hast').Root} tree */
+  function transform(tree) {
+    visit(tree, 'element', (node, index, parent) => {
+      if (node.tagName !== 'table' || !parent || index == null) return;
+      const classNames = parent.type === 'element' && parent.tagName === 'div'
+        ? parent.properties.className
+        : undefined;
+      if (Array.isArray(classNames) && classNames.includes('table-scroll')) return;
+      parent.children[index] = {
+        type: 'element',
+        tagName: 'div',
+        properties: { className: ['table-scroll'] },
+        children: [node],
+      };
+    });
+  }
+
+  return transform;
+}
 
 // Collect slugs of writings marked `unlisted: true` in their front matter.
 // Reading the files here keeps the sitemap in step with the flag automatically,
@@ -31,6 +53,7 @@ const excludedFromSitemap = [
 // https://astro.build/config
 export default defineConfig({
   site: 'https://twyoon.com',
+  markdown: { rehypePlugins: [rehypeScrollTables] },
   integrations: [sitemap({
     filter: (page) => !excludedFromSitemap.some((slug) => page.includes(slug)),
   })],
