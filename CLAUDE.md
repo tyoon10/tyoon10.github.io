@@ -57,6 +57,8 @@ links:
     icon: "github"
 ```
 
+Keep tags to 20 characters or fewer.
+
 ---
 
 ## ✍️ Writing Voice & Article Drafting

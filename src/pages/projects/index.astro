@@ -20,10 +20,10 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
 
       <div class="index">
         {sortedProjects.map(project => (
-          <div class:list={["index__item", { "index__item--nomedia": !project.data.coverImage }]}>
+          <a href={`/projects/${project.id}`} class:list={["index__item", { "index__item--nomedia": !project.data.coverImage }]}>
             {project.data.coverImage && (
               <figure class="index__media">
-                <Image src={project.data.coverImage} alt={project.data.title} widths={[200, 400, 600]} sizes="200px" />
+                <Image src={project.data.coverImage} alt="" widths={[200, 400, 700]} sizes="(max-width: 560px) calc(100vw - 40px), 200px" />
               </figure>
             )}
             <span class="index__meta">
@@ -32,9 +32,9 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
               {project.data.tags[1] && <span class="tag">{project.data.tags[1]}</span>}
               <span class="date">{iso(project.data.date)}</span>
             </span>
-            <a href={`/projects/${project.id}`} class="index__title">{project.data.title}</a>
+            <span class="index__title">{project.data.title}</span>
             <span class="index__deck">{project.data.description}</span>
-          </div>
+          </a>
         ))}
       </div>
 

@@ -57,7 +57,7 @@
   --fs-body:      16px;
   --fs-prose:     18px;
   --fs-caption:   13px;
-  --fs-label:     11px;
+  --fs-label:     12px;
 
   /* ---- layout --------------------------------------------------------- */
   --measure:      1120px;
@@ -257,8 +257,6 @@ h3, .h3 {
   padding: 92px 0;
   margin-top: var(--section);
 }
-.band-wash .section__label::before { background: var(--accent); }
-
 /* --------------------------------------------------------------------------
    FEATURED ROW — Monocle's multi-column grid, split by vertical hairlines.
    No card fills, no boxes: the rules do the separating, exactly as the print
@@ -278,6 +276,8 @@ h3, .h3 {
   align-content: start;
   padding: 28px 30px 32px;
   border-left: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
 }
 .featured__item:first-child { border-left: 0; padding-left: 0; }
 .featured__item:last-child { padding-right: 0; }
@@ -292,8 +292,8 @@ h3, .h3 {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;
-  max-height: 200px;         /* the cap, not the width — keeps 2-up and 3-up rows level */
+  aspect-ratio: 2 / 1;
+  max-height: none;
   object-fit: cover;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -484,7 +484,7 @@ h3, .h3 {
 }
 .rail__all-head { display: grid; justify-items: start; gap: 10px; }
 .rail__all-count {
-  font: 400 11px/1 var(--mono);
+  font: 400 12px/1 var(--mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ink-muted);
@@ -549,9 +549,11 @@ h3, .h3 {
   border-top: 1px solid var(--rule);
   padding: 26px 0;
   display: grid;
-  grid-template-columns: 128px 200px minmax(0, 1fr);
+  grid-template-columns: 160px 200px minmax(0, 1fr);
   gap: 10px 34px;
   align-items: start;
+  text-decoration: none;
+  color: inherit;
 }
 .index__meta {
   grid-column: 1;
@@ -583,7 +585,7 @@ h3, .h3 {
 .index__item .index__deck { grid-column: 3; }
 
 /* entries with no cover let the text take the picture's column */
-.index__item--nomedia { grid-template-columns: 128px minmax(0, 1fr); }
+.index__item--nomedia { grid-template-columns: 160px minmax(0, 1fr); }
 .index__item--nomedia .index__title,
 .index__item--nomedia .index__deck { grid-column: 2; }
 
@@ -655,16 +657,20 @@ h3, .h3 {
    METADATA — outlined pill + ISO date
    -------------------------------------------------------------------------- */
 .tag {
-  font: 400 10px/1 var(--mono);
+  font: 400 11px/1 var(--mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ink);
   border: 1px solid var(--ink);
   border-radius: var(--r-pill);
   padding: 4px 10px;
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  vertical-align: middle;
 }
 
 /* Featured is a curatorial claim, not a topic, so it reads as a solid stamp
@@ -679,7 +685,7 @@ h3, .h3 {
 }
 
 .date {
-  font: 400 11px/1 var(--mono);
+  font: 400 12px/1 var(--mono);
   color: var(--ink-muted);
   font-variant-numeric: tabular-nums;
 }
@@ -988,7 +994,7 @@ h3, .h3 {
   margin: 0 auto;
   padding: 0 32px;
   font: 400 12px/1.6 var(--mono);
-  color: var(--ink-quiet);
+  color: var(--ink-muted);
   letter-spacing: 0;
 }
 @media (max-width: 720px) { .footer__inner { padding: 0 20px; } }
@@ -1000,14 +1006,13 @@ h3, .h3 {
   border-top: 1px solid var(--rule);
   padding: 22px 0;
   display: grid;
-  grid-template-columns: 128px minmax(0, 1fr) auto;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
   gap: 8px 34px;
   align-items: start;
 }
-.event:last-of-type { border-bottom: 1px solid var(--rule); }
+.events { border-bottom: 1px solid var(--rule); }
 .event__rail { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; }
 .event__title { font: 400 19px/1.3 var(--serif); letter-spacing: -0.01em; color: var(--ink); text-decoration: none; display: block; }
-.event__title:hover { color: var(--accent); }
 .event__where { font: 400 13px/1.4 var(--sans); color: var(--ink-muted); display: block; margin-top: 6px; }
 .event__actions { display: flex; gap: 16px; flex-wrap: wrap; justify-self: end; }
 .event__actions a {

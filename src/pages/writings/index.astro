@@ -22,10 +22,10 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
 
       <div class="index">
         {sortedWritings.map(writing => (
-          <div class:list={["index__item", { "index__item--nomedia": !writing.data.coverImage }]}>
+          <a href={`/writings/${writing.id}`} class:list={["index__item", { "index__item--nomedia": !writing.data.coverImage }]}>
             {writing.data.coverImage && (
               <figure class="index__media">
-                <Image src={writing.data.coverImage} alt={writing.data.title} widths={[200, 400, 600]} sizes="200px" />
+                <Image src={writing.data.coverImage} alt="" widths={[200, 400, 700]} sizes="(max-width: 560px) calc(100vw - 40px), 200px" />
               </figure>
             )}
             <span class="index__meta">
@@ -34,9 +34,9 @@ const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
               {writing.data.tags[1] && <span class="tag">{writing.data.tags[1]}</span>}
               <span class="date">{iso(writing.data.date)}</span>
             </span>
-            <a href={`/writings/${writing.id}`} class="index__title">{writing.data.title}</a>
+            <span class="index__title">{writing.data.title}</span>
             <span class="index__deck">{writing.data.description}</span>
-          </div>
+          </a>
         ))}
       </div>
 

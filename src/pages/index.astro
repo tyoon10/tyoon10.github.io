@@ -160,10 +160,10 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
       {featuredWritings.length > 0 && (
         <div class="featured">
           {featuredWritings.map(w => (
-            <div class="featured__item">
+            <a href={`/writings/${w.id}`} class="featured__item">
               {w.data.coverImage && (
                 <figure class="featured__media">
-                  <Image src={w.data.coverImage} alt={w.data.title} widths={[300, 600, 900]} sizes="300px" />
+                  <Image src={w.data.coverImage} alt="" widths={[560, 840, 1120]} sizes="(max-width: 820px) calc(100vw - 40px), 560px" />
                 </figure>
               )}
               <span class="featured__meta">
@@ -171,28 +171,28 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
                 <span class="tag">{w.data.tags[0] || 'AI Strategy'}</span>
                 <span class="date">{iso(w.data.date)}</span>
               </span>
-              <a href={`/writings/${w.id}`} class="featured__title">{w.data.title}</a>
+              <span class="featured__title">{w.data.title}</span>
               <span class="featured__deck">{w.data.description}</span>
-            </div>
+            </a>
           ))}
         </div>
       )}
 
       <div class="index">
         {writingList.map(w => (
-          <div class:list={["index__item", { "index__item--nomedia": !w.data.coverImage }]}>
+          <a href={`/writings/${w.id}`} class:list={["index__item", { "index__item--nomedia": !w.data.coverImage }]}>
             {w.data.coverImage && (
               <figure class="index__media">
-                <Image src={w.data.coverImage} alt={w.data.title} widths={[200, 400, 600]} sizes="200px" />
+                <Image src={w.data.coverImage} alt="" widths={[200, 400, 700]} sizes="(max-width: 560px) calc(100vw - 40px), 200px" />
               </figure>
             )}
             <span class="index__meta">
               <span class="tag">{w.data.tags[0] || 'AI Strategy'}</span>
               <span class="date">{iso(w.data.date)}</span>
             </span>
-            <a href={`/writings/${w.id}`} class="index__title">{w.data.title}</a>
+            <span class="index__title">{w.data.title}</span>
             <span class="index__deck">{w.data.description}</span>
-          </div>
+          </a>
         ))}
       </div>
       <a href="/writings" class="more-link">All writing <span class="arrow" aria-hidden="true">&rarr;</span></a>
@@ -204,45 +204,47 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
     <div class="wrap">
       <span class="section__label">Events</span>
 
-      {visibleEvents.map(ev => (
-        <div class="event">
-          <span class="event__rail">
-            <span class="tag">{ev.role}</span>
-            <span class="date">{isoStr(ev.date)}</span>
-          </span>
-          <div>
-            <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="event__title">{ev.title}</a>
-            <span class="event__where">{ev.location}</span>
+      <div class="events">
+        {visibleEvents.map(ev => (
+          <div class="event">
+            <span class="event__rail">
+              <span class="tag">{ev.role}</span>
+              <span class="date">{isoStr(ev.date)}</span>
+            </span>
+            <div>
+              <span class="event__title">{ev.title}</span>
+              <span class="event__where">{ev.location}</span>
+            </div>
+            <div class="event__actions">
+              {ev.links.map(l => (
+                <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
+              ))}
+            </div>
           </div>
-          <div class="event__actions">
-            {ev.links.map(l => (
-              <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
+        ))}
+
+        {hiddenEvents.length > 0 && (
+          <div id="more-events" hidden>
+            {hiddenEvents.map(ev => (
+              <div class="event">
+                <span class="event__rail">
+                  <span class="tag">{ev.role}</span>
+                  <span class="date">{isoStr(ev.date)}</span>
+                </span>
+                <div>
+                  <span class="event__title">{ev.title}</span>
+                  <span class="event__where">{ev.location}</span>
+                </div>
+                <div class="event__actions">
+                  {ev.links.map(l => (
+                    <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      ))}
-
-      {hiddenEvents.length > 0 && (
-        <div id="more-events" hidden>
-          {hiddenEvents.map(ev => (
-            <div class="event">
-              <span class="event__rail">
-                <span class="tag">{ev.role}</span>
-                <span class="date">{isoStr(ev.date)}</span>
-              </span>
-              <div>
-                <a href={ev.links[0].url} target={ev.links[0].url.startsWith('http') ? '_blank' : null} rel={ev.links[0].url.startsWith('http') ? 'noopener' : null} class="event__title">{ev.title}</a>
-                <span class="event__where">{ev.location}</span>
-              </div>
-              <div class="event__actions">
-                {ev.links.map(l => (
-                  <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+        )}
+      </div>
 
       {hiddenEvents.length > 0 && (
         <button type="button" id="toggle-events" class="more-link" aria-expanded="false" aria-controls="more-events" style="background: none; border: none; cursor: pointer; padding: 0;">
