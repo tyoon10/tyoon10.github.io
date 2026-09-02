@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LogoTray from '../components/LogoTray.astro';
-import heroImage from '../assets/hero-fireside.jpg';
+import heroImage from '../assets/hero-fireside-2560.jpg';
 import { events } from '../data/events';
 
 const allProjects = await getCollection('projects');
@@ -70,13 +70,13 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
   <section id="about" class="section">
     <div class="wrap">
       <span class="section__label">About</span>
-      <h2 class="profile__name">
-        Taewan Yoon, CFA
+      <div class="profile__head">
+        <h2 class="profile__name">Taewan Yoon, CFA</h2>
         <span class="profile__social">
           <a href="https://www.linkedin.com/in/taewan-yoon/" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://github.com/tyoon10" target="_blank" rel="noopener">GitHub</a>
         </span>
-      </h2>
+      </div>
       <div class="profile__body">
         <p>
           Columbia MBA/MS. Built and scaled Claude's NYC builder ecosystem from 0 to 1,000+ members. Led the AI Club through 4x growth to 900+ paid members, and co-organized the flagship AI Startup Challenge. Founded BRAIN, a cross-school startup network tackling the hardest business challenges with frontier AI.
@@ -85,7 +85,7 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
           AI strategist, product manager, and startup community builder. Shipped agentic workflows as Manus AI Fellow, and co-founded AI-native fintech startup (acquired by a major insurance firm). Mentor at CFA Society New York.
         </p>
       </div>
-      <div style="margin-top: 40px;"><LogoTray /></div>
+      <LogoTray />
     </div>
   </section>
 
@@ -247,7 +247,7 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
       </div>
 
       {hiddenEvents.length > 0 && (
-        <button type="button" id="toggle-events" class="more-link" aria-expanded="false" aria-controls="more-events" style="background: none; border: none; cursor: pointer; padding: 0;">
+        <button type="button" id="toggle-events" class="more-link btn-text" aria-expanded="false" aria-controls="more-events">
           Show {hiddenEvents.length} more events <span class="arrow" aria-hidden="true">&darr;</span>
         </button>
       )}
@@ -261,12 +261,13 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
       <div class="contact__grid">
         <div>
           <h2>Let's connect, build, and inspire.</h2>
-          <p class="deck" style="margin-top: 18px;">
+          <p class="deck deck--contact">
             Always learning, always building agentic systems and frameworks. If you're doing the same, I'd love to connect.
           </p>
         </div>
         <div class="contact__actions">
-          <button class="contact__email" id="email-btn"><span id="email-btn-text">contact@twyoon.com</span></button>
+          <a href="mailto:contact@twyoon.com" class="link">contact@twyoon.com</a>
+          <button type="button" class="btn-text contact__copy" id="email-copy" data-email="contact@twyoon.com">Copy</button>
           <a href="https://linkedin.com/in/taewan-yoon" target="_blank" rel="noopener" class="link">LinkedIn</a>
           <a href="https://github.com/tyoon10" target="_blank" rel="noopener" class="link">GitHub</a>
         </div>
@@ -332,15 +333,15 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
   </script>
 
   <script is:inline>
-    const emailBtn = document.getElementById('email-btn');
-    const textSpan = document.getElementById('email-btn-text');
+    const emailBtn = document.getElementById('email-copy');
 
-    if (emailBtn && textSpan) {
+    if (emailBtn) {
       emailBtn.addEventListener('click', () => {
-        const email = 'contact@twyoon.com';
+        const email = emailBtn.dataset.email;
+        if (!email) return;
         navigator.clipboard.writeText(email).then(() => {
-          textSpan.textContent = 'Copied';
-          setTimeout(() => { textSpan.textContent = email; }, 1800);
+          emailBtn.textContent = 'Copied';
+          setTimeout(() => { emailBtn.textContent = 'Copy'; }, 1800);
         }).catch(err => {
           console.error('Could not copy email: ', err);
         });
