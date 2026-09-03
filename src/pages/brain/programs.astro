@@ -40,7 +40,10 @@ const windowChip = (state: string) =>
             </div>
             <div class="index__action">
               {program.officialUrl ? (
-                <a class="link" href={program.officialUrl} rel="noopener">On the record</a>
+                <a class="link" href={program.officialUrl}>
+                  On the record
+                  <span class="visually-hidden"> for {program.name}</span>
+                </a>
               ) : (
                 <span class="caption">{copy.programsEmpty}</span>
               )}

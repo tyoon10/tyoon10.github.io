@@ -50,7 +50,10 @@ const iso = (s: string) => s.slice(0, 10).replace(/-/g, '·');
             <span class="date">
               {offer.closedOn ? `closed ${iso(offer.closedOn)}` : iso(offer.lastVerified)}
             </span>
-            <a class="link" href={offer.officialUrl} rel="noopener">Official page</a>
+            <a class="link" href={offer.officialUrl}>
+              Official page
+              <span class="visually-hidden"> for {offer.name}</span>
+            </a>
           </div>
         </article>
       ))}

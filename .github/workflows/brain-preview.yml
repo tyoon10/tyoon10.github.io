@@ -35,7 +35,7 @@ jobs:
           node --input-type=module -e "
           import { readFileSync, readdirSync, statSync } from 'node:fs';
           import { join } from 'node:path';
-          const forbidden = /\\b(convenor|chapter|tracker|society|forum|ticket|tickets|checkout|paywall|underwriter|underwriters|underwriting|commission|commissions|box office)\\b/i;
+          const forbidden = /\\b(convenor|chapter|tracker|society|forum|ticket|tickets|checkout|paywall|underwriter|underwriters|underwriting|commission|commissions|box office|we chose Direction|the Table is the homepage|Direction 3)\\b/i;
           const walk = (d, a = []) => {
             for (const n of readdirSync(d)) {
               const p = join(d, n);

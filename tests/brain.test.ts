@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import * as copy from '../src/data/brain/copy.ts';
 import { brainEvents, resolveUpcoming } from '../src/data/brain/events.ts';
 import { offers } from '../src/data/brain/offers.ts';
+import { REGISTER_LABEL } from '../src/data/brain/types.ts';
 import { validateBrainData } from '../src/data/brain/validate.ts';
 import { events, type SiteEvent } from '../src/data/events.ts';
 
@@ -182,12 +183,25 @@ describe('preview isolation', () => {
   });
 
   it('does not lock a homepage direction in public copy or nav', () => {
-    const preview = readFileSync(join(root, 'src/pages/brain/index.astro'), 'utf8');
+    const preview = walk(join(root, 'src/pages/brain'))
+      .filter((p) => p.endsWith('.astro'))
+      .map((p) => readFileSync(p, 'utf8'))
+      .join('\n');
     const readme = readFileSync(join(root, 'README.md'), 'utf8');
-    const blob = [preview, readme, ...publicStrings(), ...copy.nav.map((n) => n.label)].join('\n');
+    const tokens = readFileSync(join(root, 'src/styles/brain/tokens.json'), 'utf8');
+    const blob = [preview, readme, tokens, ...publicStrings(), ...copy.nav.map((n) => n.label)].join('\n');
     assert.equal(copy.nav[0].label, 'Home');
+    assert.match(tokens, /"homepageDirection": "open"/);
+    assert.doesNotMatch(tokens, /"direction"\s*:/);
     assert.doesNotMatch(blob, /we chose Direction|the Table is the homepage|Direction 3|Convenor/i);
     assert.doesNotMatch(preview, /skyline|neural/);
+  });
+
+  it('keeps sitting outbound labels off the box office', () => {
+    assert.equal(REGISTER_LABEL.open, 'View details');
+    assert.equal(REGISTER_LABEL.waitlist, 'View details');
+    assert.equal(REGISTER_LABEL.details, 'View details');
+    assert.equal(REGISTER_LABEL.closed, 'Closed');
   });
 
   it('keeps BRAIN pages under src/pages/brain', () => {

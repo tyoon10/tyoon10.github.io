@@ -13,6 +13,12 @@ if (tokens.version !== '1.0' || tokens.locked !== '2026-09-02') {
   issues.push('tokens.json: version or locked date drifted from Brand kit v1.0');
 }
 if (tokens.hermes !== 'preview-only') issues.push('tokens.json: hermes must be preview-only');
+if (tokens.homepageDirection !== 'open') {
+  issues.push('tokens.json: homepage direction must stay open');
+}
+if (Object.prototype.hasOwnProperty.call(tokens, 'direction')) {
+  issues.push('tokens.json: do not lock a homepage direction');
+}
 if (tokens.themes.light.canvas !== '#fefefc') issues.push('tokens.json: light canvas must be #fefefc');
 if (tokens.themes.light.accent !== '#17324d') issues.push('tokens.json: light accent must be #17324d');
 if (tokens.themes.light.onAccent !== '#ffffff') issues.push('tokens.json: light onAccent must be #ffffff');

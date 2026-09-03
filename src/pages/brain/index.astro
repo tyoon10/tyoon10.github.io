@@ -28,36 +28,11 @@ const next = upcomingEvent();
     </div>
   </section>
 
-  <section class="brain-section" aria-labelledby="surfaces-label">
-    <div class="brain-wrap">
-      <span class="brain-section__label" id="surfaces-label">Surfaces</span>
-      <div class="swatches">
-        {copy.surfaces.map((s) => (
-          <div class={`swatch swatch--${s.label}`}>
-            <div class="swatch__chip" aria-hidden="true"></div>
-            <div class="swatch__label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="brain-section" aria-labelledby="status-label">
-    <div class="brain-wrap">
-      <span class="brain-section__label" id="status-label">Status</span>
-      <div class="chip-row">
-        <span class="chip chip--ship">{copy.chipLabels.ship}</span>
-        <span class="chip chip--assemble">{copy.chipLabels.assemble}</span>
-        <span class="chip chip--new">{copy.chipLabels.new}</span>
-        <span class="chip chip--hold">{copy.chipLabels.hold}</span>
-      </div>
-    </div>
-  </section>
-
   <section class="brain-section" aria-labelledby="seats-label">
     <div class="brain-wrap">
       <span class="brain-section__label" id="seats-label">Campus seats</span>
       <table class="seat-table">
+        <caption class="visually-hidden">Campus seats at the table</caption>
         <thead>
           <tr>
             <th scope="col">School</th>
@@ -68,14 +43,14 @@ const next = upcomingEvent();
         <tbody>
           {schools.map((school) => (
             <tr>
-              <td>
+              <td data-label="School">
                 <span class="seat-table__name">
-                  <span class="seat-dot" style={`--dot:${school.color}`}></span>
-                  <a class="link" href={school.officialUrl} rel="noopener">{school.name}</a>
+                  <span class="seat-dot" style={`--dot:${school.color}`} aria-hidden="true"></span>
+                  <a class="link" href={school.officialUrl}>{school.name}</a>
                 </span>
               </td>
-              <td>{school.geography}</td>
-              <td>
+              <td data-label="Geography">{school.geography}</td>
+              <td data-label="Seat">
                 <span class="chip chip--assemble">{copy.chipLabels.assemble}</span>
               </td>
             </tr>

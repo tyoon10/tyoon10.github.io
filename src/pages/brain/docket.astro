@@ -49,7 +49,10 @@ const iso = (s: string) => s.slice(0, 10).replace(/-/g, '·');
               <span class="index__meta">{next.location} · {copy.chairLegend[next.brain.chairRole]}{next.brain.inferred ? ` · ${copy.inferredMark}` : ''}</span>
             </div>
             <div class="index__action">
-              <a class="btn" href={next.brain.organiserUrl} rel="noopener">{registerLabel(next)}</a>
+              <a class="btn" href={next.brain.organiserUrl}>
+                {registerLabel(next)}
+                <span class="visually-hidden"> for {next.title}</span>
+              </a>
             </div>
           </div>
         </div>
@@ -81,7 +84,10 @@ const iso = (s: string) => s.slice(0, 10).replace(/-/g, '·');
                 </span>
               </div>
               <div class="index__action">
-                <a class="link" href={event.brain.organiserUrl} rel="noopener">{registerLabel(event)}</a>
+                <a class="link" href={event.brain.organiserUrl}>
+                  {registerLabel(event)}
+                  <span class="visually-hidden"> for {event.title}</span>
+                </a>
               </div>
             </div>
           ))}
