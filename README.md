@@ -86,6 +86,8 @@ npm run check            # astro / TypeScript
 npm run build
 ```
 
+The door is free. This preview is not a box office: no tickets, checkout, paid seats, or funding story. Partner slots are a reserved mark — no logos.
+
 The personal homepage (`/`) is unchanged in meaning. Do not merge this preview as the live site.
 
 ---

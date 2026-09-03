@@ -13,6 +13,8 @@ import { events, type SiteEvent } from '../src/data/events.ts';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FORBIDDEN = /\b(convenor|chapter|tracker|society|forum)\b/i;
 const GATE = /\b(join now|become a member|members only|pay to (access|unlock)|wait for (an )?event)\b/i;
+const BOX_OFFICE =
+  /\b(ticket|tickets|checkout|paywall|buy a seat|paid seat|underwriter|underwriters|underwriting|commission|commissions|box office|membership)\b/i;
 
 function walk(dir: string, acc: string[] = []): string[] {
   for (const name of readdirSync(dir)) {
@@ -138,11 +140,19 @@ describe('lexicon', () => {
 
 describe('offer book', () => {
   it('has no membership or payment gate in public copy', () => {
-    assert.match(copy.offerBookLede, /not required/i);
+    assert.match(copy.offerBookLede, /door is free/i);
     assert.equal(GATE.test(copy.offerBookLede), false);
+    assert.equal(BOX_OFFICE.test(copy.offerBookLede), false);
     for (const offer of offers) {
       assert.equal(GATE.test(offer.summary), false, offer.id);
+      assert.equal(BOX_OFFICE.test(`${offer.offer} ${offer.summary}`), false, offer.id);
       assert.equal(/ref\.|referr/i.test(offer.officialUrl), false, offer.id);
+    }
+  });
+
+  it('keeps the revenue stack off the public surface', () => {
+    for (const value of publicStrings()) {
+      assert.equal(BOX_OFFICE.test(value), false, `box-office or funding noun in: ${value}`);
     }
   });
 
@@ -169,6 +179,14 @@ describe('preview isolation', () => {
     const home = readFileSync(join(root, 'src/pages/index.astro'), 'utf8');
     assert.match(home, /Systems thinking/);
     assert.doesNotMatch(home, /The room is the product/);
+  });
+
+  it('ships Direction 3 on /brain, not Room or Map', () => {
+    const table = readFileSync(join(root, 'src/pages/brain/index.astro'), 'utf8');
+    assert.match(table, /The room is/);
+    assert.match(table, /the product/);
+    assert.match(table, /Campus seats/);
+    assert.doesNotMatch(table, /Direction 1|Direction 2|skyline|neural/);
   });
 
   it('keeps BRAIN pages under src/pages/brain', () => {

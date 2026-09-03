@@ -1,8 +1,7 @@
 import type { PublicPartner } from './types.ts';
 
 /**
- * Public fields only. No relationship state, terms, or underwriter claim.
- * Empty is correct: this preview does not invent current underwriters.
- * Partner slots on the page render as reserved marks.
+ * Public fields only. No relationship state, terms, or funding status.
+ * Empty is correct. The public page renders a reserved mark, never logos.
  */
 export const partners: PublicPartner[] = [];

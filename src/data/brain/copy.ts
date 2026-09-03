@@ -30,7 +30,7 @@ export const hermesNote =
 export const nextHeld = 'Next announced in September';
 
 export const offerBookLede =
-  'The offer book is open. A seat at the table is not required — there is nothing to join, and nothing to pay the Roundtable, to use it.';
+  'The offer book is open. The door is free. You do not need a seat at the table to use it.';
 
 export const offerBookFreshness =
   'Dates below are last-verified dates, not a claim that every term is still live. Closed items stay on the page so you do not go looking.';
@@ -63,7 +63,7 @@ export const howTable = {
   },
   service: {
     title: 'The service',
-    body: 'Information is the service: the offer book, the brief, and the docket. Use them without waiting for a sitting.',
+    body: 'The door is free. Information is the service: the offer book, the brief, and the docket. Use them without waiting for a sitting.',
   },
 };
 
@@ -84,7 +84,6 @@ export const lexicon = {
     'a seat at the table',
     'offer book',
     'the brief',
-    'underwriters',
     'counterparts',
   ],
   never: [

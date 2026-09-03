@@ -19,8 +19,8 @@ export const REGISTER_STATES = ['open', 'waitlist', 'closed', 'details'] as cons
 export type RegisterState = (typeof REGISTER_STATES)[number];
 
 export const REGISTER_LABEL: Record<RegisterState, string> = {
-  open: 'Register',
-  waitlist: 'Join waitlist',
+  open: 'View details',
+  waitlist: 'View details',
   closed: 'Closed',
   details: 'View details',
 };
@@ -86,7 +86,7 @@ export interface WireItem {
   inferred?: true;
 }
 
-/** Public fields only. No relationship state, terms, or underwriter claim. */
+/** Public fields only. No relationship state, terms, or funding status. */
 export interface PublicPartner {
   name: string;
   url?: string;

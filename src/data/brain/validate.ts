@@ -83,13 +83,6 @@ function checkPartner(partner: PublicPartner, i: number, issues: ValidationIssue
   if (partner.url && !HTTP.test(partner.url)) {
     issues.push({ module: mod, message: `partners[${i}]: url must be http(s)` });
   }
-  const leaked = ['relationship', 'term', 'commission', 'underwriter status', 'signed'];
-  const blob = JSON.stringify(partner).toLowerCase();
-  for (const key of leaked) {
-    if (blob.includes(key) && key !== 'underwriter status') {
-      /* publicRecord may mention a recap; relationship/terms keys must not exist */
-    }
-  }
   if ('relationship' in partner || 'terms' in partner || 'status' in partner) {
     issues.push({ module: mod, message: `partners[${i}]: internal fields are not public` });
   }

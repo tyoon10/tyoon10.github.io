@@ -587,6 +587,17 @@ body.brain { margin: 0; }
   .brain-nav__inner { gap: 16px; }
   .brain-nav__links { gap: 14px; }
   .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .seat-table thead { display: none; }
+  .seat-table tr {
+    display: block;
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 0;
+  }
+  .seat-table td {
+    display: block;
+    border: 0;
+    padding: 4px 0;
+  }
 }
 
 @media (max-width: 600px) {

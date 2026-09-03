@@ -3,7 +3,6 @@ import BrainLayout from '../../layouts/BrainLayout.astro';
 import * as copy from '../../data/brain/copy.ts';
 import { schools } from '../../data/brain/schools.ts';
 import { liveOfferCount } from '../../data/brain/offers.ts';
-import { partners } from '../../data/brain/partners.ts';
 import { resolveUpcoming, upcomingEvent } from '../../data/brain/events.ts';
 
 const upcoming = resolveUpcoming();
@@ -123,17 +122,11 @@ const next = upcomingEvent();
     </div>
   </section>
 
-  <section class="brain-section" aria-labelledby="partners-label">
+  <section class="brain-section" aria-labelledby="marks-label">
     <div class="brain-wrap">
-      <span class="brain-section__label" id="partners-label">Underwriters</span>
-      {partners.length === 0 ? (
-        <div>
-          <div class="mark-reserved" role="img" aria-label={copy.partnersReserved}></div>
-          <p class="caption">{copy.partnersReserved}</p>
-        </div>
-      ) : (
-        <p>This preview lists names only when they are already on the public record, and never as current underwriters.</p>
-      )}
+      <span class="brain-section__label" id="marks-label">Marks</span>
+      <div class="mark-reserved" role="img" aria-label={copy.partnersReserved}></div>
+      <p class="caption">{copy.partnersReserved}</p>
     </div>
   </section>
 

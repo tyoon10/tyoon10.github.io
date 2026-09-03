@@ -120,13 +120,13 @@ export const offers: Offer[] = [
   {
     id: 'azure-students',
     name: 'Microsoft Azure for Students',
-    offer: 'Cloud credit, no card needed',
+    offer: 'Cloud credit',
     category: 'Cloud and infrastructure',
     status: 'live',
     timeToValue: 110,
     lastVerified: SOURCE_VERIFIED,
     officialUrl: 'https://azure.microsoft.com/en-us/free/students/',
-    summary: 'Azure credit to use within 12 months, with no credit card required. Figure held to the source note.',
+    summary: 'Azure credit to use within 12 months. Figure held to the source note.',
   },
   {
     id: 'google-cloud-students',
@@ -214,7 +214,7 @@ export const offers: Offer[] = [
     timeToValue: 190,
     lastVerified: SOURCE_VERIFIED,
     officialUrl: 'https://www.adobe.com/creativecloud/buy/students/explore/ccforstudents.html',
-    summary: 'Steep in year one, then a higher renewal. Confirm the figure at checkout.',
+    summary: 'Steep in year one, then a higher renewal. Confirm the figure on the official page.',
   },
   {
     id: 'reclaim',
@@ -269,7 +269,7 @@ export const offers: Offer[] = [
     timeToValue: 240,
     lastVerified: SOURCE_VERIFIED,
     officialUrl: 'https://help.otter.ai/hc/en-us/articles/4402467517847-Student-Teacher-discount-program-for-the-Pro-plan',
-    summary: 'Individual Pro only. Official help page; no referral link.',
+    summary: 'Individual Pro only. Official help page.',
   },
   {
     id: 'aqua-voice',

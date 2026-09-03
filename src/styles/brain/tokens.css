@@ -9,6 +9,8 @@
    ========================================================================== */
 
 :root {
+  color-scheme: light;
+
   /* ---- surfaces (1:1 with design-system.css light) -------------------- */
   --canvas:       #fefefc;
   --surface:      #fdfdfa;
