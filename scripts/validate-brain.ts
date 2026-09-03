@@ -9,8 +9,8 @@ const css = readFileSync(join(root, 'src/styles/brain/tokens.css'), 'utf8');
 
 const issues: string[] = [];
 
-if (tokens.version !== '1.0' || tokens.locked !== '2026-09-02' || tokens.direction !== 3) {
-  issues.push('tokens.json: version, locked date, or direction drifted from Brand kit v1.0');
+if (tokens.version !== '1.0' || tokens.locked !== '2026-09-02') {
+  issues.push('tokens.json: version or locked date drifted from Brand kit v1.0');
 }
 if (tokens.hermes !== 'preview-only') issues.push('tokens.json: hermes must be preview-only');
 if (tokens.themes.light.canvas !== '#fefefc') issues.push('tokens.json: light canvas must be #fefefc');

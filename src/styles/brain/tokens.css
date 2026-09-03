@@ -1,8 +1,10 @@
 /* ==========================================================================
    BRAIN NYC Roundtable — Brand kit v1.0
-   Locked 2026-09-02 · Direction 3 · preview-only (HERMES)
+   Locked 2026-09-02 · preview-only (HERMES)
 
-   Source of truth for /brain. Do not invent tokens.
+   Working preview skin while /brain lives on twyoon.com. Homepage direction
+   remains open — this file is tokens, not a homepage decision.
+   Source of truth for /brain tokens. Do not invent tokens.
    Light :root names map 1:1 to src/styles/design-system.css, plus --on-accent,
    --gutter, chip tokens, and school data colours.
    Dark via prefers-color-scheme and [data-theme="dark"].

@@ -181,12 +181,13 @@ describe('preview isolation', () => {
     assert.doesNotMatch(home, /The room is the product/);
   });
 
-  it('ships Direction 3 on /brain, not Room or Map', () => {
-    const table = readFileSync(join(root, 'src/pages/brain/index.astro'), 'utf8');
-    assert.match(table, /The room is/);
-    assert.match(table, /the product/);
-    assert.match(table, /Campus seats/);
-    assert.doesNotMatch(table, /Direction 1|Direction 2|skyline|neural/);
+  it('does not lock a homepage direction in public copy or nav', () => {
+    const preview = readFileSync(join(root, 'src/pages/brain/index.astro'), 'utf8');
+    const readme = readFileSync(join(root, 'README.md'), 'utf8');
+    const blob = [preview, readme, ...publicStrings(), ...copy.nav.map((n) => n.label)].join('\n');
+    assert.equal(copy.nav[0].label, 'Home');
+    assert.doesNotMatch(blob, /we chose Direction|the Table is the homepage|Direction 3|Convenor/i);
+    assert.doesNotMatch(preview, /skyline|neural/);
   });
 
   it('keeps BRAIN pages under src/pages/brain', () => {

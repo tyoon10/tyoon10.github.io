@@ -70,7 +70,7 @@ twyoon/
 
 HERMES: drafting and preview are allowed. **Production publish is forbidden.** This does not replace the personal homepage. GitHub Pages still deploys the personal site from `main`; `/brain` is a noindex preview route.
 
-Brand kit v1.0 (2026-09-02, Direction 3) lives at `src/styles/brain/tokens.css` and `src/styles/brain/tokens.json`. That kit is the source of truth. Do not invent tokens, wordmarks, or chrome.
+Brand kit v1.0 (2026-09-02) lives at `src/styles/brain/tokens.css` and `src/styles/brain/tokens.json`. Parchment & Navy is a **working preview skin** because this route sits on twyoon.com until a domain is picked — not a settled homepage direction. Do not invent tokens, wordmarks, or chrome.
 
 ```bash
 npm install
@@ -88,7 +88,7 @@ npm run build
 
 The door is free. This preview is not a box office: no tickets, checkout, paid seats, or funding story. Partner slots are a reserved mark — no logos.
 
-The personal homepage (`/`) is unchanged in meaning. Do not merge this preview as the live site.
+The personal homepage (`/`) is unchanged in meaning. Do not merge this preview as the live site. `/brain` homepage direction remains open.
 
 ---
 

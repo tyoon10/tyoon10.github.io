@@ -96,7 +96,7 @@ export const lexicon = {
 } as const;
 
 export const nav = [
-  { href: '/brain', label: 'Table' },
+  { href: '/brain', label: 'Home' },
   { href: '/brain/offers', label: 'Offer book' },
   { href: '/brain/docket', label: 'Docket' },
   { href: '/brain/programs', label: 'Programs' },
