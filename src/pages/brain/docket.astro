@@ -1,0 +1,95 @@
+---
+import BrainLayout from '../../layouts/BrainLayout.astro';
+import * as copy from '../../data/brain/copy.ts';
+import {
+  archiveEvents,
+  registerLabel,
+  resolveUpcoming,
+  upcomingEvent,
+} from '../../data/brain/events.ts';
+
+const upcoming = resolveUpcoming();
+const next = upcomingEvent();
+const archive = archiveEvents();
+const iso = (s: string) => s.slice(0, 10).replace(/-/g, '·');
+---
+
+<BrainLayout
+  title="Docket · BRAIN NYC"
+  description="Sittings we chair, sittings we co-chair, and sittings on the docket."
+>
+  <section class="page-lead">
+    <div class="brain-wrap">
+      <span class="brain-section__label">Docket</span>
+      <h1 class="h2">Sittings</h1>
+      <p class="brain-deck">{copy.geographyNote}</p>
+      <p class="caption stack-20">
+        {copy.chairLegend.chair} · {copy.chairLegend['co-chair']} · {copy.chairLegend.docket}
+      </p>
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="upcoming-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="upcoming-label">{copy.docketUpcomingLabel}</span>
+      {upcoming.kind === 'held' || !next ? (
+        <div class="held">
+          <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+          <p>{upcoming.kind === 'held' ? upcoming.message : copy.docketEmptyUpcoming}</p>
+        </div>
+      ) : (
+        <div class:list={['index', `role--${next.chairRole}`]}>
+          <div class="index__item">
+            <span class="index__rail">
+              <span class="chip chip--new">{next.format}</span>
+              <span class="date">{iso(next.date)}</span>
+            </span>
+            <div>
+              <span class="index__title">{next.title}</span>
+              <span class="index__meta">
+                {next.location} · {copy.chairLegend[next.chairRole]}
+                {next.inferred ? ` · ${copy.inferredMark}` : ''}
+              </span>
+            </div>
+            <div class="index__action">
+              <a class="btn" href={next.organiserUrl} rel="noopener">{registerLabel(next)}</a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="archive-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="archive-label">{copy.docketArchiveLabel}</span>
+      {archive.length === 0 ? (
+        <div class="held">
+          <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+          <p>{copy.docketEmptyArchive}</p>
+        </div>
+      ) : (
+        <div class="index">
+          {archive.map((event) => (
+            <div class:list={['index__item', `role--${event.chairRole}`]}>
+              <span class="index__rail">
+                <span class="chip chip--assemble">{event.format}</span>
+                <span class="date">{iso(event.date)}</span>
+              </span>
+              <div>
+                <span class="index__title">{event.title}</span>
+                <span class="index__meta">
+                  {event.location} · {copy.chairLegend[event.chairRole]}
+                  {event.inferred ? ` · ${copy.inferredMark}` : ''}
+                </span>
+              </div>
+              <div class="index__action">
+                <a class="link" href={event.organiserUrl} rel="noopener">{registerLabel(event)}</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BrainLayout>

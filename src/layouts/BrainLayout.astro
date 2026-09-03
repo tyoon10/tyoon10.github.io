@@ -1,0 +1,67 @@
+---
+import '../styles/brain/tokens.css';
+import '../styles/brain/brain.css';
+import * as copy from '../data/brain/copy.ts';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const current = (href: string) => {
+  const clean = href.replace(/\/$/, '') || '/';
+  return path === clean || (clean !== '/brain' && path.startsWith(clean)) ? 'page' : undefined;
+};
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/brain/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="brain">
+    <a class="link visually-hidden" href="#content">Skip to content</a>
+    <p class="brain-banner">{copy.previewBanner}</p>
+    <header class="brain-nav">
+      <div class="brain-nav__inner">
+        <a href="/brain" class="brain-nav__brand">
+          <span class="brain-nav__kicker">{copy.kicker}</span>
+          <span class="brain-nav__wordmark">{copy.wordmark}</span>
+        </a>
+        <nav class="brain-nav__links" aria-label="Roundtable">
+          {copy.nav.map((item) => (
+            <a href={item.href} aria-current={current(item.href)}>{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="brain-footer">
+      <div class="brain-footer__inner">
+        <span>{copy.previewBanner}</span>
+        <a href="/">{copy.personalSiteNote}</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import BrainLayout from '../../layouts/BrainLayout.astro';
+import * as copy from '../../data/brain/copy.ts';
+import { wire } from '../../data/brain/load.ts';
+
+const student = wire.find((item) => item.lane === 'student');
+const industry = wire.find((item) => item.lane === 'industry');
+
+const laneBody = (item: typeof student) => {
+  if (!item || item.state === 'held' || !item.body) return copy.briefEmptyLane;
+  return item.body;
+};
+---
+
+<BrainLayout
+  title="The brief · BRAIN NYC"
+  description={copy.briefHeld}
+>
+  <section class="page-lead">
+    <div class="brain-wrap">
+      <span class="brain-section__label">The brief</span>
+      <h1 class="h2">Two lanes</h1>
+      <p class="brain-deck">{copy.briefHeld}</p>
+    </div>
+  </section>
+
+  <section class="brain-section">
+    <div class="brain-wrap">
+      <div class="lanes">
+        <div class="lane">
+          <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+          <h2 class="h3 stack-16">{copy.briefStudentLabel}</h2>
+          <p>{laneBody(student)}</p>
+        </div>
+        <div class="lane">
+          <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+          <h2 class="h3 stack-16">{copy.briefIndustryLabel}</h2>
+          <p>{laneBody(industry)}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BrainLayout>

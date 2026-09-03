@@ -1,0 +1,108 @@
+---
+import BrainLayout from '../../layouts/BrainLayout.astro';
+import * as copy from '../../data/brain/copy.ts';
+import {
+  liveOfferCount,
+  offersByTimeToValue,
+  tonightOffers,
+  SOURCE_VERIFIED,
+  TERMS_SOURCE,
+} from '../../data/brain/load.ts';
+
+const tonight = tonightOffers();
+const rows = offersByTimeToValue();
+const iso = (s: string) => s.slice(0, 10).replace(/-/g, '·');
+---
+
+<BrainLayout
+  title="Offer book · BRAIN NYC"
+  description={copy.offerBookLede}
+>
+  <section class="page-lead">
+    <div class="brain-wrap">
+      <span class="brain-section__label">Offer book</span>
+      <h1 class="h2">The offer book</h1>
+      <div class="brain-deck">
+        <p>{copy.offerBookLede}</p>
+        <p>{copy.offerBookSource}</p>
+        <p>{copy.offerBookFreshness}</p>
+      </div>
+      <p class="brain-deck">
+        <span class="chip chip--ship">{copy.chipLabels.ship}</span>
+        {' '}
+        {copy.offerBookCountLabel(liveOfferCount)}
+        {' · last verified '}
+        <span class="date">{iso(SOURCE_VERIFIED)}</span>
+        {' · '}
+        <a class="link" href={TERMS_SOURCE}>{copy.termsSourceLabel}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="tonight-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="tonight-label">Tonight</span>
+      <p class="caption tonight-lede">{copy.offerBookTonight}</p>
+      {tonight.length === 0 ? (
+        <div class="held">
+          <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+          <p>{copy.offerBookEmptyLive}</p>
+        </div>
+      ) : (
+        tonight.map((offer) => (
+          <article class="offer-row">
+            <div>
+              <div class="offer-row__name">{offer.name}</div>
+              <span class="index__meta">{offer.category}</span>
+            </div>
+            <div>
+              <div class="offer-row__offer">{offer.offer}</div>
+              <span class="index__meta">{offer.summary}</span>
+            </div>
+            <div class="offer-row__side">
+              <span class="chip chip--ship">{copy.chipLabels.ship}</span>
+              <span class="date">{iso(offer.lastVerified)}</span>
+              <a class="link" href={offer.officialUrl} rel="noopener">Official page</a>
+            </div>
+          </article>
+        ))
+      )}
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="index-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="index-label">Index</span>
+      {rows.length === 0 ? (
+        <div class="held">
+          <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+          <p>{copy.offerBookEmptyLive}</p>
+        </div>
+      ) : (
+        rows.map((offer) => (
+          <article class="offer-row">
+            <div>
+              <div class="offer-row__name">{offer.name}</div>
+              <span class="index__meta">{offer.category}</span>
+            </div>
+            <div>
+              <div class="offer-row__offer">{offer.offer}</div>
+              <span class="index__meta">{offer.summary}</span>
+            </div>
+            <div class="offer-row__side">
+              {offer.status === 'closed' ? (
+                <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+              ) : (
+                <span class="chip chip--ship">{copy.chipLabels.ship}</span>
+              )}
+              <span class="date">
+                {offer.closedOn ? `closed ${iso(offer.closedOn)}` : iso(offer.lastVerified)}
+              </span>
+              <a class="link" href={offer.officialUrl} rel="noopener">Official page</a>
+            </div>
+          </article>
+        ))
+      )}
+    </div>
+  </section>
+</BrainLayout>

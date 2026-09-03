@@ -1,0 +1,64 @@
+# Preview check only. Does not deploy. Does not change GitHub Pages.
+# Production publish of BRAIN is forbidden (HERMES).
+name: BRAIN preview check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Validate BRAIN modules
+        run: npm run validate:brain
+      - name: Test
+        run: npm test
+      - name: Typecheck
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: Scan preview HTML for forbidden words
+        run: |
+          node --input-type=module -e "
+          import { readFileSync, readdirSync, statSync } from 'node:fs';
+          import { join } from 'node:path';
+          const forbidden = /\\b(convenor|chapter|tracker|society|forum)\\b/i;
+          const money = /\\b(ticket|checkout|membership fee|how we(?:'|’)re funded)\\b/i;
+          const walk = (d, a = []) => {
+            for (const n of readdirSync(d)) {
+              const p = join(d, n);
+              if (statSync(p).isDirectory()) walk(p, a);
+              else if (p.endsWith('.html')) a.push(p);
+            }
+            return a;
+          };
+          const files = walk('dist/brain');
+          if (!files.length) { console.error('no dist/brain HTML'); process.exit(1); }
+          let failed = false;
+          for (const file of files) {
+            let html = readFileSync(file, 'utf8');
+            html = html.replace(/<ul data-lexicon-never>[\\s\\S]*?<\\/ul>/g, '');
+            if (forbidden.test(html)) {
+              console.error('forbidden word in', file);
+              failed = true;
+            }
+            if (money.test(html)) {
+              console.error('money/gate copy in', file);
+              failed = true;
+            }
+          }
+          process.exit(failed ? 1 : 0);
+          "

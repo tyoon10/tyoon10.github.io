@@ -119,6 +119,22 @@ To write a new blog post or case study:
 
 ---
 
+## BRAIN NYC Roundtable preview
+
+Isolated under `/brain`. **Preview only — do not merge as the live homepage, and do not deploy this branch to GitHub Pages.**
+
+```bash
+npm run validate:brain
+npm test
+npm run dev
+```
+
+Open http://localhost:4321/brain
+
+Public modules live in `src/data/brain/public/` (`offers`, `programs`, `wire`, `events`, `partners`) and are Zod-validated in CI. The personal homepage and `.github/workflows/deploy.yml` are unchanged.
+
+---
+
 ## 🧹 Housekeeping To-Do
 
 The auxiliary folder `scripts/` contains the `migrate-content.cjs` script used for the sanitization of legacy files. 

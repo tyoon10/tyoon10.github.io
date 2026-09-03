@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ai-startup-challenge-2026",
+    "seedTitle": "AI Startup Challenge — Final Competition Day",
+    "seedDate": "2026-04-24",
+    "format": "pitch competition",
+    "chairRole": "chair",
+    "registerState": "details",
+    "organiserUrl": "https://business.columbia.edu/ai-in-business/ai-startup-final-competition-day",
+    "inferred": true
+  },
+  {
+    "id": "claude-builder-hackathon-2026",
+    "seedTitle": "Columbia x NYU Claude Builder Club Hackathon",
+    "seedDate": "2026-04-12",
+    "format": "hackathon",
+    "chairRole": "co-chair",
+    "registerState": "details",
+    "organiserUrl": "https://luma.com/wt6wmh29",
+    "inferred": true
+  },
+  {
+    "id": "gdg-nyc-build-with-ai-2026",
+    "seedTitle": "GDG NYC Build With AI Hackathon",
+    "seedDate": "2026-03-08",
+    "format": "hackathon",
+    "chairRole": "docket",
+    "registerState": "details",
+    "organiserUrl": "https://gdg.community.dev/events/details/google-gdg-nyc-presents-ai-futures-fund-presents-nyc-build-w-ai-hackathon-google-cloud-labs-x-columbia-business-school-ii/",
+    "inferred": true
+  },
+  {
+    "id": "mistral-hackathon-nyc-2026",
+    "seedTitle": "Mistral AI Worldwide Hackathon — New York",
+    "seedDate": "2026-02-28",
+    "format": "hackathon",
+    "chairRole": "docket",
+    "registerState": "details",
+    "organiserUrl": "https://luma.com/mistralhack-newyork?tk=W3R0u7",
+    "inferred": true
+  },
+  {
+    "id": "iterate-columbia-hackathon-2026",
+    "seedTitle": "AI Club x Iterate NYC Hackathon",
+    "seedDate": "2026-02-14",
+    "format": "hackathon",
+    "chairRole": "co-chair",
+    "registerState": "details",
+    "organiserUrl": "https://luma.com/dyzbn70z",
+    "inferred": true
+  }
+]

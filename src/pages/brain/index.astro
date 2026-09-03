@@ -1,0 +1,165 @@
+---
+import BrainLayout from '../../layouts/BrainLayout.astro';
+import * as copy from '../../data/brain/copy.ts';
+import { schools, liveOfferCount, partners } from '../../data/brain/load.ts';
+import { resolveUpcoming, upcomingEvent, registerLabel } from '../../data/brain/events.ts';
+
+const upcoming = resolveUpcoming();
+const next = upcomingEvent();
+const iso = (s: string) => s.slice(0, 10).replace(/-/g, '·');
+---
+
+<BrainLayout
+  title="BRAIN NYC · The Roundtable"
+  description={copy.oneLiner}
+>
+  <section class="brain-hero">
+    <div class="brain-wrap">
+      <h1 class="brain-display">The room is<br />the product.</h1>
+      <div class="brain-deck">
+        <p>{copy.roundtableExpansion}</p>
+        <p>{copy.oneLiner}</p>
+        <p>{copy.yaleLine}</p>
+      </div>
+      <div class="brain-actions">
+        <a href="/brain/docket" class="btn">{copy.actionDocket}</a>
+        <a href="/brain/offers" class="btn btn--ghost">{copy.actionOffers}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="next-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="next-label">Next sitting</span>
+      {upcoming.kind === 'held' || !next ? (
+        <div class="held">
+          <span class="chip chip--hold">{copy.chipLabels.hold}</span>
+          <p>{upcoming.kind === 'held' ? upcoming.message : copy.nextHeld}</p>
+        </div>
+      ) : (
+        <div class:list={['index', `role--${next.chairRole}`]}>
+          <div class="index__item">
+            <span class="index__rail">
+              <span class="chip chip--new">{next.format}</span>
+              <span class="date">{iso(next.date)}</span>
+            </span>
+            <div>
+              <span class="index__title">{next.title}</span>
+              <span class="index__meta">
+                {next.location} · {copy.chairLegend[next.chairRole]}
+                {next.inferred ? ` · ${copy.inferredMark}` : ''}
+              </span>
+            </div>
+            <div class="index__action">
+              <a class="btn" href={next.organiserUrl} rel="noopener">{registerLabel(next)}</a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="seats-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="seats-label">Campus seats</span>
+      <table class="seat-table">
+        <thead>
+          <tr>
+            <th scope="col">School</th>
+            <th scope="col">Geography</th>
+            <th scope="col">Seat</th>
+          </tr>
+        </thead>
+        <tbody>
+          {schools.map((school) => (
+            <tr>
+              <td>
+                <span class="seat-table__name">
+                  <span class="seat-dot" style={`--dot:${school.color}`}></span>
+                  <a class="link" href={school.officialUrl} rel="noopener">{school.name}</a>
+                </span>
+              </td>
+              <td>{school.geography}</td>
+              <td>
+                <span class="chip chip--assemble">{copy.chipLabels.assemble}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="how-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="how-label">How the table works</span>
+      <div class="columns">
+        <div class="column">
+          <h2 class="h3">{copy.howTable.seats.title}</h2>
+          <p>{copy.howTable.seats.body}</p>
+        </div>
+        <div class="column">
+          <h2 class="h3">{copy.howTable.room.title}</h2>
+          <p>{copy.howTable.room.body}</p>
+        </div>
+        <div class="column">
+          <h2 class="h3">{copy.howTable.service.title}</h2>
+          <p>{copy.howTable.service.body}</p>
+          <p>
+            <a class="link" href="/brain/offers">{copy.offerBookCountLabel(liveOfferCount)}</a>
+            {' · '}
+            <a class="link" href="/brain/docket">{copy.actionDocket}</a>
+            {' · '}
+            <a class="link" href="/brain/brief">The brief</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="partners-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="partners-label">Underwriters</span>
+      {partners.length === 0 ? (
+        <div>
+          <div class="mark-reserved" role="img" aria-label={copy.partnersReserved}></div>
+          <p class="caption">{copy.partnersReserved}</p>
+          <p class="caption stack-16">{copy.partnersEmpty}</p>
+        </div>
+      ) : (
+        <ul>
+          {partners.map((partner) => (
+            <li>{partner.url ? <a class="link" href={partner.url} rel="noopener">{partner.name}</a> : partner.name}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="lexicon-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="lexicon-label">Lexicon</span>
+      <div class="lexicon">
+        <div class="lexicon__col">
+          <h2 class="h3">Use</h2>
+          <ul>
+            {copy.lexicon.use.map((term) => <li>{term}</li>)}
+          </ul>
+        </div>
+        <div class="lexicon__col">
+          <h2 class="h3">Never</h2>
+          <ul data-lexicon-never>
+            {copy.lexicon.never.map((term) => <li>{term}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brain-section" aria-labelledby="hermes-label">
+    <div class="brain-wrap">
+      <span class="brain-section__label" id="hermes-label">HERMES</span>
+      <p class="hermes">{copy.hermesNote}</p>
+    </div>
+  </section>
+</BrainLayout>
