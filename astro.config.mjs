@@ -80,16 +80,16 @@ export default defineConfig({
     '/project/ai-pipeline-quant-finance': '/projects/ai-pipeline-quant-finance',
     '/project/causal-inference': '/projects/causal-inference',
 
-    // Events → nearest equivalent (recap article / project) or the events section
+    // Events → nearest equivalent (recap article / project) or the homepage
     '/event/iterate-columbia-hackathon-2026': '/writings/iterate-columbia-hackathon-2026-recap',
     '/event/mistral-worldwide-hackathon-2026': '/writings/mistral-worldwide-hackathon-2026-recap',
     '/event/building-the-future-of-finance-with-claude': '/writings/what-senior-business-leaders-ask-about-ai',
     '/event/claude-for-product-management-workshop': '/writings/ai-superpower-for-pm',
     '/event/mathworks-conference-2025': '/projects/ai-pipeline-quant-finance',
-    '/event/ai-startup-challenge-finals-2026': '/#events',
-    '/event/claude-builder-hackathon-2026': '/#events',
-    '/event/gdg-build-with-ai-hackathon-2026': '/#events',
-    '/event/claude-builder-club-spring-2026-kick-off': '/#events',
-    '/event/ai-for-greater-good-nyc-2026': '/#events',
+    '/event/ai-startup-challenge-finals-2026': '/',
+    '/event/claude-builder-hackathon-2026': '/',
+    '/event/gdg-build-with-ai-hackathon-2026': '/',
+    '/event/claude-builder-club-spring-2026-kick-off': '/',
+    '/event/ai-for-greater-good-nyc-2026': '/',
   },
 });

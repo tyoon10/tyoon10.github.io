@@ -4,7 +4,6 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LogoTray from '../components/LogoTray.astro';
 import heroImage from '../assets/hero-fireside-2560.jpg';
-import { events } from '../data/events';
 
 const allProjects = await getCollection('projects');
 const allWritings = await getCollection('writings');
@@ -16,11 +15,6 @@ const byDateDesc = (a: { data: { date: Date } }, b: { data: { date: Date } }) =>
 
 const sortedWritings = allWritings.filter(w => !w.data.unlisted).sort(byDateDesc);
 const sortedProjects = allProjects.sort(byDateDesc);
-
-// Events — newest first; show latest 3, collapse the rest
-const sortedEvents = events.slice().sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-const visibleEvents = sortedEvents.slice(0, 3);
-const hiddenEvents = sortedEvents.slice(3);
 
 // Each section opens with a featured row — a multi-column showcase split by
 // vertical rules — then continues as compact hairline rows.
@@ -38,7 +32,6 @@ const railProjects = [
 
 // ISO dates, dot-separated — 2026·08·04
 const iso = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '·');
-const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
 ---
 
 <BaseLayout title="Systems Thinking for Applied AI" description="Personal portfolio of Taewan Yoon — leading AI ecosystems, PM, and strategic enterprise AI deployment." heroOverlay={true}>
@@ -199,61 +192,6 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
     </div>
   </section>
 
-  <!-- EVENTS -->
-  <section id="events" class="section">
-    <div class="wrap">
-      <span class="section__label">Events</span>
-
-      <div class="events">
-        {visibleEvents.map(ev => (
-          <div class="event">
-            <span class="event__rail">
-              <span class="tag">{ev.role}</span>
-              <span class="date">{isoStr(ev.date)}</span>
-            </span>
-            <div>
-              <span class="event__title">{ev.title}</span>
-              <span class="event__where">{ev.location}</span>
-            </div>
-            <div class="event__actions">
-              {ev.links.map(l => (
-                <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {hiddenEvents.length > 0 && (
-          <div id="more-events" hidden>
-            {hiddenEvents.map(ev => (
-              <div class="event">
-                <span class="event__rail">
-                  <span class="tag">{ev.role}</span>
-                  <span class="date">{isoStr(ev.date)}</span>
-                </span>
-                <div>
-                  <span class="event__title">{ev.title}</span>
-                  <span class="event__where">{ev.location}</span>
-                </div>
-                <div class="event__actions">
-                  {ev.links.map(l => (
-                    <a href={l.url} target={l.url.startsWith('http') ? '_blank' : null} rel={l.url.startsWith('http') ? 'noopener' : null}>{l.name}</a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {hiddenEvents.length > 0 && (
-        <button type="button" id="toggle-events" class="more-link btn-text" aria-expanded="false" aria-controls="more-events">
-          Show {hiddenEvents.length} more events <span class="arrow" aria-hidden="true">&darr;</span>
-        </button>
-      )}
-    </div>
-  </section>
-
   <!-- CONTACT — the page's one change of ground, to close it -->
   <section id="contact" class="band-wash">
     <div class="wrap">
@@ -267,7 +205,6 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
         </div>
         <div class="contact__actions">
           <a href="mailto:contact@twyoon.com" class="link">contact@twyoon.com</a>
-          <button type="button" class="btn-text contact__copy" id="email-copy" data-email="contact@twyoon.com">Copy</button>
           <a href="https://linkedin.com/in/taewan-yoon" target="_blank" rel="noopener" class="link">LinkedIn</a>
           <a href="https://github.com/tyoon10" target="_blank" rel="noopener" class="link">GitHub</a>
         </div>
@@ -330,38 +267,5 @@ const isoStr = (s: string) => s.slice(0, 10).replace(/-/g, '·');
       // Covers cover images that land after first paint and change scrollWidth.
       window.addEventListener('load', queueSync);
     })();
-  </script>
-
-  <script is:inline>
-    const emailBtn = document.getElementById('email-copy');
-
-    if (emailBtn) {
-      emailBtn.addEventListener('click', () => {
-        const email = emailBtn.dataset.email;
-        if (!email) return;
-        navigator.clipboard.writeText(email).then(() => {
-          emailBtn.textContent = 'Copied';
-          setTimeout(() => { emailBtn.textContent = 'Copy'; }, 1800);
-        }).catch(err => {
-          console.error('Could not copy email: ', err);
-        });
-      });
-    }
-
-    // Events expand / collapse
-    const toggleBtn = document.getElementById('toggle-events');
-    const moreEvents = document.getElementById('more-events');
-
-    if (toggleBtn && moreEvents) {
-      toggleBtn.addEventListener('click', () => {
-        const expanded = moreEvents.hidden === false;
-        moreEvents.hidden = expanded;
-        toggleBtn.setAttribute('aria-expanded', String(!expanded));
-        const count = moreEvents.querySelectorAll('.event').length;
-        toggleBtn.innerHTML = expanded
-          ? `Show ${count} more events <span class="arrow" aria-hidden="true">&darr;</span>`
-          : `Show fewer events <span class="arrow" aria-hidden="true">&uarr;</span>`;
-      });
-    }
   </script>
 </BaseLayout>
