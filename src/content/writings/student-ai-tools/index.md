@@ -699,11 +699,11 @@ Turns PDFs, papers and lecture notes into audio in ElevenLabs' voices. Note that
 
 | Field | Value |
 |---|---|
-| Original price | ElevenReader at 99 USD a year, the figure quoted on the student page. |
+| Original price | Ultra at 11 USD a month, or 8.25 USD a month billed annually, which is 99 USD a year. |
 | Student price | **Free for 12 months.** |
-| Verification | School-issued email. Your ElevenLabs account email must match a valid .edu or equivalent address, and you must be currently enrolled and 18 or over. |
+| Verification | School-issued email, not SheerID. Your ElevenLabs account email must match a valid .edu or equivalent address, and you must be currently enrolled and 18 or over. Educators qualify on the same terms. |
 | Length | 12 months, then it auto-renews at the regular annual price unless you cancel first. |
-| Eligibility | Varies by institution. Eligibility depends on your school's domain and country, with a request form for schools not yet covered. |
+| Eligibility | Gated by an institution allowlist rather than by country. ElevenLabs keeps a list of eligible institutions and yours must be on it, so a .edu address alone is not enough. Unlisted schools can be submitted through the request form. |
 | Sign up | [elevenreader.io](https://elevenreader.io/students) |
 | Referral link | [try.elevenlabs.io](https://try.elevenlabs.io/o5n7q67n9ic6) **You get nothing extra, the price is identical either way. I get referral credit.** |
 
@@ -712,6 +712,8 @@ Turns PDFs, papers and lecture notes into audio in ElevenLabs' voices. Note that
 *Note: This is ElevenReader, not the main ElevenLabs platform. Voice generation on Starter, Creator, Pro and Scale is billed separately and is not part of the student offer.*
 
 *Note: Auto-renews at 99 USD once the free year ends, so put the cancellation date in your calendar if you do not intend to keep it.*
+
+*Note: Already paying for ElevenReader? There are no refunds against an existing subscription. You have to cancel it and claim the free year once the current period runs out.*
 
 ### The rest
 
