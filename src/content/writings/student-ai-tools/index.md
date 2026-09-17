@@ -24,7 +24,7 @@ So claim the live ones today, while they are still live.
 
 > **Last refreshed:** 2026-08-18. Every entry below was checked against the vendor's own help-centre or pricing page, not a coupon site. The full research notes, including the tools I ruled out and why, live at [github.com/tyoon10/student-ai-tools](https://github.com/tyoon10/student-ai-tools).
 
-> **Disclosure.** 2 links on this page are referral links, labelled where they appear with what you get and what I get. Every other link goes straight to the vendor and earns me nothing.
+> **Disclosure.** 3 links on this page are referral links, labelled where they appear with what you get and what I get. Every other link goes straight to the vendor and earns me nothing.
 
 ---
 
@@ -155,10 +155,10 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Notes and knowledge</span>
       </a>
     </li>
-    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so i talk instead of typing. voice dictation +1 month pro lite free (referral)">
+    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="wispr flow 3 months free, then 50% off voice dictation that types into any app, so i talk instead of typing. voice dictation the same offer, at no extra cost (referral)">
       <a href="#4-wispr-flow-3-months-free-then-50-off">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/wispr-flow.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Wispr Flow</span></span>
-        <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span><span class="offercard__bonus">+1 month Pro Lite free (referral)</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">3 months free, then 50% off</span></span>
         <span class="offercard__desc">Voice dictation that types into any app, so I talk instead of typing.</span>
         <span class="offercard__cat">Voice dictation</span>
       </a>
@@ -219,7 +219,7 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__cat">Writing</span>
       </a>
     </li>
-    <li class="offercard" data-group="writing" data-free="false" data-search="otter.ai 20% off pro transcription for lectures, interviews and group meetings. transcription +1 month pro lite free (referral)">
+    <li class="offercard" data-group="writing" data-free="false" data-search="otter.ai 20% off pro transcription for lectures, interviews and group meetings. transcription 1 month of otter pro lite free, 300 minutes per month (referral)">
       <a href="#otterai-20-off-pro">
         <span class="offercard__top"><img class="offercard__logo" src="/media/logos/otter.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">Otter.ai</span></span>
         <span class="offercard__badges"><span class="offercard__offer">20% off Pro</span><span class="offercard__bonus">+1 month Pro Lite free (referral)</span></span>
@@ -265,6 +265,14 @@ Filter by category, search by name, or narrow to the free ones. Each card links 
         <span class="offercard__badges"><span class="offercard__offer">50% off, $10/month</span></span>
         <span class="offercard__desc">Sourcegraph's coding agent at half price, and the only offer here that takes your word for it: no document upload, no...</span>
         <span class="offercard__cat">AI coding agent</span>
+      </a>
+    </li>
+    <li class="offercard offercard--free" data-group="writing" data-free="true" data-search="elevenlabs free for 12 months turns pdfs, papers and lecture notes into audio in elevenlabs' voices. text to speech nothing extra, the price is identical either way (referral)">
+      <a href="#elevenlabs-free-for-12-months">
+        <span class="offercard__top"><img class="offercard__logo" src="/media/logos/elevenlabs.png" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="offercard__name">ElevenLabs</span></span>
+        <span class="offercard__badges"><span class="offercard__offer">Free for 12 months</span></span>
+        <span class="offercard__desc">Turns PDFs, papers and lecture notes into audio in ElevenLabs' voices.</span>
+        <span class="offercard__cat">Text to speech</span>
       </a>
     </li>
     <li class="offercard offercard--free" data-group="coding" data-free="true" data-search="zed free for 1 year the most credible remaining free route to a premium ai editor now that cursor's student discount has closed. ai code editor ">
@@ -684,6 +692,26 @@ Sourcegraph's coding agent at half price, and the only offer here that takes you
 *Note: Announced 2026-08-18, the same day it was first recorded here. Unproven. Re-check before relying on it.*
 
 *Note: Amp states it can change or discontinue the discount and its criteria at any time.*
+
+### ElevenLabs: **Free for 12 months**
+
+Turns PDFs, papers and lecture notes into audio in ElevenLabs' voices. Note that the student offer covers ElevenReader, the reading app, not the voice generation platform the company is better known for.
+
+| Field | Value |
+|---|---|
+| Original price | ElevenReader at 99 USD a year, the figure quoted on the student page. |
+| Student price | **Free for 12 months.** |
+| Verification | School-issued email. Your ElevenLabs account email must match a valid .edu or equivalent address, and you must be currently enrolled and 18 or over. |
+| Length | 12 months, then it auto-renews at the regular annual price unless you cancel first. |
+| Eligibility | Varies by institution. Eligibility depends on your school's domain and country, with a request form for schools not yet covered. |
+| Sign up | [elevenreader.io](https://elevenreader.io/students) |
+| Referral link | [try.elevenlabs.io](https://try.elevenlabs.io/o5n7q67n9ic6) **You get nothing extra, the price is identical either way. I get referral credit.** |
+
+*Disclosure: that referral link earns me credit. The student offer is the reason to be here, and it earns me nothing either way. Every other link on this page earns me nothing.*
+
+*Note: This is ElevenReader, not the main ElevenLabs platform. Voice generation on Starter, Creator, Pro and Scale is billed separately and is not part of the student offer.*
+
+*Note: Auto-renews at 99 USD once the free year ends, so put the cancellation date in your calendar if you do not intend to keep it.*
 
 ### The rest
 
